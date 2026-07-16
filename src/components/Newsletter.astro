@@ -10,13 +10,28 @@
     apoi lipește aici scriptul JSONP generat de MailerLite.
   -->
   <div id="mlb2-beautyhealth" class="ml-form-embed-placeholder">
-    <form>
+    <form id="bh-newsletter-form">
       <input type="email" name="fields[email]" placeholder="Adresa ta de email" required />
       <button type="submit">Abonează-te</button>
     </form>
     <p class="ml-note">⚠ Formular temporar — de conectat la MailerLite (grup BEAUTYHEALTH)</p>
   </div>
 </section>
+
+<script is:inline>
+  // bh_newsletter_signup - IMPORTANT: cand se inlocuieste acest formular cu
+  // embed-ul real MailerLite, pastreaza acest event listener (sau unul
+  // echivalent legat de formularul real), altfel semnalul se pierde.
+  (function () {
+    var form = document.getElementById('bh-newsletter-form');
+    if (!form) return;
+    form.addEventListener('submit', function () {
+      if (typeof gtag === 'function') {
+        gtag('event', 'bh_newsletter_signup', { method: 'website_form' });
+      }
+    });
+  })();
+</script>
 
 <style>
   .newsletter {
