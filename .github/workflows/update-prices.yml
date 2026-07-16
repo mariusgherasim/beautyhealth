@@ -1,0 +1,30 @@
+name: Actualizare zilnica preturi
+
+on:
+  schedule:
+    - cron: '0 3 * * *' # 03:00 UTC, zilnic
+  workflow_dispatch: {} # permite rulare manuala din tab-ul Actions
+
+jobs:
+  update-prices:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Instaleaza dependinte
+        run: npm ci
+
+      - name: Ruleaza update de preturi
+        run: npm run update-prices
+
+      - name: Commit modificari (daca exista)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/data/products.json update-report.json
+          git diff --staged --quiet || git commit -m "chore: actualizare automata preturi $(date -u +%Y-%m-%d)"
+          git push
