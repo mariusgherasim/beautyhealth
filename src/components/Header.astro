@@ -4,8 +4,7 @@ import { categories } from '../data/categories.js';
 <header class="site-header">
   <div class="header-inner">
     <a href="/" class="logo">
-      <!-- TODO: înlocuiește cu logo-ul real (SVG export din Canva, ca la copywriting.gherasimmarius.com) -->
-      BeautyHealth
+      <img src="/logo-beautyhealth-white.svg" alt="BeautyHealth" width="180" height="50" />
     </a>
     <button class="menu-toggle" id="menuToggle" aria-label="Deschide meniul" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -42,11 +41,13 @@ import { categories } from '../data/categories.js';
     flex-wrap: wrap;
   }
   .logo {
-    color: #fff;
-    font-weight: 700;
-    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    letter-spacing: 0.02em;
+  }
+  .logo img {
+    height: 42px;
+    width: auto;
   }
   .main-nav {
     display: flex;
