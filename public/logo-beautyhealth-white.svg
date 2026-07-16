@@ -1,0 +1,12 @@
+<svg width="230" height="64" viewBox="0 0 400 110" xmlns="http://www.w3.org/2000/svg" role="img">
+  <title>BeautyHealth</title>
+  <g transform="translate(50,55)">
+    <path d="M0,-38 C22,-38 38,-18 38,0 C38,18 22,38 0,38 C-22,38 -38,18 -38,0 C-38,-18 -22,-38 0,-38 Z" fill="#ffffff" opacity="0.08"/>
+    <path d="M0,-30 C16,-38 34,-24 30,-6 C26,14 6,30 0,30 C-6,30 -26,14 -30,-6 C-34,-24 -16,-38 0,-30 Z" fill="#C89B3C"/>
+    <path d="M0,26 C0,10 -14,-2 -14,-16 C-14,-26 -6,-32 0,-26 C6,-32 14,-26 14,-16 C14,-2 0,10 0,26 Z" fill="#ffffff"/>
+  </g>
+  <text x="105" y="50" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-weight="700">
+    <tspan fill="#ffffff">beauty</tspan><tspan fill="#C89B3C" dx="10">health</tspan>
+  </text>
+  <text x="105" y="73" font-family="'Segoe UI', sans-serif" font-size="11" fill="#cfcfcf" letter-spacing="2">FRUMUSETE SI SANATATE</text>
+</svg>
