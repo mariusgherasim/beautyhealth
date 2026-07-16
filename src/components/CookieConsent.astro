@@ -38,6 +38,13 @@
     z-index: 999;
     font-size: 0.85rem;
   }
+  /* BUG REZOLVAT (16.07.2026): display:flex de mai sus suprascria
+     display:none implicit al atributului [hidden], asa ca banner-ul
+     nu se mai ascundea niciodata la click. Regula de mai jos are
+     specificitate mai mare (atribut + clasa) si restabileste comportamentul. */
+  .cookie-banner[hidden] {
+    display: none;
+  }
   .cookie-banner a { color: var(--gold); }
   .cookie-banner button {
     background: var(--gold);
