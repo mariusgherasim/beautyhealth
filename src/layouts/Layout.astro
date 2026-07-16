@@ -50,6 +50,23 @@ const siteName = "BeautyHealth";
   </head>
   <body>
     <slot />
+
+    <script is:inline>
+      // bh_affiliate_click - delegare globala, functioneaza atat pentru cardurile
+      // randate de Astro (paginare normala) cat si pentru cele injectate de JS
+      // (rezultate cautare), pentru ca ambele au aceleasi data-attributes.
+      document.addEventListener('click', function (e) {
+        var card = e.target.closest('.product-card');
+        if (!card) return;
+        if (typeof gtag !== 'function') return;
+        gtag('event', 'bh_affiliate_click', {
+          product_id: card.dataset.productId || '',
+          product_title: card.dataset.productTitle || '',
+          product_price: card.dataset.productPrice || '',
+          page_location: window.location.href,
+        });
+      });
+    </script>
   </body>
 </html>
 
