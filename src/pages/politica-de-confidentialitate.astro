@@ -1,0 +1,82 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+<Layout
+  title="Politica de Confidențialitate | BeautyHealth"
+  description="Politica de confidențialitate a site-ului BeautyHealth: ce date colectăm, cum le folosim și drepturile tale conform GDPR."
+>
+  <Header />
+  <main class="legal wrap">
+    <h1>Politica de Confidențialitate</h1>
+    <p><em>Ultima actualizare: {new Date().toLocaleDateString('ro-RO')}</em></p>
+
+    <h2>1. Cine suntem</h2>
+    <p>
+      Acest site (beautyhealth.gherasimmarius.com) este operat în cadrul ecosistemului
+      gherasimmarius.com. Pentru orice întrebare legată de confidențialitate, ne poți
+      contacta la <a href="mailto:office@gherasimmarius.com">office@gherasimmarius.com</a>.
+    </p>
+
+    <h2>2. Ce date colectăm</h2>
+    <ul>
+      <li><strong>Date de utilizare a site-ului</strong> — prin Google Analytics 4 (pagini vizitate, durata sesiunii, dispozitiv, locație aproximativă, sursă de trafic).</li>
+      <li><strong>Adresa de email</strong> — dacă te abonezi la newsletter, prin formularul MailerLite.</li>
+      <li><strong>Cookie-uri</strong> — folosite pentru analiză (Google Analytics) și pentru reținerea preferinței privind bannerul de cookie-uri.</li>
+    </ul>
+
+    <h2>3. Linkuri de afiliere</h2>
+    <p>
+      Acest site conține linkuri de afiliere (prin rețeaua 2Performant) către magazine
+      partenere. Dacă faci o achiziție printr-un astfel de link, putem primi un comision,
+      fără niciun cost suplimentar pentru tine. Nu avem acces la datele tale de plată — 
+      tranzacția se desfășoară integral pe site-ul magazinului partener.
+    </p>
+
+    <h2>4. Cum folosim datele</h2>
+    <ul>
+      <li>Pentru a înțelege ce conținut și produse sunt utile vizitatorilor.</li>
+      <li>Pentru a trimite oferte prin email, doar dacă te-ai abonat explicit la newsletter.</li>
+      <li>Nu vindem și nu partajăm datele tale cu terți în scopuri de marketing, în afara furnizorilor de servicii menționați mai jos.</li>
+    </ul>
+
+    <h2>5. Furnizori de servicii folosiți</h2>
+    <ul>
+      <li><strong>Google Analytics 4</strong> — analiză trafic.</li>
+      <li><strong>Google Search Console</strong> — monitorizare indexare și performanță în căutare.</li>
+      <li><strong>MailerLite</strong> — gestionare newsletter și abonați (double opt-in activ).</li>
+      <li><strong>2Performant</strong> — rețea de afiliere pentru linkurile către magazinele partenere.</li>
+      <li><strong>GitHub Pages</strong> — găzduirea site-ului static.</li>
+    </ul>
+
+    <h2>6. Drepturile tale (GDPR)</h2>
+    <p>Conform Regulamentului (UE) 2016/679, ai dreptul de a:</p>
+    <ul>
+      <li>solicita acces la datele tale personale;</li>
+      <li>solicita rectificarea sau ștergerea datelor;</li>
+      <li>retrage consimțământul pentru newsletter în orice moment (link de dezabonare în fiecare email);</li>
+      <li>depune o plângere la Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal (ANSPDCP).</li>
+    </ul>
+
+    <h2>7. Cookie-uri</h2>
+    <p>
+      Folosim cookie-uri necesare funcționării site-ului și cookie-uri de analiză (Google
+      Analytics). Poți controla sau dezactiva cookie-urile din setările browserului tău.
+    </p>
+
+    <h2>8. Contact</h2>
+    <p>
+      Pentru orice solicitare legată de datele tale personale, scrie-ne la
+      <a href="mailto:office@gherasimmarius.com">office@gherasimmarius.com</a>.
+    </p>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .wrap { max-width: 800px; margin: 0 auto; padding: 40px 16px 60px; }
+  h1 { color: var(--navy); }
+  h2 { color: var(--navy); margin-top: 32px; font-size: 1.2rem; }
+  li { margin-bottom: 6px; }
+</style>

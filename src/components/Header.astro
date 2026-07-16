@@ -1,0 +1,88 @@
+---
+import { categories } from '../data/categories.js';
+---
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <!-- TODO: înlocuiește cu logo-ul real (SVG export din Canva, ca la copywriting.gherasimmarius.com) -->
+      BeautyHealth
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Deschide meniul" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="main-nav" id="mainNav">
+      {categories.map((c) => (
+        <a href={`/${c.slug}/`}>{c.name}</a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<script is:inline>
+  const toggle = document.getElementById('menuToggle');
+  const nav = document.getElementById('mainNav');
+  toggle?.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+</script>
+
+<style>
+  .site-header {
+    background: var(--navy);
+    color: #fff;
+  }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .logo {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.3rem;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .main-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+  .main-nav a {
+    color: #e8e8e8;
+    text-decoration: none;
+    font-size: 0.88rem;
+  }
+  .main-nav a:hover { color: var(--gold); }
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+  }
+  .menu-toggle span {
+    width: 22px;
+    height: 2px;
+    background: #fff;
+    display: block;
+  }
+  @media (max-width: 720px) {
+    .menu-toggle { display: flex; }
+    .main-nav {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .main-nav.open { display: flex; }
+  }
+</style>

@@ -1,0 +1,117 @@
+---
+const { categorySlug, categoryName } = Astro.props;
+---
+<div class="category-search" data-category={categorySlug}>
+  <input
+    type="text"
+    class="search-input"
+    placeholder={`Caută în ${categoryName} (ex: brand sau denumire produs)...`}
+    autocomplete="off"
+  />
+  <span class="search-icon">🔍</span>
+  <p class="search-status"></p>
+</div>
+
+<div class="search-results grid" hidden></div>
+
+<script>
+  // Normalizeaza diacritice (ă,â,î,ș,ț -> a,a,i,s,t) ca "sanatate" sa gaseasca "sănătate" si invers.
+  function normalize(str) {
+    return str
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase();
+  }
+
+  function debounce(fn, delay) {
+    let t;
+    return (...args) => {
+      clearTimeout(t);
+      t = setTimeout(() => fn(...args), delay);
+    };
+  }
+
+  function renderCard(p) {
+    const hasDiscount = p.old_price && p.old_price > p.price;
+    const img = p.image_url
+      ? `<img src="${p.image_url}" alt="${escapeHtml(p.title)}" loading="lazy" width="220" height="220" />`
+      : '';
+    return `
+      <a class="product-card" href="${p.affiliate_url}" target="_blank" rel="noopener sponsored nofollow"
+         data-product-id="${p.id}" data-product-title="${escapeHtml(p.title)}" data-product-price="${p.price}">
+        ${hasDiscount ? '<span class="badge">Ofertă</span>' : ''}
+        ${img}
+        <div class="card-body">
+          ${p.brand ? `<span class="brand">${escapeHtml(p.brand)}</span>` : ''}
+          <h3>${escapeHtml(p.title)}</h3>
+          <div class="price-row">
+            <span class="price">${p.price.toFixed(2)} RON</span>
+            ${hasDiscount ? `<span class="old-price">${p.old_price.toFixed(2)} RON</span>` : ''}
+          </div>
+          <span class="cta">Vezi oferta →</span>
+        </div>
+      </a>`;
+  }
+
+  function escapeHtml(s) {
+    const div = document.createElement('div');
+    div.textContent = s;
+    return div.innerHTML;
+  }
+
+  document.querySelectorAll('.category-search').forEach((box) => {
+    const slug = box.dataset.category;
+    const input = box.querySelector('.search-input');
+    const status = box.querySelector('.search-status');
+    const resultsEl = box.parentElement.querySelector('.search-results');
+    // elementele normale ale paginii (titlu rezultate + grid paginat + paginare)
+    const normalView = document.querySelectorAll('.results-count, .grid.paginated, .pagination');
+
+    let allProducts = null;
+    let loading = false;
+
+    async function ensureLoaded() {
+      if (allProducts || loading) return;
+      loading = true;
+      status.textContent = 'Se încarcă produsele din categorie...';
+      try {
+        const res = await fetch(`/category-data/${slug}.json`);
+        allProducts = await res.json();
+      } catch (e) {
+        allProducts = [];
+        status.textContent = 'Căutarea nu a putut fi încărcată. Încearcă din nou.';
+      }
+      loading = false;
+    }
+
+    const runSearch = debounce(async (query) => {
+      const q = query.trim();
+      if (q.length === 0) {
+        resultsEl.hidden = true;
+        normalView.forEach((el) => (el.style.display = ''));
+        status.textContent = '';
+        return;
+      }
+
+      await ensureLoaded();
+      normalView.forEach((el) => (el.style.display = 'none'));
+      resultsEl.hidden = false;
+
+      const nq = normalize(q);
+      const matches = allProducts.filter(
+        (p) => normalize(p.title).includes(nq) || (p.brand && normalize(p.brand).includes(nq))
+      );
+
+      status.textContent = `${matches.length} produse găsite pentru "${q}"`;
+      resultsEl.innerHTML = matches.length
+        ? matches.slice(0, 200).map(renderCard).join('')
+        : `<div class="search-empty">Niciun produs găsit pentru "${escapeHtml(q)}". Încearcă alt termen.</div>`;
+
+      if (matches.length > 200) {
+        status.textContent += ` (afișate primele 200)`;
+      }
+    }, 250);
+
+    input.addEventListener('input', (e) => runSearch(e.target.value));
+  });
+</script>

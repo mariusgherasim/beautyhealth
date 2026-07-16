@@ -1,0 +1,85 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Newsletter from '../components/Newsletter.astro';
+import CookieConsent from '../components/CookieConsent.astro';
+import productsData from '../data/products.json';
+import { categories } from '../data/categories.js';
+
+const activeProducts = productsData.filter((p) => !p.draft);
+const total = activeProducts.length;
+
+const categoryStats = categories.map((c) => ({
+  ...c,
+  count: activeProducts.filter((p) => p.category.includes(c.slug)).length,
+}));
+---
+<Layout
+  title="BeautyHealth — Comparator de Prețuri Frumusețe & Sănătate"
+  description={`Peste ${total} produse de frumusețe, îngrijire și sănătate comparate ca preț, actualizate zilnic.`}
+>
+  <Header />
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <h1>Câte produse ai cumpărat fără să compari prețul?</h1>
+        <p>Peste <strong>{total.toLocaleString('ro-RO')}</strong> produse de frumusețe, îngrijire și sănătate, comparate zilnic. Găsește oferta bună, nu doar prima pe care o vezi.</p>
+      </div>
+    </section>
+
+    <section class="categories-grid wrap">
+      <h2>Explorează categoriile</h2>
+      <div class="grid">
+        {categoryStats.map((c) => (
+          <a class="cat-card" href={`/${c.slug}/`}>
+            <h3>{c.name}</h3>
+            <span>{c.count.toLocaleString('ro-RO')} produse</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <div class="wrap">
+      <Newsletter />
+    </div>
+  </main>
+
+  <Footer />
+  <CookieConsent />
+</Layout>
+
+<style>
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+  .hero {
+    background: linear-gradient(135deg, var(--navy), #14306e);
+    color: #fff;
+    padding: 60px 16px;
+    text-align: center;
+  }
+  .hero-inner { max-width: 720px; margin: 0 auto; }
+  .hero h1 { font-size: 2rem; margin-bottom: 14px; }
+  .hero p { font-size: 1.05rem; color: #e2e2e2; }
+  .categories-grid { padding: 50px 16px; }
+  .categories-grid h2 { color: var(--navy); margin-bottom: 20px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .cat-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 24px 18px;
+    text-decoration: none;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    transition: transform 0.15s ease;
+  }
+  .cat-card:hover { transform: translateY(-3px); }
+  .cat-card h3 { color: var(--navy); margin: 0 0 6px; font-size: 1.05rem; }
+  .cat-card span { color: var(--gold); font-size: 0.85rem; font-weight: 600; }
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 1.5rem; }
+  }
+</style>

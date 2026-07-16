@@ -1,0 +1,70 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+<Layout
+  title="Termeni și Condiții | BeautyHealth"
+  description="Termenii și condițiile de utilizare a site-ului BeautyHealth."
+>
+  <Header />
+  <main class="legal wrap">
+    <h1>Termeni și Condiții</h1>
+    <p><em>Ultima actualizare: {new Date().toLocaleDateString('ro-RO')}</em></p>
+
+    <h2>1. Obiectul site-ului</h2>
+    <p>
+      BeautyHealth (beautyhealth.gherasimmarius.com) este un site de comparare de prețuri
+      și direcționare (afiliere) pentru produse de frumusețe, îngrijire personală și
+      sănătate, comercializate de magazine partenere terțe. Nu vindem produse direct și
+      nu procesăm plăți.
+    </p>
+
+    <h2>2. Prețuri și disponibilitate</h2>
+    <p>
+      Prețurile afișate sunt actualizate zilnic, automat, de la magazinele partenere.
+      Cu toate acestea, prețul final, stocul și condițiile de livrare sunt stabilite
+      exclusiv de magazinul partener la momentul achiziției. Nu garantăm acuratețea
+      100% a prețurilor afișate în orice moment.
+    </p>
+
+    <h2>3. Linkuri de afiliere</h2>
+    <p>
+      Facem parte din programe de afiliere (prin 2Performant). Când accesezi un link de
+      pe acest site și efectuezi o achiziție pe site-ul partenerului, putem primi un
+      comision. Acest lucru nu îți afectează în niciun fel prețul plătit.
+    </p>
+
+    <h2>4. Limitarea răspunderii</h2>
+    <p>
+      Nu suntem responsabili pentru calitatea produselor, livrarea, garanția sau
+      serviciul clienți oferit de magazinele partenere. Orice reclamație legată de o
+      achiziție trebuie adresată direct magazinului de la care ai cumpărat produsul.
+    </p>
+
+    <h2>5. Proprietate intelectuală</h2>
+    <p>
+      Conținutul editorial (texte, descrieri de categorii) de pe acest site este
+      proprietatea BeautyHealth / gherasimmarius.com. Imaginile produselor aparțin
+      magazinelor partenere sau producătorilor respectivi.
+    </p>
+
+    <h2>6. Modificări</h2>
+    <p>
+      Ne rezervăm dreptul de a modifica acești termeni oricând, fără notificare
+      prealabilă. Versiunea în vigoare este cea publicată pe această pagină.
+    </p>
+
+    <h2>7. Contact</h2>
+    <p>
+      Pentru întrebări: <a href="mailto:office@gherasimmarius.com">office@gherasimmarius.com</a>.
+    </p>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .wrap { max-width: 800px; margin: 0 auto; padding: 40px 16px 60px; }
+  h1 { color: var(--navy); }
+  h2 { color: var(--navy); margin-top: 32px; font-size: 1.2rem; }
+</style>

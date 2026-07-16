@@ -1,0 +1,27 @@
+---
+const { product } = Astro.props;
+const hasDiscount = product.old_price && product.old_price > product.price;
+---
+<a
+  class="product-card"
+  href={product.affiliate_url}
+  target="_blank"
+  rel="noopener sponsored nofollow"
+  data-product-id={product.id}
+  data-product-title={product.title}
+  data-product-price={product.price}
+>
+  {hasDiscount && <span class="badge">Ofertă</span>}
+  {product.image_url && (
+    <img src={product.image_url} alt={product.title} loading="lazy" width="220" height="220" />
+  )}
+  <div class="card-body">
+    {product.brand && <span class="brand">{product.brand}</span>}
+    <h3>{product.title}</h3>
+    <div class="price-row">
+      <span class="price">{product.price.toFixed(2)} RON</span>
+      {hasDiscount && <span class="old-price">{product.old_price.toFixed(2)} RON</span>}
+    </div>
+    <span class="cta">Vezi oferta →</span>
+  </div>
+</a>

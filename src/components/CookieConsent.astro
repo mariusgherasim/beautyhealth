@@ -1,0 +1,52 @@
+<div id="cookieConsent" class="cookie-banner" hidden>
+  <p>
+    Folosim cookie-uri pentru analiză și pentru a-ți oferi o experiență mai bună.
+    Continuând navigarea, ești de acord cu
+    <a href="/politica-de-confidentialitate/">Politica de confidențialitate</a>.
+  </p>
+  <button id="acceptCookies">Am înțeles</button>
+</div>
+
+<script is:inline>
+  (function () {
+    const KEY = 'bh_cookie_consent';
+    const banner = document.getElementById('cookieConsent');
+    if (!localStorage.getItem(KEY)) {
+      banner.hidden = false;
+    }
+    document.getElementById('acceptCookies')?.addEventListener('click', () => {
+      localStorage.setItem(KEY, '1');
+      banner.hidden = true;
+    });
+  })();
+</script>
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--navy);
+    color: #fff;
+    padding: 14px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    z-index: 999;
+    font-size: 0.85rem;
+  }
+  .cookie-banner a { color: var(--gold); }
+  .cookie-banner button {
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+</style>

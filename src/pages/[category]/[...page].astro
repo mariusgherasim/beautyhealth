@@ -1,0 +1,132 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import CategorySearch from '../../components/CategorySearch.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import productsData from '../../data/products.json';
+import { categories, getCategoryBySlug } from '../../data/categories.js';
+
+export function getStaticPaths({ paginate }) {
+  const PAGE_SIZE = 24;
+  return categories.flatMap((cat) => {
+    const products = productsData.filter(
+      (p) => !p.draft && p.category.includes(cat.slug)
+    );
+    return paginate(products, {
+      params: { category: cat.slug },
+      pageSize: PAGE_SIZE,
+    });
+  });
+}
+
+const { page } = Astro.props;
+const { category: categorySlug } = Astro.params;
+const cat = getCategoryBySlug(categorySlug);
+
+const canonicalBase = `https://beautyhealth.gherasimmarius.com/${categorySlug}/`;
+const canonical = page.currentPage === 1 ? canonicalBase : `${canonicalBase}${page.currentPage}/`;
+
+const title = page.currentPage === 1
+  ? `${cat.seoTitle} | BeautyHealth`
+  : `${cat.seoTitle} — Pagina ${page.currentPage} | BeautyHealth`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": cat.name,
+  "url": canonical,
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://beautyhealth.gherasimmarius.com/" },
+      { "@type": "ListItem", "position": 2, "name": cat.name, "item": canonicalBase }
+    ]
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": page.data.map((p, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "url": p.official_url
+    }))
+  }
+};
+---
+<Layout title={title} description={cat.metaDescription} canonical={canonical}>
+  <Fragment slot="head">
+    {page.currentPage > 1 && <link rel="prev" href={page.currentPage === 2 ? canonicalBase : `${canonicalBase}${page.currentPage - 1}/`} />}
+    {page.url.next && <link rel="next" href={`https://beautyhealth.gherasimmarius.com${page.url.next}`} />}
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <Header />
+
+  <main class="wrap">
+    <nav class="breadcrumbs" aria-label="breadcrumb">
+      <a href="/">Acasă</a> <span>/</span> <span>{cat.name}</span>
+    </nav>
+
+    <h1>{cat.name}</h1>
+
+    {page.currentPage === 1 && (
+      <p class="intro">{cat.intro}</p>
+    )}
+
+    <div class="category-pills">
+      {categories.map((c) => (
+        <a href={`/${c.slug}/`} class={c.slug === categorySlug ? 'active' : ''}>{c.name}</a>
+      ))}
+    </div>
+
+    <CategorySearch categorySlug={categorySlug} categoryName={cat.name} />
+
+    <p class="results-count">{page.total} produse găsite — pagina {page.currentPage} din {page.lastPage}</p>
+
+    <div class="grid paginated">
+      {page.data.map((product) => (
+        <ProductCard product={product} />
+      ))}
+    </div>
+
+    <nav class="pagination" aria-label="paginare">
+      {page.url.prev && <a href={page.url.prev}>← Pagina anterioară</a>}
+      <span>Pagina {page.currentPage} / {page.lastPage}</span>
+      {page.url.next && <a href={page.url.next}>Pagina următoare →</a>}
+    </nav>
+
+    <Newsletter />
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 20px 16px 60px; }
+  .breadcrumbs { font-size: 0.85rem; color: #888; margin-bottom: 12px; }
+  .breadcrumbs a { color: #888; text-decoration: none; }
+  h1 { color: var(--navy); margin-bottom: 8px; }
+  .intro { max-width: 780px; color: #444; margin-bottom: 20px; }
+  .category-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .category-pills a {
+    padding: 6px 14px; border-radius: 20px; background: #fff; border: 1px solid #ddd;
+    font-size: 0.85rem; text-decoration: none; color: var(--navy);
+  }
+  .category-pills a.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .results-count { color: #888; font-size: 0.85rem; margin-bottom: 16px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .pagination {
+    display: flex; justify-content: center; align-items: center; gap: 20px;
+    margin-top: 36px; font-size: 0.9rem;
+  }
+  .pagination a { color: var(--gold); font-weight: 600; text-decoration: none; }
+  @media (max-width: 480px) {
+    .grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+    .pagination { flex-direction: column; gap: 10px; }
+  }
+</style>

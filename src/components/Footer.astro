@@ -1,0 +1,53 @@
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="col">
+      <strong>BeautyHealth</strong>
+      <p>Comparator de prețuri pentru produse de frumusețe, îngrijire și sănătate. Linkurile de pe acest site sunt linkuri de afiliere — putem primi un comision din vânzările generate, fără costuri suplimentare pentru tine.</p>
+    </div>
+    <div class="col">
+      <strong>Legal</strong>
+      <a href="/politica-de-confidentialitate/">Politica de confidențialitate</a>
+      <a href="/termeni-si-conditii/">Termeni și condiții</a>
+    </div>
+    <div class="col">
+      <strong>Alte proiecte</strong>
+      <a href="https://gherasimmarius.com" target="_blank" rel="noopener">gherasimmarius.com</a>
+      <a href="https://shop.gherasimmarius.com" target="_blank" rel="noopener">Shop — Ceasuri &amp; Ochelari</a>
+      <a href="https://carti.gherasimmarius.com" target="_blank" rel="noopener">Cărți — ÎncăUnCapitol</a>
+      <a href="https://copywriting.gherasimmarius.com" target="_blank" rel="noopener">Copywriting &amp; Marketing</a>
+    </div>
+  </div>
+  <div class="bottom-bar">
+    <span>© {new Date().getFullYear()} BeautyHealth · gherasimmarius.com</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--navy);
+    color: #d8d8d8;
+    margin-top: 40px;
+  }
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 36px 16px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 24px;
+  }
+  .col strong { color: #fff; display: block; margin-bottom: 10px; }
+  .col a { display: block; color: #cfcfcf; text-decoration: none; font-size: 0.88rem; margin-bottom: 6px; }
+  .col a:hover { color: var(--gold); }
+  .col p { font-size: 0.82rem; line-height: 1.5; color: #b8b8b8; }
+  .bottom-bar {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+    padding: 14px;
+    font-size: 0.78rem;
+    color: #999;
+  }
+  @media (max-width: 720px) {
+    .footer-inner { grid-template-columns: 1fr; }
+  }
+</style>
