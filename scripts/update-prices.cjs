@@ -34,7 +34,6 @@ const springfarma = require('./lib/scrapers/springfarma.cjs');
 const minuneanaturii = require('./lib/scrapers/minuneanaturii.cjs');
 const infinitelove = require('./lib/scrapers/infinitelove.cjs');
 const farmec = require('./lib/scrapers/farmec.cjs');
-
 const PRODUCTS_PATH = path.join(__dirname, '../src/data/products.json');
 const REPORT_PATH = path.join(__dirname, '../update-report.json');
 
@@ -44,7 +43,7 @@ const SOURCE_CONFIG = {
   'springfarma.com': { scraper: springfarma, concurrency: 3, delayMs: 700 },
   'minuneanaturii.ro': { scraper: minuneanaturii, concurrency: 4, delayMs: 400 },
   'infinitelove.ro': { scraper: infinitelove, concurrency: 4, delayMs: 400 },
-  'farmec.ro': { scraper: farmec, concurrency: 4, delayMs: 400 },
+  'farmec.ro': { scraper: farmec, concurrency: 2, delayMs: 500 }, // Playwright = mai greu, browser real per request
 };
 
 // Circuit breaker: daca o sursa acumuleaza atatea esecuri CONSECUTIVE, o consideram
@@ -52,15 +51,43 @@ const SOURCE_CONFIG = {
 // care ne-a blocat deja).
 const CIRCUIT_BREAKER_THRESHOLD = 25;
 
+// Filtrare optionala de surse via --sources=site1.com,site2.com (CLI) sau
+// variabila de mediu UPDATE_PRICES_SOURCES. Fara filtru => toate sursele.
+// Folosit ca sa separam sursele care merg din GitHub Actions (infinitelove,
+// farmec) de cele blocate acolo si rulate local (springfarma, minuneanaturii)
+// - vezi "npm run update-prices:cloud" / "npm run update-prices:local" in
+// package.json si sectiunea despre rulare locala din REMEMBER.md.
+function getSourceFilter() {
+  const cliArg = process.argv.find((a) => a.startsWith('--sources='));
+  const raw = cliArg ? cliArg.split('=')[1] : process.env.UPDATE_PRICES_SOURCES;
+  if (!raw) return null;
+  return raw.split(',').map((s) => s.trim()).filter(Boolean);
+}
+
 async function main() {
   const products = JSON.parse(fs.readFileSync(PRODUCTS_PATH, 'utf-8'));
-  const toUpdate = products.filter((p) => !p.draft);
+  const sourceFilter = getSourceFilter();
+  const toUpdate = products.filter(
+    (p) => !p.draft && (!sourceFilter || sourceFilter.includes(p.source_site))
+  );
 
+  if (sourceFilter) {
+    console.log(`Filtru de surse activ: ${sourceFilter.join(', ')}`);
+  }
   console.log(`Produse de actualizat: ${toUpdate.length} din ${products.length} total`);
 
   const bySource = {};
   for (const p of toUpdate) {
     (bySource[p.source_site] ||= []).push(p);
+  }
+
+  // Porneste un browser Playwright DOAR daca vreo sursa are needsBrowser
+  // (in acest moment doar farmec.ro, fiind SPA JS) - celelalte raman rapide,
+  // pe cheerio/axios, fara sa astepte dupa Chromium.
+  let browser = null;
+  if (Object.entries(bySource).some(([site]) => SOURCE_CONFIG[site]?.scraper.needsBrowser)) {
+    const { chromium } = require('playwright');
+    browser = await chromium.launch();
   }
 
   const report = { started_at: new Date().toISOString(), ok: 0, failed: 0, skipped: 0, errors: [], by_source: {} };
@@ -92,7 +119,9 @@ async function main() {
             return;
           }
           try {
-            const result = await config.scraper.scrapeOne(product);
+            const result = config.scraper.needsBrowser
+              ? await config.scraper.scrapeOne(product, browser)
+              : await config.scraper.scrapeOne(product);
             product.price = result.price;
             product.old_price = result.old_price;
             product.availability = result.availability;
@@ -121,6 +150,8 @@ async function main() {
 
     console.log(`  ${sourceSite}: ${sourceReport.ok} ok, ${sourceReport.failed} esuate, ${sourceReport.skipped} sarite (circuit breaker)`);
   }
+
+  if (browser) await browser.close();
 
   fs.writeFileSync(PRODUCTS_PATH, JSON.stringify(products, null, 0), 'utf-8');
   report.finished_at = new Date().toISOString();
