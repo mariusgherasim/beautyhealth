@@ -8,7 +8,7 @@ REM git conectat la repo-ul de pe GitHub (nu doar fisiere incarcate manual prin
 REM interfata web). Vezi REMEMBER.md, sectiunea "Rulare locala programata",
 REM pentru pasii de configurare initiala (o singura data).
 
-cd /d "C:\FOLDER DE LUCRU\PAUL MELINTE\SITE BEAUTY_HEALTH\beautyhealth-site"
+cd /d "C:\FOLDER DE LUCRU\PAUL MELINTE\SITE BEAUTY_HEALTH\beautyhealth-site-git"
 
 echo ============================================
 echo Actualizare preturi locala - %date% %time%
