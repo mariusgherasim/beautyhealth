@@ -37,13 +37,16 @@ const farmec = require('./lib/scrapers/farmec.cjs');
 const PRODUCTS_PATH = path.join(__dirname, '../src/data/products.json');
 const REPORT_PATH = path.join(__dirname, '../update-report.json');
 
-// Concurenta si delay PER SURSA - springfarma e mult mai mare (~12.500 produse)
-// si mai probabil sa aiba protectie anti-bot, deci mai conservator acolo.
+// Concurenta si delay PER SURSA. springfarma/minuneanaturii au tiparul unui
+// rate-limit clasic (merg bine primele ~90-100 request-uri, apoi 403 solid) -
+// concurenta redusa drastic + delay mare, ca sa stam sub orice prag de genul
+// "X request-uri/minut". cooldownMs = cat asteptam dupa ce circuit breaker-ul
+// se declanseaza, inainte sa incercam din nou (nu renuntam definitiv).
 const SOURCE_CONFIG = {
-  'springfarma.com': { scraper: springfarma, concurrency: 3, delayMs: 700 },
-  'minuneanaturii.ro': { scraper: minuneanaturii, concurrency: 4, delayMs: 400 },
-  'infinitelove.ro': { scraper: infinitelove, concurrency: 4, delayMs: 400 },
-  'farmec.ro': { scraper: farmec, concurrency: 2, delayMs: 500 }, // Playwright = mai greu, browser real per request
+  'springfarma.com': { scraper: springfarma, concurrency: 1, delayMs: 2500, cooldownMs: 5 * 60 * 1000, maxCooldowns: 3 },
+  'minuneanaturii.ro': { scraper: minuneanaturii, concurrency: 1, delayMs: 2000, cooldownMs: 5 * 60 * 1000, maxCooldowns: 3 },
+  'infinitelove.ro': { scraper: infinitelove, concurrency: 4, delayMs: 400, cooldownMs: 0, maxCooldowns: 0 },
+  'farmec.ro': { scraper: farmec, concurrency: 2, delayMs: 500, cooldownMs: 0, maxCooldowns: 0 }, // Playwright = mai greu, browser real per request
 };
 
 // Circuit breaker: daca o sursa acumuleaza atatea esecuri CONSECUTIVE, o consideram
@@ -75,6 +78,19 @@ async function main() {
     console.log(`Filtru de surse activ: ${sourceFilter.join(', ')}`);
   }
   console.log(`Produse de actualizat: ${toUpdate.length} din ${products.length} total`);
+
+  // Prioritizare: cele mai vechi verificate primele (niciodata verificate =
+  // cele mai prioritare). Fara asta, la fiecare rulare care nu apuca sa
+  // termine tot catalogul (ex. springfarma, 12.500 produse), s-ar bloca
+  // mereu pe aceleasi primele produse din lista, iar restul n-ar fi
+  // actualizate NICIODATA. Cu prioritizarea asta, acoperirea se roteste
+  // treptat prin tot catalogul, chiar daca fiecare rulare acopera doar o
+  // felie din el (din cauza cooldown-urilor / circuit breaker).
+  toUpdate.sort((a, b) => {
+    const aTime = a.last_price_check ? new Date(a.last_price_check).getTime() : 0;
+    const bTime = b.last_price_check ? new Date(b.last_price_check).getTime() : 0;
+    return aTime - bTime;
+  });
 
   const bySource = {};
   for (const p of toUpdate) {
@@ -108,14 +124,29 @@ async function main() {
 
     const limit = createLimiter(config.concurrency);
     let consecutiveFailures = 0;
-    let circuitOpen = false;
+    let circuitOpenUntil = 0; // 0 = inchis (functioneaza normal); Infinity = deschis definitiv
+    let cooldownCount = 0;
+    let processedCount = 0;
+
+    // Heartbeat: afiseaza progres la fiecare 30 secunde, indiferent cate
+    // s-au procesat - ca sa fie clar ca scriptul e viu, nu agatat (bug
+    // real gasit in productie: fara asta, un run de ore intregi arata
+    // identic cu unul blocat, din exterior).
+    const heartbeat = setInterval(() => {
+      const pct = ((processedCount / sourceProducts.length) * 100).toFixed(1);
+      const cooldownNote = Date.now() < circuitOpenUntil ? ' [IN COOLDOWN]' : '';
+      console.log(
+        `  ... ${sourceSite}: ${processedCount}/${sourceProducts.length} procesate (${pct}%) - ${sourceReport.ok} ok, ${sourceReport.failed} esuate pana acum${cooldownNote}`
+      );
+    }, 30000);
 
     await Promise.all(
       sourceProducts.map((product) =>
         limit(async () => {
-          if (circuitOpen) {
+          if (Date.now() < circuitOpenUntil) {
             sourceReport.skipped++;
             report.skipped++;
+            processedCount++;
             return;
           }
           try {
@@ -134,21 +165,33 @@ async function main() {
             report.failed++;
             consecutiveFailures++;
             report.errors.push({ id: product.id, url: product.official_url, reason: err.message });
-            if (consecutiveFailures >= CIRCUIT_BREAKER_THRESHOLD && !circuitOpen) {
-              circuitOpen = true;
-              console.error(
-                `  [CIRCUIT BREAKER] ${sourceSite}: ${consecutiveFailures} esecuri consecutive - ` +
-                `sar peste restul produselor din aceasta sursa (probabil blocare anti-bot).`
-              );
+            if (consecutiveFailures >= CIRCUIT_BREAKER_THRESHOLD && Date.now() >= circuitOpenUntil) {
+              consecutiveFailures = 0;
+              if (config.cooldownMs > 0 && cooldownCount < config.maxCooldowns) {
+                cooldownCount++;
+                circuitOpenUntil = Date.now() + config.cooldownMs;
+                console.error(
+                  `  [COOLDOWN ${cooldownCount}/${config.maxCooldowns}] ${sourceSite}: prea multe esecuri consecutive ` +
+                  `(posibil rate-limit) - pauza ${Math.round(config.cooldownMs / 60000)} min, apoi reincerc.`
+                );
+              } else {
+                circuitOpenUntil = Infinity;
+                console.error(
+                  `  [CIRCUIT BREAKER PERMANENT] ${sourceSite}: prea multe esecuri, cooldown-uri epuizate - ` +
+                  `sar peste restul produselor din aceasta sursa pentru rularea curenta.`
+                );
+              }
             }
           } finally {
+            processedCount++;
             await sleep(config.delayMs);
           }
         })
       )
     );
 
-    console.log(`  ${sourceSite}: ${sourceReport.ok} ok, ${sourceReport.failed} esuate, ${sourceReport.skipped} sarite (circuit breaker)`);
+    clearInterval(heartbeat);
+    console.log(`  ${sourceSite}: ${sourceReport.ok} ok, ${sourceReport.failed} esuate, ${sourceReport.skipped} sarite (circuit breaker/cooldown)`);
   }
 
   if (browser) await browser.close();

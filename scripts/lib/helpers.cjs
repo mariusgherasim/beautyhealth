@@ -66,4 +66,27 @@ async function withRetry(fn, retries = 2, baseDelayMs = 500) {
   throw lastErr;
 }
 
-module.exports = { createLimiter, parsePrice, sleep, BROWSER_HEADERS, withRetry };
+/**
+ * Timeout DUR, garantat - opreste executia dupa ms milisecunde indiferent
+ * ce face codul de dedesubt (axios, playwright, orice).
+ *
+ * De ce e nevoie de asta: axios are propriul "timeout", dar e cunoscut ca
+ * nu garanteaza oprirea in toate cazurile - daca o conexiune ramane
+ * "agatata" la nivel de socket/retea (ex: firewall care dropeaza pachete
+ * silentios, in loc sa refuze conexiunea), timeout-ul axios poate sa nu se
+ * declanseze niciodata, iar request-ul ramane blocat la infinit. Confirmat
+ * in productie (18.07.2026): rulare locala blocata 30+ minute pe
+ * springfarma.com, fara nicio eroare, fara progres - fix aplicat aici.
+ *
+ * Promise.race garanteaza ca функция de mai jos NU poate bloca executia mai
+ * mult de ms, indiferent de cauza.
+ */
+function withHardTimeout(promise, ms, label = 'operatie') {
+  let timer;
+  const timeout = new Promise((_, reject) => {
+    timer = setTimeout(() => reject(new Error(`Timeout dur depasit (${ms}ms) pentru ${label}`)), ms);
+  });
+  return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
+}
+
+module.exports = { createLimiter, parsePrice, sleep, BROWSER_HEADERS, withRetry, withHardTimeout };

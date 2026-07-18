@@ -1,4 +1,4 @@
-const { parsePrice } = require('../helpers.cjs');
+const { parsePrice, withHardTimeout } = require('../helpers.cjs');
 
 // CORECTAT (18.07.2026): farmec.ro e o aplicatie JavaScript (SPA) - raspunsul
 // brut de la server e doar "You need to enable JavaScript to run this app.",
@@ -14,7 +14,7 @@ const { parsePrice } = require('../helpers.cjs');
 const PRICE_SELECTOR = '.ProductPrice-PriceValue';
 const OLD_PRICE_SELECTOR = '.ProductPrice-HighPrice';
 
-async function scrapeOne(product, browser) {
+async function scrapeOneInner(product, browser) {
   const page = await browser.newPage({
     userAgent:
       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
@@ -43,6 +43,15 @@ async function scrapeOne(product, browser) {
   } finally {
     await page.close();
   }
+}
+
+// Plasa de siguranta: desi Playwright are propriile timeout-uri (goto,
+// waitForSelector), un timeout dur suplimentar la nivel de intreaga functie
+// garanteaza ca un singur produs nu poate bloca scriptul la infinit, indiferent
+// de motiv (pagina neasteptata, hang la nivel de retea, etc.) - aceeasi lectie
+// invatata de la incidentul cu axios pe springfarma/minuneanaturii.
+async function scrapeOne(product, browser) {
+  return withHardTimeout(scrapeOneInner(product, browser), 40000, product.official_url);
 }
 
 module.exports = { scrapeOne, source: 'farmec.ro', needsBrowser: true };
