@@ -10,12 +10,15 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "update-prices": "node scripts/update-prices.cjs"
+    "update-prices": "node scripts/update-prices.cjs",
+    "update-prices:cloud": "node scripts/update-prices.cjs --sources=infinitelove.ro,farmec.ro",
+    "update-prices:local": "node scripts/update-prices.cjs --sources=springfarma.com,minuneanaturii.ro"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
     "astro": "^7.0.9",
     "axios": "^1.7.9",
-    "cheerio": "^1.0.0"
+    "cheerio": "^1.0.0",
+    "playwright": "^1.61.1"
   }
 }
