@@ -1,6 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { parsePrice } = require('../helpers.cjs');
+const { parsePrice, BROWSER_HEADERS, withRetry } = require('../helpers.cjs');
 
 // CONFIRMAT cu HTML real trimis de Marius (produs #3058, 16.07.2026). PrestaShop.
 // Pretul curent e in atributul "content" (mai sigur decat text), pretul vechi
@@ -14,10 +14,12 @@ const OLD_PRICE_SELECTOR = '.regular-price';
 const AVAILABILITY_SELECTOR = '#product-availability';
 
 async function scrapeOne(product) {
-  const res = await axios.get(product.official_url, {
-    timeout: 15000,
-    headers: { 'User-Agent': 'Mozilla/5.0 (compatible; BeautyHealthBot/1.0)' },
-  });
+  const res = await withRetry(() =>
+    axios.get(product.official_url, {
+      timeout: 15000,
+      headers: BROWSER_HEADERS,
+    })
+  );
   const $ = cheerio.load(res.data);
 
   const priceAttr = $(PRICE_SELECTOR).first().attr('content');

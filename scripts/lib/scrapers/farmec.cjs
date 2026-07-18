@@ -1,6 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { parsePrice } = require('../helpers.cjs');
+const { parsePrice, BROWSER_HEADERS, withRetry } = require('../helpers.cjs');
 
 // CONFIRMAT cu HTML real trimis de Marius (16.07.2026).
 // <ins class="ProductPrice-Price"><span class="ProductPrice-PriceValue">
@@ -10,10 +10,12 @@ const PRICE_SELECTOR = '.ProductPrice-PriceValue';
 const OLD_PRICE_SELECTOR = '.ProductPrice-HighPrice';
 
 async function scrapeOne(product) {
-  const res = await axios.get(product.official_url, {
-    timeout: 15000,
-    headers: { 'User-Agent': 'Mozilla/5.0 (compatible; BeautyHealthBot/1.0)' },
-  });
+  const res = await withRetry(() =>
+    axios.get(product.official_url, {
+      timeout: 15000,
+      headers: BROWSER_HEADERS,
+    })
+  );
   const $ = cheerio.load(res.data);
 
   const priceText = $(PRICE_SELECTOR).first().text();

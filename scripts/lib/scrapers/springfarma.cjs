@@ -1,5 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const { BROWSER_HEADERS, withRetry } = require('../helpers.cjs');
 
 // CONFIRMAT cu HTML real trimis de Marius (produs #9622, 16.07.2026).
 // Magento: pretul e in atributul data-price-amount, mult mai sigur decat
@@ -12,10 +13,12 @@ const OLD_PRICE_SELECTOR = '[data-price-type="oldPrice"]';
 const OUT_OF_STOCK_SELECTOR = '.stock.unavailable, .out-of-stock';
 
 async function scrapeOne(product) {
-  const res = await axios.get(product.official_url, {
-    timeout: 15000,
-    headers: { 'User-Agent': 'Mozilla/5.0 (compatible; BeautyHealthBot/1.0)' },
-  });
+  const res = await withRetry(() =>
+    axios.get(product.official_url, {
+      timeout: 15000,
+      headers: BROWSER_HEADERS,
+    })
+  );
   const $ = cheerio.load(res.data);
 
   if ($(OUT_OF_STOCK_SELECTOR).length > 0) {

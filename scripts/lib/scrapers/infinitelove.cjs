@@ -1,6 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { parsePrice } = require('../helpers.cjs');
+const { parsePrice, BROWSER_HEADERS, withRetry } = require('../helpers.cjs');
 
 // CONFIRMAT cu HTML real trimis de Marius (16.07.2026). WooCommerce + Elementor,
 // pretul e randat server-side (nu are nevoie de JS) - am renuntat la Playwright,
@@ -11,10 +11,12 @@ const CURRENT_PRICE_SELECTOR = 'ins .woocommerce-Price-amount, .price > .woocomm
 const OLD_PRICE_SELECTOR = 'del .woocommerce-Price-amount';
 
 async function scrapeOne(product) {
-  const res = await axios.get(product.official_url, {
-    timeout: 15000,
-    headers: { 'User-Agent': 'Mozilla/5.0 (compatible; BeautyHealthBot/1.0)' },
-  });
+  const res = await withRetry(() =>
+    axios.get(product.official_url, {
+      timeout: 15000,
+      headers: BROWSER_HEADERS,
+    })
+  );
   const $ = cheerio.load(res.data);
 
   const priceText = $(CURRENT_PRICE_SELECTOR).first().text();
