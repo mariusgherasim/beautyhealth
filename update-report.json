@@ -1,32 +1,12 @@
 {
-  "started_at": "2026-07-18T13:34:15.631Z",
-  "ok": 548,
-  "failed": 83,
-  "skipped": 12902,
+  "started_at": "2026-07-18T14:02:29.112Z",
+  "ok": 377,
+  "failed": 110,
+  "skipped": 13046,
   "errors": [
-    {
-      "id": "minuneanaturii-64034",
-      "url": "https://www.minuneanaturii.ro/melatonina/melatonina-eliberare-rapida-5-mg-15-tablete-cosmo-pharm-pret-oferta_.html?utm_source=2performant",
-      "reason": "Request failed with status code 403"
-    },
-    {
-      "id": "minuneanaturii-65487",
-      "url": "https://www.minuneanaturii.ro/home/lecitina-de-soia-pulbere-eco-bio-200g-deco-italia-pret-oferta_.html?utm_source=2performant",
-      "reason": "Request failed with status code 403"
-    },
-    {
-      "id": "minuneanaturii-63268",
-      "url": "https://www.minuneanaturii.ro/colesterol/lipid-care-controlul-colesterolului-60-capsule-organic-india-pret-oferta_.html?utm_source=2performant",
-      "reason": "Request failed with status code 403"
-    },
     {
       "id": "minuneanaturii-63952",
       "url": "https://www.minuneanaturii.ro/ghee-unt-clarifiat/unt-ghee-eco-bio-200ml-145g-pronat-pret-oferta_.html?utm_source=2performant",
-      "reason": "Request failed with status code 403"
-    },
-    {
-      "id": "minuneanaturii-66673",
-      "url": "https://www.minuneanaturii.ro/sare-integrala-fara-iod/sare-celtica-grunjoasa-500g-deco-italia-pret-oferta_.html?utm_source=2performant",
       "reason": "Request failed with status code 403"
     },
     {
@@ -35,13 +15,23 @@
       "reason": "Request failed with status code 403"
     },
     {
-      "id": "minuneanaturii-66276",
-      "url": "https://www.minuneanaturii.ro/sistem-nervos/polygemma-28-neuro-protect-50ml-plantextrakt-pret-oferta_.html?utm_source=2performant",
+      "id": "minuneanaturii-65487",
+      "url": "https://www.minuneanaturii.ro/home/lecitina-de-soia-pulbere-eco-bio-200g-deco-italia-pret-oferta_.html?utm_source=2performant",
       "reason": "Request failed with status code 403"
     },
     {
-      "id": "minuneanaturii-67324",
-      "url": "https://www.minuneanaturii.ro/digestie/verdiogast-20-capsule-plantextrakt-pret-oferta_.html?utm_source=2performant",
+      "id": "minuneanaturii-64034",
+      "url": "https://www.minuneanaturii.ro/melatonina/melatonina-eliberare-rapida-5-mg-15-tablete-cosmo-pharm-pret-oferta_.html?utm_source=2performant",
+      "reason": "Request failed with status code 403"
+    },
+    {
+      "id": "minuneanaturii-66673",
+      "url": "https://www.minuneanaturii.ro/sare-integrala-fara-iod/sare-celtica-grunjoasa-500g-deco-italia-pret-oferta_.html?utm_source=2performant",
+      "reason": "Request failed with status code 403"
+    },
+    {
+      "id": "minuneanaturii-66276",
+      "url": "https://www.minuneanaturii.ro/sistem-nervos/polygemma-28-neuro-protect-50ml-plantextrakt-pret-oferta_.html?utm_source=2performant",
       "reason": "Request failed with status code 403"
     },
     {
@@ -50,18 +40,13 @@
       "reason": "Request failed with status code 403"
     },
     {
+      "id": "minuneanaturii-67324",
+      "url": "https://www.minuneanaturii.ro/digestie/verdiogast-20-capsule-plantextrakt-pret-oferta_.html?utm_source=2performant",
+      "reason": "Request failed with status code 403"
+    },
+    {
       "id": "minuneanaturii-69181",
       "url": "https://www.minuneanaturii.ro/diverse/carnet-notebook-a5-bambus-imprimat-minunea-naturii-pret-oferta_.html?utm_source=2performant",
-      "reason": "Request failed with status code 403"
-    },
-    {
-      "id": "minuneanaturii-69409",
-      "url": "https://www.minuneanaturii.ro/creme-si-unturi-tartinabile/violife-specialitate-alba-greceasca-150g-violife-pret-oferta_.html?utm_source=2performant",
-      "reason": "Request failed with status code 403"
-    },
-    {
-      "id": "minuneanaturii-71255",
-      "url": "https://www.minuneanaturii.ro/multivitamine/vitamina-d3-k2-mk-7-lipozomala-30-capsule-cosmopharm-pret-oferta_.html?utm_source=2performant",
       "reason": "Request failed with status code 403"
     },
     {
@@ -70,13 +55,18 @@
       "reason": "Request failed with status code 403"
     },
     {
-      "id": "minuneanaturii-71865",
-      "url": "https://www.minuneanaturii.ro/ceaiuri/ceai-de-craite-20-g-hypericum-pret-oferta_.html?utm_source=2performant",
+      "id": "minuneanaturii-71255",
+      "url": "https://www.minuneanaturii.ro/multivitamine/vitamina-d3-k2-mk-7-lipozomala-30-capsule-cosmopharm-pret-oferta_.html?utm_source=2performant",
       "reason": "Request failed with status code 403"
     },
     {
-      "id": "minuneanaturii-72385",
-      "url": "https://www.minuneanaturii.ro/inima-circulatie-sanguina/uridine-max-30-capsule-cosmo-pharm-pret-oferta_.html?utm_source=2performant",
+      "id": "minuneanaturii-69409",
+      "url": "https://www.minuneanaturii.ro/creme-si-unturi-tartinabile/violife-specialitate-alba-greceasca-150g-violife-pret-oferta_.html?utm_source=2performant",
+      "reason": "Request failed with status code 403"
+    },
+    {
+      "id": "minuneanaturii-71865",
+      "url": "https://www.minuneanaturii.ro/ceaiuri/ceai-de-craite-20-g-hypericum-pret-oferta_.html?utm_source=2performant",
       "reason": "Request failed with status code 403"
     },
     {
@@ -90,6 +80,16 @@
       "reason": "Request failed with status code 403"
     },
     {
+      "id": "minuneanaturii-72385",
+      "url": "https://www.minuneanaturii.ro/inima-circulatie-sanguina/uridine-max-30-capsule-cosmo-pharm-pret-oferta_.html?utm_source=2performant",
+      "reason": "Request failed with status code 403"
+    },
+    {
+      "id": "minuneanaturii-73238",
+      "url": "https://www.minuneanaturii.ro/laxative-naturale/senna-30-capsule-medica-pro-natura-pret-oferta_.html?utm_source=2performant",
+      "reason": "Request failed with status code 403"
+    },
+    {
       "id": "minuneanaturii-72727",
       "url": "https://www.minuneanaturii.ro/magneziu/magneziu-bisglicinat-premium-60-capsule-vegetale-onedia-pret-oferta_.html?utm_source=2performant",
       "reason": "Request failed with status code 403"
@@ -100,23 +100,8 @@
       "reason": "Request failed with status code 403"
     },
     {
-      "id": "minuneanaturii-73238",
-      "url": "https://www.minuneanaturii.ro/laxative-naturale/senna-30-capsule-medica-pro-natura-pret-oferta_.html?utm_source=2performant",
-      "reason": "Request failed with status code 403"
-    },
-    {
       "id": "minuneanaturii-74559",
       "url": "https://www.minuneanaturii.ro/inima-circulatie-sanguina/normoton-reglator-de-ritm-cardiac-40-comprimate-pontica-elidor-pret-oferta_.html?utm_source=2performant",
-      "reason": "Request failed with status code 403"
-    },
-    {
-      "id": "minuneanaturii-77203",
-      "url": "https://www.minuneanaturii.ro/detergenti-pentru-vase/detergent-pentru-vase-fara-parfum-fara-alergeni-eco-bio-1000-ml-safe-pret-oferta_.html?utm_source=2performant",
-      "reason": "Request failed with status code 403"
-    },
-    {
-      "id": "minuneanaturii-77233",
-      "url": "https://www.minuneanaturii.ro/demachiere-curatare/dischete-demachiante-ovale-din-bumbac-eco-bio-50-bucati-tadam-pret-oferta_.html?utm_source=2performant",
       "reason": "Request failed with status code 403"
     },
     {
@@ -130,8 +115,13 @@
       "reason": "Request failed with status code 403"
     },
     {
-      "id": "minuneanaturii-79561",
-      "url": "https://www.minuneanaturii.ro/omega-3-6-9-/balance-oil-omega-3-orange-lemon-mint-100-ml-zinzino-pret-oferta_.html?utm_source=2performant",
+      "id": "minuneanaturii-77233",
+      "url": "https://www.minuneanaturii.ro/demachiere-curatare/dischete-demachiante-ovale-din-bumbac-eco-bio-50-bucati-tadam-pret-oferta_.html?utm_source=2performant",
+      "reason": "Request failed with status code 403"
+    },
+    {
+      "id": "minuneanaturii-77203",
+      "url": "https://www.minuneanaturii.ro/detergenti-pentru-vase/detergent-pentru-vase-fara-parfum-fara-alergeni-eco-bio-1000-ml-safe-pret-oferta_.html?utm_source=2performant",
       "reason": "Request failed with status code 403"
     },
     {
@@ -140,14 +130,159 @@
       "reason": "Request failed with status code 403"
     },
     {
+      "id": "minuneanaturii-79561",
+      "url": "https://www.minuneanaturii.ro/omega-3-6-9-/balance-oil-omega-3-orange-lemon-mint-100-ml-zinzino-pret-oferta_.html?utm_source=2performant",
+      "reason": "Request failed with status code 403"
+    },
+    {
+      "id": "minuneanaturii-80210",
+      "url": "https://www.minuneanaturii.ro/sare-integrala-fara-iod/sare-alimentara-neiodata-neaditivata-slanic-prahova-gema-0-4-mm-500-g-pronat-pret-oferta_.html?utm_source=2performant",
+      "reason": "Request failed with status code 403"
+    },
+    {
       "id": "minuneanaturii-79847",
       "url": "https://www.minuneanaturii.ro/demachiere-curatare/gel-hidratant-pentru-curatarea-fetei-250-ml-onedia-pret-oferta_.html?utm_source=2performant",
       "reason": "Request failed with status code 403"
     },
     {
-      "id": "springfarma-35",
-      "url": "https://www.springfarma.com/9-vita-100-drajeuri.html",
-      "reason": "Request failed with status code 403"
+      "id": "infinitelove-5926",
+      "url": "https://infinitelove.ro/produs/parfum-evora/?attribute_pa_recipient=100-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5915",
+      "url": "https://infinitelove.ro/produs/parfum-arezzo/?attribute_pa_recipient=50-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5913",
+      "url": "https://infinitelove.ro/produs/parfum-arezzo/?attribute_pa_recipient=100-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5911",
+      "url": "https://infinitelove.ro/produs/parfum-weis/?attribute_pa_recipient=50-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5909",
+      "url": "https://infinitelove.ro/produs/parfum-weis/?attribute_pa_recipient=100-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5907",
+      "url": "https://infinitelove.ro/produs/parfum-pacific/?attribute_pa_recipient=50-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5906",
+      "url": "https://infinitelove.ro/produs/parfum-pacific/?attribute_pa_recipient=2-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5910",
+      "url": "https://infinitelove.ro/produs/parfum-weis/?attribute_pa_recipient=2-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5905",
+      "url": "https://infinitelove.ro/produs/parfum-pacific/?attribute_pa_recipient=100-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5903",
+      "url": "https://infinitelove.ro/produs/parfum-colombia/?attribute_pa_recipient=50-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5902",
+      "url": "https://infinitelove.ro/produs/parfum-colombia/?attribute_pa_recipient=2-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5901",
+      "url": "https://infinitelove.ro/produs/parfum-colombia/?attribute_pa_recipient=100-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5889",
+      "url": "https://infinitelove.ro/produs/parfum-madeira/?attribute_pa_recipient=2-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5888",
+      "url": "https://infinitelove.ro/produs/parfum-madeira/?attribute_pa_recipient=100-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5885",
+      "url": "https://infinitelove.ro/produs/parfum-laguna/?attribute_pa_recipient=50-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5875",
+      "url": "https://infinitelove.ro/produs/parfum-laguna/?attribute_pa_recipient=2-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5874",
+      "url": "https://infinitelove.ro/produs/parfum-laguna/?attribute_pa_recipient=100-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5871",
+      "url": "https://infinitelove.ro/produs/parfum-milano/?attribute_pa_recipient=50-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5870",
+      "url": "https://infinitelove.ro/produs/parfum-milano/?attribute_pa_recipient=2-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5869",
+      "url": "https://infinitelove.ro/produs/parfum-milano/?attribute_pa_recipient=100-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5850",
+      "url": "https://infinitelove.ro/produs/parfum-salta/?attribute_pa_recipient=2-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5825",
+      "url": "https://infinitelove.ro/produs/parfum-nimes/?attribute_pa_recipient=2-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5824",
+      "url": "https://infinitelove.ro/produs/parfum-nimes/?attribute_pa_recipient=100-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5821",
+      "url": "https://infinitelove.ro/produs/parfum-mystras/?attribute_pa_recipient=50-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5820",
+      "url": "https://infinitelove.ro/produs/parfum-mystras/?attribute_pa_recipient=2-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5819",
+      "url": "https://infinitelove.ro/produs/parfum-mystras/?attribute_pa_recipient=100-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5812",
+      "url": "https://infinitelove.ro/produs/parfum-maia/?attribute_pa_recipient=2-ml",
+      "reason": "Request failed with status code 503"
+    },
+    {
+      "id": "infinitelove-5811",
+      "url": "https://infinitelove.ro/produs/parfum-maia/?attribute_pa_recipient=100-ml",
+      "reason": "Request failed with status code 503"
     },
     {
       "id": "springfarma-297",
@@ -160,6 +295,16 @@
       "reason": "Request failed with status code 403"
     },
     {
+      "id": "springfarma-35",
+      "url": "https://www.springfarma.com/9-vita-100-drajeuri.html",
+      "reason": "Request failed with status code 403"
+    },
+    {
+      "id": "springfarma-306",
+      "url": "https://www.springfarma.com/crom-forte-30-tablete-walmark.html",
+      "reason": "Request failed with status code 403"
+    },
+    {
       "id": "springfarma-633",
       "url": "https://www.springfarma.com/genera-soft-sapun-antibacterian-cu-glicerina-500ml.html",
       "reason": "Request failed with status code 403"
@@ -167,11 +312,6 @@
     {
       "id": "springfarma-1309",
       "url": "https://www.springfarma.com/irigator-tantum-rosa-igiena-intima-331.html",
-      "reason": "Request failed with status code 403"
-    },
-    {
-      "id": "springfarma-306",
-      "url": "https://www.springfarma.com/crom-forte-30-tablete-walmark.html",
       "reason": "Request failed with status code 403"
     },
     {
@@ -190,6 +330,11 @@
       "reason": "Request failed with status code 403"
     },
     {
+      "id": "springfarma-8588",
+      "url": "https://www.springfarma.com/gel-supliform-75ml-hofigal.html",
+      "reason": "Request failed with status code 403"
+    },
+    {
       "id": "springfarma-5572",
       "url": "https://www.springfarma.com/lacrisifi-solutie-oftalmica-10-ml.html",
       "reason": "Request failed with status code 403"
@@ -200,23 +345,18 @@
       "reason": "Request failed with status code 403"
     },
     {
-      "id": "springfarma-8588",
-      "url": "https://www.springfarma.com/gel-supliform-75ml-hofigal.html",
-      "reason": "Request failed with status code 403"
-    },
-    {
       "id": "springfarma-8801",
       "url": "https://www.springfarma.com/tinctura-de-valeriana-50-ml-hofigal.html",
       "reason": "Request failed with status code 403"
     },
     {
-      "id": "springfarma-9656",
-      "url": "https://www.springfarma.com/nestle-8-cereale-miere-250-g.html",
+      "id": "springfarma-9399",
+      "url": "https://www.springfarma.com/sapun-moale-lichid-vegetal-200ml-hofigal.html",
       "reason": "Request failed with status code 403"
     },
     {
-      "id": "springfarma-9399",
-      "url": "https://www.springfarma.com/sapun-moale-lichid-vegetal-200ml-hofigal.html",
+      "id": "springfarma-9656",
+      "url": "https://www.springfarma.com/nestle-8-cereale-miere-250-g.html",
       "reason": "Request failed with status code 403"
     },
     {
@@ -235,11 +375,6 @@
       "reason": "Request failed with status code 403"
     },
     {
-      "id": "springfarma-12710",
-      "url": "https://www.springfarma.com/crema-dr-boici-60-g-antiinflamator.html",
-      "reason": "Request failed with status code 403"
-    },
-    {
       "id": "springfarma-11074",
       "url": "https://www.springfarma.com/tinctura-de-paducel-50-ml-hofigal.html",
       "reason": "Request failed with status code 403"
@@ -250,13 +385,13 @@
       "reason": "Request failed with status code 403"
     },
     {
-      "id": "springfarma-14023",
-      "url": "https://www.springfarma.com/nestle-nan-fara-lactoza-de-la-nastere-400g.html",
+      "id": "springfarma-12710",
+      "url": "https://www.springfarma.com/crema-dr-boici-60-g-antiinflamator.html",
       "reason": "Request failed with status code 403"
     },
     {
-      "id": "springfarma-14362",
-      "url": "https://www.springfarma.com/parodontax-fluoride-pentru-oprirea-sangerarilor-gingivale-75g.html",
+      "id": "springfarma-14023",
+      "url": "https://www.springfarma.com/nestle-nan-fara-lactoza-de-la-nastere-400g.html",
       "reason": "Request failed with status code 403"
     },
     {
@@ -265,8 +400,18 @@
       "reason": "Request failed with status code 403"
     },
     {
+      "id": "springfarma-14362",
+      "url": "https://www.springfarma.com/parodontax-fluoride-pentru-oprirea-sangerarilor-gingivale-75g.html",
+      "reason": "Request failed with status code 403"
+    },
+    {
       "id": "springfarma-14690",
       "url": "https://www.springfarma.com/bioderma-sensibio-ds-crema-40ml.html",
+      "reason": "Request failed with status code 403"
+    },
+    {
+      "id": "springfarma-14735",
+      "url": "https://www.springfarma.com/sirop-patlagina-250-ml-fares.html",
       "reason": "Request failed with status code 403"
     },
     {
@@ -275,9 +420,9 @@
       "reason": "Request failed with status code 403"
     },
     {
-      "id": "springfarma-14735",
-      "url": "https://www.springfarma.com/sirop-patlagina-250-ml-fares.html",
-      "reason": "Request failed with status code 403"
+      "id": "farmec-502",
+      "url": "http://www.farmec.ro/tarr-super-lotiune-astringenta-calmanta-180?___store=default",
+      "reason": "Nu am gasit pret pentru http://www.farmec.ro/tarr-super-lotiune-astringenta-calmanta-180?___store=default (selector de verificat)"
     },
     {
       "id": "farmec-288",
@@ -293,11 +438,6 @@
       "id": "farmec-3732",
       "url": "http://www.farmec.ro/deodorant-favorit-231?___store=default",
       "reason": "Nu am gasit pret pentru http://www.farmec.ro/deodorant-favorit-231?___store=default (selector de verificat)"
-    },
-    {
-      "id": "farmec-502",
-      "url": "http://www.farmec.ro/tarr-super-lotiune-astringenta-calmanta-180?___store=default",
-      "reason": "Nu am gasit pret pentru http://www.farmec.ro/tarr-super-lotiune-astringenta-calmanta-180?___store=default (selector de verificat)"
     },
     {
       "id": "farmec-289",
@@ -320,19 +460,14 @@
       "reason": "Nu am gasit pret pentru http://www.farmec.ro/sampon-anticadere-400-ml-553?___store=default (selector de verificat)"
     },
     {
-      "id": "farmec-1157",
-      "url": "http://www.farmec.ro/ser-termoprotector-cu-keratina-560?___store=default",
-      "reason": "Nu am gasit pret pentru http://www.farmec.ro/ser-termoprotector-cu-keratina-560?___store=default (selector de verificat)"
-    },
-    {
-      "id": "farmec-1152",
-      "url": "http://www.farmec.ro/sampon-antimatreata-564?___store=default",
-      "reason": "Nu am gasit pret pentru http://www.farmec.ro/sampon-antimatreata-564?___store=default (selector de verificat)"
-    },
-    {
       "id": "farmec-1150",
       "url": "http://www.farmec.ro/sampon-antimatreata-cu-ichtiol-563?___store=default",
       "reason": "Nu am gasit pret pentru http://www.farmec.ro/sampon-antimatreata-cu-ichtiol-563?___store=default (selector de verificat)"
+    },
+    {
+      "id": "farmec-1157",
+      "url": "http://www.farmec.ro/ser-termoprotector-cu-keratina-560?___store=default",
+      "reason": "Nu am gasit pret pentru http://www.farmec.ro/ser-termoprotector-cu-keratina-560?___store=default (selector de verificat)"
     },
     {
       "id": "farmec-1153",
@@ -340,9 +475,19 @@
       "reason": "Nu am gasit pret pentru http://www.farmec.ro/sampon-sebum-control-566?___store=default (selector de verificat)"
     },
     {
+      "id": "farmec-1152",
+      "url": "http://www.farmec.ro/sampon-antimatreata-564?___store=default",
+      "reason": "Nu am gasit pret pentru http://www.farmec.ro/sampon-antimatreata-564?___store=default (selector de verificat)"
+    },
+    {
       "id": "farmec-399",
       "url": "http://www.farmec.ro/crema-corp-pentru-piele-uscata-572?___store=default",
       "reason": "Nu am gasit pret pentru http://www.farmec.ro/crema-corp-pentru-piele-uscata-572?___store=default (selector de verificat)"
+    },
+    {
+      "id": "farmec-402",
+      "url": "http://www.farmec.ro/crema-anticuperozica-hidratanta-spf-10-574?___store=default",
+      "reason": "Nu am gasit pret pentru http://www.farmec.ro/crema-anticuperozica-hidratanta-spf-10-574?___store=default (selector de verificat)"
     },
     {
       "id": "farmec-2313",
@@ -355,16 +500,6 @@
       "reason": "Nu am gasit pret pentru http://www.farmec.ro/crema-depilatoare-piele-sensibila-607?___store=default (selector de verificat)"
     },
     {
-      "id": "farmec-402",
-      "url": "http://www.farmec.ro/crema-anticuperozica-hidratanta-spf-10-574?___store=default",
-      "reason": "Nu am gasit pret pentru http://www.farmec.ro/crema-anticuperozica-hidratanta-spf-10-574?___store=default (selector de verificat)"
-    },
-    {
-      "id": "farmec-823",
-      "url": "http://www.farmec.ro/crema-depilatoare-teenager-608?___store=default",
-      "reason": "Nu am gasit pret pentru http://www.farmec.ro/crema-depilatoare-teenager-608?___store=default (selector de verificat)"
-    },
-    {
       "id": "farmec-290",
       "url": "http://www.farmec.ro/crema-pentru-ten-matur-uscat-ridat-658?___store=default",
       "reason": "Nu am gasit pret pentru http://www.farmec.ro/crema-pentru-ten-matur-uscat-ridat-658?___store=default (selector de verificat)"
@@ -375,14 +510,14 @@
       "reason": "Nu am gasit pret pentru http://www.farmec.ro/fiola-cu-acid-hialuronic-638?___store=default (selector de verificat)"
     },
     {
+      "id": "farmec-823",
+      "url": "http://www.farmec.ro/crema-depilatoare-teenager-608?___store=default",
+      "reason": "Nu am gasit pret pentru http://www.farmec.ro/crema-depilatoare-teenager-608?___store=default (selector de verificat)"
+    },
+    {
       "id": "farmec-286",
       "url": "http://www.farmec.ro/crema-regeneranta-pentru-maini-701?___store=default",
       "reason": "Nu am gasit pret pentru http://www.farmec.ro/crema-regeneranta-pentru-maini-701?___store=default (selector de verificat)"
-    },
-    {
-      "id": "farmec-457",
-      "url": "http://www.farmec.ro/crema-gel-sebum-control-752?___store=default",
-      "reason": "Nu am gasit pret pentru http://www.farmec.ro/crema-gel-sebum-control-752?___store=default (selector de verificat)"
     },
     {
       "id": "farmec-459",
@@ -395,14 +530,14 @@
       "reason": "Nu am gasit pret pentru http://www.farmec.ro/benzi-curatare-puncte-negre-756?___store=default (selector de verificat)"
     },
     {
+      "id": "farmec-457",
+      "url": "http://www.farmec.ro/crema-gel-sebum-control-752?___store=default",
+      "reason": "Nu am gasit pret pentru http://www.farmec.ro/crema-gel-sebum-control-752?___store=default (selector de verificat)"
+    },
+    {
       "id": "farmec-458",
       "url": "http://www.farmec.ro/crema-ultra-activa-753?___store=default",
       "reason": "Nu am gasit pret pentru http://www.farmec.ro/crema-ultra-activa-753?___store=default (selector de verificat)"
-    },
-    {
-      "id": "farmec-454",
-      "url": "http://www.farmec.ro/gel-spumant-purifiant-751?___store=default",
-      "reason": "Nu am gasit pret pentru http://www.farmec.ro/gel-spumant-purifiant-751?___store=default (selector de verificat)"
     },
     {
       "id": "farmec-455",
@@ -410,9 +545,9 @@
       "reason": "Nu am gasit pret pentru http://www.farmec.ro/masca-film-purificatoare-755?___store=default (selector de verificat)"
     },
     {
-      "id": "farmec-491",
-      "url": "http://www.farmec.ro/fiole-cu-acid-hialuronic-hyaluron-c-2-806?___store=default",
-      "reason": "Nu am gasit pret pentru http://www.farmec.ro/fiole-cu-acid-hialuronic-hyaluron-c-2-806?___store=default (selector de verificat)"
+      "id": "farmec-454",
+      "url": "http://www.farmec.ro/gel-spumant-purifiant-751?___store=default",
+      "reason": "Nu am gasit pret pentru http://www.farmec.ro/gel-spumant-purifiant-751?___store=default (selector de verificat)"
     },
     {
       "id": "farmec-4185",
@@ -423,15 +558,15 @@
   "by_source": {
     "minuneanaturii.ro": {
       "total": 576,
-      "ok": 200,
+      "ok": 201,
       "failed": 28,
-      "skipped": 348
+      "skipped": 347
     },
     "infinitelove.ro": {
       "total": 348,
-      "ok": 348,
-      "failed": 0,
-      "skipped": 0
+      "ok": 176,
+      "failed": 28,
+      "skipped": 144
     },
     "springfarma.com": {
       "total": 12495,
@@ -442,9 +577,9 @@
     "farmec.ro": {
       "total": 114,
       "ok": 0,
-      "failed": 28,
-      "skipped": 86
+      "failed": 27,
+      "skipped": 87
     }
   },
-  "finished_at": "2026-07-18T13:36:54.347Z"
+  "finished_at": "2026-07-18T14:05:28.192Z"
 }
