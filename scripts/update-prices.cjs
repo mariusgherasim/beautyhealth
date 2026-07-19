@@ -28,6 +28,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 const { createLimiter, sleep, withRetry } = require('./lib/helpers.cjs');
 
 const springfarma = require('./lib/scrapers/springfarma.cjs');
@@ -36,6 +37,36 @@ const infinitelove = require('./lib/scrapers/infinitelove.cjs');
 const farmec = require('./lib/scrapers/farmec.cjs');
 const PRODUCTS_PATH = path.join(__dirname, '../src/data/products.json');
 const REPORT_PATH = path.join(__dirname, '../update-report.json');
+const REPO_ROOT = path.join(__dirname, '..');
+
+// Push la fiecare checkpoint - DOAR pentru rularea locala (Task Scheduler),
+// NU si in GitHub Actions (acolo commit-ul se face o singura data, la finalul
+// workflow-ului - vezi update-prices.yml). Activat prin variabila de mediu
+// setata explicit in update-prices-local.bat, ca sa nu porneasca din greseala
+// si in cloud.
+const PUSH_ON_CHECKPOINT = process.env.UPDATE_PRICES_PUSH_ON_CHECKPOINT === '1';
+
+/** Face git add + commit + push pentru products.json, fara sa opreasca scriptul daca esueaza. */
+function checkpointGitPush() {
+  const opts = { cwd: REPO_ROOT, stdio: 'pipe' };
+  try {
+    execSync('git add src/data/products.json', opts);
+    // "git commit" da exit code diferit de 0 daca nu sunt schimbari - normal,
+    // nu tratam ca eroare reala (nimic nou de trimis in acel moment).
+    try {
+      execSync('git commit -m "chore: checkpoint automat actualizare preturi (rulare in curs)"', opts);
+    } catch (commitErr) {
+      if (!/nothing to commit/i.test(commitErr.stdout?.toString() || '')) {
+        throw commitErr;
+      }
+      return; // nimic nou, nu mai incercam push
+    }
+    execSync('git push', opts);
+    console.log('  [checkpoint] git push reusit - progres salvat pe GitHub');
+  } catch (err) {
+    console.error(`  [checkpoint] git push esuat (progresul ramane salvat local): ${err.message}`);
+  }
+}
 
 // Concurenta si delay PER SURSA. springfarma/minuneanaturii au tiparul unui
 // rate-limit clasic (merg bine primele ~90-100 request-uri, apoi 403 solid) -
@@ -145,10 +176,18 @@ async function main() {
     // (Task Scheduler) - daca PC-ul se opreste/adoarme sau task-ul e
     // intrerupt la mijloc (ore intregi la ritmul lent actual), progresul de
     // pana atunci ramane salvat, nu se pierde tot.
+    let checkpointCount = 0;
+    const CHECKPOINTS_PER_PUSH = 10; // push la fiecare 10 checkpoint-uri = ~20 minute (checkpoint la 2 min)
+
     const checkpoint = setInterval(() => {
       try {
         fs.writeFileSync(PRODUCTS_PATH, JSON.stringify(products, null, 0), 'utf-8');
-        console.log(`  [checkpoint] products.json salvat (progres partial pastrat)`);
+        checkpointCount++;
+        console.log(`  [checkpoint ${checkpointCount}] products.json salvat local (progres partial pastrat)`);
+        if (PUSH_ON_CHECKPOINT && checkpointCount % CHECKPOINTS_PER_PUSH === 0) {
+          console.log(`  [checkpoint ${checkpointCount}] ~20 min de la ultimul push - trimit pe GitHub...`);
+          checkpointGitPush();
+        }
       } catch (err) {
         console.error(`  [checkpoint] eroare la salvare: ${err.message}`);
       }
