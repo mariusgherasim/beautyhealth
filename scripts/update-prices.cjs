@@ -140,6 +140,20 @@ async function main() {
       );
     }, 30000);
 
+    // Checkpoint: salveaza products.json la fiecare 2 minute, nu doar la
+    // finalul intregului script. Necesar pentru rulari nesupravegheate
+    // (Task Scheduler) - daca PC-ul se opreste/adoarme sau task-ul e
+    // intrerupt la mijloc (ore intregi la ritmul lent actual), progresul de
+    // pana atunci ramane salvat, nu se pierde tot.
+    const checkpoint = setInterval(() => {
+      try {
+        fs.writeFileSync(PRODUCTS_PATH, JSON.stringify(products, null, 0), 'utf-8');
+        console.log(`  [checkpoint] products.json salvat (progres partial pastrat)`);
+      } catch (err) {
+        console.error(`  [checkpoint] eroare la salvare: ${err.message}`);
+      }
+    }, 2 * 60 * 1000);
+
     await Promise.all(
       sourceProducts.map((product) =>
         limit(async () => {
@@ -191,6 +205,7 @@ async function main() {
     );
 
     clearInterval(heartbeat);
+    clearInterval(checkpoint);
     console.log(`  ${sourceSite}: ${sourceReport.ok} ok, ${sourceReport.failed} esuate, ${sourceReport.skipped} sarite (circuit breaker/cooldown)`);
   }
 
