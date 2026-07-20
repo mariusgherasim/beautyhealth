@@ -76,7 +76,7 @@ function checkpointGitPush() {
 const SOURCE_CONFIG = {
   'springfarma.com': { scraper: springfarma, concurrency: 1, delayMs: 2500, cooldownMs: 5 * 60 * 1000, maxCooldowns: 3 },
   'minuneanaturii.ro': { scraper: minuneanaturii, concurrency: 1, delayMs: 2000, cooldownMs: 5 * 60 * 1000, maxCooldowns: 3 },
-  'infinitelove.ro': { scraper: infinitelove, concurrency: 4, delayMs: 400, cooldownMs: 0, maxCooldowns: 0 },
+  'infinitelove.ro': { scraper: infinitelove, concurrency: 2, delayMs: 1000, cooldownMs: 5 * 60 * 1000, maxCooldowns: 2 },
   'farmec.ro': { scraper: farmec, concurrency: 2, delayMs: 500, cooldownMs: 0, maxCooldowns: 0 }, // Playwright = mai greu, browser real per request
 };
 
