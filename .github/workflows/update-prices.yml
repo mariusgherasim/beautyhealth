@@ -23,7 +23,7 @@ jobs:
       - name: Instaleaza Playwright (Chromium) - necesar doar pentru farmec.ro (SPA JS)
         run: npx playwright install --with-deps chromium
 
-      - name: Ruleaza update de preturi (doar surse care merg din cloud: infinitelove, farmec)
+      - name: "Ruleaza update de preturi (doar surse cloud - infinitelove, farmec)"
         run: npm run update-prices:cloud
         continue-on-error: true
 
