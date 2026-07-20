@@ -1,0 +1,80 @@
+---
+// Slot de banner afiliat. Folosire:
+//   <BannerSlot category="parfumuri" size="728x90" />
+//   <BannerSlot category="homepage" size="300x250" />
+//
+// - category: slug-ul categoriei curente (sau "homepage")
+// - size (optional): "728x90" | "300x250" | "300x600" - daca lipseste, accepta orice dimensiune
+//
+// Filtrarea dupa data (active_from / active_until) si alegerea aleatorie se
+// fac CLIENT-SIDE (in browser), nu la build - altfel un banner expirat ar
+// ramane afisat pana la urmatorul rebuild al site-ului, iar rotatia aleatorie
+// la fiecare incarcare n-ar fi posibila pe un site static.
+import { banners } from '../data/banners.js';
+
+const { category, size = null } = Astro.props;
+
+const eligible = banners.filter((b) => {
+  if (!b.categories.includes(category)) return false;
+  if (size) {
+    const [w, h] = size.split('x').map(Number);
+    if (b.width !== w || b.height !== h) return false;
+  }
+  return true;
+});
+---
+{eligible.length > 0 && (
+  <div class="banner-slot" data-banner-slot>
+    {eligible.map((b) => (
+      <a
+        class="banner-item"
+        href={b.affiliate_url}
+        target="_blank"
+        rel="noopener sponsored nofollow"
+        data-banner-id={b.id}
+        data-active-from={b.active_from || ''}
+        data-active-until={b.active_until || ''}
+        hidden
+      >
+        <img src={b.image_url} alt={b.merchant} width={b.width} height={b.height} loading="lazy" />
+      </a>
+    ))}
+  </div>
+)}
+
+<script>
+  // Ruleaza pentru toate sloturile de pe pagina: filtreaza dupa data curenta,
+  // alege un banner aleatoriu dintre cele active si il face vizibil.
+  document.querySelectorAll('[data-banner-slot]').forEach((slot) => {
+    const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+    const candidates = Array.from(slot.querySelectorAll('.banner-item')).filter((el) => {
+      const from = el.dataset.activeFrom;
+      const until = el.dataset.activeUntil;
+      if (from && today < from) return false;
+      if (until && today > until) return false;
+      return true;
+    });
+    if (candidates.length === 0) {
+      slot.remove(); // niciun banner activ azi - slotul dispare complet
+      return;
+    }
+    const pick = candidates[Math.floor(Math.random() * candidates.length)];
+    pick.hidden = false;
+  });
+</script>
+
+<style>
+  .banner-slot {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  .banner-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+  }
+  .banner-item[hidden] {
+    display: none;
+  }
+</style>

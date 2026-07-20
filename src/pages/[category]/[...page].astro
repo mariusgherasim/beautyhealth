@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import CategorySearch from '../../components/CategorySearch.astro';
+import BannerSlot from '../../components/BannerSlot.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Newsletter from '../../components/Newsletter.astro';
@@ -68,6 +69,8 @@ const jsonLd = {
       <a href="/">Acasă</a> <span>/</span> <span>{cat.name}</span>
     </nav>
 
+    <BannerSlot category={categorySlug} size="728x90" />
+
     <h1>{cat.name}</h1>
 
     {page.currentPage === 1 && (
@@ -95,6 +98,8 @@ const jsonLd = {
       <span>Pagina {page.currentPage} / {page.lastPage}</span>
       {page.url.next && <a href={page.url.next}>Pagina următoare →</a>}
     </nav>
+
+    <BannerSlot category={categorySlug} />
 
     <Newsletter />
   </main>

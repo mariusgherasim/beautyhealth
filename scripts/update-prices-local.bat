@@ -26,7 +26,8 @@ echo --- git pull --- >> "%LOGFILE%"
 git pull >> "%LOGFILE%" 2>&1
 
 echo. >> "%LOGFILE%"
-echo --- npm run update-prices:local --- >> "%LOGFILE%"
+echo --- npm run update-prices:local (cu push automat la checkpoint) --- >> "%LOGFILE%"
+set UPDATE_PRICES_PUSH_ON_CHECKPOINT=1
 call npm run update-prices:local >> "%LOGFILE%" 2>&1
 
 echo. >> "%LOGFILE%"

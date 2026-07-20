@@ -107,6 +107,23 @@ const { categorySlug, categoryName } = Astro.props;
         ? matches.slice(0, 200).map(renderCard).join('')
         : `<div class="search-empty">Niciun produs găsit pentru "${escapeHtml(q)}". Încearcă alt termen.</div>`;
 
+      // Baner intre rezultate: clonam un banner ACTIV din sloturile deja
+      // randate pe pagina (filtrarea dupa data e deja facuta de scriptul
+      // BannerSlot, care lasa vizibile doar bannerele active azi) si il
+      // inseram dupa al 12-lea rezultat (sau la final, daca-s mai putine).
+      if (matches.length > 0) {
+        const activeBanners = Array.from(
+          document.querySelectorAll('[data-banner-slot] .banner-item:not([hidden])')
+        );
+        if (activeBanners.length > 0) {
+          const pick = activeBanners[Math.floor(Math.random() * activeBanners.length)].cloneNode(true);
+          pick.classList.add('banner-in-results');
+          const cards = resultsEl.querySelectorAll('.product-card');
+          const anchor = cards[Math.min(11, cards.length - 1)];
+          anchor.insertAdjacentElement('afterend', pick);
+        }
+      }
+
       if (matches.length > 200) {
         status.textContent += ` (afișate primele 200)`;
       }

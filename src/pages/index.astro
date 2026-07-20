@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Newsletter from '../components/Newsletter.astro';
 import CookieConsent from '../components/CookieConsent.astro';
+import BannerSlot from '../components/BannerSlot.astro';
 import productsData from '../data/products.json';
 import { categories } from '../data/categories.js';
 
@@ -29,6 +30,10 @@ const categoryStats = categories.map((c) => ({
       </div>
     </section>
 
+    <div class="wrap">
+      <BannerSlot category="homepage" size="728x90" />
+    </div>
+
     <section class="categories-grid wrap">
       <h2>Explorează categoriile</h2>
       <div class="grid">
@@ -42,6 +47,7 @@ const categoryStats = categories.map((c) => ({
     </section>
 
     <div class="wrap">
+      <BannerSlot category="homepage" />
       <Newsletter />
     </div>
   </main>
