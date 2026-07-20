@@ -26,7 +26,7 @@ const categoryStats = categories.map((c) => ({
     <section class="hero">
       <div class="hero-inner">
         <h1>Câte produse ai cumpărat fără să compari prețul?</h1>
-        <p>Peste <strong>{total.toLocaleString('ro-RO')}</strong> produse de frumusețe, îngrijire și sănătate, comparate zilnic. Găsește oferta bună, nu doar prima pe care o vezi.</p>
+        <p>Peste <strong>10.000</strong> produse de frumusețe, îngrijire și sănătate, comparate zilnic. Găsește oferta bună, nu doar prima pe care o vezi.</p>
       </div>
     </section>
 
@@ -40,7 +40,6 @@ const categoryStats = categories.map((c) => ({
         {categoryStats.map((c) => (
           <a class="cat-card" href={`/${c.slug}/`}>
             <h3>{c.name}</h3>
-            <span>{c.count.toLocaleString('ro-RO')} produse</span>
           </a>
         ))}
       </div>
