@@ -1,168 +1,22 @@
 {
-  "started_at": "2026-07-20T06:24:01.826Z",
-  "ok": 237,
-  "failed": 29,
-  "skipped": 196,
-  "errors": [
-    {
-      "id": "farmec-2550",
-      "url": "http://www.farmec.ro/mascara-supreme-lash-843?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/mascara-supreme-lash-843?___store=default"
-    },
-    {
-      "id": "infinitelove-5376",
-      "url": "https://infinitelove.ro/produs/parfum-las-vegas/?attribute_pa_recipient=2-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5365",
-      "url": "https://infinitelove.ro/produs/parfum-bali/?attribute_pa_recipient=50-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5363",
-      "url": "https://infinitelove.ro/produs/parfum-bali/?attribute_pa_recipient=100-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5364",
-      "url": "https://infinitelove.ro/produs/parfum-bali/?attribute_pa_recipient=2-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5360",
-      "url": "https://infinitelove.ro/produs/parfum-lemnos-barbati-belpasso/?attribute_pa_recipient=50-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5359",
-      "url": "https://infinitelove.ro/produs/parfum-lemnos-barbati-belpasso/?attribute_pa_recipient=2-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5358",
-      "url": "https://infinitelove.ro/produs/parfum-lemnos-barbati-belpasso/?attribute_pa_recipient=100-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5350",
-      "url": "https://infinitelove.ro/produs/parfum-lemnos-dama-cali/?attribute_pa_recipient=50-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5349",
-      "url": "https://infinitelove.ro/produs/parfum-lemnos-dama-cali/?attribute_pa_recipient=2-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5348",
-      "url": "https://infinitelove.ro/produs/parfum-lemnos-dama-cali/?attribute_pa_recipient=100-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5306",
-      "url": "https://infinitelove.ro/produs/parfum-anvers/?attribute_pa_recipient=50-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5305",
-      "url": "https://infinitelove.ro/produs/parfum-anvers/?attribute_pa_recipient=2-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5304",
-      "url": "https://infinitelove.ro/produs/parfum-anvers/?attribute_pa_recipient=100-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5286",
-      "url": "https://infinitelove.ro/produs/parfum-champs-elysees/?attribute_pa_recipient=50-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5285",
-      "url": "https://infinitelove.ro/produs/parfum-champs-elysees/?attribute_pa_recipient=2-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5252",
-      "url": "https://infinitelove.ro/produs/parfum-canillo/?attribute_pa_recipient=50-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5250",
-      "url": "https://infinitelove.ro/produs/parfum-canillo/?attribute_pa_recipient=100-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5216",
-      "url": "https://infinitelove.ro/produs/parfum-brescia/?attribute_pa_recipient=50-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5215",
-      "url": "https://infinitelove.ro/produs/parfum-brescia/?attribute_pa_recipient=2-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5214",
-      "url": "https://infinitelove.ro/produs/parfum-brescia/?attribute_pa_recipient=100-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5207",
-      "url": "https://infinitelove.ro/produs/parfum-siena/?attribute_pa_recipient=50-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5206",
-      "url": "https://infinitelove.ro/produs/parfum-siena/?attribute_pa_recipient=2-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5205",
-      "url": "https://infinitelove.ro/produs/parfum-siena/?attribute_pa_recipient=100-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5202",
-      "url": "https://infinitelove.ro/produs/parfum-madrid/?attribute_pa_recipient=50-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5200",
-      "url": "https://infinitelove.ro/produs/parfum-madrid/?attribute_pa_recipient=100-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5201",
-      "url": "https://infinitelove.ro/produs/parfum-madrid/?attribute_pa_recipient=2-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5170",
-      "url": "https://infinitelove.ro/produs/parfum-rocca/?attribute_pa_recipient=50-ml",
-      "reason": "Request failed with status code 503"
-    },
-    {
-      "id": "infinitelove-5169",
-      "url": "https://infinitelove.ro/produs/parfum-rocca/?attribute_pa_recipient=2-ml",
-      "reason": "Request failed with status code 503"
-    }
-  ],
+  "started_at": "2026-07-21T05:41:52.031Z",
+  "ok": 458,
+  "failed": 0,
+  "skipped": 0,
+  "errors": [],
   "by_source": {
     "farmec.ro": {
       "total": 114,
-      "ok": 113,
-      "failed": 1,
+      "ok": 114,
+      "failed": 0,
       "skipped": 0
     },
     "infinitelove.ro": {
-      "total": 348,
-      "ok": 124,
-      "failed": 28,
-      "skipped": 196
+      "total": 344,
+      "ok": 344,
+      "failed": 0,
+      "skipped": 0
     }
   },
-  "finished_at": "2026-07-20T06:53:06.501Z"
+  "finished_at": "2026-07-21T06:14:50.158Z"
 }
