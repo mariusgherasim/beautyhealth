@@ -68,16 +68,20 @@ function checkpointGitPush() {
   }
 }
 
-// Concurenta si delay PER SURSA. springfarma/minuneanaturii au tiparul unui
-// rate-limit clasic (merg bine primele ~90-100 request-uri, apoi 403 solid) -
-// concurenta redusa drastic + delay mare, ca sa stam sub orice prag de genul
-// "X request-uri/minut". cooldownMs = cat asteptam dupa ce circuit breaker-ul
-// se declanseaza, inainte sa incercam din nou (nu renuntam definitiv).
+// Concurenta si delay PER SURSA.
+// IMPORTANT: infinitelove.ro este EXCLUS din scraping-ul zilnic - preturile
+// produselor lor depind de varianta selectata (30ml/50ml/100ml) si se
+// incarca dinamic prin JavaScript; cheerio/axios nu executa JS, deci citeste
+// mereu un pret gresit (al primei variante din DOM sau un pret agregat).
+// Preturile infinitelove sunt mentinute prin re-importul saptamanal din
+// feed-ul XML 2Performant (care are preturile corecte per varianta) - vezi
+// sectiunea "De retinut: comparare saptamanala feed-uri vs products.json"
+// din REMEMBER.md.
 const SOURCE_CONFIG = {
   'springfarma.com': { scraper: springfarma, concurrency: 1, delayMs: 2500, cooldownMs: 5 * 60 * 1000, maxCooldowns: 3 },
   'minuneanaturii.ro': { scraper: minuneanaturii, concurrency: 1, delayMs: 2000, cooldownMs: 5 * 60 * 1000, maxCooldowns: 3 },
-  'infinitelove.ro': { scraper: infinitelove, concurrency: 2, delayMs: 1000, cooldownMs: 5 * 60 * 1000, maxCooldowns: 2 },
-  'farmec.ro': { scraper: farmec, concurrency: 2, delayMs: 500, cooldownMs: 0, maxCooldowns: 0 }, // Playwright = mai greu, browser real per request
+  'farmec.ro': { scraper: farmec, concurrency: 2, delayMs: 500, cooldownMs: 0, maxCooldowns: 0 },
+  // infinitelove.ro: exclus intentionat - vezi comentariul de mai sus
 };
 
 // Circuit breaker: daca o sursa acumuleaza atatea esecuri CONSECUTIVE, o consideram
