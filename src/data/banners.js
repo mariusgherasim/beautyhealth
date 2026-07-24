@@ -145,7 +145,42 @@ export const banners = [
     height: 250,
     active_from: "2026-07-20",
     active_until: null
-  }
+  },
+
+  // ---------- farmec.ro — bannere noi (adaugate 22.07.2026) ----------
+  {
+    id: "farmec-728x90-d",
+    merchant: "farmec.ro",
+    categories: ["ingrijire-ten", "ingrijire-corp", "ingrijire-par", "machiaj", "cosmetice-barbati", "homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/271414/original/271414.png",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=d6fa81fda&aff_code=676a7e7d9&campaign_unique=1dfbc028f",
+    width: 728,
+    height: 90,
+    active_from: "2026-07-22",
+    active_until: null
+  },
+  {
+    id: "farmec-300x600-d",
+    merchant: "farmec.ro",
+    categories: ["ingrijire-ten", "ingrijire-corp", "ingrijire-par", "machiaj", "cosmetice-barbati", "homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/271226/original/271226.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=997b3623f&aff_code=676a7e7d9&campaign_unique=1dfbc028f",
+    width: 300,
+    height: 600,
+    active_from: "2026-07-22",
+    active_until: null
+  },
+  {
+    id: "farmec-300x250-e",
+    merchant: "farmec.ro",
+    categories: ["ingrijire-ten", "ingrijire-corp", "ingrijire-par", "machiaj", "cosmetice-barbati", "homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/270786/original/270786.png",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=07d519c9f&aff_code=676a7e7d9&campaign_unique=1dfbc028f",
+    width: 300,
+    height: 250,
+    active_from: "2026-07-22",
+    active_until: null
+  },
 
   // ---------- infinitelove.ro (de completat când primești bannerele) ----------
   // {
