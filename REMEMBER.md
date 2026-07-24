@@ -414,6 +414,25 @@ respectă automat aceleași reguli de dată/categorie).
 Fără tracking GA4 pe bannere (decizia lui Marius — doar link simplu de
 afiliat).
 
+**Verificare rapidă după deploy (2-3 minute):** deschide
+`https://beautyhealth.gherasimmarius.com/machiaj/` — ar trebui să vezi un
+banner farmec deasupra titlului "Machiaj". Refresh de câteva ori — bannerul
+se schimbă aleatoriu (rotația funcționează). Pe Parfumuri și Vitamine nu
+apare nimic — corect, acolo nu-s definite bannere încă. **Confirmat
+funcțional pe site-ul live (20.07.2026).**
+
+**Workflow pentru adăugare/modificare bannere (Marius, periodic):**
+editezi doar `src/data/banners.js` (are instrucțiuni complete în
+comentarii), apoi:
+```powershell
+git add src/data/banners.js
+git commit -m "chore: bannere noi"
+git push
+```
+Pentru bannere cu perioadă limitată (oferte), setezi `active_from` și
+`active_until` — expiră singure, exact în ziua stabilită, fără să mai fie
+nevoie de vreo intervenție.
+
 ## Ce rămâne de făcut manual (nu pot face eu asta)
 
 
@@ -509,3 +528,376 @@ afiliat).
 - Scraping: axios + cheerio (springfarma, minuneanaturii — site-uri statice),
   Playwright (infinitelove — posibil necesar JS pentru variante de produs)
 - GitHub Actions pentru build/deploy + cron zilnic de prețuri
+
+---
+
+## Ghid comenzi Git — situații frecvente și ce face fiecare comandă
+
+Acest ghid documentează comenzile git folosite în mod repetat pe proiectul
+beautyhealth, cu explicații pentru fiecare situație. Folderul de lucru pentru
+toate comenzile de mai jos este întotdeauna:
+
+```
+C:\FOLDER DE LUCRU\PAUL MELINTE\SITE BEAUTY_HEALTH\beautyhealth-site-git
+```
+
+---
+
+### Ce este git pull, git add, git commit, git push — pe scurt
+
+| Comandă | Ce face |
+|---|---|
+| `git pull` | Aduce modificările de pe GitHub (cloud) pe calculatorul tău local. **Rulează întotdeauna PRIMUL**, înainte să trimiți ceva. |
+| `git add <fisier>` | Marchează fișierul pentru a fi inclus în următorul commit. Fără `add`, fișierul nu se trimite nicăieri. |
+| `git commit -m "mesaj"` | Salvează local un "snapshot" cu toate fișierele adăugate (`add`). Mesajul descrie ce ai schimbat. |
+| `git push` | Trimite commit-urile locale pe GitHub (cloud). Abia acum apar modificările pe site (declanșează deploy automat). |
+
+**Ordinea corectă întotdeauna:** `pull` → `add` → `commit` → `push`
+
+---
+
+### Situația 1 — Trimiți fișiere noi sau modificate pe GitHub
+
+**Când:** ori de câte ori ai primit fișiere noi de la Claude (cod, bannere,
+products.json corectat etc.) și vrei să le publici pe site.
+
+```powershell
+cd "C:\FOLDER DE LUCRU\PAUL MELINTE\SITE BEAUTY_HEALTH\beautyhealth-site-git"
+git pull
+git add src/data/banners.js
+git commit -m "feat: 3 bannere noi farmec (728x90, 300x600, 300x250)"
+git push
+```
+
+**Poți adăuga mai multe fișiere în același commit:**
+```powershell
+git add src/data/products.json scripts/update-prices.cjs
+git commit -m "fix: preturi infinitelove din feed + exclus din scraping zilnic"
+git push
+```
+
+**`-m "mesaj"`** — mesajul e doar pentru istoricul tău (git log), nu apare
+pe site. Scrie ceva scurt și descriptiv: ce ai schimbat și de ce.
+
+---
+
+### Situația 2 — git pull dă eroare: "would be overwritten by merge"
+
+**Când apare:**
+```
+error: Your local changes to the following files would be overwritten by merge:
+        src/data/products.json
+Please commit your changes or stash them before you merge.
+Aborting
+```
+
+**Ce înseamnă:** ai modificări locale nesalvate (de ex. scriptul de update
+prețuri a scris în `products.json` local), iar GitHub are o versiune diferită
+a aceluiași fișier. Git refuză să suprascrie fișierul tău local fără să-l
+salvezi mai întâi.
+
+**Soluție:** comite mai întâi fișierul local, apoi faci pull:
+```powershell
+git add src/data/products.json
+git commit -m "chore: products.json actualizat local"
+git pull --no-rebase
+git push
+```
+
+---
+
+### Situația 3 — git pull --no-rebase dă conflict pe products.json
+
+**Când apare** (după ce ai urmat situația 2):
+```
+CONFLICT (content): Merge conflict in src/data/products.json
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+**Ce înseamnă:** atât versiunea ta locală, cât și cea din cloud (GitHub
+Actions) au modificat `products.json` în același timp, iar git nu știe pe
+care s-o păstreze. `products.json` e un fișier generat automat (nu editat
+manual), deci nu are sens să "împletim" linii — alegem una din versiuni
+integral.
+
+**Cazul cel mai frecvent — păstrezi versiunea TA locală** (de ex. ai
+corectat prețurile infinitelove și nu vrei să le suprascrie versiunea din
+cloud):
+```powershell
+git checkout --ours src/data/products.json
+git add src/data/products.json
+git commit -m "merge: pastrat products.json local (preturi corecte)"
+git push
+```
+
+**Dacă există conflict și pe update-report.json** (se întâmplă uneori):
+```powershell
+git checkout --ours src/data/products.json
+git checkout --ours update-report.json
+git add src/data/products.json update-report.json
+git commit -m "merge: pastrat products.json local (preturi infinitelove corectate din feed)"
+git push
+```
+
+**`--ours`** = "ia versiunea MEA locală, ignoră ce vine din cloud"
+**`--theirs`** = "ia versiunea DIN CLOUD, ignoră ce am eu local" (folosit
+când vrei să preiei ce a scris GitHub Actions, de ex. prețurile actualizate
+automat din cloud)
+
+---
+
+### Situația 4 — git push dă eroare: "rejected / non-fast-forward"
+
+**Când apare:**
+```
+! [rejected]        main -> main (non-fast-forward)
+error: failed to push some refs to '...'
+hint: Updates were rejected because the tip of your current branch is behind
+```
+
+**Ce înseamnă:** GitHub are commit-uri noi (de ex. scraper-ul local a mai
+trimis un checkpoint, sau GitHub Actions a făcut un commit automat) pe care
+tu nu le ai local. Git refuză push-ul ca să nu suprascrii accidental aceste
+commit-uri noi.
+
+**Soluție:** `git pull --no-rebase` mai întâi, apoi push:
+```powershell
+git pull --no-rebase
+git push
+```
+
+Dacă pull-ul dă conflict, urmezi Situația 3 de mai sus.
+
+---
+
+### Situația 5 — Vrei să vezi ce s-a schimbat înainte să faci push
+
+**Verifici ce fișiere au modificări locale nesalvate:**
+```powershell
+git status
+```
+
+Arată:
+- `modified:` — fișiere existente cu modificări
+- `Untracked files:` — fișiere noi, neincluse încă în git (atenție: **nu**
+  include `node_modules/` sau `logs/` — sunt în `.gitignore`)
+
+**Verifici istoricul ultimelor commit-uri:**
+```powershell
+git log --oneline -10
+```
+
+Arată ultimele 10 commit-uri cu mesajele lor. Util ca să confirmi că un
+commit a ajuns pe GitHub (dacă apare în listă, a fost trimis).
+
+**Verifici ce conține un fișier specific:**
+```powershell
+type src\data\banners.js
+```
+
+---
+
+### Situația 6 — Actualizare prețuri infinitelove (manual, săptămânal)
+
+**Când:** săptămânal, când primești feed-ul XML nou de la infinitelove.ro
+prin 2Performant, sau când observi diferențe mari de preț între site-ul tău
+și site-ul oficial infinitelove.ro.
+
+**De ce manual:** infinitelove.ro e un site WooCommerce cu variante de produs
+(30ml/50ml/100ml) — prețul variantei se încarcă prin JavaScript, iar scraper-ul
+nostru (cheerio/axios) nu execută JS, deci ar citi mereu un preț greșit.
+**infinitelove.ro este exclus din scraping-ul zilnic automat.**
+
+**Procesul:** trimiți feed-ul XML lui Claude (sau versiunea actualizată a
+lui `feed_9d5a36a0f.xml`), iar Claude face merge în `products.json` cu
+prețurile corecte. Primești fișierul `products-beautyhealth-updated.json`,
+îl salvezi ca `src/data/products.json` și:
+
+```powershell
+cd "C:\FOLDER DE LUCRU\PAUL MELINTE\SITE BEAUTY_HEALTH\beautyhealth-site-git"
+git pull
+git add src/data/products.json
+git commit -m "chore: actualizare preturi infinitelove din feed saptamanal"
+git push
+```
+
+Dacă `git pull` dă conflict (Situația 3), folosești `--ours` pentru a păstra
+versiunea ta cu prețurile corecte.
+
+---
+
+### Referință rapidă — comenzile pe care le vei folosi cel mai des
+
+```powershell
+# Trimitere fișiere noi/modificate pe GitHub (fluxul normal)
+git pull
+git add <fisier1> <fisier2>
+git commit -m "descriere scurta"
+git push
+
+# Rezolvare conflict pe products.json (păstrezi versiunea locală)
+git checkout --ours src/data/products.json
+git add src/data/products.json
+git commit -m "merge: pastrat products.json local"
+git push
+
+# Rezolvare "rejected" la push
+git pull --no-rebase
+# (daca da conflict, aplici --ours ca mai sus)
+git push
+
+# Verificare stare curentă
+git status
+git log --oneline -5
+```
+
+---
+
+### Notă despre warning-urile LF/CRLF
+
+La aproape orice `git add` pe Windows vei vedea:
+```
+warning: in the working copy of 'fisier.js', LF will be replaced by CRLF
+```
+**Ignoră-le complet** — sunt inofensive. E o diferență de format de linie
+între Linux (LF, cum generează Claude și GitHub Actions) și Windows (CRLF).
+Git le convertește automat și corect, fișierele funcționează identic pe
+ambele sisteme.
+
+
+---
+
+## UTM-uri pentru BeautyHealth — toate canalele media
+
+UTM-urile sunt parametri adăugați la linkurile pe care le distribui pe social
+media, newsletter, WhatsApp etc., ca să poți vedea în **GA4 exact de unde
+vine traficul** pe site — câți vizitatori vin din Facebook vs TikTok vs
+newsletter, pe ce pagini ajung, și câte click-uri pe produse generează fiecare
+canal.
+
+### Structura unui link cu UTM
+
+```
+https://beautyhealth.gherasimmarius.com/ingrijire-ten/?utm_source=facebook&utm_medium=social&utm_campaign=gerovital-creme
+```
+
+Parametrii:
+- **`utm_source`** — platforma (facebook, tiktok, instagram etc.)
+- **`utm_medium`** — tipul de canal (social, email, message, story, bio)
+- **`utm_campaign`** — campania sau postarea specifică (denumire scurtă, fără spații)
+- **`utm_content`** *(opțional)* — diferențiezi 2 linkuri din același canal (ex. story vs. feed)
+
+**Reguli de formare:**
+- Scrie totul cu **litere mici**, fără spații (folosește `-` între cuvinte)
+- Fii consecvent — dacă azi scrii `facebook`, nu scrie `Facebook` mâine
+- `utm_campaign` descrie **ce promovezi** (ex. `vitamine-iarna`, `parfumuri-vara`, `oferta-farmec`)
+
+---
+
+### Tabel complet UTM-uri per canal
+
+| Canal | `utm_source` | `utm_medium` | Exemplu `utm_campaign` |
+|---|---|---|---|
+| **Facebook — profil personal** | `facebook` | `social` | `oferta-saptamana`, `parfumuri-vara` |
+| **Facebook — postare în grup** | `facebook-grup` | `social` | `grup-beauty-ro`, `grup-mame` |
+| **Facebook — Stories** | `facebook` | `story` | `farmec-reduceri` |
+| **Facebook — Messenger** | `messenger` | `message` | `recomandare-produs` |
+| **Instagram — feed** | `instagram` | `social` | `vitamine-iarna` |
+| **Instagram — Stories** | `instagram` | `story` | `ingrijire-ten` |
+| **Instagram — bio link** | `instagram` | `bio` | `beautyhealth-homepage` |
+| **TikTok — bio link** | `tiktok` | `bio` | `beautyhealth-homepage` |
+| **TikTok — video** | `tiktok` | `social` | `gerovital-review` |
+| **WhatsApp — mesaj direct** | `whatsapp` | `message` | `recomandare-produs` |
+| **WhatsApp — Status** | `whatsapp` | `story` | `oferta-saptamana` |
+| **WhatsApp — grup** | `whatsapp-grup` | `message` | `grup-beauty` |
+| **LinkedIn** | `linkedin` | `social` | `sanatate-suplimente` |
+| **Newsletter MailerLite** | `mailerlite` | `email` | `newsletter-iulie-2026` |
+| **SMS / mesaj text** | `sms` | `message` | `oferta-flash` |
+| **Alte site-uri / bloguri** | `guest-post` | `referral` | `articol-blog-beauty` |
+
+---
+
+### Exemple de linkuri complete, gata de copiat
+
+**Facebook (postare normală pe profil):**
+```
+https://beautyhealth.gherasimmarius.com/?utm_source=facebook&utm_medium=social&utm_campaign=oferta-saptamana
+```
+
+**Facebook Stories:**
+```
+https://beautyhealth.gherasimmarius.com/parfumuri/?utm_source=facebook&utm_medium=story&utm_campaign=parfumuri-vara
+```
+
+**Instagram bio (link fix, spre homepage):**
+```
+https://beautyhealth.gherasimmarius.com/?utm_source=instagram&utm_medium=bio&utm_campaign=beautyhealth-homepage
+```
+
+**TikTok bio (link fix, spre homepage):**
+```
+https://beautyhealth.gherasimmarius.com/?utm_source=tiktok&utm_medium=bio&utm_campaign=beautyhealth-homepage
+```
+
+**WhatsApp Status (ofertă săptămânală):**
+```
+https://beautyhealth.gherasimmarius.com/ingrijire-ten/?utm_source=whatsapp&utm_medium=story&utm_campaign=oferta-saptamana
+```
+
+**WhatsApp mesaj direct (recomandare produs):**
+```
+https://beautyhealth.gherasimmarius.com/vitamine-suplimente/?utm_source=whatsapp&utm_medium=message&utm_campaign=recomandare-produs
+```
+
+**LinkedIn:**
+```
+https://beautyhealth.gherasimmarius.com/vitamine-suplimente/?utm_source=linkedin&utm_medium=social&utm_campaign=sanatate-suplimente
+```
+
+**Newsletter MailerLite:**
+```
+https://beautyhealth.gherasimmarius.com/machiaj/?utm_source=mailerlite&utm_medium=email&utm_campaign=newsletter-iulie-2026
+```
+
+---
+
+### Cum diferențiezi 2 linkuri din același canal — utm_content
+
+Dacă trimiți spre beautyhealth atât în feed cât și în Stories pe Instagram în
+aceeași zi, folosești `utm_content` ca să le diferențiezi în GA4:
+
+```
+# Link din feed
+https://beautyhealth.gherasimmarius.com/parfumuri/?utm_source=instagram&utm_medium=social&utm_campaign=parfumuri-vara&utm_content=feed
+
+# Link din Stories
+https://beautyhealth.gherasimmarius.com/parfumuri/?utm_source=instagram&utm_medium=story&utm_campaign=parfumuri-vara&utm_content=story
+```
+
+---
+
+### Unde vezi rezultatele în GA4
+
+**GA4 → Reports → Acquisition → Traffic acquisition**
+
+Coloanele cheie:
+- **Session source / medium** — ex. `facebook / social`, `tiktok / bio`
+- **Sessions** — câte vizite a adus canalul respectiv
+- **Key events** — câte click-uri pe produse (`bh_affiliate_click`) sau
+  vizualizări de categorie (`bh_category_page_view`) au generat
+
+Poți filtra după `utm_campaign` dacă vrei să compari campanii specifice:
+**Explore → Free form** → dimensiune `Campaign` + metric `Key events`.
+
+---
+
+### Generator rapid de UTM — fără să scrii manual
+
+Dacă vrei să generezi linkuri mai rapid fără să le construiești manual,
+folosește **Google Campaign URL Builder**:
+```
+https://ga-dev-tools.google.com/campaign-url-builder/
+```
+Completezi URL-ul, sursa, mediul și campania, și generează linkul complet
+cu toți parametrii gata de copiat.
+
