@@ -39,12 +39,14 @@ const PRODUCTS_PATH = path.join(__dirname, '../src/data/products.json');
 const REPORT_PATH = path.join(__dirname, '../update-report.json');
 const REPO_ROOT = path.join(__dirname, '..');
 
-// Push la fiecare checkpoint - DOAR pentru rularea locala (Task Scheduler),
-// NU si in GitHub Actions (acolo commit-ul se face o singura data, la finalul
-// workflow-ului - vezi update-prices.yml). Activat prin variabila de mediu
-// setata explicit in update-prices-local.bat, ca sa nu porneasca din greseala
-// si in cloud.
-const PUSH_ON_CHECKPOINT = process.env.UPDATE_PRICES_PUSH_ON_CHECKPOINT === '1';
+// Push la fiecare checkpoint - DEZACTIVAT (22.07.2026) pentru a reduce
+// conflictele de merge intre scraper-ul local si workflow-ul din cloud
+// (GitHub Actions face push zilnic la 03:00 UTC, iar push-urile locale la
+// fiecare 20 min se suprapuneau frecvent si generau conflicte pe
+// products.json). Push-ul final din update-prices-local.bat (o singura data
+// pe zi, la finalul complet al rularii) este suficient - checkpoint-ul local
+// pe disc (la fiecare 2 min) protejeaza impotriva intreruperilor bruste.
+const PUSH_ON_CHECKPOINT = false;
 
 /** Face git add + commit + push pentru products.json, fara sa opreasca scriptul daca esueaza. */
 function checkpointGitPush() {
