@@ -1,19 +1,9 @@
 {
-  "started_at": "2026-07-23T05:45:43.527Z",
-  "ok": 112,
-  "failed": 2,
+  "started_at": "2026-07-25T05:35:57.247Z",
+  "ok": 114,
+  "failed": 0,
   "skipped": 339,
   "errors": [
-    {
-      "id": "farmec-838",
-      "url": "http://www.farmec.ro/benzi-depilatoare-pentru-fata-cu-ceara-gel-993?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/benzi-depilatoare-pentru-fata-cu-ceara-gel-993?___store=default"
-    },
-    {
-      "id": "farmec-2866",
-      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-49?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-49?___store=default"
-    },
     {
       "id": "infinitelove-5926",
       "reason": "sursa necunoscuta: infinitelove.ro"
@@ -22,8 +12,8 @@
   "by_source": {
     "farmec.ro": {
       "total": 114,
-      "ok": 112,
-      "failed": 2,
+      "ok": 114,
+      "failed": 0,
       "skipped": 0
     },
     "infinitelove.ro": {
@@ -33,5 +23,5 @@
       "skipped": 339
     }
   },
-  "finished_at": "2026-07-23T06:13:53.445Z"
+  "finished_at": "2026-07-25T06:03:51.111Z"
 }
