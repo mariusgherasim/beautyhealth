@@ -1,5 +1,5 @@
 {
-  "started_at": "2026-07-25T05:35:57.247Z",
+  "started_at": "2026-07-26T05:52:05.113Z",
   "ok": 114,
   "failed": 0,
   "skipped": 339,
@@ -10,18 +10,18 @@
     }
   ],
   "by_source": {
-    "farmec.ro": {
-      "total": 114,
-      "ok": 114,
-      "failed": 0,
-      "skipped": 0
-    },
     "infinitelove.ro": {
       "total": 339,
       "ok": 0,
       "failed": 0,
       "skipped": 339
+    },
+    "farmec.ro": {
+      "total": 114,
+      "ok": 114,
+      "failed": 0,
+      "skipped": 0
     }
   },
-  "finished_at": "2026-07-25T06:03:51.111Z"
+  "finished_at": "2026-07-26T06:19:45.719Z"
 }
