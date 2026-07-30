@@ -1,27 +1,32 @@
 {
-  "started_at": "2026-07-29T05:43:41.788Z",
-  "ok": 114,
-  "failed": 0,
-  "skipped": 339,
+  "started_at": "2026-07-30T05:32:06.898Z",
+  "ok": 113,
+  "failed": 1,
+  "skipped": 334,
   "errors": [
     {
-      "id": "infinitelove-5926",
+      "id": "infinitelove-6759",
       "reason": "sursa necunoscuta: infinitelove.ro"
+    },
+    {
+      "id": "farmec-1269",
+      "url": "http://www.farmec.ro/lapte-demachiant-hidratant-882?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/lapte-demachiant-hidratant-882?___store=default"
     }
   ],
   "by_source": {
     "infinitelove.ro": {
-      "total": 339,
+      "total": 334,
       "ok": 0,
       "failed": 0,
-      "skipped": 339
+      "skipped": 334
     },
     "farmec.ro": {
       "total": 114,
-      "ok": 114,
-      "failed": 0,
+      "ok": 113,
+      "failed": 1,
       "skipped": 0
     }
   },
-  "finished_at": "2026-07-29T06:14:48.718Z"
+  "finished_at": "2026-07-30T06:02:01.132Z"
 }
