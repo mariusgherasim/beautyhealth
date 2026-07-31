@@ -1,7 +1,7 @@
 {
-  "started_at": "2026-07-30T05:32:06.898Z",
-  "ok": 113,
-  "failed": 1,
+  "started_at": "2026-07-31T05:57:01.075Z",
+  "ok": 112,
+  "failed": 2,
   "skipped": 334,
   "errors": [
     {
@@ -9,9 +9,14 @@
       "reason": "sursa necunoscuta: infinitelove.ro"
     },
     {
-      "id": "farmec-1269",
-      "url": "http://www.farmec.ro/lapte-demachiant-hidratant-882?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/lapte-demachiant-hidratant-882?___store=default"
+      "id": "farmec-2313",
+      "url": "http://www.farmec.ro/dizolvant-fara-acetona-586?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/dizolvant-fara-acetona-586?___store=default"
+    },
+    {
+      "id": "farmec-491",
+      "url": "http://www.farmec.ro/fiole-cu-acid-hialuronic-hyaluron-c-2-806?___store=default",
+      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"http://www.farmec.ro/fiole-cu-acid-hialuronic-hyaluron-c-2-806?___store=default\", waiting until \"networkidle\"\n"
     }
   ],
   "by_source": {
@@ -23,10 +28,10 @@
     },
     "farmec.ro": {
       "total": 114,
-      "ok": 113,
-      "failed": 1,
+      "ok": 112,
+      "failed": 2,
       "skipped": 0
     }
   },
-  "finished_at": "2026-07-30T06:02:01.132Z"
+  "finished_at": "2026-07-31T06:26:46.632Z"
 }
