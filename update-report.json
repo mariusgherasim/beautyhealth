@@ -1,203 +1,27 @@
 {
-  "started_at": "2026-07-31T07:00:09.771Z",
-  "ok": 620,
-  "failed": 36,
-  "skipped": 12415,
+  "started_at": "2026-08-01T05:47:09.872Z",
+  "ok": 114,
+  "failed": 0,
+  "skipped": 334,
   "errors": [
     {
-      "id": "springfarma-117617",
-      "url": "https://www.springfarma.com/crema-tratament-uscaciune-deshidratare-si-dermatite-75-ml-ceramol.html",
-      "reason": "Maximum number of redirects exceeded"
-    },
-    {
-      "id": "springfarma-89795",
-      "url": "https://www.springfarma.com/zinc-complex-30-capsule-herbagetica",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-89629",
-      "url": "https://www.springfarma.com/herbagetica-cozi-de-cirese-extract-60-capsule",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-89665",
-      "url": "https://www.springfarma.com/ginkgo-120-stem-60-capsule",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-89769",
-      "url": "https://www.springfarma.com/silymarin-8050-detox-forte-30-capsule-herbagetica",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-117490",
-      "url": "https://www.springfarma.com/supozitoare-cu-glicerina-pentru-copii-laxaclean-10-bucati-viva-pharma.html",
-      "reason": "Maximum number of redirects exceeded"
-    },
-    {
-      "id": "springfarma-97477",
-      "url": "https://www.springfarma.com/scholl-brant-gelactiv-pentru-incaltamintea-de-iarna",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-106275",
-      "url": "https://www.springfarma.com/tonimer-lab-isotonic-baby-spray-100ml.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-110981",
-      "url": "https://www.springfarma.com/ciocolata-72-cacao-si-migdale-fara-zahar-100g-chocolates-sole.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-90275",
-      "url": "https://www.springfarma.com/echinacea-cu-propolis-si-vitamina-c-63-comprimate-fares.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-122206",
-      "url": "https://www.springfarma.com/gel-vaginal-non-hormonal-lysselle-8-monodoze-5-ml-biessen-pharma.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-121130",
-      "url": "https://www.springfarma.com/stilou-pentru-tratament-ciuperca-unghiei-4-ml-dezarcit.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-122209",
-      "url": "https://www.springfarma.com/gel-vaginal-non-hormonal-lysselle-40-ml-biessen-pharma.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-123329",
-      "url": "https://www.springfarma.com/artrosulfur-visc-16-plicuri-laborest.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-123767",
-      "url": "https://www.springfarma.com/klokan-30-capsule-good-days-therapy.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-123666",
-      "url": "https://www.springfarma.com/paleta-ultra-shiny-10-nuante-zao.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-123642",
-      "url": "https://www.springfarma.com/mascara-velvet-080-negru-intens-zao.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-105886",
-      "url": "https://www.springfarma.com/vitreonorm-30-capsule-ntc-italia.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-123008",
-      "url": "https://www.springfarma.com/crema-ar-sensibio-40ml-bioderma.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-123707",
-      "url": "https://www.springfarma.com/apa-micelara-3in1-300ml-geroccossen.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-123700",
-      "url": "https://www.springfarma.com/sampon-forte-contra-matretii-400ml-geroccossen.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-123706",
-      "url": "https://www.springfarma.com/crema-antirid-35-50ml-geroccossen.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-123713",
-      "url": "https://www.springfarma.com/lapte-demachiant-200ml-geroccossen.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-123703",
-      "url": "https://www.springfarma.com/sampon-tratament-impotriva-caderii-parului-capilar-275ml-gerocossen.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-123722",
-      "url": "https://www.springfarma.com/crema-antirid-65-50ml-geroccossen.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-123704",
-      "url": "https://www.springfarma.com/sampon-pentru-par-vopsit-400ml-gerocossen.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-123711",
-      "url": "https://www.springfarma.com/balsam-pentru-par-vopsit-400ml-geroccossen.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-123709",
-      "url": "https://www.springfarma.com/tratament-intensiv-pentru-calcaie-150ml-gerocossen.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-123726",
-      "url": "https://www.springfarma.com/masca-contra-caderii-parului-recapil-forte-300ml-gerocossen.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-123712",
-      "url": "https://www.springfarma.com/unt-de-corp-450-ml-gerocossen.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-123723",
-      "url": "https://www.springfarma.com/masca-tratament-regenerare-par-300ml-gerocossen.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-123725",
-      "url": "https://www.springfarma.com/sampon-tratament-cu-placenta-400ml-gerocossen.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-123724",
-      "url": "https://www.springfarma.com/ser-tratament-pentru-par-125ml-gerocossen.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-123730",
-      "url": "https://www.springfarma.com/crema-antirid-de-noapte-hyaluron-anti-age-50ml-gerocossen.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-123731",
-      "url": "https://www.springfarma.com/crema-antirid-de-zi-hyaluron-anti-age-50ml-gerocossen.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "minuneanaturii-26347",
-      "url": "https://www.minuneanaturii.ro/masti-de-fata/masca-servetel-ochi-cu-melc-si-peptide-loom-bioearth-pret-oferta_.html?utm_source=2performant",
-      "reason": "Nu am gasit pret pentru https://www.minuneanaturii.ro/masti-de-fata/masca-servetel-ochi-cu-melc-si-peptide-loom-bioearth-pret-oferta_.html?utm_source=2performant (selector de verificat)"
+      "id": "infinitelove-6759",
+      "reason": "sursa necunoscuta: infinitelove.ro"
     }
   ],
   "by_source": {
-    "springfarma.com": {
-      "total": 12495,
-      "ok": 45,
-      "failed": 35,
-      "skipped": 12415
+    "infinitelove.ro": {
+      "total": 334,
+      "ok": 0,
+      "failed": 0,
+      "skipped": 334
     },
-    "minuneanaturii.ro": {
-      "total": 576,
-      "ok": 575,
-      "failed": 1,
+    "farmec.ro": {
+      "total": 114,
+      "ok": 114,
+      "failed": 0,
       "skipped": 0
     }
   },
-  "finished_at": "2026-07-31T07:33:05.979Z"
+  "finished_at": "2026-08-01T06:16:59.918Z"
 }
