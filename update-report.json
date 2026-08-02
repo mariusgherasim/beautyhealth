@@ -1,213 +1,37 @@
 {
-  "started_at": "2026-08-01T07:00:06.858Z",
-  "ok": 603,
-  "failed": 38,
-  "skipped": 12430,
+  "started_at": "2026-08-02T05:48:10.544Z",
+  "ok": 112,
+  "failed": 2,
+  "skipped": 334,
   "errors": [
     {
-      "id": "springfarma-117617",
-      "url": "https://www.springfarma.com/crema-tratament-uscaciune-deshidratare-si-dermatite-75-ml-ceramol.html",
-      "reason": "Maximum number of redirects exceeded"
+      "id": "infinitelove-6759",
+      "reason": "sursa necunoscuta: infinitelove.ro"
     },
     {
-      "id": "springfarma-89795",
-      "url": "https://www.springfarma.com/zinc-complex-30-capsule-herbagetica",
-      "reason": "Request failed with status code 404"
+      "id": "farmec-289",
+      "url": "http://www.farmec.ro/crema-regenerare-avansata-342?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/crema-regenerare-avansata-342?___store=default"
     },
     {
-      "id": "springfarma-89629",
-      "url": "https://www.springfarma.com/herbagetica-cozi-de-cirese-extract-60-capsule",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-89665",
-      "url": "https://www.springfarma.com/ginkgo-120-stem-60-capsule",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-89769",
-      "url": "https://www.springfarma.com/silymarin-8050-detox-forte-30-capsule-herbagetica",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-117490",
-      "url": "https://www.springfarma.com/supozitoare-cu-glicerina-pentru-copii-laxaclean-10-bucati-viva-pharma.html",
-      "reason": "Maximum number of redirects exceeded"
-    },
-    {
-      "id": "springfarma-97477",
-      "url": "https://www.springfarma.com/scholl-brant-gelactiv-pentru-incaltamintea-de-iarna",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-106275",
-      "url": "https://www.springfarma.com/tonimer-lab-isotonic-baby-spray-100ml.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-110981",
-      "url": "https://www.springfarma.com/ciocolata-72-cacao-si-migdale-fara-zahar-100g-chocolates-sole.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-90275",
-      "url": "https://www.springfarma.com/echinacea-cu-propolis-si-vitamina-c-63-comprimate-fares.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-126439",
-      "url": "https://www.springfarma.com/crema-nutritiva-natural-miere-100-ml-gerocossen.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-110994",
-      "url": "https://www.springfarma.com/ciocolata-cu-lapte-si-stevie-fara-zahar-100g-chocolates-sole.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-39744",
-      "url": "https://www.springfarma.com/ceai-verde-x-30cps-trvit",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-104138",
-      "url": "https://www.springfarma.com/golamir-2-act-20-comprimate-11610.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-111632",
-      "url": "https://www.springfarma.com/niavis-cacao-pulbere-raw-ecologica-bio-250g",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-119248",
-      "url": "https://www.springfarma.com/serum-cu-actiune-intensiva-anti-imbatranire-si-3-tipuri-de-retinol-retinol-intense-30ml-some-by-mi.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-108754",
-      "url": "https://www.springfarma.com/secom-good-routine-glucosamine-chondroitin-hyaluronic-acid-90-comprimate.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-82859",
-      "url": "https://www.springfarma.com/ivatherm-sunlight-kids-spf50-200ml-11773.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-130706",
-      "url": "https://www.springfarma.com/spray-oral-parotherm-implant-50-ml-synergy-therm.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-130705",
-      "url": "https://www.springfarma.com/spray-bucal-junior-parotherm-30-ml-synergy-therm.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-130627",
-      "url": "https://www.springfarma.com/sirop-laxodep-forte-150-ml-dr-phyto.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-130736",
-      "url": "https://www.springfarma.com/solutie-fara-alcool-pentru-curatarea-ranilor-nawalution-flacon-500-ml.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-130725",
-      "url": "https://www.springfarma.com/spray-pentru-arsuri-flamaderm-flacon-50-ml.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-130447",
-      "url": "https://www.springfarma.com/resource-ultra-high-protein-cu-aroma-de-capsuni-4-125-ml-nestle.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-130446",
-      "url": "https://www.springfarma.com/resource-ultra-high-protein-cu-aroma-de-vanilie-4-125-ml-nestle.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-126820",
-      "url": "https://www.springfarma.com/litorsal-cirese-24-comprimate-efervescente-zdorvit.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-67694",
-      "url": "https://www.springfarma.com/secom-astaxanthin-12-mg-30-capsule.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-126500",
-      "url": "https://www.springfarma.com/vizik-picaturi-pentru-ochi-uscati-si-obositi-2-10-ml-zdrovit.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-130767",
-      "url": "https://www.springfarma.com/racitor-portabil-pentru-lapte-matern-325-ml-kekhealth.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-130766",
-      "url": "https://www.springfarma.com/racitor-portabil-pentru-lapte-matern-650-ml-kekhealth.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-130818",
-      "url": "https://www.springfarma.com/aspirator-nazal-vk79445-vita-kids.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-65392",
-      "url": "https://www.springfarma.com/alevia-silfide-complex-de-slabit-forte-100-comprimate.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-89849",
-      "url": "https://www.springfarma.com/alevia-ceai-de-macese-50-g.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-81976",
-      "url": "https://www.springfarma.com/alevia-balsam-gheara-diavolului-250-g.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-100030",
-      "url": "https://www.springfarma.com/protectis-cu-vitamina-d3-picaturi-pentru-copii-5-ml.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-103866",
-      "url": "https://www.springfarma.com/mustela-crema-nutritiva-cu-cold-cream-40-ml-12210.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "springfarma-105395",
-      "url": "https://www.springfarma.com/mustela-stick-nutritiv-cu-cold-cream-92-g-.html",
-      "reason": "Request failed with status code 429"
-    },
-    {
-      "id": "minuneanaturii-26347",
-      "url": "https://www.minuneanaturii.ro/masti-de-fata/masca-servetel-ochi-cu-melc-si-peptide-loom-bioearth-pret-oferta_.html?utm_source=2performant",
-      "reason": "Nu am gasit pret pentru https://www.minuneanaturii.ro/masti-de-fata/masca-servetel-ochi-cu-melc-si-peptide-loom-bioearth-pret-oferta_.html?utm_source=2performant (selector de verificat)"
+      "id": "farmec-1103",
+      "url": "http://www.farmec.ro/keratina-lichida-926?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/keratina-lichida-926?___store=default"
     }
   ],
   "by_source": {
-    "springfarma.com": {
-      "total": 12495,
-      "ok": 28,
-      "failed": 37,
-      "skipped": 12430
+    "infinitelove.ro": {
+      "total": 334,
+      "ok": 0,
+      "failed": 0,
+      "skipped": 334
     },
-    "minuneanaturii.ro": {
-      "total": 576,
-      "ok": 575,
-      "failed": 1,
+    "farmec.ro": {
+      "total": 114,
+      "ok": 112,
+      "failed": 2,
       "skipped": 0
     }
   },
-  "finished_at": "2026-08-01T10:10:54.712Z"
+  "finished_at": "2026-08-02T06:17:45.698Z"
 }
