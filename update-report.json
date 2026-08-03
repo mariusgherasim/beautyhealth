@@ -1,7 +1,7 @@
 {
-  "started_at": "2026-08-02T05:48:10.544Z",
-  "ok": 112,
-  "failed": 2,
+  "started_at": "2026-08-03T06:11:33.227Z",
+  "ok": 113,
+  "failed": 1,
   "skipped": 334,
   "errors": [
     {
@@ -9,14 +9,9 @@
       "reason": "sursa necunoscuta: infinitelove.ro"
     },
     {
-      "id": "farmec-289",
-      "url": "http://www.farmec.ro/crema-regenerare-avansata-342?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/crema-regenerare-avansata-342?___store=default"
-    },
-    {
-      "id": "farmec-1103",
-      "url": "http://www.farmec.ro/keratina-lichida-926?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/keratina-lichida-926?___store=default"
+      "id": "farmec-455",
+      "url": "http://www.farmec.ro/masca-film-purificatoare-755?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/masca-film-purificatoare-755?___store=default"
     }
   ],
   "by_source": {
@@ -28,10 +23,10 @@
     },
     "farmec.ro": {
       "total": 114,
-      "ok": 112,
-      "failed": 2,
+      "ok": 113,
+      "failed": 1,
       "skipped": 0
     }
   },
-  "finished_at": "2026-08-02T06:17:45.698Z"
+  "finished_at": "2026-08-03T06:41:38.410Z"
 }
