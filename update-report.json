@@ -1,5 +1,5 @@
 {
-  "started_at": "2026-08-03T06:11:33.227Z",
+  "started_at": "2026-08-04T05:40:20.781Z",
   "ok": 113,
   "failed": 1,
   "skipped": 334,
@@ -9,9 +9,9 @@
       "reason": "sursa necunoscuta: infinitelove.ro"
     },
     {
-      "id": "farmec-455",
-      "url": "http://www.farmec.ro/masca-film-purificatoare-755?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/masca-film-purificatoare-755?___store=default"
+      "id": "farmec-356",
+      "url": "http://www.farmec.ro/fiole-cu-acid-hialuronic-5-gerovital-men-968?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/fiole-cu-acid-hialuronic-5-gerovital-men-968?___store=default"
     }
   ],
   "by_source": {
@@ -28,5 +28,5 @@
       "skipped": 0
     }
   },
-  "finished_at": "2026-08-03T06:41:38.410Z"
+  "finished_at": "2026-08-04T06:09:19.888Z"
 }
