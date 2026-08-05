@@ -1,8 +1,6 @@
 // Branduri cu pagina proprie pe site.
-// URL-ul generat: /{categorie}/{brand-slug}/ (ex: /ingrijire-ten/apivita/)
+// URL-ul generat: /{categorie}/brand/{brand-slug}/ (ex: /parfumuri/brand/dior/)
 // Adauga un brand nou: adauga un obiect in lista, cu name, slug, categories.
-// categories: lista de slug-uri de categorii unde apare brandul
-// (daca e prezent in mai multe categorii, apare pe fiecare)
 
 export const brands = [
   // --- Cerute de Marius ---
@@ -16,9 +14,32 @@ export const brands = [
   { name: 'INFINITE LOVE', slug: 'infinite-love', categories: ['parfumuri'] },
   { name: 'PHILIPS AVENT', slug: 'philips-avent', categories: ['mama-si-copilul'] },
 
-  // --- Propuneri suplimentare ---
-  { name: 'DIOR', slug: 'dior', categories: ['parfumuri','machiaj','ingrijire-ten'] },
+  // --- Parfumuri ---
+  { name: 'HERMÈS', slug: 'hermes', categories: ['parfumuri'] },
   { name: 'GUERLAIN', slug: 'guerlain', categories: ['parfumuri','machiaj','ingrijire-ten'] },
+  { name: 'VERSACE', slug: 'versace', categories: ['parfumuri'] },
+  { name: 'DIOR', slug: 'dior', categories: ['parfumuri','machiaj','ingrijire-ten'] },
+  { name: 'CALVIN KLEIN', slug: 'calvin-klein', categories: ['parfumuri'] },
+  { name: 'DOLCE&GABBANA', slug: 'dolce-gabbana', categories: ['parfumuri','machiaj'] },
+  { name: 'HUGO BOSS', slug: 'hugo-boss', categories: ['parfumuri','cosmetice-barbati'] },
+  { name: 'ARMANI', slug: 'armani', categories: ['parfumuri'] },
+  { name: 'JEAN PAUL GAULTIER', slug: 'jean-paul-gaultier', categories: ['parfumuri'] },
+  { name: 'TOM FORD', slug: 'tom-ford', categories: ['parfumuri'] },
+  { name: 'CHLOÉ', slug: 'chloe', categories: ['parfumuri'] },
+  { name: 'RABANNE', slug: 'rabanne', categories: ['parfumuri'] },
+  { name: 'BURBERRY', slug: 'burberry', categories: ['parfumuri'] },
+  { name: 'GIVENCHY', slug: 'givenchy', categories: ['parfumuri','machiaj'] },
+  { name: 'GUCCI', slug: 'gucci', categories: ['parfumuri'] },
+  { name: 'YVES SAINT LAURENT', slug: 'yves-saint-laurent', categories: ['parfumuri','machiaj'] },
+  { name: 'CAROLINA HERRERA', slug: 'carolina-herrera', categories: ['parfumuri'] },
+  { name: 'CREED', slug: 'creed', categories: ['parfumuri'] },
+  { name: 'VICTORIA\'S SECRET', slug: 'victorias-secret', categories: ['parfumuri'] },
+  { name: 'GUESS', slug: 'guess', categories: ['parfumuri'] },
+  { name: 'MONTALE', slug: 'montale', categories: ['parfumuri'] },
+  { name: 'LATTAFA', slug: 'lattafa', categories: ['parfumuri'] },
+  { name: 'YANKEE CANDLE', slug: 'yankee-candle', categories: ['parfumuri'] },
+
+  // --- Machiaj & Îngrijire ten ---
   { name: 'BOBBI BROWN', slug: 'bobbi-brown', categories: ['machiaj','ingrijire-ten'] },
   { name: 'SISLEY', slug: 'sisley', categories: ['parfumuri','machiaj','ingrijire-ten'] },
   { name: 'LANCÔME', slug: 'lancome', categories: ['parfumuri','machiaj','ingrijire-ten'] },
@@ -26,15 +47,12 @@ export const brands = [
   { name: 'CLARINS', slug: 'clarins', categories: ['ingrijire-ten','ingrijire-corp','parfumuri'] },
   { name: 'CLINIQUE', slug: 'clinique', categories: ['ingrijire-ten','machiaj'] },
   { name: 'ESTÉE LAUDER', slug: 'estee-lauder', categories: ['ingrijire-ten','machiaj','parfumuri'] },
+  { name: 'MAC COSMETICS', slug: 'mac-cosmetics', categories: ['machiaj'] },
+
+  // --- Îngrijire ten/corp ---
   { name: 'URIAGE', slug: 'uriage', categories: ['ingrijire-ten','ingrijire-corp'] },
   { name: 'AVÈNE', slug: 'avene', categories: ['ingrijire-ten','ingrijire-corp'] },
   { name: 'ZIAJA', slug: 'ziaja', categories: ['ingrijire-ten','ingrijire-corp','ingrijire-par'] },
-  { name: 'MAC COSMETICS', slug: 'mac-cosmetics', categories: ['machiaj'] },
-  { name: 'YVES SAINT LAURENT', slug: 'yves-saint-laurent', categories: ['parfumuri','machiaj'] },
-  { name: 'DOLCE&GABBANA', slug: 'dolce-gabbana', categories: ['parfumuri','machiaj'] },
-  { name: 'VERSACE', slug: 'versace', categories: ['parfumuri'] },
-  { name: 'HUGO BOSS', slug: 'hugo-boss', categories: ['parfumuri','cosmetice-barbati'] },
-  { name: 'CALVIN KLEIN', slug: 'calvin-klein', categories: ['parfumuri'] },
 ];
 
 export function getBrandBySlug(slug) {

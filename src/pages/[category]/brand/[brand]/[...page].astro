@@ -32,6 +32,23 @@ export function getStaticPaths({ paginate }) {
         if (brand.slug === 'calvin-klein') return pb.includes('CALVIN');
         if (brand.slug === 'philips-avent') return pb.includes('PHILIPS');
         if (brand.slug === 'bobbi-brown') return pb.includes('BOBBI');
+        if (brand.slug === 'chloe') return pb.includes('CHLO');
+        if (brand.slug === 'hermes') return pb.includes('HERM');
+        if (brand.slug === 'victorias-secret') return pb.includes('VICTORIA');
+        if (brand.slug === 'yankee-candle') return pb.includes('YANKEE');
+        if (brand.slug === 'jean-paul-gaultier') return pb.includes('GAULTIER') || pb.includes('JEAN PAUL');
+        if (brand.slug === 'tom-ford') return pb.includes('TOM FORD');
+        if (brand.slug === 'carolina-herrera') return pb.includes('CAROLINA');
+        if (brand.slug === 'armani') return pb.includes('ARMANI');
+        if (brand.slug === 'givenchy') return pb.includes('GIVENCHY');
+        if (brand.slug === 'gucci') return pb.includes('GUCCI');
+        if (brand.slug === 'burberry') return pb.includes('BURBERRY');
+        if (brand.slug === 'rabanne') return pb.includes('RABANNE');
+        if (brand.slug === 'creed') return pb.includes('CREED');
+        if (brand.slug === 'montale') return pb.includes('MONTALE');
+        if (brand.slug === 'lattafa') return pb.includes('LATTAFA');
+        if (brand.slug === 'guess') return pb.includes('GUESS');
+        if (brand.slug === 'avene') return pb.includes('AVEN');
         return pb.includes(brandNameVariants);
       });
 
