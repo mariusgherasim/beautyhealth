@@ -8,6 +8,8 @@ import Footer from '../../components/Footer.astro';
 import Newsletter from '../../components/Newsletter.astro';
 import productsData from '../../data/products.json';
 import { categories, getCategoryBySlug } from '../../data/categories.js';
+import { getBrandsForCategory } from '../../data/brands.js';
+import { getSubcategoriesForCategory } from '../../data/subcategories.js';
 
 export function getStaticPaths({ paginate }) {
   const PAGE_SIZE = 24;
@@ -25,6 +27,8 @@ export function getStaticPaths({ paginate }) {
 const { page } = Astro.props;
 const { category: categorySlug } = Astro.params;
 const cat = getCategoryBySlug(categorySlug);
+const catBrands = getBrandsForCategory(categorySlug);
+const catSubs = getSubcategoriesForCategory(categorySlug);
 
 const canonicalBase = `https://beautyhealth.gherasimmarius.com/${categorySlug}/`;
 const canonical = page.currentPage === 1 ? canonicalBase : `${canonicalBase}${page.currentPage}/`;
@@ -77,12 +81,45 @@ const jsonLd = {
       <p class="intro">{cat.intro}</p>
     )}
 
-    <div class="category-pills">
-      {categories.map((c) => (
-        <a href={`/${c.slug}/`} class={c.slug === categorySlug ? 'active' : ''}>{c.name}</a>
-      ))}
+    <!-- Linia 1: navigare categorii principale -->
+    <div class="nav-row">
+      <span class="nav-label">Categorii</span>
+      <div class="category-pills">
+        {categories.map((c) => (
+          <a href={`/${c.slug}/`} class={c.slug === categorySlug ? 'cat-pill active' : 'cat-pill'}>{c.name}</a>
+        ))}
+      </div>
     </div>
 
+    <!-- Linia 2: subcategorii de tip produs (dacă există) -->
+    {catSubs.length > 0 && (
+      <div class="nav-row">
+        <span class="nav-label">Tipuri</span>
+        <div class="sub-pills">
+          {catSubs.map((sub) => (
+            <a href={`/${categorySlug}/sub/${sub.slug}/`} class="sub-pill">
+              {sub.name}
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Linia 3: branduri (dacă există) -->
+    {catBrands.length > 0 && (
+      <div class="nav-row">
+        <span class="nav-label">Branduri</span>
+        <div class="brand-pills">
+          {catBrands.map((brand) => (
+            <a href={`/${categorySlug}/brand/${brand.slug}/`} class="brand-pill">
+              {brand.name}
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Căutare -->
     <CategorySearch categorySlug={categorySlug} categoryName={cat.name} />
 
     <p class="results-count">{page.total} produse găsite — pagina {page.currentPage} din {page.lastPage}</p>
@@ -100,7 +137,6 @@ const jsonLd = {
     </nav>
 
     <BannerSlot category={categorySlug} />
-
     <Newsletter />
   </main>
 
@@ -121,14 +157,74 @@ const jsonLd = {
   .breadcrumbs { font-size: 0.85rem; color: #888; margin-bottom: 12px; }
   .breadcrumbs a { color: #888; text-decoration: none; }
   h1 { color: var(--navy); margin-bottom: 8px; }
-  .intro { max-width: 780px; color: #444; margin-bottom: 20px; }
-  .category-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-  .category-pills a {
-    padding: 6px 14px; border-radius: 20px; background: #fff; border: 1px solid #ddd;
-    font-size: 0.85rem; text-decoration: none; color: var(--navy);
+  .intro { max-width: 780px; color: #444; margin-bottom: 16px; }
+
+  /* Rânduri de navigare: label + pills */
+  .nav-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
   }
-  .category-pills a.active { background: var(--navy); color: #fff; border-color: var(--navy); }
-  .results-count { color: #888; font-size: 0.85rem; margin-bottom: 16px; }
+  .nav-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #aaa;
+    font-weight: 700;
+    padding-top: 7px;
+    white-space: nowrap;
+    min-width: 52px;
+  }
+
+  /* Pills categorii principale — dimensiune standard */
+  .category-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .cat-pill {
+    padding: 6px 13px;
+    border-radius: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    font-size: 0.85rem;
+    text-decoration: none;
+    color: var(--navy);
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .cat-pill:hover { border-color: var(--navy); }
+  .cat-pill.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+  /* Pills subcategorii — mai mici, accent cald */
+  .sub-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .sub-pill {
+    padding: 4px 11px;
+    border-radius: 20px;
+    background: #fff8ee;
+    border: 1px solid #e8c97a;
+    font-size: 0.78rem;
+    text-decoration: none;
+    color: #7a5c00;
+    font-weight: 500;
+    transition: background 0.15s;
+  }
+  .sub-pill:hover { background: var(--gold); color: #fff; border-color: var(--gold); }
+
+  /* Pills branduri — mai mici, fond neutru, text bold */
+  .brand-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .brand-pill {
+    padding: 3px 10px;
+    border-radius: 5px;
+    background: #f0f0f0;
+    border: 1px solid #d8d8d8;
+    font-size: 0.73rem;
+    text-decoration: none;
+    color: var(--navy);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    transition: background 0.15s;
+  }
+  .brand-pill:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+  .results-count { color: #888; font-size: 0.85rem; margin: 12px 0; }
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -139,7 +235,12 @@ const jsonLd = {
     margin-top: 36px; font-size: 0.9rem;
   }
   .pagination a { color: var(--gold); font-weight: 600; text-decoration: none; }
-  @media (max-width: 480px) {
+
+  @media (max-width: 600px) {
+    .nav-label { min-width: 44px; font-size: 0.68rem; }
+    .cat-pill { font-size: 0.78rem; padding: 5px 10px; }
+    .sub-pill { font-size: 0.72rem; padding: 4px 9px; }
+    .brand-pill { font-size: 0.68rem; padding: 3px 8px; }
     .grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
     .pagination { flex-direction: column; gap: 10px; }
   }
