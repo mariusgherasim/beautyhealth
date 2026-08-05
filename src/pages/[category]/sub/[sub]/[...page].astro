@@ -9,9 +9,8 @@ import { getCategoryBySlug } from '../../../../data/categories.js';
 import { subcategories, getSubcategoryBySlug } from '../../../../data/subcategories.js';
 import productsData from '../../../../data/products.json';
 
-const PAGE_SIZE = 24;
-
 export function getStaticPaths({ paginate }) {
+  const PAGE_SIZE = 24;
   const paths = [];
 
   for (const sub of subcategories) {

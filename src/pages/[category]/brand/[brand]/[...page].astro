@@ -9,9 +9,8 @@ import { categories, getCategoryBySlug } from '../../../../data/categories.js';
 import { brands, getBrandBySlug } from '../../../../data/brands.js';
 import productsData from '../../../../data/products.json';
 
-const PAGE_SIZE = 24;
-
 export function getStaticPaths({ paginate }) {
+  const PAGE_SIZE = 24;
   const paths = [];
   for (const brand of brands) {
     for (const catSlug of brand.categories) {
