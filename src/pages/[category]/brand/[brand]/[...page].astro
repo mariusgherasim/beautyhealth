@@ -1,0 +1,163 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ProductCard from '../../../components/ProductCard.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import Newsletter from '../../../components/Newsletter.astro';
+import BannerSlot from '../../../components/BannerSlot.astro';
+import { categories, getCategoryBySlug } from '../../../data/categories.js';
+import { brands, getBrandBySlug } from '../../../data/brands.js';
+import productsData from '../../../data/products.json';
+
+const PAGE_SIZE = 24;
+
+export function getStaticPaths({ paginate }) {
+  const paths = [];
+  for (const brand of brands) {
+    for (const catSlug of brand.categories) {
+      const brandNameVariants = brand.name.toUpperCase();
+      const products = productsData.filter((p) => {
+        if (p.draft) return false;
+        if (!p.category.includes(catSlug)) return false;
+        const pb = (p.brand || '').toUpperCase();
+        if (brand.slug === 'la-roche-posay') return pb.includes('LA ROCHE');
+        if (brand.slug === 'infinite-love') return pb.includes('INFINITE');
+        if (brand.slug === 'avene') return pb.includes('AVEN');
+        if (brand.slug === 'estee-lauder') return pb.includes('ESTEE') || pb.includes('ESTÉE');
+        if (brand.slug === 'lancome') return pb.includes('LANC');
+        if (brand.slug === 'dolce-gabbana') return pb.includes('DOLCE');
+        if (brand.slug === 'cosmetic-plant') return pb.includes('COSMETIC PLANT');
+        if (brand.slug === 'mac-cosmetics') return pb.includes('MAC COSM');
+        if (brand.slug === 'yves-saint-laurent') return pb.includes('YVES');
+        if (brand.slug === 'hugo-boss') return pb.includes('HUGO');
+        if (brand.slug === 'calvin-klein') return pb.includes('CALVIN');
+        if (brand.slug === 'philips-avent') return pb.includes('PHILIPS');
+        if (brand.slug === 'bobbi-brown') return pb.includes('BOBBI');
+        return pb.includes(brandNameVariants);
+      });
+
+      if (products.length === 0) continue;
+
+      const paginatedPaths = paginate(products, {
+        params: { category: catSlug, brand: brand.slug },
+        pageSize: PAGE_SIZE,
+      });
+      paths.push(...paginatedPaths);
+    }
+  }
+  return paths;
+}
+
+const { page } = Astro.props;
+const { category: categorySlug, brand: brandSlug } = Astro.params;
+
+const cat = getCategoryBySlug(categorySlug);
+const brand = getBrandBySlug(brandSlug);
+
+const canonicalBase = `https://beautyhealth.gherasimmarius.com/${categorySlug}/brand/${brandSlug}/`;
+const canonical = page.currentPage === 1
+  ? canonicalBase
+  : `${canonicalBase}${page.currentPage}/`;
+
+const title = page.currentPage === 1
+  ? `${brand.name} — ${cat.name} | BeautyHealth`
+  : `${brand.name} — ${cat.name}, Pagina ${page.currentPage} | BeautyHealth`;
+
+const description = `${page.total} produse ${brand.name} din categoria ${cat.name}, prețuri comparate zilnic.`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": `${brand.name} — ${cat.name}`,
+  "url": canonical,
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://beautyhealth.gherasimmarius.com/" },
+      { "@type": "ListItem", "position": 2, "name": cat.name, "item": `https://beautyhealth.gherasimmarius.com/${categorySlug}/` },
+      { "@type": "ListItem", "position": 3, "name": brand.name, "item": canonicalBase }
+    ]
+  }
+};
+---
+
+<Layout title={title} description={description} canonical={canonical}>
+  <Fragment slot="head">
+    {page.currentPage > 1 && (
+      <link rel="prev" href={page.currentPage === 2 ? canonicalBase : `${canonicalBase}${page.currentPage - 1}/`} />
+    )}
+    {page.url.next && (
+      <link rel="next" href={`https://beautyhealth.gherasimmarius.com${page.url.next}`} />
+    )}
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <Header />
+
+  <main class="wrap">
+    <nav class="breadcrumbs" aria-label="breadcrumb">
+      <a href="/">Acasă</a>
+      <span>/</span>
+      <a href={`/${categorySlug}/`}>{cat.name}</a>
+      <span>/</span>
+      <span>{brand.name}</span>
+    </nav>
+
+    <BannerSlot category={categorySlug} size="728x90" />
+
+    <h1>{brand.name} <span class="cat-label">— {cat.name}</span></h1>
+
+    {page.currentPage === 1 && (
+      <p class="intro">
+        {page.total} produse {brand.name} din categoria {cat.name}, prețuri comparate zilnic.
+      </p>
+    )}
+
+    <p class="results-count">
+      {page.total} produse — pagina {page.currentPage} din {page.lastPage}
+    </p>
+
+    <div class="grid">
+      {page.data.map((product) => (
+        <ProductCard product={product} />
+      ))}
+    </div>
+
+    <nav class="pagination" aria-label="paginare">
+      {page.url.prev && <a href={page.url.prev}>← Pagina anterioară</a>}
+      <span>Pagina {page.currentPage} / {page.lastPage}</span>
+      {page.url.next && <a href={page.url.next}>Pagina următoare →</a>}
+    </nav>
+
+    <BannerSlot category={categorySlug} />
+    <Newsletter />
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 20px 16px 60px; }
+  .breadcrumbs { font-size: 0.85rem; color: #888; margin-bottom: 12px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .breadcrumbs a { color: #888; text-decoration: none; }
+  .breadcrumbs a:hover { color: var(--gold); }
+  h1 { color: var(--navy); margin-bottom: 8px; font-size: 1.8rem; }
+  .cat-label { font-weight: 400; font-size: 1.1rem; color: #666; }
+  .intro { max-width: 780px; color: #444; margin-bottom: 16px; }
+  .results-count { color: #888; font-size: 0.85rem; margin-bottom: 16px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .pagination {
+    display: flex; justify-content: center; align-items: center; gap: 20px;
+    margin-top: 36px; font-size: 0.9rem;
+  }
+  .pagination a { color: var(--gold); font-weight: 600; text-decoration: none; }
+  @media (max-width: 480px) {
+    .grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+    .pagination { flex-direction: column; gap: 10px; }
+    h1 { font-size: 1.4rem; }
+  }
+</style>
