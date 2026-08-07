@@ -293,53 +293,212 @@ export const banners = [
   // formate pătrate pentru social media — nu se potrivesc ca bannere web.
   // Când primești bannere 300x250, 300x600 sau 728x90 de la ei, le adaugi
   // după modelul de mai sus cu categories: ["parfumuri", "homepage"].
-];
 
-// Nota: fisierul se termina cu 
   // ────────────────────────────────────────────────────────
-  // BANNERE SOCIAL MEDIA — nu se afisaza pe site
+  // BANNERE SOCIAL MEDIA — nu se afiseaza pe site
   // Foloseste channels pentru a sti unde le poti folosi.
   // ────────────────────────────────────────────────────────
 
   // ── notino.ro — 750×350 ──────────────────────────────────
-  { id:"notino-750x350-a", merchant:"notino.ro", categories:["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/175643/original/175643.jpg", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=8cefd4dd0&aff_code=676a7e7d9&campaign_unique=c6dae5faa", width:750, height:350, active_from:"2026-08-05", active_until:null, channels:["facebook","instagram"], note:"social media — non-standard IAB, nu se afiseaza pe site" },
-  { id:"notino-750x350-b", merchant:"notino.ro", categories:["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/175642/original/175642.jpg", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=369df3c0b&aff_code=676a7e7d9&campaign_unique=c6dae5faa", width:750, height:350, active_from:"2026-08-05", active_until:null, channels:["facebook","instagram"], note:"social media — non-standard IAB, nu se afiseaza pe site" },
-  { id:"notino-750x350-c", merchant:"notino.ro", categories:["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/175641/original/175641.jpg", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=312aa69d9&aff_code=676a7e7d9&campaign_unique=c6dae5faa", width:750, height:350, active_from:"2026-08-05", active_until:null, channels:["facebook","instagram"], note:"social media — non-standard IAB, nu se afiseaza pe site" },
-  { id:"notino-750x350-d", merchant:"notino.ro", categories:["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/95499/original/95499.jpg", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=ac00f36a6&aff_code=676a7e7d9&campaign_unique=c6dae5faa", width:750, height:350, active_from:"2026-08-05", active_until:null, channels:["facebook","instagram"], note:"social media — non-standard IAB, nu se afiseaza pe site" },
-  { id:"notino-750x350-e", merchant:"notino.ro", categories:["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/95501/original/95501.jpg", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=48dfbb943&aff_code=676a7e7d9&campaign_unique=c6dae5faa", width:750, height:350, active_from:"2026-08-05", active_until:null, channels:["facebook","instagram"], note:"social media — non-standard IAB, nu se afiseaza pe site" },
-
-  // ── notino.ro — 600×250 ──────────────────────────────────
-  { id:"notino-600x250-a", merchant:"notino.ro", categories:["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/175639/original/175639.jpg", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=16d9a3787&aff_code=676a7e7d9&campaign_unique=c6dae5faa", width:600, height:250, active_from:"2026-08-05", active_until:null, channels:["facebook","instagram"], note:"social media — non-standard IAB, nu se afiseaza pe site" },
-  { id:"notino-600x250-b", merchant:"notino.ro", categories:["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/175638/original/175638.jpg", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=a95674a8a&aff_code=676a7e7d9&campaign_unique=c6dae5faa", width:600, height:250, active_from:"2026-08-05", active_until:null, channels:["facebook","instagram"], note:"social media — non-standard IAB, nu se afiseaza pe site" },
-  { id:"notino-600x250-c", merchant:"notino.ro", categories:["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/175637/original/175637.jpg", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=d07cfebac&aff_code=676a7e7d9&campaign_unique=c6dae5faa", width:600, height:250, active_from:"2026-08-05", active_until:null, channels:["facebook","instagram"], note:"social media — non-standard IAB, nu se afiseaza pe site" },
-  { id:"notino-600x250-d", merchant:"notino.ro", categories:["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/95498/original/95498.jpg", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=3d835656f&aff_code=676a7e7d9&campaign_unique=c6dae5faa", width:600, height:250, active_from:"2026-08-05", active_until:null, channels:["facebook","instagram"], note:"social media — non-standard IAB, nu se afiseaza pe site" },
-  { id:"notino-600x250-e", merchant:"notino.ro", categories:["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/95505/original/95505.jpg", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=bcb2c17cf&aff_code=676a7e7d9&campaign_unique=c6dae5faa", width:600, height:250, active_from:"2026-08-05", active_until:null, channels:["facebook","instagram"], note:"social media — non-standard IAB, nu se afiseaza pe site" },
-
-  // ── notino.ro — 300×300 ──────────────────────────────────
-  { id:"notino-300x300-a", merchant:"notino.ro", categories:["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/175633/original/175633.jpg", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=74bd1c172&aff_code=676a7e7d9&campaign_unique=c6dae5faa", width:300, height:300, active_from:"2026-08-05", active_until:null, channels:["facebook","instagram"], note:"social media — format patrat 1:1" },
-  { id:"notino-300x300-b", merchant:"notino.ro", categories:["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/175632/original/175632.jpg", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=312e0b875&aff_code=676a7e7d9&campaign_unique=c6dae5faa", width:300, height:300, active_from:"2026-08-05", active_until:null, channels:["facebook","instagram"], note:"social media — format patrat 1:1" },
-
-  // ── notino.ro — 250×250 ──────────────────────────────────
-  { id:"notino-250x250-a", merchant:"notino.ro", categories:["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/81515/original/81515.jpg", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=3ed01aa9a&aff_code=676a7e7d9&campaign_unique=c6dae5faa", width:250, height:250, active_from:"2026-08-05", active_until:null, channels:["facebook","instagram"], note:"social media — format patrat 1:1" },
-
-  // ── notino.ro — 160×600 ──────────────────────────────────
-  { id:"notino-160x600-a", merchant:"notino.ro", categories:["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/81514/original/81514.jpg", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=80aaa9dea&aff_code=676a7e7d9&campaign_unique=c6dae5faa", width:160, height:600, active_from:"2026-08-05", active_until:null, channels:["facebook"], note:"social media — skyscraper non-standard IAB" },
-  { id:"notino-160x600-b", merchant:"notino.ro", categories:["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/95506/original/95506.jpg", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=4f49e2c10&aff_code=676a7e7d9&campaign_unique=c6dae5faa", width:160, height:600, active_from:"2026-08-05", active_until:null, channels:["facebook"], note:"social media — skyscraper non-standard IAB" },
-  { id:"notino-160x600-c", merchant:"notino.ro", categories:["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/95507/original/95507.jpg", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=6f7909e1d&aff_code=676a7e7d9&campaign_unique=c6dae5faa", width:160, height:600, active_from:"2026-08-05", active_until:null, channels:["facebook"], note:"social media — skyscraper non-standard IAB" },
-  { id:"notino-160x600-d", merchant:"notino.ro", categories:["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/175629/original/175629.jpg", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=d4a9da371&aff_code=676a7e7d9&campaign_unique=c6dae5faa", width:160, height:600, active_from:"2026-08-05", active_until:null, channels:["facebook"], note:"social media — skyscraper non-standard IAB" },
-
-  // ── infinitelove.ro — formate patrate (social media) ─────
-  { id:"infinitelove-1080x1080-a", merchant:"infinitelove.ro", categories:["parfumuri","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/270794/original/270794.jpeg", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=5486df99d&aff_code=676a7e7d9&campaign_unique=3fd6221b1", width:1080, height:1080, active_from:"2026-08-05", active_until:null, channels:["instagram","facebook"], note:"social media — format patrat 1:1, ideal Instagram Feed si Facebook" },
-  { id:"infinitelove-1080x1080-b", merchant:"infinitelove.ro", categories:["parfumuri","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/270792/original/270792.jpeg", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=170088e26&aff_code=676a7e7d9&campaign_unique=3fd6221b1", width:1080, height:1080, active_from:"2026-08-05", active_until:null, channels:["instagram","facebook"], note:"social media — format patrat 1:1, ideal Instagram Feed si Facebook" },
-  { id:"infinitelove-1080x1080-c", merchant:"infinitelove.ro", categories:["parfumuri","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/270480/original/270480.jpeg", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=ec95633b8&aff_code=676a7e7d9&campaign_unique=3fd6221b1", width:1080, height:1080, active_from:"2026-08-05", active_until:null, channels:["instagram","facebook"], note:"social media — format patrat 1:1, ideal Instagram Feed si Facebook" },
-  { id:"infinitelove-768x768-a", merchant:"infinitelove.ro", categories:["parfumuri","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/270478/original/270478.jpeg", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=fbc671949&aff_code=676a7e7d9&campaign_unique=3fd6221b1", width:768, height:768, active_from:"2026-08-05", active_until:null, channels:["instagram","facebook"], note:"social media — format patrat 1:1" },
-  { id:"infinitelove-1024x1024-a", merchant:"infinitelove.ro", categories:["parfumuri","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/269587/original/269587.jpeg", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=e6cfd1f99&aff_code=676a7e7d9&campaign_unique=3fd6221b1", width:1024, height:1024, active_from:"2026-08-05", active_until:null, channels:["instagram","facebook"], note:"social media — format patrat 1:1" },
-  { id:"infinitelove-1024x1024-b", merchant:"infinitelove.ro", categories:["parfumuri","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/269585/original/269585.jpeg", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=b8062b7b6&aff_code=676a7e7d9&campaign_unique=3fd6221b1", width:1024, height:1024, active_from:"2026-08-05", active_until:null, channels:["instagram","facebook"], note:"social media — format patrat 1:1" },
-
-  // ── minuneanaturii.ro — 1501×1500 (social media) ─────────
-  { id:"minuneanaturii-1500x1500-a", merchant:"minuneanaturii.ro", categories:["vitamine-suplimente","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/214259/original/214259.jpeg", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=a37c0016b&aff_code=676a7e7d9&campaign_unique=2fa33259c", width:1500, height:1500, active_from:"2026-08-05", active_until:null, channels:["instagram","facebook"], note:"social media — format patrat 1:1, ideal Instagram Feed si Facebook" },
-
-  // ── minuneanaturii.ro — 161×601 (skyscraper non-standard) ─
-  { id:"minuneanaturii-160x600-a", merchant:"minuneanaturii.ro", categories:["vitamine-suplimente","homepage"], image_url:"https://img.2performant.com/system/paperclip/banner_pictures/pics/190369/original/190369.png", affiliate_url:"https://event.2performant.com/events/click?ad_type=banner&unique=5cd2576b2&aff_code=676a7e7d9&campaign_unique=2fa33259c", width:160, height:600, active_from:"2026-08-05", active_until:null, channels:["facebook"], note:"skyscraper non-standard IAB, nu se afiseaza pe site" },
+  {
+    id: "notino-750x350-a", merchant: "notino.ro",
+    categories: ["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/175643/original/175643.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=8cefd4dd0&aff_code=676a7e7d9&campaign_unique=c6dae5faa",
+    width: 750, height: 350, active_from: "2026-08-05", active_until: null,
+    channels: ["facebook","instagram"], note: "social media — non-standard IAB, nu se afiseaza pe site",
+  },
+  {
+    id: "notino-750x350-b", merchant: "notino.ro",
+    categories: ["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/175642/original/175642.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=369df3c0b&aff_code=676a7e7d9&campaign_unique=c6dae5faa",
+    width: 750, height: 350, active_from: "2026-08-05", active_until: null,
+    channels: ["facebook","instagram"], note: "social media — non-standard IAB, nu se afiseaza pe site",
+  },
+  {
+    id: "notino-750x350-c", merchant: "notino.ro",
+    categories: ["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/175641/original/175641.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=312aa69d9&aff_code=676a7e7d9&campaign_unique=c6dae5faa",
+    width: 750, height: 350, active_from: "2026-08-05", active_until: null,
+    channels: ["facebook","instagram"], note: "social media — non-standard IAB, nu se afiseaza pe site",
+  },
+  {
+    id: "notino-750x350-d", merchant: "notino.ro",
+    categories: ["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/95499/original/95499.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=ac00f36a6&aff_code=676a7e7d9&campaign_unique=c6dae5faa",
+    width: 750, height: 350, active_from: "2026-08-05", active_until: null,
+    channels: ["facebook","instagram"], note: "social media — non-standard IAB, nu se afiseaza pe site",
+  },
+  {
+    id: "notino-750x350-e", merchant: "notino.ro",
+    categories: ["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/95501/original/95501.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=48dfbb943&aff_code=676a7e7d9&campaign_unique=c6dae5faa",
+    width: 750, height: 350, active_from: "2026-08-05", active_until: null,
+    channels: ["facebook","instagram"], note: "social media — non-standard IAB, nu se afiseaza pe site",
+  },
+  {
+    id: "notino-600x250-a", merchant: "notino.ro",
+    categories: ["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/175639/original/175639.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=16d9a3787&aff_code=676a7e7d9&campaign_unique=c6dae5faa",
+    width: 600, height: 250, active_from: "2026-08-05", active_until: null,
+    channels: ["facebook","instagram"], note: "social media — non-standard IAB, nu se afiseaza pe site",
+  },
+  {
+    id: "notino-600x250-b", merchant: "notino.ro",
+    categories: ["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/175638/original/175638.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=a95674a8a&aff_code=676a7e7d9&campaign_unique=c6dae5faa",
+    width: 600, height: 250, active_from: "2026-08-05", active_until: null,
+    channels: ["facebook","instagram"], note: "social media — non-standard IAB, nu se afiseaza pe site",
+  },
+  {
+    id: "notino-600x250-c", merchant: "notino.ro",
+    categories: ["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/175637/original/175637.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=d07cfebac&aff_code=676a7e7d9&campaign_unique=c6dae5faa",
+    width: 600, height: 250, active_from: "2026-08-05", active_until: null,
+    channels: ["facebook","instagram"], note: "social media — non-standard IAB, nu se afiseaza pe site",
+  },
+  {
+    id: "notino-600x250-d", merchant: "notino.ro",
+    categories: ["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/95498/original/95498.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=3d835656f&aff_code=676a7e7d9&campaign_unique=c6dae5faa",
+    width: 600, height: 250, active_from: "2026-08-05", active_until: null,
+    channels: ["facebook","instagram"], note: "social media — non-standard IAB, nu se afiseaza pe site",
+  },
+  {
+    id: "notino-600x250-e", merchant: "notino.ro",
+    categories: ["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/95505/original/95505.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=bcb2c17cf&aff_code=676a7e7d9&campaign_unique=c6dae5faa",
+    width: 600, height: 250, active_from: "2026-08-05", active_until: null,
+    channels: ["facebook","instagram"], note: "social media — non-standard IAB, nu se afiseaza pe site",
+  },
+  {
+    id: "notino-300x300-a", merchant: "notino.ro",
+    categories: ["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/175633/original/175633.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=74bd1c172&aff_code=676a7e7d9&campaign_unique=c6dae5faa",
+    width: 300, height: 300, active_from: "2026-08-05", active_until: null,
+    channels: ["facebook","instagram"], note: "social media — format patrat 1:1",
+  },
+  {
+    id: "notino-300x300-b", merchant: "notino.ro",
+    categories: ["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/175632/original/175632.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=312e0b875&aff_code=676a7e7d9&campaign_unique=c6dae5faa",
+    width: 300, height: 300, active_from: "2026-08-05", active_until: null,
+    channels: ["facebook","instagram"], note: "social media — format patrat 1:1",
+  },
+  {
+    id: "notino-250x250-a", merchant: "notino.ro",
+    categories: ["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/81515/original/81515.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=3ed01aa9a&aff_code=676a7e7d9&campaign_unique=c6dae5faa",
+    width: 250, height: 250, active_from: "2026-08-05", active_until: null,
+    channels: ["facebook","instagram"], note: "social media — format patrat 1:1",
+  },
+  {
+    id: "notino-160x600-a", merchant: "notino.ro",
+    categories: ["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/81514/original/81514.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=80aaa9dea&aff_code=676a7e7d9&campaign_unique=c6dae5faa",
+    width: 160, height: 600, active_from: "2026-08-05", active_until: null,
+    channels: ["facebook"], note: "social media — skyscraper non-standard IAB",
+  },
+  {
+    id: "notino-160x600-b", merchant: "notino.ro",
+    categories: ["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/95506/original/95506.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=4f49e2c10&aff_code=676a7e7d9&campaign_unique=c6dae5faa",
+    width: 160, height: 600, active_from: "2026-08-05", active_until: null,
+    channels: ["facebook"], note: "social media — skyscraper non-standard IAB",
+  },
+  {
+    id: "notino-160x600-c", merchant: "notino.ro",
+    categories: ["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/95507/original/95507.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=6f7909e1d&aff_code=676a7e7d9&campaign_unique=c6dae5faa",
+    width: 160, height: 600, active_from: "2026-08-05", active_until: null,
+    channels: ["facebook"], note: "social media — skyscraper non-standard IAB",
+  },
+  {
+    id: "notino-160x600-d", merchant: "notino.ro",
+    categories: ["parfumuri","machiaj","ingrijire-ten","ingrijire-par","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/175629/original/175629.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=d4a9da371&aff_code=676a7e7d9&campaign_unique=c6dae5faa",
+    width: 160, height: 600, active_from: "2026-08-05", active_until: null,
+    channels: ["facebook"], note: "social media — skyscraper non-standard IAB",
+  },
+  {
+    id: "infinitelove-1080x1080-a", merchant: "infinitelove.ro",
+    categories: ["parfumuri","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/270794/original/270794.jpeg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=5486df99d&aff_code=676a7e7d9&campaign_unique=3fd6221b1",
+    width: 1080, height: 1080, active_from: "2026-08-05", active_until: null,
+    channels: ["instagram","facebook"], note: "social media — format patrat 1:1",
+  },
+  {
+    id: "infinitelove-1080x1080-b", merchant: "infinitelove.ro",
+    categories: ["parfumuri","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/270792/original/270792.jpeg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=170088e26&aff_code=676a7e7d9&campaign_unique=3fd6221b1",
+    width: 1080, height: 1080, active_from: "2026-08-05", active_until: null,
+    channels: ["instagram","facebook"], note: "social media — format patrat 1:1",
+  },
+  {
+    id: "infinitelove-1080x1080-c", merchant: "infinitelove.ro",
+    categories: ["parfumuri","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/270480/original/270480.jpeg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=ec95633b8&aff_code=676a7e7d9&campaign_unique=3fd6221b1",
+    width: 1080, height: 1080, active_from: "2026-08-05", active_until: null,
+    channels: ["instagram","facebook"], note: "social media — format patrat 1:1",
+  },
+  {
+    id: "infinitelove-768x768-a", merchant: "infinitelove.ro",
+    categories: ["parfumuri","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/270478/original/270478.jpeg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=fbc671949&aff_code=676a7e7d9&campaign_unique=3fd6221b1",
+    width: 768, height: 768, active_from: "2026-08-05", active_until: null,
+    channels: ["instagram","facebook"], note: "social media — format patrat 1:1",
+  },
+  {
+    id: "infinitelove-1024x1024-a", merchant: "infinitelove.ro",
+    categories: ["parfumuri","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/269587/original/269587.jpeg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=e6cfd1f99&aff_code=676a7e7d9&campaign_unique=3fd6221b1",
+    width: 1024, height: 1024, active_from: "2026-08-05", active_until: null,
+    channels: ["instagram","facebook"], note: "social media — format patrat 1:1",
+  },
+  {
+    id: "infinitelove-1024x1024-b", merchant: "infinitelove.ro",
+    categories: ["parfumuri","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/269585/original/269585.jpeg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=b8062b7b6&aff_code=676a7e7d9&campaign_unique=3fd6221b1",
+    width: 1024, height: 1024, active_from: "2026-08-05", active_until: null,
+    channels: ["instagram","facebook"], note: "social media — format patrat 1:1",
+  },
+  {
+    id: "minuneanaturii-1500x1500-a", merchant: "minuneanaturii.ro",
+    categories: ["vitamine-suplimente","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/214259/original/214259.jpeg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=a37c0016b&aff_code=676a7e7d9&campaign_unique=2fa33259c",
+    width: 1500, height: 1500, active_from: "2026-08-05", active_until: null,
+    channels: ["instagram","facebook"], note: "social media — format patrat 1:1",
+  },
+  {
+    id: "minuneanaturii-160x600-a", merchant: "minuneanaturii.ro",
+    categories: ["vitamine-suplimente","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/190369/original/190369.png",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=5cd2576b2&aff_code=676a7e7d9&campaign_unique=2fa33259c",
+    width: 160, height: 600, active_from: "2026-08-05", active_until: null,
+    channels: ["facebook"], note: "skyscraper non-standard IAB, nu se afiseaza pe site",
+  },
 
 ];
