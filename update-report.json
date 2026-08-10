@@ -1,5 +1,5 @@
 {
-  "started_at": "2026-08-09T04:11:17.722Z",
+  "started_at": "2026-08-10T04:23:33.850Z",
   "ok": 113,
   "failed": 1,
   "skipped": 339,
@@ -9,9 +9,9 @@
       "reason": "sursa necunoscuta: infinitelove.ro"
     },
     {
-      "id": "farmec-1275",
-      "url": "http://www.farmec.ro/gel-termoactiv-936?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/gel-termoactiv-936?___store=default"
+      "id": "farmec-337",
+      "url": "http://www.farmec.ro/balsam-dupa-ras-gerovital-men-1031?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/balsam-dupa-ras-gerovital-men-1031?___store=default"
     }
   ],
   "by_source": {
@@ -28,5 +28,5 @@
       "skipped": 0
     }
   },
-  "finished_at": "2026-08-09T04:41:47.117Z"
+  "finished_at": "2026-08-10T04:43:50.208Z"
 }
