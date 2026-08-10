@@ -176,6 +176,18 @@ export const banners = [
     channels: ["site","email"],
   },
 
+  // ── farmec.ro — banner nou (10.08.2026) ──────────────────
+  {
+    id: "farmec-300x250-e",
+    merchant: "farmec.ro",
+    categories: ["ingrijire-ten","ingrijire-corp","ingrijire-par","machiaj","cosmetice-barbati","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/271789/original/271789.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=0fc0a5984&aff_code=676a7e7d9&campaign_unique=1dfbc028f",
+    width: 300, height: 250,
+    active_from: "2026-08-10", active_until: "2026-08-19",
+    channels: ["site","email"],
+  },
+
   // ── notino.ro — 728×90 ───────────────────────────────────
   {
     id: "notino-728x90-a",
