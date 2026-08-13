@@ -263,43 +263,7 @@ export const banners = [
     active_from: "2026-08-05", active_until: null,
     channels: ["site","email","facebook","instagram"],
   },
-
-  // ── minuneanaturii.ro — 729×91 scalat la 728×90 ──────────
-  {
-    id: "minuneanaturii-728x90-a",
-    merchant: "minuneanaturii.ro",
-    categories: ["vitamine-suplimente","homepage"],
-    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/190372/original/190372.png",
-    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=aecc92b4a&aff_code=676a7e7d9&campaign_unique=2fa33259c",
-    width: 728, height: 90,
-    active_from: "2026-08-05", active_until: null,
-    channels: ["site"],
-  },
-
-  // ── minuneanaturii.ro — 301×601 scalat la 300×600 ────────
-  {
-    id: "minuneanaturii-300x600-a",
-    merchant: "minuneanaturii.ro",
-    categories: ["vitamine-suplimente","homepage"],
-    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/190371/original/190371.png",
-    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=1c571096d&aff_code=676a7e7d9&campaign_unique=2fa33259c",
-    width: 300, height: 600,
-    active_from: "2026-08-05", active_until: null,
-    channels: ["site","email"],
-  },
-
-  // ── minuneanaturii.ro — 301×251 scalat la 300×250 ────────
-  {
-    id: "minuneanaturii-300x250-a",
-    merchant: "minuneanaturii.ro",
-    categories: ["vitamine-suplimente","homepage"],
-    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/190370/original/190370.png",
-    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=28ca28c57&aff_code=676a7e7d9&campaign_unique=2fa33259c",
-    width: 300, height: 250,
-    active_from: "2026-08-05", active_until: null,
-    channels: ["site","email","facebook","instagram"],
-  },
-
+  
   // ── infinitelove.ro (de completat cu bannere standard când primești) ──
   // Bannerele disponibile acum (1080x1080, 768x768, 1024x1024) sunt
   // formate pătrate pentru social media — nu se potrivesc ca bannere web.
@@ -495,22 +459,6 @@ export const banners = [
     affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=b8062b7b6&aff_code=676a7e7d9&campaign_unique=3fd6221b1",
     width: 1024, height: 1024, active_from: "2026-08-05", active_until: null,
     channels: ["instagram","facebook"], note: "social media — format patrat 1:1",
-  },
-  {
-    id: "minuneanaturii-1500x1500-a", merchant: "minuneanaturii.ro",
-    categories: ["vitamine-suplimente","homepage"],
-    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/214259/original/214259.jpeg",
-    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=a37c0016b&aff_code=676a7e7d9&campaign_unique=2fa33259c",
-    width: 1500, height: 1500, active_from: "2026-08-05", active_until: null,
-    channels: ["instagram","facebook"], note: "social media — format patrat 1:1",
-  },
-  {
-    id: "minuneanaturii-160x600-a", merchant: "minuneanaturii.ro",
-    categories: ["vitamine-suplimente","homepage"],
-    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/190369/original/190369.png",
-    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=5cd2576b2&aff_code=676a7e7d9&campaign_unique=2fa33259c",
-    width: 160, height: 600, active_from: "2026-08-05", active_until: null,
-    channels: ["facebook"], note: "skyscraper non-standard IAB, nu se afiseaza pe site",
-  },
-
+  }
+  
 ];
