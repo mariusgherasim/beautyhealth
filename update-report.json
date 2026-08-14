@@ -1,25 +1,25 @@
 {
-  "started_at": "2026-08-13T04:45:22.003Z",
+  "started_at": "2026-08-14T04:43:18.310Z",
   "ok": 113,
   "failed": 1,
-  "skipped": 339,
+  "skipped": 343,
   "errors": [
     {
-      "id": "infinitelove-5926",
+      "id": "infinitelove-6766",
       "reason": "sursa necunoscuta: infinitelove.ro"
     },
     {
-      "id": "farmec-399",
-      "url": "http://www.farmec.ro/crema-corp-pentru-piele-uscata-572?___store=default",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"http://www.farmec.ro/crema-corp-pentru-piele-uscata-572?___store=default\", waiting until \"networkidle\"\n"
+      "id": "farmec-402",
+      "url": "http://www.farmec.ro/crema-anticuperozica-hidratanta-spf-10-574?___store=default",
+      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"http://www.farmec.ro/crema-anticuperozica-hidratanta-spf-10-574?___store=default\", waiting until \"networkidle\"\n"
     }
   ],
   "by_source": {
     "infinitelove.ro": {
-      "total": 339,
+      "total": 343,
       "ok": 0,
       "failed": 0,
-      "skipped": 339
+      "skipped": 343
     },
     "farmec.ro": {
       "total": 114,
@@ -28,5 +28,5 @@
       "skipped": 0
     }
   },
-  "finished_at": "2026-08-13T05:03:56.044Z"
+  "finished_at": "2026-08-14T05:00:54.572Z"
 }
