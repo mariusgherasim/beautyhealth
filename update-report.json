@@ -1,17 +1,12 @@
 {
-  "started_at": "2026-08-14T04:43:18.310Z",
-  "ok": 113,
-  "failed": 1,
+  "started_at": "2026-08-15T03:31:41.313Z",
+  "ok": 114,
+  "failed": 0,
   "skipped": 343,
   "errors": [
     {
       "id": "infinitelove-6766",
       "reason": "sursa necunoscuta: infinitelove.ro"
-    },
-    {
-      "id": "farmec-402",
-      "url": "http://www.farmec.ro/crema-anticuperozica-hidratanta-spf-10-574?___store=default",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"http://www.farmec.ro/crema-anticuperozica-hidratanta-spf-10-574?___store=default\", waiting until \"networkidle\"\n"
     }
   ],
   "by_source": {
@@ -23,10 +18,10 @@
     },
     "farmec.ro": {
       "total": 114,
-      "ok": 113,
-      "failed": 1,
+      "ok": 114,
+      "failed": 0,
       "skipped": 0
     }
   },
-  "finished_at": "2026-08-14T05:00:54.572Z"
+  "finished_at": "2026-08-15T03:49:17.687Z"
 }
