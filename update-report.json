@@ -1,7 +1,7 @@
 {
-  "started_at": "2026-08-17T03:41:37.970Z",
-  "ok": 113,
-  "failed": 1,
+  "started_at": "2026-08-18T03:37:02.640Z",
+  "ok": 95,
+  "failed": 19,
   "skipped": 343,
   "errors": [
     {
@@ -12,6 +12,96 @@
       "id": "farmec-402",
       "url": "http://www.farmec.ro/crema-anticuperozica-hidratanta-spf-10-574?___store=default",
       "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"http://www.farmec.ro/crema-anticuperozica-hidratanta-spf-10-574?___store=default\", waiting until \"networkidle\"\n"
+    },
+    {
+      "id": "farmec-1141",
+      "url": "http://www.farmec.ro/sampon-anticadere-400-ml-553?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/sampon-anticadere-400-ml-553?___store=default"
+    },
+    {
+      "id": "farmec-1157",
+      "url": "http://www.farmec.ro/ser-termoprotector-cu-keratina-560?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/ser-termoprotector-cu-keratina-560?___store=default"
+    },
+    {
+      "id": "farmec-2313",
+      "url": "http://www.farmec.ro/dizolvant-fara-acetona-586?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/dizolvant-fara-acetona-586?___store=default"
+    },
+    {
+      "id": "farmec-457",
+      "url": "http://www.farmec.ro/crema-gel-sebum-control-752?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/crema-gel-sebum-control-752?___store=default"
+    },
+    {
+      "id": "farmec-456",
+      "url": "http://www.farmec.ro/benzi-curatare-puncte-negre-756?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/benzi-curatare-puncte-negre-756?___store=default"
+    },
+    {
+      "id": "farmec-458",
+      "url": "http://www.farmec.ro/crema-ultra-activa-753?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/crema-ultra-activa-753?___store=default"
+    },
+    {
+      "id": "farmec-286",
+      "url": "http://www.farmec.ro/crema-regeneranta-pentru-maini-701?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/crema-regeneranta-pentru-maini-701?___store=default"
+    },
+    {
+      "id": "farmec-4185",
+      "url": "http://www.farmec.ro/kit-tratament-cosmetic-757?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/kit-tratament-cosmetic-757?___store=default"
+    },
+    {
+      "id": "farmec-309",
+      "url": "http://www.farmec.ro/doina-lapte-cu-ulei-de-galbenele-874?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/doina-lapte-cu-ulei-de-galbenele-874?___store=default"
+    },
+    {
+      "id": "farmec-2861",
+      "url": "http://www.farmec.ro/tratament-expert-gel-top-coat-881?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/tratament-expert-gel-top-coat-881?___store=default"
+    },
+    {
+      "id": "farmec-1104",
+      "url": "http://www.farmec.ro/sampon-revitalizant-cu-keratina-co-wash-927?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/sampon-revitalizant-cu-keratina-co-wash-927?___store=default"
+    },
+    {
+      "id": "farmec-839",
+      "url": "http://www.farmec.ro/benzi-depilatoare-pentru-corp-cu-ceara-gel-994?___store=default",
+      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"http://www.farmec.ro/benzi-depilatoare-pentru-corp-cu-ceara-gel-994?___store=default\", waiting until \"networkidle\"\n"
+    },
+    {
+      "id": "farmec-1103",
+      "url": "http://www.farmec.ro/keratina-lichida-926?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/keratina-lichida-926?___store=default"
+    },
+    {
+      "id": "farmec-3706",
+      "url": "http://www.farmec.ro/deodorant-athos-spice-up-1049?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/deodorant-athos-spice-up-1049?___store=default"
+    },
+    {
+      "id": "farmec-1275",
+      "url": "http://www.farmec.ro/gel-termoactiv-936?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/gel-termoactiv-936?___store=default"
+    },
+    {
+      "id": "farmec-P-2571",
+      "url": "http://www.farmec.ro/lac-pentru-unghii-magic-gel-effect-869-21?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/lac-pentru-unghii-magic-gel-effect-869-21?___store=default"
+    },
+    {
+      "id": "farmec-1278",
+      "url": "http://www.farmec.ro/crema-de-masaj-sparelax-940?___store=default",
+      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"http://www.farmec.ro/crema-de-masaj-sparelax-940?___store=default\", waiting until \"networkidle\"\n"
+    },
+    {
+      "id": "farmec-1299",
+      "url": "http://www.farmec.ro/ser-hidratant-889?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/ser-hidratant-889?___store=default"
     }
   ],
   "by_source": {
@@ -23,10 +113,10 @@
     },
     "farmec.ro": {
       "total": 114,
-      "ok": 113,
-      "failed": 1,
+      "ok": 95,
+      "failed": 19,
       "skipped": 0
     }
   },
-  "finished_at": "2026-08-17T03:59:54.808Z"
+  "finished_at": "2026-08-18T03:59:06.435Z"
 }
