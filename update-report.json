@@ -1,27 +1,142 @@
 {
-  "started_at": "2026-08-19T03:38:53.235Z",
-  "ok": 114,
-  "failed": 0,
-  "skipped": 343,
+  "started_at": "2026-08-19T07:00:23.458Z",
+  "ok": 0,
+  "failed": 25,
+  "skipped": 12470,
   "errors": [
     {
-      "id": "infinitelove-6766",
-      "reason": "sursa necunoscuta: infinitelove.ro"
+      "id": "springfarma-117617",
+      "url": "https://www.springfarma.com/crema-tratament-uscaciune-deshidratare-si-dermatite-75-ml-ceramol.html",
+      "reason": "Maximum number of redirects exceeded"
+    },
+    {
+      "id": "springfarma-89795",
+      "url": "https://www.springfarma.com/zinc-complex-30-capsule-herbagetica",
+      "reason": "Request failed with status code 404"
+    },
+    {
+      "id": "springfarma-89629",
+      "url": "https://www.springfarma.com/herbagetica-cozi-de-cirese-extract-60-capsule",
+      "reason": "Request failed with status code 404"
+    },
+    {
+      "id": "springfarma-89665",
+      "url": "https://www.springfarma.com/ginkgo-120-stem-60-capsule",
+      "reason": "Request failed with status code 404"
+    },
+    {
+      "id": "springfarma-89769",
+      "url": "https://www.springfarma.com/silymarin-8050-detox-forte-30-capsule-herbagetica",
+      "reason": "Request failed with status code 404"
+    },
+    {
+      "id": "springfarma-117490",
+      "url": "https://www.springfarma.com/supozitoare-cu-glicerina-pentru-copii-laxaclean-10-bucati-viva-pharma.html",
+      "reason": "Maximum number of redirects exceeded"
+    },
+    {
+      "id": "springfarma-97477",
+      "url": "https://www.springfarma.com/scholl-brant-gelactiv-pentru-incaltamintea-de-iarna",
+      "reason": "Request failed with status code 404"
+    },
+    {
+      "id": "springfarma-85108",
+      "url": "https://www.springfarma.com/spray-propolis-si-echinaceea-pufypuf-20ml-dacia-plant.html",
+      "reason": "Request failed with status code 404"
+    },
+    {
+      "id": "springfarma-85107",
+      "url": "https://www.springfarma.com/spray-cu-propolis-si-musetel-pufypuf-20ml-dacia-plant.html",
+      "reason": "Request failed with status code 404"
+    },
+    {
+      "id": "springfarma-104007",
+      "url": "https://www.springfarma.com/propolis-c-tare-spray-natural-20-ml-alevia.html",
+      "reason": "Request failed with status code 404"
+    },
+    {
+      "id": "springfarma-67061",
+      "url": "https://www.springfarma.com/propolis-c-tare-natural-30-comprimate-alevia.html",
+      "reason": "Request failed with status code 404"
+    },
+    {
+      "id": "springfarma-106275",
+      "url": "https://www.springfarma.com/tonimer-lab-isotonic-baby-spray-100ml.html",
+      "reason": "Request failed with status code 404"
+    },
+    {
+      "id": "springfarma-90275",
+      "url": "https://www.springfarma.com/echinacea-cu-propolis-si-vitamina-c-63-comprimate-fares.html",
+      "reason": "Request failed with status code 404"
+    },
+    {
+      "id": "springfarma-126439",
+      "url": "https://www.springfarma.com/crema-nutritiva-natural-miere-100-ml-gerocossen.html",
+      "reason": "Request failed with status code 404"
+    },
+    {
+      "id": "springfarma-110994",
+      "url": "https://www.springfarma.com/ciocolata-cu-lapte-si-stevie-fara-zahar-100g-chocolates-sole.html",
+      "reason": "Request failed with status code 404"
+    },
+    {
+      "id": "springfarma-107895",
+      "url": "https://www.springfarma.com/ceai-de-slabit-cu-ginseng-si-ananas-20-doze-solaris.html",
+      "reason": "Request failed with status code 404"
+    },
+    {
+      "id": "springfarma-110918",
+      "url": "https://www.springfarma.com/naturalis-glucosuport-ceai-20-plicuri.html",
+      "reason": "Request failed with status code 404"
+    },
+    {
+      "id": "springfarma-110972",
+      "url": "https://www.springfarma.com/yogi-tea-ceai-sprijin-imunitar-17-plicuri.html",
+      "reason": "Request failed with status code 404"
+    },
+    {
+      "id": "springfarma-110979",
+      "url": "https://www.springfarma.com/yogi-tea-ceai-din-curcumaturmeric-17-plicuri.html",
+      "reason": "Request failed with status code 404"
+    },
+    {
+      "id": "springfarma-110984",
+      "url": "https://www.springfarma.com/yogi-tea-ceai-energie-pozitiva-cu-merisor-si-hibiscus-17-plicuri.html",
+      "reason": "Request failed with status code 404"
+    },
+    {
+      "id": "springfarma-110988",
+      "url": "https://www.springfarma.com/yogi-tea-ceai-cu-echinacea-17-plicuri.html",
+      "reason": "Request failed with status code 404"
+    },
+    {
+      "id": "springfarma-110987",
+      "url": "https://www.springfarma.com/yogi-tea-ceai-echilibru-verde-17-plicuri.html",
+      "reason": "Request failed with status code 404"
+    },
+    {
+      "id": "springfarma-110986",
+      "url": "https://www.springfarma.com/yogi-tea-ceai-respira-sanatos-17-plicuri.html",
+      "reason": "Request failed with status code 404"
+    },
+    {
+      "id": "springfarma-110990",
+      "url": "https://www.springfarma.com/yogi-tea-ceai-cu-ghimbir-17-plicuri.html",
+      "reason": "Request failed with status code 404"
+    },
+    {
+      "id": "springfarma-110996",
+      "url": "https://www.springfarma.com/yogi-tea-ceai-din-plante-alcaline-17-plicuri.html",
+      "reason": "read ECONNRESET"
     }
   ],
   "by_source": {
-    "infinitelove.ro": {
-      "total": 343,
+    "springfarma.com": {
+      "total": 12495,
       "ok": 0,
-      "failed": 0,
-      "skipped": 343
-    },
-    "farmec.ro": {
-      "total": 114,
-      "ok": 114,
-      "failed": 0,
-      "skipped": 0
+      "failed": 25,
+      "skipped": 12470
     }
   },
-  "finished_at": "2026-08-19T03:56:07.195Z"
+  "finished_at": "2026-08-19T07:03:50.640Z"
 }
