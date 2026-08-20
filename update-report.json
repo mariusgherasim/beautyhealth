@@ -1,142 +1,87 @@
 {
-  "started_at": "2026-08-19T07:00:23.458Z",
-  "ok": 0,
-  "failed": 25,
-  "skipped": 12470,
+  "started_at": "2026-08-20T03:38:52.047Z",
+  "ok": 102,
+  "failed": 12,
+  "skipped": 343,
   "errors": [
     {
-      "id": "springfarma-117617",
-      "url": "https://www.springfarma.com/crema-tratament-uscaciune-deshidratare-si-dermatite-75-ml-ceramol.html",
-      "reason": "Maximum number of redirects exceeded"
+      "id": "infinitelove-6766",
+      "reason": "sursa necunoscuta: infinitelove.ro"
     },
     {
-      "id": "springfarma-89795",
-      "url": "https://www.springfarma.com/zinc-complex-30-capsule-herbagetica",
-      "reason": "Request failed with status code 404"
+      "id": "farmec-402",
+      "url": "http://www.farmec.ro/crema-anticuperozica-hidratanta-spf-10-574?___store=default",
+      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"http://www.farmec.ro/crema-anticuperozica-hidratanta-spf-10-574?___store=default\", waiting until \"networkidle\"\n"
     },
     {
-      "id": "springfarma-89629",
-      "url": "https://www.springfarma.com/herbagetica-cozi-de-cirese-extract-60-capsule",
-      "reason": "Request failed with status code 404"
+      "id": "farmec-459",
+      "url": "http://www.farmec.ro/crema-cc-matifianta-754?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/crema-cc-matifianta-754?___store=default"
     },
     {
-      "id": "springfarma-89665",
-      "url": "https://www.springfarma.com/ginkgo-120-stem-60-capsule",
-      "reason": "Request failed with status code 404"
+      "id": "farmec-2550",
+      "url": "http://www.farmec.ro/mascara-supreme-lash-843?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/mascara-supreme-lash-843?___store=default"
     },
     {
-      "id": "springfarma-89769",
-      "url": "https://www.springfarma.com/silymarin-8050-detox-forte-30-capsule-herbagetica",
-      "reason": "Request failed with status code 404"
+      "id": "farmec-2861",
+      "url": "http://www.farmec.ro/tratament-expert-gel-top-coat-881?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/tratament-expert-gel-top-coat-881?___store=default"
     },
     {
-      "id": "springfarma-117490",
-      "url": "https://www.springfarma.com/supozitoare-cu-glicerina-pentru-copii-laxaclean-10-bucati-viva-pharma.html",
-      "reason": "Maximum number of redirects exceeded"
+      "id": "farmec-1307",
+      "url": "http://www.farmec.ro/masca-pentru-ochi-879?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/masca-pentru-ochi-879?___store=default"
     },
     {
-      "id": "springfarma-97477",
-      "url": "https://www.springfarma.com/scholl-brant-gelactiv-pentru-incaltamintea-de-iarna",
-      "reason": "Request failed with status code 404"
+      "id": "farmec-2732",
+      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-9?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-9?___store=default"
     },
     {
-      "id": "springfarma-85108",
-      "url": "https://www.springfarma.com/spray-propolis-si-echinaceea-pufypuf-20ml-dacia-plant.html",
-      "reason": "Request failed with status code 404"
+      "id": "farmec-2707",
+      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-5?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-5?___store=default"
     },
     {
-      "id": "springfarma-85107",
-      "url": "https://www.springfarma.com/spray-cu-propolis-si-musetel-pufypuf-20ml-dacia-plant.html",
-      "reason": "Request failed with status code 404"
+      "id": "farmec-2834",
+      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-33?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-33?___store=default"
     },
     {
-      "id": "springfarma-104007",
-      "url": "https://www.springfarma.com/propolis-c-tare-spray-natural-20-ml-alevia.html",
-      "reason": "Request failed with status code 404"
+      "id": "farmec-2773",
+      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-14?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-14?___store=default"
     },
     {
-      "id": "springfarma-67061",
-      "url": "https://www.springfarma.com/propolis-c-tare-natural-30-comprimate-alevia.html",
-      "reason": "Request failed with status code 404"
+      "id": "farmec-2785",
+      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-17?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-17?___store=default"
     },
     {
-      "id": "springfarma-106275",
-      "url": "https://www.springfarma.com/tonimer-lab-isotonic-baby-spray-100ml.html",
-      "reason": "Request failed with status code 404"
+      "id": "farmec-2810",
+      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-22?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-22?___store=default"
     },
     {
-      "id": "springfarma-90275",
-      "url": "https://www.springfarma.com/echinacea-cu-propolis-si-vitamina-c-63-comprimate-fares.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-126439",
-      "url": "https://www.springfarma.com/crema-nutritiva-natural-miere-100-ml-gerocossen.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-110994",
-      "url": "https://www.springfarma.com/ciocolata-cu-lapte-si-stevie-fara-zahar-100g-chocolates-sole.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-107895",
-      "url": "https://www.springfarma.com/ceai-de-slabit-cu-ginseng-si-ananas-20-doze-solaris.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-110918",
-      "url": "https://www.springfarma.com/naturalis-glucosuport-ceai-20-plicuri.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-110972",
-      "url": "https://www.springfarma.com/yogi-tea-ceai-sprijin-imunitar-17-plicuri.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-110979",
-      "url": "https://www.springfarma.com/yogi-tea-ceai-din-curcumaturmeric-17-plicuri.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-110984",
-      "url": "https://www.springfarma.com/yogi-tea-ceai-energie-pozitiva-cu-merisor-si-hibiscus-17-plicuri.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-110988",
-      "url": "https://www.springfarma.com/yogi-tea-ceai-cu-echinacea-17-plicuri.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-110987",
-      "url": "https://www.springfarma.com/yogi-tea-ceai-echilibru-verde-17-plicuri.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-110986",
-      "url": "https://www.springfarma.com/yogi-tea-ceai-respira-sanatos-17-plicuri.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-110990",
-      "url": "https://www.springfarma.com/yogi-tea-ceai-cu-ghimbir-17-plicuri.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-110996",
-      "url": "https://www.springfarma.com/yogi-tea-ceai-din-plante-alcaline-17-plicuri.html",
-      "reason": "read ECONNRESET"
+      "id": "farmec-2558",
+      "url": "http://www.farmec.ro/fard-de-obraz-maro-855?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/fard-de-obraz-maro-855?___store=default"
     }
   ],
   "by_source": {
-    "springfarma.com": {
-      "total": 12495,
+    "infinitelove.ro": {
+      "total": 343,
       "ok": 0,
-      "failed": 25,
-      "skipped": 12470
+      "failed": 0,
+      "skipped": 343
+    },
+    "farmec.ro": {
+      "total": 114,
+      "ok": 102,
+      "failed": 12,
+      "skipped": 0
     }
   },
-  "finished_at": "2026-08-19T07:03:50.640Z"
+  "finished_at": "2026-08-20T04:12:20.183Z"
 }
