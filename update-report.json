@@ -1,7 +1,7 @@
 {
-  "started_at": "2026-08-21T03:43:00.336Z",
-  "ok": 97,
-  "failed": 17,
+  "started_at": "2026-08-22T03:34:33.065Z",
+  "ok": 102,
+  "failed": 12,
   "skipped": 343,
   "errors": [
     {
@@ -19,19 +19,9 @@
       "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/tratament-expert-gel-top-coat-881?___store=default"
     },
     {
-      "id": "farmec-2834",
-      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-33?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-33?___store=default"
-    },
-    {
       "id": "farmec-2558",
       "url": "http://www.farmec.ro/fard-de-obraz-maro-855?___store=default",
       "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/fard-de-obraz-maro-855?___store=default"
-    },
-    {
-      "id": "farmec-2567",
-      "url": "http://www.farmec.ro/anticearcan-soft-focus-863?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/anticearcan-soft-focus-863?___store=default"
     },
     {
       "id": "farmec-2859",
@@ -44,54 +34,39 @@
       "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/dizolvant-cu-acetona-194?___store=default"
     },
     {
-      "id": "farmec-2866",
-      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-49?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-49?___store=default"
+      "id": "farmec-2814",
+      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-27?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-27?___store=default"
     },
     {
-      "id": "farmec-399",
-      "url": "http://www.farmec.ro/crema-corp-pentru-piele-uscata-572?___store=default",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"http://www.farmec.ro/crema-corp-pentru-piele-uscata-572?___store=default\", waiting until \"networkidle\"\n"
+      "id": "farmec-1153",
+      "url": "http://www.farmec.ro/sampon-sebum-control-566?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/sampon-sebum-control-566?___store=default"
     },
     {
-      "id": "farmec-458",
-      "url": "http://www.farmec.ro/crema-ultra-activa-753?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/crema-ultra-activa-753?___store=default"
+      "id": "farmec-290",
+      "url": "http://www.farmec.ro/crema-pentru-ten-matur-uscat-ridat-658?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/crema-pentru-ten-matur-uscat-ridat-658?___store=default"
     },
     {
-      "id": "farmec-P-2571",
-      "url": "http://www.farmec.ro/lac-pentru-unghii-magic-gel-effect-869-21?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/lac-pentru-unghii-magic-gel-effect-869-21?___store=default"
+      "id": "farmec-457",
+      "url": "http://www.farmec.ro/crema-gel-sebum-control-752?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/crema-gel-sebum-control-752?___store=default"
     },
     {
-      "id": "farmec-2853",
-      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-38?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-38?___store=default"
+      "id": "farmec-356",
+      "url": "http://www.farmec.ro/fiole-cu-acid-hialuronic-5-gerovital-men-968?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/fiole-cu-acid-hialuronic-5-gerovital-men-968?___store=default"
     },
     {
-      "id": "farmec-2848",
-      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-36?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-36?___store=default"
+      "id": "farmec-1300",
+      "url": "http://www.farmec.ro/ser-perfect-anti-age-100-ml-891?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/ser-perfect-anti-age-100-ml-891?___store=default"
     },
     {
-      "id": "farmec-2867",
-      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-50?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-50?___store=default"
-    },
-    {
-      "id": "farmec-2869",
-      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-52?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-52?___store=default"
-    },
-    {
-      "id": "farmec-2772",
-      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-13?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-13?___store=default"
-    },
-    {
-      "id": "farmec-2787",
-      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-19?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-19?___store=default"
+      "id": "farmec-2705",
+      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-4?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-4?___store=default"
     }
   ],
   "by_source": {
@@ -103,10 +78,10 @@
     },
     "farmec.ro": {
       "total": 114,
-      "ok": 97,
-      "failed": 17,
+      "ok": 102,
+      "failed": 12,
       "skipped": 0
     }
   },
-  "finished_at": "2026-08-21T04:15:59.514Z"
+  "finished_at": "2026-08-22T04:06:20.498Z"
 }
