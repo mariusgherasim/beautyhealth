@@ -1,92 +1,57 @@
 {
-  "started_at": "2026-08-21T08:51:00.139Z",
-  "ok": 12480,
-  "failed": 15,
-  "skipped": 0,
+  "started_at": "2026-08-25T03:40:38.327Z",
+  "ok": 108,
+  "failed": 6,
+  "skipped": 343,
   "errors": [
     {
-      "id": "springfarma-117617",
-      "url": "https://www.springfarma.com/crema-tratament-uscaciune-deshidratare-si-dermatite-75-ml-ceramol.html",
-      "reason": "Maximum number of redirects exceeded"
+      "id": "infinitelove-6766",
+      "reason": "sursa necunoscuta: infinitelove.ro"
     },
     {
-      "id": "springfarma-89795",
-      "url": "https://www.springfarma.com/zinc-complex-30-capsule-herbagetica",
-      "reason": "Request failed with status code 404"
+      "id": "farmec-402",
+      "url": "http://www.farmec.ro/crema-anticuperozica-hidratanta-spf-10-574?___store=default",
+      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"http://www.farmec.ro/crema-anticuperozica-hidratanta-spf-10-574?___store=default\", waiting until \"networkidle\"\n"
     },
     {
-      "id": "springfarma-89629",
-      "url": "https://www.springfarma.com/herbagetica-cozi-de-cirese-extract-60-capsule",
-      "reason": "Request failed with status code 404"
+      "id": "farmec-459",
+      "url": "http://www.farmec.ro/crema-cc-matifianta-754?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/crema-cc-matifianta-754?___store=default"
     },
     {
-      "id": "springfarma-89665",
-      "url": "https://www.springfarma.com/ginkgo-120-stem-60-capsule",
-      "reason": "Request failed with status code 404"
+      "id": "farmec-2861",
+      "url": "http://www.farmec.ro/tratament-expert-gel-top-coat-881?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/tratament-expert-gel-top-coat-881?___store=default"
     },
     {
-      "id": "springfarma-89769",
-      "url": "https://www.springfarma.com/silymarin-8050-detox-forte-30-capsule-herbagetica",
-      "reason": "Request failed with status code 404"
+      "id": "farmec-399",
+      "url": "http://www.farmec.ro/crema-corp-pentru-piele-uscata-572?___store=default",
+      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"http://www.farmec.ro/crema-corp-pentru-piele-uscata-572?___store=default\", waiting until \"networkidle\"\n"
     },
     {
-      "id": "springfarma-117490",
-      "url": "https://www.springfarma.com/supozitoare-cu-glicerina-pentru-copii-laxaclean-10-bucati-viva-pharma.html",
-      "reason": "Maximum number of redirects exceeded"
+      "id": "farmec-456",
+      "url": "http://www.farmec.ro/benzi-curatare-puncte-negre-756?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/benzi-curatare-puncte-negre-756?___store=default"
     },
     {
-      "id": "springfarma-97477",
-      "url": "https://www.springfarma.com/scholl-brant-gelactiv-pentru-incaltamintea-de-iarna",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-85108",
-      "url": "https://www.springfarma.com/spray-propolis-si-echinaceea-pufypuf-20ml-dacia-plant.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-85107",
-      "url": "https://www.springfarma.com/spray-cu-propolis-si-musetel-pufypuf-20ml-dacia-plant.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-104007",
-      "url": "https://www.springfarma.com/propolis-c-tare-spray-natural-20-ml-alevia.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-67061",
-      "url": "https://www.springfarma.com/propolis-c-tare-natural-30-comprimate-alevia.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-106275",
-      "url": "https://www.springfarma.com/tonimer-lab-isotonic-baby-spray-100ml.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-90275",
-      "url": "https://www.springfarma.com/echinacea-cu-propolis-si-vitamina-c-63-comprimate-fares.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-126439",
-      "url": "https://www.springfarma.com/crema-nutritiva-natural-miere-100-ml-gerocossen.html",
-      "reason": "Request failed with status code 404"
-    },
-    {
-      "id": "springfarma-110994",
-      "url": "https://www.springfarma.com/ciocolata-cu-lapte-si-stevie-fara-zahar-100g-chocolates-sole.html",
-      "reason": "Request failed with status code 404"
+      "id": "farmec-P-2571",
+      "url": "http://www.farmec.ro/lac-pentru-unghii-magic-gel-effect-869-21?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/lac-pentru-unghii-magic-gel-effect-869-21?___store=default"
     }
   ],
   "by_source": {
-    "springfarma.com": {
-      "total": 12495,
-      "ok": 12480,
-      "failed": 15,
+    "infinitelove.ro": {
+      "total": 343,
+      "ok": 0,
+      "failed": 0,
+      "skipped": 343
+    },
+    "farmec.ro": {
+      "total": 114,
+      "ok": 108,
+      "failed": 6,
       "skipped": 0
     }
   },
-  "finished_at": "2026-08-23T12:33:43.204Z"
+  "finished_at": "2026-08-25T04:11:27.284Z"
 }
