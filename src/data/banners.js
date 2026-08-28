@@ -187,6 +187,30 @@ export const banners = [
     active_from: "2026-08-10", active_until: "2026-08-19",
     channels: ["site","email"],
   },
+  // ── farmec.ro — banner nou (28.08.2026) ──────────────────
+
+  {
+    id: "farmec-728x90-a",
+    merchant: "farmec.ro",
+    categories: ["ingrijire-ten","ingrijire-corp","ingrijire-par","machiaj","cosmetice-barbati","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/272089/original/272089.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=332f00378&aff_code=676a7e7d9&campaign_unique=1dfbc028f",
+    width: 728, height: 90,
+    active_from: "2026-08-28", active_until: "2026-09-13",
+    channels: ["site"],
+  },
+
+  // ── farmec.ro — banner nou (21.08.2026) ──────────────────
+{
+    id: "farmec-300x250-e",
+    merchant: "farmec.ro",
+    categories: ["ingrijire-ten","ingrijire-corp","ingrijire-par","machiaj","cosmetice-barbati","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/272033/original/272033.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=d0693df31&aff_code=676a7e7d9&campaign_unique=1dfbc028f",
+    width: 728, height: 90,
+    active_from: "2026-08-10", active_until: "2026-08-24",
+    channels: ["site","email"],
+  },
 
   // ── notino.ro — 728×90 ───────────────────────────────────
   {
