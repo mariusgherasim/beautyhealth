@@ -1,7 +1,7 @@
 {
-  "started_at": "2026-08-26T03:45:24.973Z",
-  "ok": 107,
-  "failed": 7,
+  "started_at": "2026-08-27T13:23:05.017Z",
+  "ok": 110,
+  "failed": 4,
   "skipped": 343,
   "errors": [
     {
@@ -14,11 +14,6 @@
       "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"http://www.farmec.ro/crema-anticuperozica-hidratanta-spf-10-574?___store=default\", waiting until \"networkidle\"\n"
     },
     {
-      "id": "farmec-2732",
-      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-9?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-9?___store=default"
-    },
-    {
       "id": "farmec-2558",
       "url": "http://www.farmec.ro/fard-de-obraz-maro-855?___store=default",
       "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/fard-de-obraz-maro-855?___store=default"
@@ -29,19 +24,9 @@
       "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/anticearcan-soft-focus-863?___store=default"
     },
     {
-      "id": "farmec-2863",
-      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-46?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-46?___store=default"
-    },
-    {
-      "id": "farmec-2814",
-      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-27?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-27?___store=default"
-    },
-    {
-      "id": "farmec-2592",
-      "url": "http://www.farmec.ro/matt-top-coat-865?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/matt-top-coat-865?___store=default"
+      "id": "farmec-456",
+      "url": "http://www.farmec.ro/benzi-curatare-puncte-negre-756?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/benzi-curatare-puncte-negre-756?___store=default"
     }
   ],
   "by_source": {
@@ -53,10 +38,10 @@
     },
     "farmec.ro": {
       "total": 114,
-      "ok": 107,
-      "failed": 7,
+      "ok": 110,
+      "failed": 4,
       "skipped": 0
     }
   },
-  "finished_at": "2026-08-26T04:14:44.565Z"
+  "finished_at": "2026-08-27T13:52:16.277Z"
 }
