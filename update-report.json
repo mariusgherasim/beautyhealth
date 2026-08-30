@@ -1,7 +1,7 @@
 {
-  "started_at": "2026-08-29T09:35:14.066Z",
-  "ok": 110,
-  "failed": 4,
+  "started_at": "2026-08-30T08:42:55.560Z",
+  "ok": 113,
+  "failed": 1,
   "skipped": 343,
   "errors": [
     {
@@ -9,24 +9,9 @@
       "reason": "sursa necunoscuta: infinitelove.ro"
     },
     {
-      "id": "farmec-402",
-      "url": "http://www.farmec.ro/crema-anticuperozica-hidratanta-spf-10-574?___store=default",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"http://www.farmec.ro/crema-anticuperozica-hidratanta-spf-10-574?___store=default\", waiting until \"networkidle\"\n"
-    },
-    {
-      "id": "farmec-399",
-      "url": "http://www.farmec.ro/crema-corp-pentru-piele-uscata-572?___store=default",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"http://www.farmec.ro/crema-corp-pentru-piele-uscata-572?___store=default\", waiting until \"networkidle\"\n"
-    },
-    {
-      "id": "farmec-2726",
-      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-8?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-8?___store=default"
-    },
-    {
-      "id": "farmec-2853",
-      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-38?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-38?___store=default"
+      "id": "farmec-P-2571",
+      "url": "http://www.farmec.ro/lac-pentru-unghii-magic-gel-effect-869-21?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/lac-pentru-unghii-magic-gel-effect-869-21?___store=default"
     }
   ],
   "by_source": {
@@ -38,10 +23,10 @@
     },
     "farmec.ro": {
       "total": 114,
-      "ok": 110,
-      "failed": 4,
+      "ok": 113,
+      "failed": 1,
       "skipped": 0
     }
   },
-  "finished_at": "2026-08-29T10:03:25.790Z"
+  "finished_at": "2026-08-30T09:11:43.878Z"
 }
