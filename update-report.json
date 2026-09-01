@@ -1,7 +1,7 @@
 {
-  "started_at": "2026-08-31T09:05:27.422Z",
-  "ok": 109,
-  "failed": 5,
+  "started_at": "2026-09-01T08:08:02.696Z",
+  "ok": 111,
+  "failed": 3,
   "skipped": 343,
   "errors": [
     {
@@ -14,24 +14,14 @@
       "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/lac-pentru-unghii-magic-gel-effect-869-21?___store=default"
     },
     {
-      "id": "farmec-2726",
-      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-8?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-8?___store=default"
-    },
-    {
-      "id": "farmec-2550",
-      "url": "http://www.farmec.ro/mascara-supreme-lash-843?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/mascara-supreme-lash-843?___store=default"
-    },
-    {
-      "id": "farmec-2558",
-      "url": "http://www.farmec.ro/fard-de-obraz-maro-855?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/fard-de-obraz-maro-855?___store=default"
-    },
-    {
       "id": "farmec-2567",
       "url": "http://www.farmec.ro/anticearcan-soft-focus-863?___store=default",
       "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/anticearcan-soft-focus-863?___store=default"
+    },
+    {
+      "id": "farmec-402",
+      "url": "http://www.farmec.ro/crema-anticuperozica-hidratanta-spf-10-574?___store=default",
+      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"http://www.farmec.ro/crema-anticuperozica-hidratanta-spf-10-574?___store=default\", waiting until \"networkidle\"\n"
     }
   ],
   "by_source": {
@@ -43,10 +33,10 @@
     },
     "farmec.ro": {
       "total": 114,
-      "ok": 109,
-      "failed": 5,
+      "ok": 111,
+      "failed": 3,
       "skipped": 0
     }
   },
-  "finished_at": "2026-08-31T09:37:57.097Z"
+  "finished_at": "2026-09-01T08:40:03.056Z"
 }
