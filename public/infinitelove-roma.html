@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Câștigă un City Break la Roma — Infinite Love</title>
+
+  <!-- OG tags pentru preview pe WhatsApp / Facebook / Instagram -->
+  <meta property="og:title" content="🏛️ Parfumul tău preferat te poate duce la Roma!">
+  <meta property="og:description" content="Comandă online de la Infinite Love și intri automat în concursul pentru unul dintre cele 3 city break-uri la Roma.">
+  <meta property="og:image" content="https://img.2performant.com/system/paperclip/banner_pictures/pics/272197/original/272197.jpg">
+  <meta property="og:url" content="https://beautyhealth.gherasimmarius.com/infinitelove-roma.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: linear-gradient(160deg, #0a0a2e 0%, #1a0a3a 50%, #0a1a2e 100%);
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 48px;
+    }
+
+    /* ── Header ── */
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+      max-width: 480px;
+    }
+
+    .brand {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #C89B3C;
+      margin-bottom: 10px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(200, 155, 60, 0.15);
+      border: 1px solid rgba(200, 155, 60, 0.4);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 12px;
+      color: #e8c06a;
+      margin-bottom: 16px;
+      letter-spacing: 0.05em;
+    }
+
+    h1 {
+      font-size: clamp(22px, 5vw, 30px);
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+
+    h1 .accent { color: #C89B3C; }
+
+    .subtitle {
+      font-size: 15px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.6;
+    }
+
+    /* ── Carusel imagini ── */
+    .carousel-wrap {
+      width: 100%;
+      max-width: 400px;
+      margin: 24px 0;
+    }
+
+    .carousel {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+      aspect-ratio: 4/5;
+      background: #111;
+    }
+
+    .carousel a {
+      display: block;
+      position: absolute;
+      inset: 0;
+    }
+
+    .carousel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      position: absolute;
+      inset: 0;
+    }
+
+    .carousel img.active { opacity: 1; }
+
+    /* Dots */
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 7px;
+      margin-top: 14px;
+    }
+
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      border: none;
+    }
+
+    .dot.active {
+      background: #C89B3C;
+      transform: scale(1.3);
+    }
+
+    /* Sageti */
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.45);
+      border: none;
+      color: white;
+      font-size: 20px;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .arrow:hover { background: rgba(200,155,60,0.7); }
+    .arrow.prev { left: 10px; }
+    .arrow.next { right: 10px; }
+
+    /* ── Premii ── */
+    .prizes {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 24px;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .prize {
+      flex: 1;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 12px 8px;
+      text-align: center;
+    }
+
+    .prize-icon { font-size: 22px; margin-bottom: 5px; }
+    .prize-label { font-size: 11px; color: rgba(255,255,255,0.6); line-height: 1.4; }
+    .prize-value { font-size: 13px; font-weight: 700; color: #C89B3C; margin-top: 3px; }
+
+    /* ── CTA ── */
+    .cta-section {
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .cta-btn {
+      display: block;
+      background: linear-gradient(135deg, #C89B3C, #a87e2e);
+      color: white;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 17px;
+      padding: 16px 24px;
+      border-radius: 12px;
+      letter-spacing: 0.02em;
+      box-shadow: 0 8px 24px rgba(200,155,60,0.35);
+      transition: transform 0.15s, box-shadow 0.15s;
+      margin-bottom: 10px;
+    }
+
+    .cta-btn:active { transform: scale(0.98); box-shadow: 0 4px 12px rgba(200,155,60,0.25); }
+
+    .cta-note {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.5;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 32px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="brand">Infinite Love × BeautyHealth</div>
+    <div class="badge">🏛️ Concurs activ — City Break Roma</div>
+    <h1>Parfumul tău preferat<br>te poate duce la <span class="accent">Roma!</span></h1>
+    <p class="subtitle">
+      Comandă online de la Infinite Love și intri automat în concursul
+      pentru unul dintre cele <strong>3 city break-uri la Roma</strong>.
+    </p>
+  </div>
+
+  <!-- Carusel -->
+  <div class="carousel-wrap">
+    <div class="carousel" id="carousel">
+      <button class="arrow prev" onclick="move(-1)">&#8249;</button>
+      <button class="arrow next" onclick="move(1)">&#8250;</button>
+
+      <a href="https://event.2performant.com/events/click?ad_type=banner&unique=dd3fa7efc&aff_code=676a7e7d9&campaign_unique=3fd6221b1"
+         target="_blank" rel="noopener sponsored nofollow">
+        <img src="https://img.2performant.com/system/paperclip/banner_pictures/pics/272197/original/272197.jpg" alt="Concurs Roma Infinite Love" class="active" data-idx="0">
+        <img src="https://img.2performant.com/system/paperclip/banner_pictures/pics/272200/original/272200.jpg" alt="Concurs Roma Infinite Love" data-idx="1">
+        <img src="https://img.2performant.com/system/paperclip/banner_pictures/pics/272199/original/272199.jpg" alt="Concurs Roma Infinite Love" data-idx="2">
+        <img src="https://img.2performant.com/system/paperclip/banner_pictures/pics/272198/original/272198.jpg" alt="Concurs Roma Infinite Love" data-idx="3">
+        <img src="https://img.2performant.com/system/paperclip/banner_pictures/pics/272196/original/272196.jpg" alt="Concurs Roma Infinite Love" data-idx="4">
+      </a>
+    </div>
+
+    <div class="dots" id="dots">
+      <button class="dot active" onclick="goTo(0)"></button>
+      <button class="dot" onclick="goTo(1)"></button>
+      <button class="dot" onclick="goTo(2)"></button>
+      <button class="dot" onclick="goTo(3)"></button>
+      <button class="dot" onclick="goTo(4)"></button>
+    </div>
+  </div>
+
+  <!-- Premii -->
+  <div class="prizes">
+    <div class="prize">
+      <div class="prize-icon">✈️</div>
+      <div class="prize-label">City Break</div>
+      <div class="prize-value">Roma</div>
+    </div>
+    <div class="prize">
+      <div class="prize-icon">🏆</div>
+      <div class="prize-label">Câștigători</div>
+      <div class="prize-value">3 persoane</div>
+    </div>
+    <div class="prize">
+      <div class="prize-icon">🛒</div>
+      <div class="prize-label">Condiție</div>
+      <div class="prize-value">O comandă</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <a class="cta-btn"
+       href="https://beautyhealth.gherasimmarius.com/parfumuri/brand/infinite-love/?utm_source=whatsapp&utm_medium=message&utm_campaign=infinitelove-roma-concurs"
+       target="_blank" rel="noopener">
+      🛍️ Comandă și participă la concurs →
+    </a>
+    <p class="cta-note">
+      Fiecare comandă plasată la Infinite Love înscrie automat în concurs.<br>
+      Prețuri comparate zilnic pe beautyhealth.gherasimmarius.com
+    </p>
+  </div>
+
+  <div class="footer">beautyhealth.gherasimmarius.com · parteneriat afiliat 2Performant</div>
+
+  <script>
+    let current = 0;
+    const imgs = document.querySelectorAll('#carousel img');
+    const dots = document.querySelectorAll('.dot');
+
+    function goTo(idx) {
+      imgs[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = (idx + imgs.length) % imgs.length;
+      imgs[current].classList.add('active');
+      dots[current].classList.add('active');
+    }
+
+    function move(dir) { goTo(current + dir); }
+
+    // Auto-play la 3 secunde
+    setInterval(() => move(1), 3000);
+  </script>
+
+</body>
+</html>
