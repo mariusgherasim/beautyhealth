@@ -483,6 +483,55 @@ export const banners = [
     affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=b8062b7b6&aff_code=676a7e7d9&campaign_unique=3fd6221b1",
     width: 1024, height: 1024, active_from: "2026-08-05", active_until: null,
     channels: ["instagram","facebook"], note: "social media — format patrat 1:1",
+  },
+  {
+    id: "infinitelove-1350x1080-b", merchant: "infinitelove.ro",
+    categories: ["parfumuri","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/272200/original/272200.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=5bd7a3412&aff_code=676a7e7d9&campaign_unique=3fd6221b1",
+    width: 1080, height: 1350, active_from: "2026-09-02", active_until: null,
+    channels: ["instagram","facebook"], note: "social media — format patrat 1:1",
+  },
+  {
+    id: "infinitelove-1350x1080-b", merchant: "infinitelove.ro",
+    categories: ["parfumuri","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/272199/original/272199.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=accc7a189&aff_code=676a7e7d9&campaign_unique=3fd6221b1",
+    width: 1080, height: 1350, active_from: "2026-09-02", active_until: null,
+    channels: ["instagram","facebook"], note: "social media — format patrat 1:1",
+  },
+  {
+    id: "infinitelove-1350x1080-b", merchant: "infinitelove.ro",
+    categories: ["parfumuri","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/272198/original/272198.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=e7c1eef46&aff_code=676a7e7d9&campaign_unique=3fd6221b1",
+    width: 1080, height: 1350, active_from: "2026-09-02", active_until: null,
+    channels: ["instagram","facebook"], note: "social media — format patrat 1:1",
+  },
+  {
+    id: "infinitelove-1080x1080-b", merchant: "infinitelove.ro",
+    categories: ["parfumuri","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/272197/original/272197.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=dd3fa7efc&aff_code=676a7e7d9&campaign_unique=3fd6221b1",
+    width: 1080, height: 1080, active_from: "2026-09-02", active_until: null,
+    channels: ["instagram","facebook"], note: "social media — format patrat 1:1",
+  },
+  {
+    id: "infinitelove-1080x1080-b", merchant: "infinitelove.ro",
+    categories: ["parfumuri","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/272197/original/272197.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=dd3fa7efc&aff_code=676a7e7d9&campaign_unique=3fd6221b1",
+    width: 1080, height: 1080, active_from: "2026-09-02", active_until: null,
+    channels: ["instagram","facebook"], note: "social media — format patrat 1:1",
+  },
+  {
+    id: "infinitelove-1350x1080-b", merchant: "infinitelove.ro",
+    categories: ["parfumuri","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/272196/original/272196.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=d132692ee&aff_code=676a7e7d9&campaign_unique=3fd6221b1",
+    width: 1080, height: 1350, active_from: "2026-09-02", active_until: null,
+    channels: ["instagram","facebook"], note: "social media — format patrat 1:1",
   }
-  
+
+
 ];
