@@ -1,7 +1,7 @@
 {
-  "started_at": "2026-09-04T07:40:02.291Z",
-  "ok": 120,
-  "failed": 9,
+  "started_at": "2026-09-05T07:14:07.220Z",
+  "ok": 127,
+  "failed": 2,
   "skipped": 324,
   "errors": [
     {
@@ -9,49 +9,14 @@
       "reason": "sursa necunoscuta: infinitelove.ro"
     },
     {
-      "id": "farmec-402",
-      "url": "http://www.farmec.ro/crema-anticuperozica-hidratanta-spf-10-574?___store=default",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"http://www.farmec.ro/crema-anticuperozica-hidratanta-spf-10-574?___store=default\", waiting until \"networkidle\"\n"
-    },
-    {
-      "id": "farmec-2550",
-      "url": "http://www.farmec.ro/mascara-supreme-lash-843?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/mascara-supreme-lash-843?___store=default"
-    },
-    {
       "id": "farmec-399",
       "url": "http://www.farmec.ro/crema-corp-pentru-piele-uscata-572?___store=default",
       "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"http://www.farmec.ro/crema-corp-pentru-piele-uscata-572?___store=default\", waiting until \"networkidle\"\n"
     },
     {
-      "id": "farmec-2785",
-      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-17?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-17?___store=default"
-    },
-    {
-      "id": "farmec-2810",
-      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-22?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-22?___store=default"
-    },
-    {
-      "id": "farmec-2558",
-      "url": "http://www.farmec.ro/fard-de-obraz-maro-855?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/fard-de-obraz-maro-855?___store=default"
-    },
-    {
-      "id": "farmec-2567",
-      "url": "http://www.farmec.ro/anticearcan-soft-focus-863?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/anticearcan-soft-focus-863?___store=default"
-    },
-    {
-      "id": "farmec-2814",
-      "url": "http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-27?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/make-up/farmec-ultrarezistent-lac-pentru-unghii-in-diferite-nuante-191-27?___store=default"
-    },
-    {
-      "id": "farmec-485",
-      "url": "http://www.farmec.ro/fluid-purifiant-1036?___store=default",
-      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/fluid-purifiant-1036?___store=default"
+      "id": "farmec-2550",
+      "url": "http://www.farmec.ro/mascara-supreme-lash-843?___store=default",
+      "reason": "Timeout dur depasit (40000ms) pentru http://www.farmec.ro/mascara-supreme-lash-843?___store=default"
     }
   ],
   "by_source": {
@@ -63,10 +28,10 @@
     },
     "farmec.ro": {
       "total": 129,
-      "ok": 120,
-      "failed": 9,
+      "ok": 127,
+      "failed": 2,
       "skipped": 0
     }
   },
-  "finished_at": "2026-09-04T08:10:57.959Z"
+  "finished_at": "2026-09-05T07:43:20.635Z"
 }
