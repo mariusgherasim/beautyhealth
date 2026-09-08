@@ -1,157 +1,292 @@
 {
-  "started_at": "2026-09-07T07:42:09.866Z",
-  "ok": 15,
-  "failed": 26,
-  "skipped": 730,
+  "started_at": "2026-09-08T07:00:15.949Z",
+  "ok": 8,
+  "failed": 55,
+  "skipped": 14302,
   "errors": [
     {
-      "id": "infinitelove-6766",
-      "reason": "sursa necunoscuta: infinitelove.ro"
+      "id": "springfarma-89769",
+      "url": "https://www.springfarma.com/silymarin-8050-detox-forte-30-capsule-herbagetica",
+      "reason": "Request failed with status code 404"
     },
     {
-      "id": "farmec-6999",
-      "url": "https://infinitelove.ro/produs/parfum-divine/?attribute_pa_recipient=50-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-divine/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-97477",
+      "url": "https://www.springfarma.com/scholl-brant-gelactiv-pentru-incaltamintea-de-iarna",
+      "reason": "Request failed with status code 404"
     },
     {
-      "id": "farmec-6998",
-      "url": "https://infinitelove.ro/produs/parfum-divine/?attribute_pa_recipient=100-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-divine/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-97109",
+      "url": "https://www.springfarma.com/naturalis-diolex-gel-100ml.html",
+      "reason": "Maximum number of redirects exceeded"
     },
     {
-      "id": "farmec-6993",
-      "url": "https://infinitelove.ro/produs/parfum-blaze/?attribute_pa_recipient=100-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-blaze/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-87252",
+      "url": "https://www.springfarma.com/maca-zen-forte-30-capsule-herbagetica",
+      "reason": "Request failed with status code 404"
     },
     {
-      "id": "farmec-6992",
-      "url": "https://infinitelove.ro/produs/parfum-blaze/?attribute_pa_recipient=50-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-blaze/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-119432",
+      "url": "https://www.springfarma.com/catalog/product/view/id/30160/",
+      "reason": "Request failed with status code 404"
     },
     {
-      "id": "farmec-6988",
-      "url": "https://infinitelove.ro/produs/parfum-fatal/?attribute_pa_recipient=2-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-fatal/?attribute_pa_recipient=2-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-119431",
+      "url": "https://www.springfarma.com/catalog/product/view/id/30160/",
+      "reason": "Request failed with status code 404"
     },
     {
-      "id": "farmec-6986",
-      "url": "https://infinitelove.ro/produs/parfum-fatal/?attribute_pa_recipient=50-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-fatal/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-119433",
+      "url": "https://www.springfarma.com/catalog/product/view/id/30160/",
+      "reason": "Request failed with status code 404"
     },
     {
-      "id": "farmec-6983",
-      "url": "https://infinitelove.ro/produs/parfum-canabis/?attribute_pa_recipient=2-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-canabis/?attribute_pa_recipient=2-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-92244",
+      "url": "https://www.springfarma.com/sana-centura-postnatala-marimea-xxxl",
+      "reason": "Request failed with status code 404"
     },
     {
-      "id": "farmec-6982",
-      "url": "https://infinitelove.ro/produs/parfum-canabis/?attribute_pa_recipient=50-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-canabis/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-85108",
+      "url": "https://www.springfarma.com/spray-propolis-si-echinaceea-pufypuf-20ml-dacia-plant.html",
+      "reason": "Request failed with status code 404"
     },
     {
-      "id": "farmec-6973",
-      "url": "https://infinitelove.ro/produs/parfum-canabis/?attribute_pa_recipient=100-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-canabis/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-85107",
+      "url": "https://www.springfarma.com/spray-cu-propolis-si-musetel-pufypuf-20ml-dacia-plant.html",
+      "reason": "Request failed with status code 404"
     },
     {
-      "id": "farmec-6969",
-      "url": "https://infinitelove.ro/produs/parfum-exotic/?attribute_pa_recipient=100-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-exotic/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-104007",
+      "url": "https://www.springfarma.com/propolis-c-tare-spray-natural-20-ml-alevia.html",
+      "reason": "Request failed with status code 404"
     },
     {
-      "id": "farmec-6968",
-      "url": "https://infinitelove.ro/produs/parfum-exotic/?attribute_pa_recipient=50-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-exotic/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-67061",
+      "url": "https://www.springfarma.com/propolis-c-tare-natural-30-comprimate-alevia.html",
+      "reason": "Request failed with status code 404"
     },
     {
-      "id": "farmec-6963",
-      "url": "https://infinitelove.ro/produs/parfum-luxe/?attribute_pa_recipient=100-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-luxe/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-90275",
+      "url": "https://www.springfarma.com/echinacea-cu-propolis-si-vitamina-c-63-comprimate-fares.html",
+      "reason": "Request failed with status code 404"
     },
     {
-      "id": "farmec-6958",
-      "url": "https://infinitelove.ro/produs/parfum-silk/?attribute_pa_recipient=100-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-silk/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-110994",
+      "url": "https://www.springfarma.com/ciocolata-cu-lapte-si-stevie-fara-zahar-100g-chocolates-sole.html",
+      "reason": "Request failed with status code 404"
     },
     {
-      "id": "farmec-6956",
-      "url": "https://infinitelove.ro/produs/parfum-silk/?attribute_pa_recipient=50-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-silk/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-56352",
+      "url": "https://www.springfarma.com/hepeto-30-capsule-bio-vitality.html",
+      "reason": "Request failed with status code 404"
     },
     {
-      "id": "farmec-6918",
-      "url": "https://infinitelove.ro/produs/parfum-bliss/?attribute_pa_recipient=50-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-bliss/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-101571",
+      "url": "https://www.springfarma.com/assista-aquamare-spray-nazal-izotonic-100ml.html",
+      "reason": "Maximum number of redirects exceeded"
     },
     {
-      "id": "farmec-6917",
-      "url": "https://infinitelove.ro/produs/parfum-bliss/?attribute_pa_recipient=100-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-bliss/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-95768",
+      "url": "https://www.springfarma.com/crema-hidratanta-de-noapte-cu-lapte-de-capra-50-ml-ziaja.html",
+      "reason": "Request failed with status code 404"
     },
     {
-      "id": "farmec-6913",
-      "url": "https://infinitelove.ro/produs/parfum-loyal/?attribute_pa_recipient=50-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-loyal/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-90916",
+      "url": "https://www.springfarma.com/always-platinum-night-12-bucati",
+      "reason": "Request failed with status code 404"
     },
     {
-      "id": "farmec-6912",
-      "url": "https://infinitelove.ro/produs/parfum-loyal/?attribute_pa_recipient=100-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-loyal/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-109856",
+      "url": "https://www.springfarma.com/rilastil-daily-care-gel-de-curatare-purifiant-200ml.html",
+      "reason": "Maximum number of redirects exceeded"
     },
     {
-      "id": "farmec-6911",
-      "url": "https://infinitelove.ro/produs/parfum-loyal/?attribute_pa_recipient=2-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-loyal/?attribute_pa_recipient=2-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-86914",
+      "url": "https://www.springfarma.com/pasta-de-dinti-cu-0-12-clorhexidina-ads-dna-75-ml-curasept.html",
+      "reason": "Request failed with status code 404"
     },
     {
-      "id": "farmec-6874",
-      "url": "https://infinitelove.ro/produs/parfum-mons/?attribute_pa_recipient=50-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-mons/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-109851",
+      "url": "https://www.springfarma.com/rilastil-daily-care-apa-micelara-250-ml.html",
+      "reason": "Maximum number of redirects exceeded"
     },
     {
-      "id": "farmec-6873",
-      "url": "https://infinitelove.ro/produs/parfum-mons/?attribute_pa_recipient=100-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-mons/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-109968",
+      "url": "https://www.springfarma.com/rilastil-xerolact-crema-reparatoare-pentru-maini-30ml.html",
+      "reason": "Request failed with status code 404"
     },
     {
-      "id": "farmec-6872",
-      "url": "https://infinitelove.ro/produs/parfum-mons/?attribute_pa_recipient=2-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-mons/?attribute_pa_recipient=2-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-119897",
+      "url": "https://www.springfarma.com/complex-antifungic-pentru-unghii-20-ml-justin-pharma.html",
+      "reason": "Request failed with status code 429"
     },
     {
-      "id": "farmec-6869",
-      "url": "https://infinitelove.ro/produs/parfum-peach/?attribute_pa_recipient=50-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-peach/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-119901",
+      "url": "https://www.springfarma.com/ashwagandha-30-jeleuri-justin-pharma.html",
+      "reason": "Request failed with status code 429"
     },
     {
-      "id": "farmec-6868",
-      "url": "https://infinitelove.ro/produs/parfum-peach/?attribute_pa_recipient=100-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-peach/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-119902",
+      "url": "https://www.springfarma.com/gelee-royale-junior-shots-10-fiole-justin-pharma.html",
+      "reason": "Request failed with status code 429"
     },
     {
-      "id": "farmec-6867",
-      "url": "https://infinitelove.ro/produs/parfum-peach/?attribute_pa_recipient=2-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-peach/?attribute_pa_recipient=2-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-119903",
+      "url": "https://www.springfarma.com/gelee-royale-max-shots-10-fiole-buvabile-justin-pharma.html",
+      "reason": "Request failed with status code 429"
     },
     {
-      "id": "farmec-6861",
-      "url": "https://infinitelove.ro/produs/parfum-cognac/?attribute_pa_recipient=50-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-cognac/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
+      "id": "springfarma-119904",
+      "url": "https://www.springfarma.com/somn-usor-esential-10-ml-justin-pharma.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-119900",
+      "url": "https://www.springfarma.com/apple-cider-vinegar-30-jeleuri-justin-pharma.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-119909",
+      "url": "https://www.springfarma.com/roll-on-aromaterapie-calmtime-serotonin-10-ml-justin-pharma.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-119906",
+      "url": "https://www.springfarma.com/spray-aromaterapie-sleeptime-kids-30-ml-justin-pharma.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-5325",
+      "url": "https://www.springfarma.com/hepatobil-v-40-comprimate-plantavorel.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-165",
+      "url": "https://www.springfarma.com/baby-drink-12-plicuri.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-50245",
+      "url": "https://www.springfarma.com/himalaya-gel-purif-curatare-fata-extrneem-x-150ml-453.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-67019",
+      "url": "https://www.springfarma.com/stimuven-plus-crema-50-g-aliphia.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-72960",
+      "url": "https://www.springfarma.com/crema-cu-uree-15-dermotis-50-ml-tis-farmaceutic.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-72270",
+      "url": "https://www.springfarma.com/live-vitamins-x-30-cps.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-55570",
+      "url": "https://www.springfarma.com/bio-d-pearls-vitamina-d3-pharma-nord-80-capsule-moi.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-60409",
+      "url": "https://www.springfarma.com/bioderma-sebium-pore-refiner-30-ml.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-81005",
+      "url": "https://www.springfarma.com/solgar-skin-hair-and-nails-60-tablete.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-83810",
+      "url": "https://www.springfarma.com/anticarcel-acut-10-comprimate-zdrovit.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-50171",
+      "url": "https://www.springfarma.com/avene-deodorant-roll-on-24h-pentru-piele-sensibila-50-ml.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-82431",
+      "url": "https://www.springfarma.com/bio-active-q10-gold-100-mg-pharma-nord-30-capsule-moi.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-82313",
+      "url": "https://www.springfarma.com/bio-calciu-d3-k1-k2-pharma-nord-30-tablete-filmate.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-53565",
+      "url": "https://www.springfarma.com/periuta-de-dinti-pentru-copii-kids-4-ani-1-bucata-diverse-modele-lacalut.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-84749",
+      "url": "https://www.springfarma.com/secom-candida-cleanse-sanatatea-tractului-uro-genital-60-capsule.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-88305",
+      "url": "https://www.springfarma.com/apicrisin-d-x-50-ml-spray-cu-propolis-tis.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-90193",
+      "url": "https://www.springfarma.com/ashwagandha-cu-ginseng-60-capsule-fares.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-89340",
+      "url": "https://www.springfarma.com/q4u-balsam-pentru-maini-x-100-ml-tis",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-89357",
+      "url": "https://www.springfarma.com/sampon-antipelicular-cu-climbazol-x-150-ml-tis",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-87909",
+      "url": "https://www.springfarma.com/sebamed-sensitive-skin-balsam-dermatologic-pentru-buze-spf-30-48ml.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-93556",
+      "url": "https://www.springfarma.com/isis-geneskin-lift-crema-50ml.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-90219",
+      "url": "https://www.springfarma.com/ceai-u-ceai-pentru-stomac-ret-farago-50-g-fares.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-90247",
+      "url": "https://www.springfarma.com/stomac-sanatos-63-capsule-fares.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-87777",
+      "url": "https://www.springfarma.com/cosmo-artroforte-30-capsule.html",
+      "reason": "Request failed with status code 429"
+    },
+    {
+      "id": "springfarma-87729",
+      "url": "https://www.springfarma.com/cosmo-ginkgo-max-extract-120mg-30-caps.html",
+      "reason": "Request failed with status code 429"
     }
   ],
   "by_source": {
-    "infinitelove.ro": {
-      "total": 324,
-      "ok": 0,
-      "failed": 0,
-      "skipped": 324
-    },
-    "farmec.ro": {
-      "total": 447,
-      "ok": 15,
-      "failed": 26,
-      "skipped": 406
+    "springfarma.com": {
+      "total": 14365,
+      "ok": 8,
+      "failed": 55,
+      "skipped": 14302
     }
   },
-  "finished_at": "2026-09-07T07:49:24.775Z"
+  "finished_at": "2026-09-08T07:06:58.123Z"
 }
