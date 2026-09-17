@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import Newsletter from '../components/Newsletter.astro';
 import CookieConsent from '../components/CookieConsent.astro';
 import BannerSlot from '../components/BannerSlot.astro';
+import ProductCard from '../components/ProductCard.astro';
 import productsData from '../data/products.json';
 import { categories } from '../data/categories.js';
 
@@ -15,6 +16,20 @@ const categoryStats = categories.map((c) => ({
   ...c,
   count: activeProducts.filter((p) => p.category.includes(c.slug)).length,
 }));
+
+// Oferte zilei — toate produsele cu discount, sortate dupa % reducere desc
+const discountProducts = activeProducts
+  .filter((p) => p.old_price && p.old_price > p.price)
+  .map((p) => ({
+    ...p,
+    _pct: Math.round((1 - p.price / p.old_price) * 100),
+    _sum: Math.round(p.old_price - p.price),
+  }))
+  .sort((a, b) => b._pct - a._pct);
+
+const totalDiscount = discountProducts.length;
+// Prima pagina de oferte: primele 24
+const offerteAzi = discountProducts.slice(0, 24);
 ---
 <Layout
   title="BeautyHealth — Comparator de Prețuri Frumusețe & Sănătate"
@@ -34,6 +49,40 @@ const categoryStats = categories.map((c) => ({
       <BannerSlot category="homepage" size="728x90" />
     </div>
 
+    <!-- ── OFERTE ZILEI ── -->
+    {offerteAzi.length > 0 && (
+      <section class="oferte-section wrap">
+        <div class="oferte-header">
+          <div>
+            <h2>🏷️ Oferte & Reduceri</h2>
+            <p class="oferte-sub">{totalDiscount} produse cu reducere — sortate după cel mai mare discount</p>
+          </div>
+          <a href="/oferte/" class="vezi-toate">Vezi toate {totalDiscount} ofertele →</a>
+        </div>
+
+        <div class="offers-grid">
+          {offerteAzi.map((product) => (
+            <div class="card-wrap">
+              <div class="discount-badge">-{product._pct}%</div>
+              <ProductCard product={product} />
+            </div>
+          ))}
+        </div>
+
+        <div class="oferte-footer">
+          <a href="/oferte/" class="btn-oferte">
+            Vezi toate ofertele →
+          </a>
+          <div class="oferte-cats">
+            {categories.map((c) => (
+              <a href={`/oferte/${c.slug}/`} class="oferta-cat-pill">{c.name}</a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- ── CATEGORII ── -->
     <section class="categories-grid wrap">
       <h2>Explorează categoriile</h2>
       <div class="grid">
@@ -57,6 +106,8 @@ const categoryStats = categories.map((c) => ({
 
 <style>
   .wrap { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+
+  /* Hero */
   .hero {
     background: linear-gradient(135deg, var(--navy), #14306e);
     color: #fff;
@@ -66,6 +117,91 @@ const categoryStats = categories.map((c) => ({
   .hero-inner { max-width: 720px; margin: 0 auto; }
   .hero h1 { font-size: 2rem; margin-bottom: 14px; }
   .hero p { font-size: 1.05rem; color: #e2e2e2; }
+
+  /* Oferte */
+  .oferte-section { padding: 48px 16px 40px; }
+
+  .oferte-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .oferte-header h2 { color: var(--navy); margin: 0 0 4px; font-size: 1.5rem; }
+  .oferte-sub { color: #888; font-size: 0.875rem; margin: 0; }
+  .vezi-toate {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    white-space: nowrap;
+    padding-top: 4px;
+  }
+  .vezi-toate:hover { text-decoration: underline; }
+
+  .offers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .card-wrap { position: relative; }
+  .discount-badge {
+    position: absolute;
+    top: 8px; left: 8px;
+    z-index: 2;
+    background: #b94040;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 3px 9px;
+    border-radius: 20px;
+    pointer-events: none;
+  }
+
+  .oferte-footer {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-oferte {
+    display: inline-block;
+    background: var(--navy);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 10px 22px;
+    border-radius: 8px;
+    transition: background 0.15s;
+    white-space: nowrap;
+  }
+  .btn-oferte:hover { background: var(--gold); }
+
+  .oferte-cats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .oferta-cat-pill {
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: #fff8ee;
+    border: 1px solid #e8c97a;
+    font-size: 0.78rem;
+    text-decoration: none;
+    color: #7a5c00;
+    font-weight: 500;
+    transition: background 0.15s;
+  }
+  .oferta-cat-pill:hover { background: var(--gold); color: #fff; border-color: var(--gold); }
+
+  /* Categorii */
   .categories-grid { padding: 50px 16px; }
   .categories-grid h2 { color: var(--navy); margin-bottom: 20px; }
   .grid {
@@ -84,7 +220,11 @@ const categoryStats = categories.map((c) => ({
   .cat-card:hover { transform: translateY(-3px); }
   .cat-card h3 { color: var(--navy); margin: 0 0 6px; font-size: 1.05rem; }
   .cat-card span { color: var(--gold); font-size: 0.85rem; font-weight: 600; }
-  @media (max-width: 480px) {
+
+  @media (max-width: 600px) {
     .hero h1 { font-size: 1.5rem; }
+    .offers-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+    .oferte-header { flex-direction: column; }
+    .oferte-footer { flex-direction: column; align-items: flex-start; }
   }
 </style>
