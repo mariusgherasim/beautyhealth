@@ -1,5 +1,5 @@
 {
-  "started_at": "2026-09-19T07:40:00.488Z",
+  "started_at": "2026-09-20T08:05:32.654Z",
   "ok": 0,
   "failed": 26,
   "skipped": 745,
@@ -19,14 +19,14 @@
       "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-divine/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
     },
     {
-      "id": "farmec-6992",
-      "url": "https://infinitelove.ro/produs/parfum-blaze/?attribute_pa_recipient=50-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-blaze/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
-    },
-    {
       "id": "farmec-6993",
       "url": "https://infinitelove.ro/produs/parfum-blaze/?attribute_pa_recipient=100-ml",
       "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-blaze/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
+    },
+    {
+      "id": "farmec-6992",
+      "url": "https://infinitelove.ro/produs/parfum-blaze/?attribute_pa_recipient=50-ml",
+      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-blaze/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
     },
     {
       "id": "farmec-6988",
@@ -39,14 +39,14 @@
       "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-fatal/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
     },
     {
-      "id": "farmec-6983",
-      "url": "https://infinitelove.ro/produs/parfum-canabis/?attribute_pa_recipient=2-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-canabis/?attribute_pa_recipient=2-ml\", waiting until \"networkidle\"\n"
-    },
-    {
       "id": "farmec-6982",
       "url": "https://infinitelove.ro/produs/parfum-canabis/?attribute_pa_recipient=50-ml",
       "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-canabis/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
+    },
+    {
+      "id": "farmec-6983",
+      "url": "https://infinitelove.ro/produs/parfum-canabis/?attribute_pa_recipient=2-ml",
+      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-canabis/?attribute_pa_recipient=2-ml\", waiting until \"networkidle\"\n"
     },
     {
       "id": "farmec-6973",
@@ -59,14 +59,14 @@
       "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-exotic/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
     },
     {
-      "id": "farmec-6963",
-      "url": "https://infinitelove.ro/produs/parfum-luxe/?attribute_pa_recipient=100-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-luxe/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
-    },
-    {
       "id": "farmec-6968",
       "url": "https://infinitelove.ro/produs/parfum-exotic/?attribute_pa_recipient=50-ml",
       "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-exotic/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
+    },
+    {
+      "id": "farmec-6963",
+      "url": "https://infinitelove.ro/produs/parfum-luxe/?attribute_pa_recipient=100-ml",
+      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-luxe/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
     },
     {
       "id": "farmec-6956",
@@ -79,14 +79,14 @@
       "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-silk/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
     },
     {
-      "id": "farmec-6917",
-      "url": "https://infinitelove.ro/produs/parfum-bliss/?attribute_pa_recipient=100-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-bliss/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
-    },
-    {
       "id": "farmec-6918",
       "url": "https://infinitelove.ro/produs/parfum-bliss/?attribute_pa_recipient=50-ml",
       "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-bliss/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
+    },
+    {
+      "id": "farmec-6917",
+      "url": "https://infinitelove.ro/produs/parfum-bliss/?attribute_pa_recipient=100-ml",
+      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-bliss/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
     },
     {
       "id": "farmec-6912",
@@ -99,19 +99,14 @@
       "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-loyal/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
     },
     {
-      "id": "farmec-6874",
-      "url": "https://infinitelove.ro/produs/parfum-mons/?attribute_pa_recipient=50-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-mons/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
-    },
-    {
       "id": "farmec-6911",
       "url": "https://infinitelove.ro/produs/parfum-loyal/?attribute_pa_recipient=2-ml",
       "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-loyal/?attribute_pa_recipient=2-ml\", waiting until \"networkidle\"\n"
     },
     {
-      "id": "farmec-6872",
-      "url": "https://infinitelove.ro/produs/parfum-mons/?attribute_pa_recipient=2-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-mons/?attribute_pa_recipient=2-ml\", waiting until \"networkidle\"\n"
+      "id": "farmec-6874",
+      "url": "https://infinitelove.ro/produs/parfum-mons/?attribute_pa_recipient=50-ml",
+      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-mons/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
     },
     {
       "id": "farmec-6873",
@@ -119,14 +114,19 @@
       "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-mons/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
     },
     {
-      "id": "farmec-6869",
-      "url": "https://infinitelove.ro/produs/parfum-peach/?attribute_pa_recipient=50-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-peach/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
+      "id": "farmec-6872",
+      "url": "https://infinitelove.ro/produs/parfum-mons/?attribute_pa_recipient=2-ml",
+      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-mons/?attribute_pa_recipient=2-ml\", waiting until \"networkidle\"\n"
     },
     {
       "id": "farmec-6868",
       "url": "https://infinitelove.ro/produs/parfum-peach/?attribute_pa_recipient=100-ml",
       "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-peach/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
+    },
+    {
+      "id": "farmec-6869",
+      "url": "https://infinitelove.ro/produs/parfum-peach/?attribute_pa_recipient=50-ml",
+      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-peach/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
     },
     {
       "id": "farmec-6867",
@@ -153,5 +153,5 @@
       "skipped": 421
     }
   },
-  "finished_at": "2026-09-19T07:45:33.054Z"
+  "finished_at": "2026-09-20T08:11:05.143Z"
 }
