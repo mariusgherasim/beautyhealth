@@ -555,4 +555,16 @@ export const banners = [
     channels: ["site"],
   },
 
+  // ── farmec.ro — 300x250 adaugat 25.09.2026 ───────────────
+  {
+    id: "farmec-300x250-f",
+    merchant: "farmec.ro",
+    categories: ["ingrijire-ten","ingrijire-corp","ingrijire-par","machiaj","cosmetice-barbati","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/272648/original/272648.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=44651c133&aff_code=676a7e7d9&campaign_unique=1dfbc028f",
+    width: 300, height: 250,
+    active_from: "2026-09-25", active_until: null,
+    channels: ["site","email","facebook","instagram"],
+  },
+
 ];
