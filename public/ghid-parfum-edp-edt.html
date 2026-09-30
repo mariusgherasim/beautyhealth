@@ -371,6 +371,48 @@
       font-size: 12px;
     }
 
+
+    /* ── Bannere afiliate ── */
+    .banner-inline {
+      text-align: center;
+      margin: 36px 0;
+    }
+    .banner-inline a { display: inline-block; }
+    .banner-inline img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 6px;
+      box-shadow: 0 3px 14px rgba(0,0,0,0.1);
+    }
+    .banner-label {
+      font-family: system-ui, sans-serif;
+      font-size: 10px;
+      color: #bbb;
+      text-align: center;
+      margin-top: 6px;
+      letter-spacing: 0.06em;
+    }
+    .cta-newsletter-inner {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      justify-content: center;
+    }
+    .cta-newsletter-text { flex: 1; min-width: 0; }
+    .cta-newsletter-banner { flex-shrink: 0; }
+    .cta-newsletter-banner img {
+      display: block;
+      width: 200px;
+      height: auto;
+      border-radius: 6px;
+    }
+    @media (max-width: 560px) {
+      .cta-newsletter-inner { flex-direction: column; }
+      .cta-newsletter-banner img { width: 100%; max-width: 300px; }
+    }
+
     @media (max-width: 560px) {
       .choice-grid { grid-template-columns: 1fr; }
       .pyramid-level--top { width: 80%; }
@@ -453,6 +495,17 @@
         </tr>
       </tbody>
     </table>
+
+
+    <!-- Banner Notino 300x250-a -->
+    <div class="banner-inline">
+      <a href="https://event.2performant.com/events/click?ad_type=banner&unique=b1ccff066&aff_code=676a7e7d9&campaign_unique=c6dae5faa"
+         target="_blank" rel="noopener sponsored nofollow">
+        <img src="https://img.2performant.com/system/paperclip/banner_pictures/pics/175631/original/175631.jpg"
+             alt="Notino.ro — Parfumuri și cosmetice" width="300" height="250">
+      </a>
+      <p class="banner-label">Publicitate — Notino.ro</p>
+    </div>
 
     <div class="highlight">
       <p>
@@ -554,6 +607,17 @@
     </div>
 
     <!-- 4. Ghid alegere -->
+
+    <!-- Banner Notino 300x250-b -->
+    <div class="banner-inline">
+      <a href="https://event.2performant.com/events/click?ad_type=banner&unique=9c9fab839&aff_code=676a7e7d9&campaign_unique=c6dae5faa"
+         target="_blank" rel="noopener sponsored nofollow">
+        <img src="https://img.2performant.com/system/paperclip/banner_pictures/pics/175630/original/175630.jpg"
+             alt="Notino.ro — Parfumuri premium" width="300" height="250">
+      </a>
+      <p class="banner-label">Publicitate — Notino.ro</p>
+    </div>
+
     <h2>4. Cum alegi — ghid rapid pe situație</h2>
 
     <div class="choice-grid">
@@ -623,19 +687,30 @@
 
     <!-- CTA Newsletter -->
     <div class="cta-newsletter">
-      <div class="cta-tag">🌸 BeautyHealth Newsletter</div>
-      <h2>Vrei să știi când apar reduceri la parfumurile premium?</h2>
-      <p>
-        Abonații noștri primesc săptămânal topul celor mai mari reduceri la parfumuri, îngrijire și machiaj —
-        selectate din peste 34.000 de produse comparate zilnic.
-        Fără spam, doar ofertele care merită.
-      </p>
-      <a class="cta-btn"
-         href="https://beautyhealth.gherasimmarius.com/parfumuri/?utm_source=ghid&utm_medium=articol&utm_campaign=ghid-parfum-edp-edt"
-         target="_blank">
-        Vezi ofertele la parfumuri →
-      </a>
-      <p class="cta-sub">Sau abonează-te la newsletter pentru a primi reducerile direct pe email.</p>
+      <div class="cta-newsletter-inner">
+        <div class="cta-newsletter-text">
+          <div class="cta-tag">🌸 BeautyHealth Newsletter</div>
+          <h2>Vrei să știi când apar reduceri la parfumurile premium?</h2>
+          <p>
+            Abonații noștri primesc săptămânal topul celor mai mari reduceri la parfumuri, îngrijire și machiaj —
+            selectate din peste 34.000 de produse comparate zilnic.
+            Fără spam, doar ofertele care merită.
+          </p>
+          <a class="cta-btn"
+             href="https://beautyhealth.gherasimmarius.com/parfumuri/?utm_source=ghid&utm_medium=articol&utm_campaign=ghid-parfum-edp-edt"
+             target="_blank">
+            Vezi ofertele la parfumuri →
+          </a>
+          <p class="cta-sub">Sau abonează-te la newsletter pentru a primi reducerile direct pe email.</p>
+        </div>
+        <div class="cta-newsletter-banner">
+          <a href="https://event.2performant.com/events/click?ad_type=banner&unique=53b4b50d7&aff_code=676a7e7d9&campaign_unique=c6dae5faa"
+             target="_blank" rel="noopener sponsored nofollow">
+            <img src="https://img.2performant.com/system/paperclip/banner_pictures/pics/175636/original/175636.jpg"
+                 alt="Notino.ro — Parfumuri premium">
+          </a>
+        </div>
+      </div>
     </div>
 
     <!-- Surse -->
