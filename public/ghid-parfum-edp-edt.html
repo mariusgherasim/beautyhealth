@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parfum, Apă de Parfum sau Apă de Toaletă — Ce Cumperi de Fapt? | BeautyHealth</title>
+  <meta name="description" content="Ghid complet despre concentrațiile de parfum: diferența dintre parfum (extrait), eau de parfum și eau de toilette. Cu date științifice și sfaturi practice.">
+
+  <meta property="og:title" content="Parfum, Apă de Parfum sau Apă de Toaletă — Ce Cumperi de Fapt?">
+  <meta property="og:description" content="Ghid complet cu date științifice. Concentrații, durată, piramidă olfactivă, cum îți influențează pielea parfumul.">
+  <meta property="og:url" content="https://beautyhealth.gherasimmarius.com/ghid-parfum-edp-edt.html">
+  <meta property="og:type" content="article">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy: #0B1F4A;
+      --gold: #C89B3C;
+      --cream: #FAF8F4;
+      --white: #ffffff;
+      --mid: #6B5B4E;
+      --border: #E8E0D5;
+      --text: #2a2a2a;
+    }
+
+    body {
+      background: var(--cream);
+      font-family: Georgia, 'Times New Roman', serif;
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.75;
+    }
+
+    /* ── Header ── */
+    .site-header {
+      background: var(--navy);
+      padding: 14px 20px;
+      text-align: center;
+    }
+    .site-logo {
+      font-size: 20px;
+      color: #fff;
+      text-decoration: none;
+    }
+    .site-logo span { color: var(--gold); }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(160deg, var(--navy) 0%, #1a3560 100%);
+      color: white;
+      padding: 56px 20px 48px;
+      text-align: center;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-family: system-ui, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(200,155,60,0.4);
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(24px, 5vw, 40px);
+      line-height: 1.2;
+      font-weight: 700;
+      margin-bottom: 16px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-lead {
+      font-family: system-ui, sans-serif;
+      font-size: 16px;
+      color: rgba(255,255,255,0.75);
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ── Layout ── */
+    .article-wrap {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 48px 20px 64px;
+    }
+
+    /* ── Tipografie ── */
+    h2 {
+      font-size: clamp(20px, 3.5vw, 26px);
+      color: var(--navy);
+      margin: 48px 0 16px;
+      line-height: 1.3;
+      border-left: 4px solid var(--gold);
+      padding-left: 16px;
+    }
+    h3 {
+      font-size: 18px;
+      color: var(--navy);
+      margin: 28px 0 10px;
+    }
+    p { margin-bottom: 18px; }
+    strong { color: var(--navy); }
+
+    /* ── Tabel concentrații ── */
+    .conc-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 28px 0;
+      font-family: system-ui, sans-serif;
+      font-size: 14px;
+    }
+    .conc-table thead tr {
+      background: var(--navy);
+      color: white;
+    }
+    .conc-table th {
+      padding: 12px 14px;
+      text-align: left;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .conc-table td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .conc-table tbody tr:nth-child(even) { background: #f5f1ec; }
+    .conc-table tbody tr:hover { background: #ede8e0; }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      color: white;
+    }
+    .badge--extrait { background: #2d5a3d; }
+    .badge--edp { background: #2d5a8e; }
+    .badge--edt { background: #7a5c2e; }
+    .badge--edc { background: #888; }
+
+    /* ── Highlight box ── */
+    .highlight {
+      background: var(--white);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 10px 10px 0;
+      padding: 20px 22px;
+      margin: 28px 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .highlight p { margin-bottom: 0; }
+    .highlight strong { color: var(--gold); }
+
+    /* ── Piramida olfactivă ── */
+    .pyramid {
+      margin: 32px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      align-items: center;
+    }
+    .pyramid-level {
+      border-radius: 6px;
+      padding: 14px 20px;
+      text-align: center;
+      font-family: system-ui, sans-serif;
+    }
+    .pyramid-level--top {
+      background: #f0e8f5;
+      border: 2px solid #9b6eb5;
+      width: 55%;
+      min-width: 260px;
+    }
+    .pyramid-level--heart {
+      background: #e8f0f5;
+      border: 2px solid #4a7c9e;
+      width: 75%;
+      min-width: 280px;
+    }
+    .pyramid-level--base {
+      background: #f5ede8;
+      border: 2px solid #9e6a4a;
+      width: 100%;
+      max-width: 500px;
+    }
+    .pyramid-label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+    .pyramid-level--top .pyramid-label { color: #6b3b8e; }
+    .pyramid-level--heart .pyramid-label { color: #2d5a8e; }
+    .pyramid-level--base .pyramid-label { color: #7a4a2d; }
+    .pyramid-title { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+    .pyramid-sub { font-size: 13px; color: var(--mid); }
+
+    /* ── Ghid alegere ── */
+    .choice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 28px 0;
+    }
+    .choice-card {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 18px 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+      border-top: 3px solid;
+    }
+    .choice-card--edt { border-color: #7a5c2e; }
+    .choice-card--edp { border-color: #2d5a8e; }
+    .choice-card--parfum { border-color: #2d5a3d; }
+    .choice-card--edc { border-color: #888; }
+    .choice-card h3 {
+      font-family: system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 0 0 10px;
+    }
+    .choice-card--edt h3 { color: #7a5c2e; }
+    .choice-card--edp h3 { color: #2d5a8e; }
+    .choice-card--parfum h3 { color: #2d5a3d; }
+    .choice-card--edc h3 { color: #888; }
+    .choice-card ul {
+      list-style: none;
+      font-family: system-ui, sans-serif;
+      font-size: 13px;
+      color: #555;
+    }
+    .choice-card ul li { padding: 3px 0 3px 16px; position: relative; }
+    .choice-card ul li::before { content: "✓"; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+
+    /* ── Sfaturi aplicare ── */
+    .tips-list {
+      list-style: none;
+      margin: 20px 0;
+    }
+    .tips-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-family: system-ui, sans-serif;
+      font-size: 15px;
+    }
+    .tips-list li:last-child { border-bottom: none; }
+    .tip-num {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      background: var(--navy);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+
+    /* ── CTA Newsletter ── */
+    .cta-newsletter {
+      background: linear-gradient(135deg, var(--navy) 0%, #1a3560 100%);
+      border-radius: 16px;
+      padding: 40px 32px;
+      text-align: center;
+      color: white;
+      margin: 48px 0;
+    }
+    .cta-newsletter .cta-tag {
+      display: inline-block;
+      font-family: system-ui, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .cta-newsletter h2 {
+      border: none;
+      padding: 0;
+      color: white;
+      font-size: clamp(20px, 4vw, 28px);
+      margin: 0 0 12px;
+    }
+    .cta-newsletter p {
+      font-family: system-ui, sans-serif;
+      font-size: 15px;
+      color: rgba(255,255,255,0.75);
+      max-width: 480px;
+      margin: 0 auto 24px;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: var(--gold);
+      color: white;
+      text-decoration: none;
+      font-family: system-ui, sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 32px;
+      border-radius: 8px;
+      box-shadow: 0 6px 20px rgba(200,155,60,0.35);
+      transition: opacity 0.15s;
+    }
+    .cta-btn:hover { opacity: 0.9; }
+    .cta-sub {
+      font-family: system-ui, sans-serif;
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      margin-top: 10px !important;
+    }
+
+    /* ── Surse ── */
+    .sources {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 28px 24px;
+      margin: 48px 0 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .sources h2 {
+      border: none;
+      padding: 0;
+      font-size: 16px;
+      margin: 0 0 16px;
+      font-family: system-ui, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--mid);
+    }
+    .sources ol {
+      list-style: decimal;
+      padding-left: 20px;
+      font-family: system-ui, sans-serif;
+      font-size: 13px;
+      color: var(--mid);
+      line-height: 1.7;
+    }
+    .sources ol li { margin-bottom: 8px; }
+    .sources ol a { color: var(--navy); }
+    .sources .sources-note {
+      margin-top: 14px;
+      font-size: 12px;
+      color: #aaa;
+      font-family: system-ui, sans-serif;
+    }
+
+    /* ── Footer ── */
+    .site-footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 20px;
+      font-family: system-ui, sans-serif;
+      font-size: 12px;
+    }
+
+    @media (max-width: 560px) {
+      .choice-grid { grid-template-columns: 1fr; }
+      .pyramid-level--top { width: 80%; }
+      .pyramid-level--heart { width: 90%; }
+      .cta-newsletter { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="https://beautyhealth.gherasimmarius.com" class="site-logo">beauty<span>health</span></a>
+  </header>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-tag">Ghid educativ · Parfumuri</div>
+    <h1>Parfum, Apă de Parfum sau Apă de Toaletă — Ce Cumperi de Fapt?</h1>
+    <p class="hero-lead">
+      Știai că două flacoane cu același parfum, dar etichete diferite, pot mirosi la fel 30 de minute și complet diferit după 6 ore?
+      Tot ce contează e un singur număr: concentrația.
+    </p>
+  </div>
+
+  <div class="article-wrap">
+
+    <!-- Intro -->
+    <p>
+      Stai în fața raftului și vezi: <em>Parfum</em>, <em>Eau de Parfum</em>, <em>Eau de Toilette</em>, <em>Eau de Cologne</em>.
+      Prețurile diferă cu zeci de lei. Flacoanele arată la fel. Ce alegi?
+    </p>
+    <p>
+      Răspunsul scurt: totul se reduce la <strong>concentrația de uleiuri aromatice</strong> — procentul de compuși odoranți dizolvați în alcool și apă.
+      Acel procent dictează intensitatea, durata și cum evoluează mirosul pe pielea ta în timp.
+    </p>
+    <p>
+      Iată ce spun datele, nu reclamele.
+    </p>
+
+    <!-- 1. Concentrații -->
+    <h2>1. Concentrațiile — ce înseamnă fiecare etichetă</h2>
+
+    <p>
+      Industria parfumuriei nu are un standard global obligatoriu, dar există intervale general acceptate, documentate inclusiv în brevete USPTO pentru formulări de parfum:
+    </p>
+
+    <table class="conc-table">
+      <thead>
+        <tr>
+          <th>Tip</th>
+          <th>Concentrație uleiuri</th>
+          <th>Durată estimată</th>
+          <th>Intensitate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="badge badge--extrait">Parfum / Extrait</span></td>
+          <td>20–40%</td>
+          <td>8–12+ ore</td>
+          <td>Foarte intensă, apropiată</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge--edp">Eau de Parfum (EdP)</span></td>
+          <td>15–20%</td>
+          <td>6–8 ore</td>
+          <td>Intensă, cu proiecție bună</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge--edt">Eau de Toilette (EdT)</span></td>
+          <td>5–15%</td>
+          <td>3–5 ore</td>
+          <td>Ușoară, proaspătă</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge--edc">Eau de Cologne (EdC)</span></td>
+          <td>2–5%</td>
+          <td>1–2 ore</td>
+          <td>Foarte ușoară, răcoritoare</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight">
+      <p>
+        <strong>Atenție la suprapunerile de interval.</strong> Un EdT cu 14% ulei aromatic și un EdP cu 16% sunt
+        mai apropiați ca intensitate decât un EdT cu 6% și unul cu 14%.
+        Intervalele se suprapun la margini — o casă de parfumuri poate eticheta același produs ca EdT,
+        alta ca EdP, fără ca vreuna să greșească tehnic.
+      </p>
+    </div>
+
+    <!-- 2. Piramida olfactivă -->
+    <h2>2. Piramida olfactivă — de ce mirosul se schimbă în timp</h2>
+
+    <p>
+      Un parfum nu miroase la fel în prima secundă, după 20 de minute și după 3 ore.
+      Această evoluție e intenționată și poartă numele de <strong>piramidă olfactivă</strong> —
+      un concept introdus în sec. XIX de parfumierul W.A. Poucher, care a clasificat compușii odoranți
+      după <em>coeficienți de evaporare</em> de la 1 (cel mai volatil) la 100 (cel mai persistent).
+    </p>
+
+    <div class="pyramid">
+      <div class="pyramid-level pyramid-level--top">
+        <div class="pyramid-label">Note de vârf (Top Notes)</div>
+        <div class="pyramid-title">Prima impresie — 5–15 minute</div>
+        <div class="pyramid-sub">Citrice, ierburi, note verzi, condimente ușoare. Molecule mici, foarte volatile.</div>
+      </div>
+      <div class="pyramid-level pyramid-level--heart">
+        <div class="pyramid-label">Note de inimă (Heart Notes)</div>
+        <div class="pyramid-title">Caracterul parfumului — 20–60 minute</div>
+        <div class="pyramid-sub">Florale, fructate, picante. Formează „personalitatea" fragrancei.</div>
+      </div>
+      <div class="pyramid-level pyramid-level--base">
+        <div class="pyramid-label">Note de bază (Base Notes)</div>
+        <div class="pyramid-title">Amprenta — ore întregi</div>
+        <div class="pyramid-sub">Lemnoase, muscat, ambra, vanilie. Molecule grele, cu evaporare lentă, fixează celelalte note.</div>
+      </div>
+    </div>
+
+    <p>
+      Concentrația influențează direct cum se desfășoară această piramidă.
+      Un <strong>Eau de Toilette</strong> trece mai rapid de la notele de vârf la cele de inimă,
+      în timp ce un <strong>Eau de Parfum sau Parfum</strong> accentuează notele de inimă și de bază,
+      permitând o evoluție mai lentă și mai complexă — tocmai pentru că are mai mulți compuși
+      cu volatilitate scăzută.
+    </p>
+
+    <!-- 3. Pielea ta contează -->
+    <h2>3. De ce același parfum durează diferit pe pielea fiecăruia</h2>
+
+    <p>
+      Un studiu publicat în <em>International Journal of Cosmetic Science</em> (Hadjiefstathiou et al., 2025,
+      Université Le Havre Normandie) a investigat evaporarea moleculelor de parfum pe pielea voluntarilor
+      și a demonstrat că <strong>proprietățile pielii influențează semnificativ rata de evaporare</strong>,
+      aceasta variind de la o persoană la alta în funcție de tip de piele, hidratare și pierderea transepidermică de apă.
+    </p>
+
+    <p>
+      Un alt studiu publicat pe PubMed (Patel et al., <em>Flavour and Fragrance Journal</em>, 2009)
+      analizează interacțiunile fizice și chimice dintre parfum și piele,
+      concluzionând că transformările induse de piele pot fi exploatate pentru a livra
+      efecte de parfum neobișnuite sau pentru a îmbunătăți longevitatea.
+    </p>
+
+    <p>Variabilele care contează cel mai mult:</p>
+
+    <ul class="tips-list">
+      <li>
+        <span class="tip-num">1</span>
+        <div>
+          <strong>Hidratarea pielii.</strong> Pielea bine hidratată reține moleculele de parfum mai bine — moleculele de apă din stratum corneum interacționează cu compușii polari ai fragrancei, încetinind evaporarea. Pielea uscată, dimpotrivă, grăbește evaporarea și scurtează durata.
+        </div>
+      </li>
+      <li>
+        <span class="tip-num">2</span>
+        <div>
+          <strong>Tipul de piele — grasă vs uscată.</strong> Pielea grasă acționează ca un rezervor natural: lipidele leagă moleculele aromatice și le eliberează lent. Pielea uscată le pierde rapid.
+        </div>
+      </li>
+      <li>
+        <span class="tip-num">3</span>
+        <div>
+          <strong>Temperatura corporală.</strong> Căldura accelerează evaporarea, ceea ce înseamnă proiecție inițială mai puternică dar longevitate mai scurtă. De aceea parfumurile „durează mai puțin" vara sau după sport.
+        </div>
+      </li>
+      <li>
+        <span class="tip-num">4</span>
+        <div>
+          <strong>pH-ul și chimia individuală.</strong> pH-ul pielii, hormoni, dietă și medicamente pot altera modul în care un parfum miroase și cât timp rămâne perceptibil. Nu există doi oameni cu aceeași chimie a pielii.
+        </div>
+      </li>
+    </ul>
+
+    <div class="highlight">
+      <p>
+        <strong>Concluzie practică:</strong> dacă ai pielea uscată și un parfum pare că „dispare"
+        repede pe tine, nu e neapărat vina concentrației scăzute — poți câștiga mai mult hidratând
+        pielea înainte de aplicare decât trecând la un EdP mai scump.
+      </p>
+    </div>
+
+    <!-- 4. Ghid alegere -->
+    <h2>4. Cum alegi — ghid rapid pe situație</h2>
+
+    <div class="choice-grid">
+      <div class="choice-card choice-card--edc">
+        <h3>Eau de Cologne</h3>
+        <ul>
+          <li>Vară, călduri extreme</li>
+          <li>Sport, activități fizice</li>
+          <li>Prima experiență cu un parfum nou</li>
+          <li>Buget limitat, uz zilnic</li>
+        </ul>
+      </div>
+      <div class="choice-card choice-card--edt">
+        <h3>Eau de Toilette</h3>
+        <ul>
+          <li>Birou, medii aglomerate</li>
+          <li>Zi de lucru, ocazii casual</li>
+          <li>Piele grasă sau bine hidratată</li>
+          <li>Preferi parfumuri discrete</li>
+        </ul>
+      </div>
+      <div class="choice-card choice-card--edp">
+        <h3>Eau de Parfum</h3>
+        <ul>
+          <li>Sezon rece — toamnă, iarnă</li>
+          <li>Ieșiri de seară, restaurant</li>
+          <li>Piele uscată sau normală</li>
+          <li>Vrei să dureze fără reaplicare</li>
+        </ul>
+      </div>
+      <div class="choice-card choice-card--parfum">
+        <h3>Parfum / Extrait</h3>
+        <ul>
+          <li>Evenimente formale, ocazii speciale</li>
+          <li>Aplicat cu moderație (1–2 picături)</li>
+          <li>Când vrei o amprentă olfactivă puternică</li>
+          <li>Colecționari și entuziaști de parfumuri</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 5. Sfaturi aplicare -->
+    <h2>5. Cum prelungești durata — indiferent de concentrație</h2>
+
+    <ul class="tips-list">
+      <li>
+        <span class="tip-num">1</span>
+        <div><strong>Hidratează înainte.</strong> Aplică o loțiune sau ulei de corp fără miros puternic pe zonele unde vei pune parfumul. Moleculele aromatice se leagă de lipide și evaporă mai lent.</div>
+      </li>
+      <li>
+        <span class="tip-num">2</span>
+        <div><strong>Aplică pe punctele de căldură.</strong> Încheieturi, gât, spatele urechilor, interiorul coatelor — zonele unde pulsul e mai aproape de suprafață distribuie parfumul în aer continuu.</div>
+      </li>
+      <li>
+        <span class="tip-num">3</span>
+        <div><strong>Nu freca după aplicare.</strong> Frecatul sparge moleculele volatile și distorsionează notele de vârf — rezultatul e un miros mai plat și mai scurt.</div>
+      </li>
+      <li>
+        <span class="tip-num">4</span>
+        <div><strong>Păstrează parfumul corect.</strong> Lumina, căldura și umiditatea degradează compușii aromatici. Sticlele stau cel mai bine în cutia originală, la temperatura camerei, departe de fereastră.</div>
+      </li>
+      <li>
+        <span class="tip-num">5</span>
+        <div><strong>Testează pe piele, nu pe hârtie.</strong> Un blotter arată cum miroase alcoolul inițial. Pielea ta arată cum va mirosi parfumul după 20 de minute — și asta e ce contează.</div>
+      </li>
+    </ul>
+
+    <!-- CTA Newsletter -->
+    <div class="cta-newsletter">
+      <div class="cta-tag">🌸 BeautyHealth Newsletter</div>
+      <h2>Vrei să știi când apar reduceri la parfumurile premium?</h2>
+      <p>
+        Abonații noștri primesc săptămânal topul celor mai mari reduceri la parfumuri, îngrijire și machiaj —
+        selectate din peste 34.000 de produse comparate zilnic.
+        Fără spam, doar ofertele care merită.
+      </p>
+      <a class="cta-btn"
+         href="https://beautyhealth.gherasimmarius.com/parfumuri/?utm_source=ghid&utm_medium=articol&utm_campaign=ghid-parfum-edp-edt"
+         target="_blank">
+        Vezi ofertele la parfumuri →
+      </a>
+      <p class="cta-sub">Sau abonează-te la newsletter pentru a primi reducerile direct pe email.</p>
+    </div>
+
+    <!-- Surse -->
+    <div class="sources">
+      <h2>Surse</h2>
+      <ol>
+        <li>
+          Hadjiefstathiou, E., Savary, G., Malhiac, C., Terescenco, D., Picard, C. (2025).
+          <em>Exploring the impact of fragrance molecular and skin properties on the evaporation profile of fragrances.</em>
+          International Journal of Cosmetic Science, 47(6), 981–995.
+          <a href="https://pubmed.ncbi.nlm.nih.gov/40524649/" target="_blank" rel="noopener">PubMed PMID 40524649</a>
+        </li>
+        <li>
+          Patel, T., et al. (2009).
+          <em>Insight into how skin changes perfume.</em>
+          Flavour and Fragrance Journal.
+          <a href="https://pubmed.ncbi.nlm.nih.gov/19245452/" target="_blank" rel="noopener">PubMed PMID 19245452</a>
+        </li>
+        <li>
+          Wikipedia — <em>Note (perfumery)</em>: clasificarea Poucher a notelor olfactive după coeficienți de evaporare (1–100).
+          <a href="https://en.wikipedia.org/wiki/Note_(perfumery)" target="_blank" rel="noopener">wikipedia.org/wiki/Note_(perfumery)</a>
+        </li>
+        <li>
+          Wikipedia — <em>Eau de toilette</em>: concentrații standard în parfumerie modernă.
+          <a href="https://en.wikipedia.org/wiki/Eau_de_toilette" target="_blank" rel="noopener">wikipedia.org/wiki/Eau_de_toilette</a>
+        </li>
+        <li>
+          USPTO Brevet nr. 8,852,528 — <em>Fragrance product, dispenser, and dispenser assembly</em>:
+          concentrații documentate tehnic pentru fiecare tip de produs (extrait 20–40%, EdP 10–20%, EdT 5–10%, EdC 2–3%).
+          <a href="https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/8852528" target="_blank" rel="noopener">USPTO 8852528</a>
+        </li>
+        <li>
+          Hadjiefstathiou et al., via <em>Wiley Online Library</em> — International Journal of Cosmetic Science.
+          <a href="https://onlinelibrary.wiley.com/doi/10.1111/ics.13085" target="_blank" rel="noopener">DOI 10.1111/ics.13085</a>
+        </li>
+      </ol>
+      <p class="sources-note">
+        Sursele academice au fost verificate în baza de date PubMed (National Library of Medicine, NIH).
+        Datele despre concentrații provin din documentație tehnică USPTO și din literatura de specialitate a industriei parfumeriei.
+      </p>
+    </div>
+
+  </div><!-- /article-wrap -->
+
+  <footer class="site-footer">
+    beautyhealth.gherasimmarius.com · Prețuri comparate zilnic din 4 surse verificate
+  </footer>
+
+</body>
+</html>
