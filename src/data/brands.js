@@ -13,6 +13,7 @@ export const brands = [
   { name: 'LA ROCHE POSAY', slug: 'la-roche-posay', categories: ['ingrijire-ten','ingrijire-corp'] },
   { name: 'INFINITE LOVE', slug: 'infinite-love', categories: ['parfumuri'] },
   { name: 'PHILIPS AVENT', slug: 'philips-avent', categories: ['mama-si-copilul'] },
+  { name: 'ENDRO', slug: 'endro', categories: ['ingrijire-ten','ingrijire-corp'] },
 
   // --- Parfumuri ---
   { name: 'HERMÈS', slug: 'hermes', categories: ['parfumuri'] },

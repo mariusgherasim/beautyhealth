@@ -13,7 +13,7 @@ export function getStaticPaths({ paginate }) {
   const PAGE_SIZE = 24;
   const paths = [];
 
-  for (const sub of subcategories) {
+  for (const sub of subcategories.filter(s => s.type !== 'brand')) {
     for (const catSlug of sub.categories) {
       const keywords = sub.keywords;
       const products = productsData.filter((p) => {
