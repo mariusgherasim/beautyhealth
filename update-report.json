@@ -1,8 +1,8 @@
 {
-  "started_at": "2026-10-11T09:30:37.833Z",
+  "started_at": "2026-10-12T10:00:55.139Z",
   "ok": 0,
   "failed": 26,
-  "skipped": 797,
+  "skipped": 796,
   "errors": [
     {
       "id": "infinitelove-6766",
@@ -29,14 +29,14 @@
       "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-blaze/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
     },
     {
-      "id": "farmec-6986",
-      "url": "https://infinitelove.ro/produs/parfum-fatal/?attribute_pa_recipient=50-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-fatal/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
-    },
-    {
       "id": "farmec-6988",
       "url": "https://infinitelove.ro/produs/parfum-fatal/?attribute_pa_recipient=2-ml",
       "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-fatal/?attribute_pa_recipient=2-ml\", waiting until \"networkidle\"\n"
+    },
+    {
+      "id": "farmec-6986",
+      "url": "https://infinitelove.ro/produs/parfum-fatal/?attribute_pa_recipient=50-ml",
+      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-fatal/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
     },
     {
       "id": "farmec-6983",
@@ -49,24 +49,24 @@
       "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-canabis/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
     },
     {
-      "id": "farmec-6969",
-      "url": "https://infinitelove.ro/produs/parfum-exotic/?attribute_pa_recipient=100-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-exotic/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
-    },
-    {
       "id": "farmec-6973",
       "url": "https://infinitelove.ro/produs/parfum-canabis/?attribute_pa_recipient=100-ml",
       "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-canabis/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
     },
     {
-      "id": "farmec-6968",
-      "url": "https://infinitelove.ro/produs/parfum-exotic/?attribute_pa_recipient=50-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-exotic/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
+      "id": "farmec-6969",
+      "url": "https://infinitelove.ro/produs/parfum-exotic/?attribute_pa_recipient=100-ml",
+      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-exotic/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
     },
     {
       "id": "farmec-6963",
       "url": "https://infinitelove.ro/produs/parfum-luxe/?attribute_pa_recipient=100-ml",
       "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-luxe/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
+    },
+    {
+      "id": "farmec-6968",
+      "url": "https://infinitelove.ro/produs/parfum-exotic/?attribute_pa_recipient=50-ml",
+      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-exotic/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
     },
     {
       "id": "farmec-6956",
@@ -79,14 +79,14 @@
       "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-silk/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
     },
     {
-      "id": "farmec-6917",
-      "url": "https://infinitelove.ro/produs/parfum-bliss/?attribute_pa_recipient=100-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-bliss/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
-    },
-    {
       "id": "farmec-6918",
       "url": "https://infinitelove.ro/produs/parfum-bliss/?attribute_pa_recipient=50-ml",
       "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-bliss/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
+    },
+    {
+      "id": "farmec-6917",
+      "url": "https://infinitelove.ro/produs/parfum-bliss/?attribute_pa_recipient=100-ml",
+      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-bliss/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
     },
     {
       "id": "farmec-6913",
@@ -109,14 +109,14 @@
       "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-mons/?attribute_pa_recipient=50-ml\", waiting until \"networkidle\"\n"
     },
     {
-      "id": "farmec-6873",
-      "url": "https://infinitelove.ro/produs/parfum-mons/?attribute_pa_recipient=100-ml",
-      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-mons/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
-    },
-    {
       "id": "farmec-6872",
       "url": "https://infinitelove.ro/produs/parfum-mons/?attribute_pa_recipient=2-ml",
       "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-mons/?attribute_pa_recipient=2-ml\", waiting until \"networkidle\"\n"
+    },
+    {
+      "id": "farmec-6873",
+      "url": "https://infinitelove.ro/produs/parfum-mons/?attribute_pa_recipient=100-ml",
+      "reason": "page.goto: Timeout 25000ms exceeded.\nCall log:\n  - navigating to \"https://infinitelove.ro/produs/parfum-mons/?attribute_pa_recipient=100-ml\", waiting until \"networkidle\"\n"
     },
     {
       "id": "farmec-6869",
@@ -141,10 +141,10 @@
   ],
   "by_source": {
     "infinitelove.ro": {
-      "total": 343,
+      "total": 342,
       "ok": 0,
       "failed": 0,
-      "skipped": 343
+      "skipped": 342
     },
     "farmec.ro": {
       "total": 480,
@@ -153,5 +153,5 @@
       "skipped": 454
     }
   },
-  "finished_at": "2026-10-11T09:36:10.338Z"
+  "finished_at": "2026-10-12T10:06:27.577Z"
 }
