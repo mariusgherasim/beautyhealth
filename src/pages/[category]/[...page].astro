@@ -28,7 +28,7 @@ const { page } = Astro.props;
 const { category: categorySlug } = Astro.params;
 const cat = getCategoryBySlug(categorySlug);
 const catBrands = getBrandsForCategory(categorySlug);
-const catSubs = getSubcategoriesForCategory(categorySlug);
+const catSubs = getSubcategoriesForCategory(categorySlug).filter(s => s.type === 'tip');
 
 const canonicalBase = `https://beautyhealth.gherasimmarius.com/${categorySlug}/`;
 const canonical = page.currentPage === 1 ? canonicalBase : `${canonicalBase}${page.currentPage}/`;

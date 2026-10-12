@@ -1,0 +1,42 @@
+{
+  "timestamp": "2026-10-12T05:35:43.287Z",
+  "dry_run": false,
+  "sources": {
+    "notino.ro": {
+      "updated": 19839,
+      "added": 116,
+      "deactivated": 6332
+    },
+    "springfarma.com": {
+      "updated": 14038,
+      "added": 41,
+      "deactivated": 1784
+    },
+    "farmec.ro": {
+      "updated": 462,
+      "added": 0,
+      "deactivated": 0
+    },
+    "infinitelove.ro": {
+      "updated": 342,
+      "added": 0,
+      "deactivated": 24
+    },
+    "boabe.ro": {
+      "updated": 0,
+      "added": 28,
+      "deactivated": 0
+    },
+    "endro.ro": {
+      "updated": 0,
+      "added": 74,
+      "deactivated": 0
+    }
+  },
+  "summary": {
+    "total": 43145,
+    "active": 35001,
+    "with_old_price": 876,
+    "size_mb": 35.4
+  }
+}

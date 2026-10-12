@@ -19,7 +19,7 @@ export const categories = [
     metaDescription:
       "Peste 2.600 de produse de îngrijire a tenului: creme de zi și de noapte, seruri, protecție solară, demachiante. Prețuri actualizate zilnic.",
     intro:
-      "Ai câte o cremă pentru fiecare anotimp, dar tot nu ești sigură care ți se potrivește? Câte produse „minune” ai încercat până acum? Am strâns peste 2.600 de produse pentru îngrijirea tenului — creme, seruri, protecție solară, demachiante și tratamente — ca să le poți compara rapid, după preț și tip de piele."
+      "Ai câte o cremă pentru fiecare anotimp, dar tot nu ești sigură care ți se potrivește? Câte produse \"minune\" ai încercat până acum? Am strâns peste 2.600 de produse pentru îngrijirea tenului — creme, seruri, protecție solară, demachiante și tratamente — ca să le poți compara rapid, după preț și tip de piele."
   },
   {
     slug: "ingrijire-corp",
@@ -46,7 +46,7 @@ export const categories = [
     metaDescription:
       "Peste 400 de produse de machiaj comparate ca preț: fond de ten, rimel, ruj și multe altele.",
     intro:
-      "Câte produse de machiaj ai cumpărat doar pentru că erau „la ofertă”, ca apoi să le uiți în sertar? Peste 400 de produse de make-up, comparate ca preț, ca să alegi cu cap, nu din impuls."
+      "Câte produse de machiaj ai cumpărat doar pentru că erau \"la ofertă\", ca apoi să le uiți în sertar? Peste 400 de produse de make-up, comparate ca preț, ca să alegi cu cap, nu din impuls."
   },
   {
     slug: "igiena-orala",
@@ -82,6 +82,15 @@ export const categories = [
     metaDescription: "Produse cosmetice pentru bărbați: ras, barbierit, îngrijire.",
     intro:
       "Rutina ta de îngrijire se rezumă la săpun și atât? Iată câteva produse dedicate special bărbaților — ras, barbierit și îngrijire — comparate ca preț."
+  },
+  {
+    slug: "wellness",
+    name: "Wellness",
+    seoTitle: "Wellness — Cafea de Specialitate și Produse pentru Starea de Bine 2026",
+    metaDescription:
+      "Cafea de specialitate single origin, produse pentru starea de bine și ritualuri zilnice sănătoase. Prețuri actualizate zilnic.",
+    intro:
+      "Câte dimineți ai început cu o cafea pe care ai ales-o la întâmplare? Știai că există cafea de specialitate single origin — cu trasabilitate exactă, de la fermă la ceașcă? Dacă starea ta de bine contează, și ce bei contează la fel de mult ca ce aplici pe piele. Descoperă produse wellness — cafea artizanală, ritualuri sănătoase — comparate ca preț."
   }
 ];
 

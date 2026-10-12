@@ -726,6 +726,70 @@ versiunea ta cu prețurile corecte.
 
 ---
 
+
+### Situația 7 — Înlocuire products.json și push (fluxul complet)
+
+**Când:** ori de câte ori primești un fișier `products-beautyhealth-updated.json`
+nou de la Claude (actualizare feed-uri, corectare prețuri etc.) și vrei să-l
+publici pe site.
+
+**Pasul 1 — Copiezi fișierul în folderul corect**
+
+Deschizi `cmd` și navighezi la folderul de date:
+```cmd
+cd "C:\FOLDER DE LUCRU\PAUL MELINTE\SITE BEAUTY_HEALTH\beautyhealth-site-git\src\data"
+```
+
+Ștergi fișierul vechi și redenumești pe cel nou:
+```cmd
+del products.json
+ren "products-beautyhealth-updated.json" "products.json"
+```
+
+Verifici că a mers (ar trebui să apară ~49-51MB și data de azi):
+```cmd
+dir products.json
+```
+
+**Pasul 2 — Faci pull, add, commit, push**
+
+```cmd
+cd "C:\FOLDER DE LUCRU\PAUL MELINTE\SITE BEAUTY_HEALTH\beautyhealth-site-git"
+git pull -X ours
+git add src/data/products.json
+git commit -m "chore: actualizare toate sursele din feed"
+git push
+```
+
+**Dacă vrei să incluzi și `banners.js` în același commit** (când ai adăugat
+bannere noi manual):
+```cmd
+git add src/data/products.json src/data/banners.js
+git commit -m "chore: actualizare produse + bannere noi"
+git push
+```
+
+**Dacă `del products.json` dă eroare** (fișierul e blocat de alt proces):
+- Închide File Explorer dacă e deschis în acel folder
+- Închide orice editor de text care ar putea avea fișierul deschis
+- Reîncearcă comanda
+
+**Dacă `ren` dă eroare "A duplicate file name exists"**: înseamnă că
+`products.json` nu a fost șters complet. Rulezi din nou `del products.json`
+și apoi `ren`.
+
+**Alternativă din PowerShell** (dacă preferi PowerShell în loc de cmd):
+```powershell
+cd "C:\FOLDER DE LUCRU\PAUL MELINTE\SITE BEAUTY_HEALTH\beautyhealth-site-git"
+Copy-Item "$env:USERPROFILE\Downloads\products-beautyhealth-updated.json" "src\data\products.json" -Force
+git pull -X ours
+git add src/data/products.json
+git commit -m "chore: actualizare toate sursele din feed"
+git push
+```
+
+---
+
 ### Referință rapidă — comenzile pe care le vei folosi cel mai des
 
 ```powershell
@@ -901,3 +965,270 @@ https://ga-dev-tools.google.com/campaign-url-builder/
 Completezi URL-ul, sursa, mediul și campania, și generează linkul complet
 cu toți parametrii gata de copiat.
 
+---
+
+## 11. Trimiterea emailurilor BeautyHealth în MailerLite
+
+### Frecvență recomandată
+- **Manual**, când vrei tu — o dată/săptămână sau mai rar
+- **Ziua optimă**: marți sau joi
+- **Ora optimă**: 14:00 (vârf de comenzi conform datelor BusinessLeague)
+- A doua fereastră bună: 20:00-23:00
+
+### Flux complet pas cu pas
+
+**Pasul 1 — Generezi HTML-ul**
+```cmd
+cd "C:\FOLDER DE LUCRU\PAUL MELINTE\SITE BEAUTY_HEALTH\beautyhealth-site-git"
+node generate-beautyhealth-email.cjs
+```
+Se creează `beautyhealth-email-output.html`. Deschizi cu Notepad/VS Code și găsești:
+- **SUBIECT** — copiezi în Subject
+- **PREHEADER** — copiezi în Preheader
+- **COD HTML** — copiezi tot ce e după linia `===`
+
+**Pasul 2 — Creezi campania în MailerLite**
+1. MailerLite → **Campaigns** → **Create campaign**
+2. Tip: **Regular campaign**
+3. **Campaign name** (intern): `BeautyHealth Parfumuri — {data}`
+4. **Subject line**: lipești subiectul din fișier
+5. **Preheader**: lipești preheader-ul din fișier
+
+**Pasul 3 — Construiești emailul**
+1. La pasul de design alegi **Drag & drop editor**
+2. Adaugi bloc **Countdown** în partea de sus (urgență)
+3. Sub el adaugi bloc **Custom HTML**
+4. Click pe Custom HTML → **Edit HTML** → lipești codul HTML din fișier
+5. **Save**
+
+**Pasul 4 — Configurezi trimiterea**
+1. **Recipients**: selectezi lista BeautyHealth
+2. **Schedule**: **Send now** sau programezi la ora dorită
+
+### Lista de abonatți
+- Există deja o listă BeautyHealth în MailerLite
+- Formularul de abonare e embed în site (MailerLite form ID 193157177015273136)
+
+### Ce face scriptul automat
+- Selectează top 12 parfumuri cu cel mai mare discount (old_price > price)
+- Rotație zilnică deterministică — în fiecare zi apar produse diferite
+- Alege automat un banner compatibil cu emailul din categoria parfumuri/homepage
+- Generează subiect și preheader cu cifrele reale din acea zi
+  (ex: „Reduceri până la 50% la parfumuri — Infinite Love, LabNatur și altele")
+
+### Nu uita
+- Blocul **Countdown** se adaugă DEASUPRA blocului Custom HTML în MailerLite
+- Emailul conține link spre `/oferte/parfumuri/` — pagina de oferte parfumuri de pe site
+- Dacă nu există parfumuri cu reducere în acea zi, scriptul afișează mesaj și nu generează nimic
+
+---
+
+## 12. Email brand aleator parfumuri — generate-beautyhealth-email-brand.cjs
+
+### Ce face
+Generează un email cu **20 parfumuri aleatorii dintr-un brand ales aleator**
+la fiecare rulare. Brand diferit de fiecare dată — nu e deterministic pe zi.
+
+### Unde se află fișierul
+```
+beautyhealth-site-git\generate-beautyhealth-email-brand.cjs
+```
+
+### Cum rulezi
+```cmd
+cd "C:\FOLDER DE LUCRU\PAUL MELINTE\SITE BEAUTY_HEALTH\beautyhealth-site-git"
+node generate-beautyhealth-email-brand.cjs
+```
+
+Output: **`beautyhealth-email-brand-output.html`** în același folder.
+
+### Logica de selecție
+
+**Brand:**
+- Aleator pur la fiecare rulare (Math.random — brand diferit la fiecare apăsare)
+- Eligibil doar dacă are **>= 20 parfumuri active**
+- Dacă brandul ales are < 20 → sare automat la alt brand eligibil
+
+**Produse (20 bucăți):**
+- Cele cu reducere apar **primele** (sortate după % reducere descrescător)
+- Restul completează aleator până la 20 (fără reducere)
+
+### Diferența față de generate-beautyhealth-email.cjs
+
+| | `email.cjs` | `email-brand.cjs` |
+|---|---|---|
+| Selecție | Top reduceri din toți | Brand aleator, 20 produse |
+| Rotație | Zilnică deterministică | Complet aleatorie la fiecare rulare |
+| Focus | Cel mai mare discount | Prezentare colecție brand |
+| CTA | `/oferte/parfumuri/` | `/parfumuri/brand/{slug}/` |
+
+### Subiect și preheader
+Se generează automat în funcție de brand și dacă are sau nu reduceri:
+- **Cu reduceri**: `{Brand} — 20 parfumuri, reduceri până la X% | BeautyHealth`
+- **Fără reduceri**: `Descoperă colecția {Brand} — 20 parfumuri selectate | BeautyHealth`
+
+### Nu uita în MailerLite
+- Adaugă blocul **Countdown** DEASUPRA blocului Custom HTML
+- CTA-ul duce pe pagina de brand: `beautyhealth.gherasimmarius.com/parfumuri/brand/{slug}/`
+
+---
+
+## 13. Sincronizare locală products.json cu feed-urile XML — sync-feeds-local.cjs
+
+### Ce face
+Compară feed-urile XML descărcate de la merchants cu `products.json` și:
+- **Actualizează prețurile** (price + old_price) pentru produsele existente
+- **Adaugă produsele noi** din feed care lipsesc din JSON
+- **Dezactivează** (draft: true) produsele din JSON absente din feed
+- **Șterge câmpul description** din toate produsele (reduce dimensiunea fișierului)
+
+### Unde se află fișierul
+```
+beautyhealth-site-git\sync-feeds-local.cjs
+```
+
+### Cum rulezi
+Pune feed-urile XML descărcate **în același folder** cu scriptul (rădăcina proiectului).
+Scriptul recunoaște automat mai multe variante de nume de fișier.
+
+```cmd
+cd "C:\FOLDER DE LUCRU\PAUL MELINTE\SITE BEAUTY_HEALTH\beautyhealth-site-git"
+node sync-feeds-local.cjs
+```
+
+### Opțiuni disponibile
+
+```cmd
+REM Toate sursele (default)
+node sync-feeds-local.cjs
+
+REM Doar anumite surse
+node sync-feeds-local.cjs --surse=notino,infinitelove
+node sync-feeds-local.cjs --surse=springfarma,farmec
+
+REM Dry run — afisaza ce ar face, fara sa salveze nimic
+node sync-feeds-local.cjs --dry-run
+```
+
+### Nume de fișiere feed acceptate (oricare din variante)
+
+| Sursă | Variante de nume acceptate |
+|-------|---------------------------|
+| notino.ro | `feed_notino.xml`, `feed_235256a01.xml`, `feed_235256a01_1.xml` |
+| springfarma.com | `feed_springfarma.xml`, `feed_436edea46.xml`, `feed_436edea46_1.xml` |
+| farmec.ro | `feed_farmec.xml`, `feed_eb530f914.xml`, `feed_eb530f914_1.xml` |
+| infinitelove.ro | `feed_infinitelove.xml`, `feed_9d5a36a0f.xml`, `feed_9d5a36a0f_1.xml` |
+
+### Output
+- `src/data/products.json` — actualizat direct
+- `sync-report.json` — raport detaliat cu ce s-a schimbat
+
+### Flux complet după rulare
+
+```cmd
+git pull -X ours
+git add src/data/products.json
+git commit -m "chore: sync feeds local"
+git push
+```
+
+### Diferența față de actualizarea prin Claude
+| | Prin Claude | sync-feeds-local.cjs |
+|---|---|---|
+| Cine rulează | Claude (sandbox) | Tu, local pe calculator |
+| Feed-uri necesare | Urcate pe Claude | Puse în folderul proiectului |
+| Rezultat | Fișier de descărcat | Modifică direct src/data/products.json |
+| Avantaj | Nicio instalare necesară | Mai rapid, fără upload/download |
+
+### Limite Notino (păstrate ca la actualizarea prin Claude)
+- Parfumuri: toate
+- Machiaj: top 5.000 după preț descrescător
+- Îngrijire ten: top 1.000
+- Îngrijire păr: top 1.000
+
+---
+
+### Situația 8 — vim se deschide la git pull sau git merge
+
+**Când apare:** `git pull` găsește modificări pe GitHub și deschide editorul vim
+pentru a confirma mesajul de merge. Arată un ecran negru cu text și `~` pe linii.
+
+**Rezolvare rapidă:**
+1. Apasă **Esc** (o dată)
+2. Apasă **Shift+Z** de două ori rapid (**ZZ** cu majuscule)
+3. Vim se închide și merge-ul continuă automat
+
+**Alternativă dacă ZZ nu merge:**
+```cmd
+REM Inchide fereastra cmd, deschide una noua, apoi:
+cd "C:\FOLDER DE LUCRU\PAUL MELINTE\SITE BEAUTY_HEALTH\beautyhealth-site-git"
+git commit --no-edit
+git push
+```
+
+**Ce face ZZ:** salvează fișierul și închide vim (echivalent cu `:wq` + Enter).
+**Ce face --no-edit:** acceptă mesajul de merge implicit fără să deschidă editorul.
+
+**Prevenire pe viitor:** poți seta git să nu mai deschidă vim pentru merge-uri:
+```cmd
+git config --global core.editor "notepad"
+```
+Sau să accepte automat mesajul de merge fără editor:
+```cmd
+git config --global merge.log false
+```
+
+---
+
+## 14. Adăugare bannere noi — add-banners.cjs
+
+### Ce face
+Script interactiv care parsează linkurile HTML de la 2Performant și le adaugă
+automat în `banners.js` — fără să editezi manual fișierul.
+
+### Unde se află fișierul
+```
+beautyhealth-site-git\add-banners.cjs
+```
+
+### Cum rulezi
+```cmd
+cd "C:\FOLDER DE LUCRU\PAUL MELINTE\SITE BEAUTY_HEALTH\beautyhealth-site-git"
+node add-banners.cjs
+```
+
+### Flux interactiv
+1. Scriptul îți cere să lipești linkurile HTML (unul sau mai multe deodată)
+2. Dai **Enter de două ori** când ai terminat de lipit
+3. Îți arată ce a detectat + dacă bannerul există deja (îl sare automat)
+4. Îți cere data de expirare — `YYYY-MM-DD` sau **Enter** pentru fără termen
+5. Confirmă și salvează direct în `src/data/banners.js`
+
+### Ce detectează automat
+| Câmp | Cum e detectat |
+|------|----------------|
+| `id` | Merchant + dimensiune + prima literă disponibilă |
+| `channels` | După dimensiune: 728×90→site, 300×250→site+email+fb+ig, 300×600→site+email |
+| `categories` | După merchant: farmec→ingrijire, notino→parfumuri+machiaj etc. |
+| `active_from` | Data de azi |
+| `note` | Automat pentru formate non-standard IAB |
+| Duplicate | Detectate după `unique=` din URL — nu adaugă de două ori |
+
+### Format link HTML acceptat (de la 2Performant)
+```html
+<a href="https://event.2performant.com/events/click?ad_type=banner&unique=44651c133&aff_code=...">
+  <img src="https://img.2performant.com/.../272648.jpg" height="250px" width="300px" />
+</a>
+```
+
+### Validare automată
+Scriptul verifică sintaxa JS înainte să salveze — dacă ceva nu e corect,
+nu suprascrie fișierul și afișează eroarea.
+
+### După rulare — push pe GitHub
+```cmd
+git pull -X ours
+git add src/data/banners.js
+git commit -m "feat: bannere noi"
+git push
+```
