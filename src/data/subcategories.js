@@ -77,7 +77,17 @@ export const subcategories = [
     categories: ['ingrijire-ten', 'ingrijire-corp'],
   },
 
-  // ─── Tipuri — Wellness (boabe.ro) ─────────────────────────────────────────
+  // ─── Tipuri — Wellness (boabe.ro + detoxmed.ro) ───────────────────────────
+  {
+    slug: 'detox',
+    name: 'Detox',
+    type: 'tip',
+    seoTitle: 'Sucuri și Programe Detox — Prețuri și Oferte',
+    metaDescription: 'Sucuri naturale și programe detox comparate ca preț. Formule cold-pressed pentru slăbit, revitalizare și curățare internă.',
+    intro: 'Câte programe detox ai început fără să știi exact ce conțin sau cât costă în altă parte? Găsești aici sucuri naturale și kituri detox comparate ca preț — de la formule de slăbit până la cure de revitalizare completă.',
+    keywords: ['detox','detoxmed','healthymed','imunomed','suc natural','suc presat','cold press','juice','slim','revitalize','revitalizare','age defy','pure revit','green glow','crud','depurativ','cleanse'],
+    categories: ['wellness'],
+  },
   {
     slug: 'cafea-specialitate',
     name: 'Cafea de Specialitate',
