@@ -4,3 +4,4 @@ dist/
 update-report.json
 logs/
 .env
+"*.xml" 
