@@ -48,7 +48,28 @@ export function getStaticPaths({ paginate }) {
         if (brand.slug === 'montale') return pb.includes('MONTALE');
         if (brand.slug === 'lattafa') return pb.includes('LATTAFA');
         if (brand.slug === 'guess') return pb.includes('GUESS');
-        if (brand.slug === 'endro') return pb.includes('ENDRO');
+        // --- PARFLAB branduri nișă ---
+        if (brand.slug === 'tiziana-terenzi') return pb.includes('TIZIANA');
+        if (brand.slug === 'v-canto') return pb.includes('V CANTO');
+        if (brand.slug === 'etat-libre-dorange') return pb.includes("ETAT LIBRE");
+        if (brand.slug === 'maison-francis-kurkdjian') return pb.includes('KURKDJIAN') || pb.includes('MAISON FRANCIS');
+        if (brand.slug === 'parfums-de-marly') return pb.includes('DE MARLY') || pb.includes('PARFUMS DE MARLY');
+        if (brand.slug === 'initio') return pb.includes('INITIO');
+        if (brand.slug === 'jo-malone') return pb.includes('JO MALONE');
+        if (brand.slug === 'escentric-molecules') return pb.includes('ESCENTRIC');
+        if (brand.slug === 'maison-crivelli') return pb.includes('CRIVELLI');
+        if (brand.slug === 'ex-nihilo') return pb.includes('EX NIHILO') || pb.includes('EXNIHILO');
+        if (brand.slug === 'bdk-parfums') return pb.includes('BDK');
+        if (brand.slug === 'liquides-imaginaires') return pb.includes('LIQUIDES');
+        if (brand.slug === 'matiere-premiere') return pb.includes('MATIERE') || pb.includes('MATIÈRE');
+        if (brand.slug === 'clive-christian') return pb.includes('CLIVE');
+        if (brand.slug === 'frederic-malle') return pb.includes('FREDERIC MALLE') || pb.includes('FRÉDÉRIC');
+        if (brand.slug === 'le-labo') return pb.includes('LE LABO');
+        if (brand.slug === 'fragrance-du-bois') return pb.includes('FRAGRANCE DU BOIS');
+        if (brand.slug === 'thomas-kosmala') return pb.includes('KOSMALA');
+        if (brand.slug === 'orto-parisi') return pb.includes('ORTO PARISI') || pb.includes('ORTOPARISI');
+        if (brand.slug === 'boadicea') return pb.includes('BOADICEA');
+        if (brand.slug === 'louis-vuitton') return pb.includes('LOUIS VUITTON') || pb.includes('LV ');
         return pb.includes(brandNameVariants);
       });
 

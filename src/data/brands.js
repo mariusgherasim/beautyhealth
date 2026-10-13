@@ -15,7 +15,7 @@ export const brands = [
   { name: 'PHILIPS AVENT', slug: 'philips-avent', categories: ['mama-si-copilul'] },
   { name: 'ENDRO', slug: 'endro', categories: ['ingrijire-ten','ingrijire-corp'] },
 
-  // --- Parfumuri ---
+  // --- Parfumuri clasice (deja existente) ---
   { name: 'HERMÈS', slug: 'hermes', categories: ['parfumuri'] },
   { name: 'GUERLAIN', slug: 'guerlain', categories: ['parfumuri','machiaj','ingrijire-ten'] },
   { name: 'VERSACE', slug: 'versace', categories: ['parfumuri'] },
@@ -34,11 +34,48 @@ export const brands = [
   { name: 'YVES SAINT LAURENT', slug: 'yves-saint-laurent', categories: ['parfumuri','machiaj'] },
   { name: 'CAROLINA HERRERA', slug: 'carolina-herrera', categories: ['parfumuri'] },
   { name: 'CREED', slug: 'creed', categories: ['parfumuri'] },
-  { name: 'VICTORIA\'S SECRET', slug: 'victorias-secret', categories: ['parfumuri'] },
+  { name: "VICTORIA'S SECRET", slug: 'victorias-secret', categories: ['parfumuri'] },
   { name: 'GUESS', slug: 'guess', categories: ['parfumuri'] },
   { name: 'MONTALE', slug: 'montale', categories: ['parfumuri'] },
   { name: 'LATTAFA', slug: 'lattafa', categories: ['parfumuri'] },
   { name: 'YANKEE CANDLE', slug: 'yankee-candle', categories: ['parfumuri'] },
+
+  // --- Parfumuri nișă & lux — PARFLAB.ro ---
+  { name: 'TIZIANA TERENZI', slug: 'tiziana-terenzi', categories: ['parfumuri'] },           // 280 produse
+  { name: 'AMOUAGE', slug: 'amouage', categories: ['parfumuri'] },                             // 164
+  { name: 'BVLGARI', slug: 'bvlgari', categories: ['parfumuri'] },                             // 124
+  { name: 'MANCERA', slug: 'mancera', categories: ['parfumuri'] },                             // 116
+  { name: "ETAT LIBRE D'ORANGE", slug: 'etat-libre-dorange', categories: ['parfumuri'] },     // 104
+  { name: 'V CANTO', slug: 'v-canto', categories: ['parfumuri'] },                             // 100 (V CANTO by TERENZI)
+  { name: 'NISHANE', slug: 'nishane', categories: ['parfumuri'] },                             // 100
+  { name: 'LOUIS VUITTON', slug: 'louis-vuitton', categories: ['parfumuri'] },                 // 88
+  { name: 'MAISON FRANCIS KURKDJIAN', slug: 'maison-francis-kurkdjian', categories: ['parfumuri'] }, // 84
+  { name: 'TOSKOVAT', slug: 'toskovat', categories: ['parfumuri'] },                           // 80
+  { name: 'BORNTOSTANDOUT', slug: 'borntostandout', categories: ['parfumuri'] },               // 72
+  { name: 'KAJAL', slug: 'kajal', categories: ['parfumuri'] },                                 // 64
+  { name: 'JO MALONE', slug: 'jo-malone', categories: ['parfumuri'] },                         // 64
+  { name: 'ESCENTRIC MOLECULES', slug: 'escentric-molecules', categories: ['parfumuri'] },     // 64
+  { name: 'PRADA', slug: 'prada', categories: ['parfumuri'] },                                 // 64
+  { name: 'MAISON CRIVELLI', slug: 'maison-crivelli', categories: ['parfumuri'] },             // 64
+  { name: 'EX NIHILO', slug: 'ex-nihilo', categories: ['parfumuri'] },                         // 56
+  { name: 'BDK PARFUMS', slug: 'bdk-parfums', categories: ['parfumuri'] },                     // 44
+  { name: 'XERJOFF', slug: 'xerjoff', categories: ['parfumuri'] },                             // 44
+  { name: 'PARFUMS DE MARLY', slug: 'parfums-de-marly', categories: ['parfumuri'] },           // 44
+  { name: 'LIQUIDES IMAGINAIRES', slug: 'liquides-imaginaires', categories: ['parfumuri'] },   // 44
+  { name: 'MATIERE PREMIERE', slug: 'matiere-premiere', categories: ['parfumuri'] },           // 32
+  { name: 'BYREDO', slug: 'byredo', categories: ['parfumuri'] },                               // 32
+  { name: 'INITIO', slug: 'initio', categories: ['parfumuri'] },                               // 28 (INITIO PARFUMES PRIVES)
+  { name: 'FREDERIC MALLE', slug: 'frederic-malle', categories: ['parfumuri'] },               // 28
+  { name: 'CLIVE CHRISTIAN', slug: 'clive-christian', categories: ['parfumuri'] },             // 24
+  { name: 'KILIAN', slug: 'kilian', categories: ['parfumuri'] },                               // 20
+  { name: 'ORTO PARISI', slug: 'orto-parisi', categories: ['parfumuri'] },                     // 16
+  { name: 'BOADICEA', slug: 'boadicea', categories: ['parfumuri'] },                           // 12
+  { name: 'LE LABO', slug: 'le-labo', categories: ['parfumuri'] },                             // 8
+  { name: 'VALENTINO', slug: 'valentino', categories: ['parfumuri'] },                         // 8
+  { name: 'MEMO', slug: 'memo', categories: ['parfumuri'] },                                   // 4
+  { name: 'THOMAS KOSMALA', slug: 'thomas-kosmala', categories: ['parfumuri'] },               // 4
+  { name: 'FRAGRANCE DU BOIS', slug: 'fragrance-du-bois', categories: ['parfumuri'] },         // 4
+  { name: 'NASOMATTO', slug: 'nasomatto', categories: ['parfumuri'] },                         // 4
 
   // --- Machiaj & Îngrijire ten ---
   { name: 'BOBBI BROWN', slug: 'bobbi-brown', categories: ['machiaj','ingrijire-ten'] },
