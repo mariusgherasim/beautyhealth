@@ -102,17 +102,37 @@ const absoluteOgImage = new URL(ogImage, "https://beautyhealth.gherasimmarius.co
       <button class="ps-close" id="ps-close" title="Închide" aria-label="Închide">✕</button>
     </a>
 
-    <!-- ── TRUSTPILOT Floating TrustBox ── -->
-    <div class="trustpilot-widget"
-         data-locale="en-US"
-         data-template-id="56278e9abfbbba0bdcd568bc"
-         data-businessunit-id="6ad0a9bbc306c18a13301538"
-         data-style-height="52px"
-         data-style-width="100%"
-         data-token="feb288da-c598-4f56-889c-4b401bfb23de">
-      <a href="https://www.trustpilot.com/review/beautyhealth.gherasimmarius.com"
-         target="_blank" rel="noopener">Trustpilot</a>
+    <!-- ── TRUSTPILOT Floating Sticker ── -->
+    <div id="tp-sticker">
+      <div class="trustpilot-widget"
+           data-locale="en-US"
+           data-template-id="56278e9abfbbba0bdcd568bc"
+           data-businessunit-id="6ad0a9bbc306c18a13301538"
+           data-style-height="52px"
+           data-style-width="160px"
+           data-token="feb288da-c598-4f56-889c-4b401bfb23de">
+        <a href="https://www.trustpilot.com/review/beautyhealth.gherasimmarius.com"
+           target="_blank" rel="noopener">Trustpilot</a>
+      </div>
     </div>
+    <style is:global>
+      #tp-sticker {
+        position: fixed;
+        left: 0;
+        bottom: 160px;
+        z-index: 9998;
+        transform: rotate(-90deg);
+        transform-origin: left bottom;
+        background: #fff;
+        border-radius: 0 8px 0 0;
+        box-shadow: 2px -2px 12px rgba(0,0,0,.15);
+        padding: 6px 10px 4px;
+        width: 160px;
+      }
+      @media (max-width: 640px) {
+        #tp-sticker { display: none; }
+      }
+    </style>
     <!-- ── END TRUSTPILOT ── -->
 
     <style is:global>
