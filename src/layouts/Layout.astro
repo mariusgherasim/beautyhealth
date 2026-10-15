@@ -70,6 +70,103 @@ const absoluteOgImage = new URL(ogImage, "https://beautyhealth.gherasimmarius.co
         });
       });
     </script>
+
+    <!-- ── PROMO STICKER: Farmec 30% — 14 Oct–1 Nov 2026 ── -->
+    <a class="promo-sticker" id="promo-sticker"
+       href="https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=1dfbc028f&redirect_to=https%253A//www.farmec.ro/promo/complete-care"
+       target="_blank" rel="noopener sponsored">
+      <div class="ps-top">
+        <span class="ps-pct">30%</span>
+        <span class="ps-label">Reducere<br>îngrijire ten</span>
+      </div>
+      <div class="ps-mid">
+        <div class="ps-brand">Farmec</div>
+        <div class="ps-desc">Complete Care — reducere directă în preț</div>
+      </div>
+      <div class="ps-timer">
+        <div class="ps-block"><span class="ps-num" id="ps-d">17</span><span class="ps-lbl">Zile</span></div>
+        <span class="ps-sep">:</span>
+        <div class="ps-block"><span class="ps-num" id="ps-h">00</span><span class="ps-lbl">Ore</span></div>
+        <span class="ps-sep">:</span>
+        <div class="ps-block"><span class="ps-num" id="ps-m">00</span><span class="ps-lbl">Min</span></div>
+        <span class="ps-sep">:</span>
+        <div class="ps-block"><span class="ps-num" id="ps-s">00</span><span class="ps-lbl">Sec</span></div>
+      </div>
+      <div class="ps-cta">
+        Vezi oferta
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+      <button class="ps-close" id="ps-close" title="Închide" aria-label="Închide">✕</button>
+    </a>
+
+    <style is:global>
+      .promo-sticker {
+        position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+        width: 178px; background: #1a1713; color: #fff;
+        border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,.28), 0 2px 8px rgba(200,16,46,.25);
+        overflow: hidden; text-decoration: none; display: block;
+        transition: transform .2s, box-shadow .2s;
+        font-family: 'Segoe UI', system-ui, sans-serif;
+      }
+      .promo-sticker:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,.32), 0 4px 16px rgba(200,16,46,.30); }
+      .ps-top { background: #c8102e; padding: 10px 14px 8px; display: flex; align-items: center; justify-content: space-between; }
+      .ps-pct { font-size: 1.9rem; font-weight: 900; line-height: 1; letter-spacing: -.02em; font-family: Georgia, serif; color: #fff; }
+      .ps-label { font-size: .62rem; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; opacity: .9; text-align: right; line-height: 1.35; color: #fff; }
+      .ps-mid { padding: 10px 14px 6px; border-bottom: 1px solid rgba(255,255,255,.08); }
+      .ps-brand { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #c8a96e; margin-bottom: 3px; }
+      .ps-desc { font-size: .78rem; color: rgba(255,255,255,.75); line-height: 1.4; }
+      .ps-timer { padding: 8px 14px; display: flex; gap: 6px; justify-content: center; align-items: center; }
+      .ps-block { display: flex; flex-direction: column; align-items: center; background: rgba(255,255,255,.07); border-radius: 5px; padding: 4px 6px; min-width: 34px; }
+      .ps-num { font-size: .9rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1; color: #fff; }
+      .ps-lbl { font-size: .48rem; text-transform: uppercase; letter-spacing: .06em; color: rgba(255,255,255,.45); margin-top: 2px; }
+      .ps-sep { font-size: .75rem; color: rgba(255,255,255,.3); margin-top: -4px; }
+      .ps-cta { background: #c8102e; text-align: center; padding: 9px 14px; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; display: flex; align-items: center; justify-content: center; gap: 5px; color: #fff; }
+      .ps-close { position: absolute; top: 7px; right: 7px; width: 18px; height: 18px; background: rgba(255,255,255,.18); border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 10px; line-height: 1; padding: 0; transition: background .15s; }
+      .ps-close:hover { background: rgba(255,255,255,.32); }
+      @media (max-width: 480px) {
+        .promo-sticker { bottom: 16px; right: 16px; width: 160px; }
+      }
+    </style>
+
+    <script is:inline>
+      (function () {
+        // Ascunde dacă a fost deja închis
+        try { if (localStorage.getItem('ps-farmec-closed') === '1') { document.getElementById('promo-sticker').style.display = 'none'; } } catch(e) {}
+
+        // Countdown
+        var end = new Date('2026-11-01T23:59:59');
+        function updateTimer() {
+          var diff = Math.max(0, end - new Date());
+          var d = Math.floor(diff / 86400000); diff %= 86400000;
+          var h = Math.floor(diff / 3600000);  diff %= 3600000;
+          var m = Math.floor(diff / 60000);    diff %= 60000;
+          var s = Math.floor(diff / 1000);
+          function pad(n) { return String(n).padStart(2, '0'); }
+          var ed = document.getElementById('ps-d');
+          var eh = document.getElementById('ps-h');
+          var em = document.getElementById('ps-m');
+          var es = document.getElementById('ps-s');
+          if (ed) ed.textContent = pad(d);
+          if (eh) eh.textContent = pad(h);
+          if (em) em.textContent = pad(m);
+          if (es) es.textContent = pad(s);
+        }
+        updateTimer();
+        setInterval(updateTimer, 1000);
+
+        // Buton închidere
+        var btn = document.getElementById('ps-close');
+        if (btn) {
+          btn.addEventListener('click', function (e) {
+            e.preventDefault(); e.stopPropagation();
+            var el = document.getElementById('promo-sticker');
+            if (el) { el.style.transition = 'opacity .3s, transform .3s'; el.style.opacity = '0'; el.style.transform = 'translateY(20px)'; setTimeout(function(){ el.style.display = 'none'; }, 320); }
+            try { localStorage.setItem('ps-farmec-closed', '1'); } catch(e) {}
+          });
+        }
+      })();
+    </script>
+    <!-- ── END PROMO STICKER ── -->
   </body>
 </html>
 
