@@ -104,12 +104,13 @@ const absoluteOgImage = new URL(ogImage, "https://beautyhealth.gherasimmarius.co
 
     <!-- ── TRUSTPILOT Floating Sticker ── -->
     <div id="tp-sticker">
+      <div class="tp-sticker-label">Recenzii clienți</div>
       <div class="trustpilot-widget"
            data-locale="en-US"
            data-template-id="56278e9abfbbba0bdcd568bc"
            data-businessunit-id="6ad0a9bbc306c18a13301538"
            data-style-height="52px"
-           data-style-width="160px"
+           data-style-width="220px"
            data-token="feb288da-c598-4f56-889c-4b401bfb23de">
         <a href="https://www.trustpilot.com/review/beautyhealth.gherasimmarius.com"
            target="_blank" rel="noopener">Trustpilot</a>
@@ -118,16 +119,23 @@ const absoluteOgImage = new URL(ogImage, "https://beautyhealth.gherasimmarius.co
     <style is:global>
       #tp-sticker {
         position: fixed;
-        left: 0;
-        bottom: 160px;
+        left: 12px;
+        bottom: 24px;
         z-index: 9998;
-        transform: rotate(-90deg);
-        transform-origin: left bottom;
         background: #fff;
-        border-radius: 0 8px 0 0;
-        box-shadow: 2px -2px 12px rgba(0,0,0,.15);
-        padding: 6px 10px 4px;
-        width: 160px;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0,0,0,.15);
+        padding: 8px 12px 6px;
+        min-width: 220px;
+      }
+      .tp-sticker-label {
+        font-size: 0.62rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #555;
+        margin-bottom: 4px;
+        font-family: 'Segoe UI', system-ui, sans-serif;
       }
       @media (max-width: 640px) {
         #tp-sticker { display: none; }
