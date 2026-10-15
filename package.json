@@ -15,7 +15,7 @@
     "update-prices:local": "node scripts/update-prices.cjs --sources=springfarma.com,minuneanaturii.ro"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/sitemap": "^3.7.4",
     "astro": "^7.0.9",
     "axios": "^1.7.9",
     "cheerio": "^1.0.0",
