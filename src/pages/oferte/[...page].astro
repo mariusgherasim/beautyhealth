@@ -26,7 +26,7 @@ export function getStaticPaths({ paginate }) {
 
 const { page } = Astro.props;
 
-const canonicalBase = 'https://beautyhealth.gherasimmarius.com/oferte/';
+const canonicalBase = 'https://beauty-healths.com/oferte/';
 const canonical = page.currentPage === 1
   ? canonicalBase
   : `${canonicalBase}${page.currentPage}/`;
@@ -44,7 +44,7 @@ const description = `${page.total} produse cu reducere, sortate după cel mai ma
       <link rel="prev" href={page.currentPage === 2 ? canonicalBase : `${canonicalBase}${page.currentPage - 1}/`} />
     )}
     {page.url.next && (
-      <link rel="next" href={`https://beautyhealth.gherasimmarius.com${page.url.next}`} />
+      <link rel="next" href={`https://beauty-healths.com${page.url.next}`} />
     )}
   </Fragment>
 

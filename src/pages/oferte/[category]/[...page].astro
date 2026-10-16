@@ -38,7 +38,7 @@ const { page } = Astro.props;
 const { category: categorySlug } = Astro.params;
 const cat = getCategoryBySlug(categorySlug);
 
-const canonicalBase = `https://beautyhealth.gherasimmarius.com/oferte/${categorySlug}/`;
+const canonicalBase = `https://beauty-healths.com/oferte/${categorySlug}/`;
 const canonical = page.currentPage === 1
   ? canonicalBase
   : `${canonicalBase}${page.currentPage}/`;
@@ -54,7 +54,7 @@ const title = page.currentPage === 1
       <link rel="prev" href={page.currentPage === 2 ? canonicalBase : `${canonicalBase}${page.currentPage - 1}/`} />
     )}
     {page.url.next && (
-      <link rel="next" href={`https://beautyhealth.gherasimmarius.com${page.url.next}`} />
+      <link rel="next" href={`https://beauty-healths.com${page.url.next}`} />
     )}
   </Fragment>
 

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Preview Sticker Farmec</title>
+<style>
+  body { margin: 0; background: #f0ede8; min-height: 100vh; display: flex; align-items: center; justify-content: center; font-family: system-ui, sans-serif; }
+  .note { text-align: center; color: #888; font-size: .85rem; margin-bottom: 20px; }
+
+  /* ── STICKER ── copiezi doar acest bloc în site-ul tău ── */
+  .promo-sticker {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    width: 180px;
+    background: #1a1713;
+    color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.28), 0 2px 8px rgba(200,16,46,.25);
+    overflow: hidden;
+    font-family: 'Inter', system-ui, sans-serif;
+    text-decoration: none;
+    display: block;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .promo-sticker:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,.32), 0 4px 16px rgba(200,16,46,.30); }
+
+  .sticker-top {
+    background: #c8102e;
+    padding: 10px 14px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .sticker-pct {
+    font-size: 1.9rem;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -.02em;
+    font-family: Georgia, serif;
+  }
+  .sticker-label {
+    font-size: .62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    opacity: .9;
+    text-align: right;
+    line-height: 1.35;
+  }
+
+  .sticker-mid {
+    padding: 10px 14px 6px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  .sticker-brand {
+    font-size: .7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: #c8a96e;
+    margin-bottom: 3px;
+  }
+  .sticker-desc {
+    font-size: .78rem;
+    color: rgba(255,255,255,.75);
+    line-height: 1.4;
+  }
+
+  .sticker-timer {
+    padding: 8px 14px;
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    align-items: center;
+  }
+  .st-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255,255,255,.07);
+    border-radius: 5px;
+    padding: 4px 6px;
+    min-width: 34px;
+  }
+  .st-num {
+    font-size: .9rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+  .st-lbl {
+    font-size: .48rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: rgba(255,255,255,.45);
+    margin-top: 2px;
+  }
+  .st-sep { font-size: .75rem; color: rgba(255,255,255,.3); margin-top: -4px; }
+
+  .sticker-cta {
+    background: #c8102e;
+    text-align: center;
+    padding: 9px 14px;
+    font-size: .72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+  .sticker-cta svg { width: 11px; height: 11px; }
+
+  .sticker-close {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 18px;
+    height: 18px;
+    background: rgba(255,255,255,.18);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 10px;
+    line-height: 1;
+    padding: 0;
+    transition: background .15s;
+  }
+  .sticker-close:hover { background: rgba(255,255,255,.32); }
+  /* ── END STICKER ── */
+</style>
+</head>
+<body>
+
+<div style="text-align:center; color:#888; font-size:.85rem; position:fixed; top:20px; left:0; right:0;">
+  Previzualizare sticker — apare în colțul dreapta-jos al paginii
+</div>
+
+<!-- STICKER -->
+<a class="promo-sticker" href="https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=1dfbc028f&redirect_to=https%253A//www.farmec.ro/promo/complete-care" target="_blank" rel="noopener" id="promo-sticker">
+
+  <div class="sticker-top">
+    <span class="sticker-pct">30%</span>
+    <span class="sticker-label">Reducere<br>îngrijire ten</span>
+  </div>
+
+  <div class="sticker-mid">
+    <div class="sticker-brand">Farmec</div>
+    <div class="sticker-desc">Complete Care — reducere directă în preț</div>
+  </div>
+
+  <div class="sticker-timer">
+    <div class="st-block"><span class="st-num" id="st-d">17</span><span class="st-lbl">Zile</span></div>
+    <span class="st-sep">:</span>
+    <div class="st-block"><span class="st-num" id="st-h">00</span><span class="st-lbl">Ore</span></div>
+    <span class="st-sep">:</span>
+    <div class="st-block"><span class="st-num" id="st-m">00</span><span class="st-lbl">Min</span></div>
+    <span class="st-sep">:</span>
+    <div class="st-block"><span class="st-num" id="st-s">00</span><span class="st-lbl">Sec</span></div>
+  </div>
+
+  <div class="sticker-cta">
+    Vezi oferta
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </div>
+
+  <button class="sticker-close" id="sticker-close-btn" title="Închide">✕</button>
+</a>
+
+<script>
+// Countdown
+(function() {
+  const end = new Date('2026-11-01T23:59:59');
+  function update() {
+    let diff = Math.max(0, end - new Date());
+    const d = Math.floor(diff / 86400000); diff %= 86400000;
+    const h = Math.floor(diff / 3600000);  diff %= 3600000;
+    const m = Math.floor(diff / 60000);    diff %= 60000;
+    const s = Math.floor(diff / 1000);
+    const pad = n => String(n).padStart(2, '0');
+    document.getElementById('st-d').textContent = pad(d);
+    document.getElementById('st-h').textContent = pad(h);
+    document.getElementById('st-m').textContent = pad(m);
+    document.getElementById('st-s').textContent = pad(s);
+  }
+  update(); setInterval(update, 1000);
+})();
+
+// Close button
+document.getElementById('sticker-close-btn').addEventListener('click', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  const s = document.getElementById('promo-sticker');
+  s.style.transition = 'opacity .3s, transform .3s';
+  s.style.opacity = '0';
+  s.style.transform = 'translateY(20px)';
+  setTimeout(() => s.style.display = 'none', 320);
+  try { localStorage.setItem('farmec-sticker-closed', '1'); } catch(e) {}
+});
+
+// Dacă a fost închis anterior
+try {
+  if (localStorage.getItem('farmec-sticker-closed') === '1') {
+    document.getElementById('promo-sticker').style.display = 'none';
+  }
+} catch(e) {}
+</script>
+</body>
+</html>

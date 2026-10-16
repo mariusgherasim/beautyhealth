@@ -91,7 +91,7 @@ const { category: categorySlug, brand: brandSlug } = Astro.params;
 const cat = getCategoryBySlug(categorySlug);
 const brand = getBrandBySlug(brandSlug);
 
-const canonicalBase = `https://beautyhealth.gherasimmarius.com/${categorySlug}/brand/${brandSlug}/`;
+const canonicalBase = `https://beauty-healths.com/${categorySlug}/brand/${brandSlug}/`;
 const canonical = page.currentPage === 1
   ? canonicalBase
   : `${canonicalBase}${page.currentPage}/`;
@@ -110,8 +110,8 @@ const jsonLd = {
   "breadcrumb": {
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://beautyhealth.gherasimmarius.com/" },
-      { "@type": "ListItem", "position": 2, "name": cat.name, "item": `https://beautyhealth.gherasimmarius.com/${categorySlug}/` },
+      { "@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://beauty-healths.com/" },
+      { "@type": "ListItem", "position": 2, "name": cat.name, "item": `https://beauty-healths.com/${categorySlug}/` },
       { "@type": "ListItem", "position": 3, "name": brand.name, "item": canonicalBase }
     ]
   }
@@ -124,7 +124,7 @@ const jsonLd = {
       <link rel="prev" href={page.currentPage === 2 ? canonicalBase : `${canonicalBase}${page.currentPage - 1}/`} />
     )}
     {page.url.next && (
-      <link rel="next" href={`https://beautyhealth.gherasimmarius.com${page.url.next}`} />
+      <link rel="next" href={`https://beauty-healths.com${page.url.next}`} />
     )}
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </Fragment>

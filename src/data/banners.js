@@ -8,7 +8,7 @@
 //   - 300 x 600  (half page)        → afișat în listă/grilă, mai înalt
 //
 // CÂMPUL channels — unde poate fi folosit bannerul:
-//   site      = afișat pe beautyhealth.gherasimmarius.com
+//   site      = afișat pe beauty-healths.com
 //   email     = poate fi inclus în emailuri cu oferte (MailerLite)
 //   facebook  = dimensiune compatibilă cu reclame/postări Facebook
 //   instagram = dimensiune compatibilă cu postări Instagram Feed

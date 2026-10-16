@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://beautyhealth.gherasimmarius.com/sitemap-index.xml
+Sitemap: https://beauty-healths.com/sitemap-index.xml
