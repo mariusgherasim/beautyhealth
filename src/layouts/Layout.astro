@@ -103,6 +103,93 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
       <button class="ps-close" id="ps-close" title="Închide" aria-label="Închide">✕</button>
     </a>
 
+    <!-- ── TOMBOLA STICKER: Farmec 15 ani — 5 Oct–18 Nov 2026 ── -->
+    <a class="tombola-sticker" id="tombola-sticker" href="/farmec-15-ani.html">
+      <div class="ts-top">
+        <span class="ts-big">15</span>
+        <span class="ts-label">Ani<br>aniversare</span>
+      </div>
+      <div class="ts-mid">
+        <div class="ts-brand">Farmec · Tombola</div>
+        <div class="ts-desc">Premii aniversare pe farmec.ro și în magazinele Gerovital</div>
+      </div>
+      <div class="ts-timer">
+        <div class="ts-block"><span class="ts-num" id="ts-d">--</span><span class="ts-lbl">Zile</span></div>
+        <span class="ts-sep">:</span>
+        <div class="ts-block"><span class="ts-num" id="ts-h">--</span><span class="ts-lbl">Ore</span></div>
+        <span class="ts-sep">:</span>
+        <div class="ts-block"><span class="ts-num" id="ts-m">--</span><span class="ts-lbl">Min</span></div>
+      </div>
+      <div class="ts-cta">
+        Vezi cum participi
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+      <button class="ts-close" id="ts-close" title="Închide" aria-label="Închide">✕</button>
+    </a>
+    <style is:global>
+      .tombola-sticker {
+        position: fixed; bottom: 24px; left: 24px; z-index: 9999;
+        width: 178px; background: #0B1F4A; color: #fff;
+        border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,.28), 0 2px 8px rgba(200,155,60,.25);
+        overflow: hidden; text-decoration: none; display: block;
+        transition: transform .2s, box-shadow .2s;
+        font-family: 'Segoe UI', system-ui, sans-serif;
+      }
+      .tombola-sticker:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,.32), 0 4px 16px rgba(200,155,60,.35); }
+      .ts-top { background: #C89B3C; padding: 10px 14px 8px; display: flex; align-items: center; justify-content: space-between; }
+      .ts-big { font-size: 1.9rem; font-weight: 900; line-height: 1; font-family: Georgia, serif; color: #1a1713; }
+      .ts-label { font-size: .62rem; font-weight: 800; text-transform: uppercase; letter-spacing: .09em; text-align: right; line-height: 1.35; color: #1a1713; }
+      .ts-mid { padding: 10px 14px 6px; border-bottom: 1px solid rgba(255,255,255,.1); }
+      .ts-brand { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #C89B3C; margin-bottom: 3px; }
+      .ts-desc { font-size: .78rem; color: rgba(255,255,255,.8); line-height: 1.4; }
+      .ts-timer { padding: 8px 14px; display: flex; gap: 6px; justify-content: center; align-items: center; }
+      .ts-block { display: flex; flex-direction: column; align-items: center; background: rgba(255,255,255,.08); border-radius: 5px; padding: 4px 6px; min-width: 38px; }
+      .ts-num { font-size: .9rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1; color: #fff; }
+      .ts-lbl { font-size: .48rem; text-transform: uppercase; letter-spacing: .06em; color: rgba(255,255,255,.5); margin-top: 2px; }
+      .ts-sep { font-size: .75rem; color: rgba(255,255,255,.3); margin-top: -4px; }
+      .ts-cta { background: #c8102e; text-align: center; padding: 9px 14px; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; display: flex; align-items: center; justify-content: center; gap: 5px; color: #fff; }
+      .ts-close { position: absolute; top: 7px; right: 7px; width: 18px; height: 18px; background: rgba(0,0,0,.18); border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #1a1713; font-size: 10px; line-height: 1; padding: 0; }
+      .ts-close:hover { background: rgba(0,0,0,.3); }
+      @media (max-width: 480px) {
+        .tombola-sticker { bottom: 16px; left: 16px; width: 160px; }
+      }
+    </style>
+    <script is:inline>
+      (function () {
+        var el = document.getElementById('tombola-sticker');
+        if (!el) return;
+        var end = new Date('2026-11-18T23:59:59+02:00');
+        // Ascunde după final sau dacă a fost închis
+        if (new Date() > end) { el.style.display = 'none'; return; }
+        try { if (localStorage.getItem('ts-farmec15-closed') === '1') { el.style.display = 'none'; return; } } catch(e) {}
+        // Nu afișa sticker-ul chiar pe pagina campaniei
+        if (location.pathname.indexOf('farmec-15-ani') !== -1) { el.style.display = 'none'; return; }
+
+        function pad(n) { return String(n).padStart(2, '0'); }
+        function tick() {
+          var diff = Math.max(0, end - new Date());
+          var d = Math.floor(diff / 86400000); diff %= 86400000;
+          var h = Math.floor(diff / 3600000);  diff %= 3600000;
+          var m = Math.floor(diff / 60000);
+          document.getElementById('ts-d').textContent = pad(d);
+          document.getElementById('ts-h').textContent = pad(h);
+          document.getElementById('ts-m').textContent = pad(m);
+        }
+        tick(); setInterval(tick, 30000);
+
+        var btn = document.getElementById('ts-close');
+        if (btn) {
+          btn.addEventListener('click', function (e) {
+            e.preventDefault(); e.stopPropagation();
+            el.style.transition = 'opacity .3s, transform .3s'; el.style.opacity = '0'; el.style.transform = 'translateY(20px)';
+            setTimeout(function(){ el.style.display = 'none'; }, 320);
+            try { localStorage.setItem('ts-farmec15-closed', '1'); } catch(e) {}
+          });
+        }
+      })();
+    </script>
+    <!-- ── END TOMBOLA STICKER ── -->
+
     <!-- ── TRUSTPILOT Floating Sticker ── -->
     <div id="tp-sticker">
       <div class="tp-sticker-label">Recenzii clienți</div>
@@ -180,6 +267,8 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
       (function () {
         // Ascunde dacă a fost deja închis
         try { if (localStorage.getItem('ps-farmec-closed') === '1') { document.getElementById('promo-sticker').style.display = 'none'; } } catch(e) {}
+        // Ascunde automat după finalul ofertei (1 noiembrie 2026)
+        if (new Date() > new Date('2026-11-01T23:59:59+02:00')) { var psEl = document.getElementById('promo-sticker'); if (psEl) psEl.style.display = 'none'; }
 
         // Countdown
         var end = new Date('2026-11-01T23:59:59');
