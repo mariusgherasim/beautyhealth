@@ -49,8 +49,9 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
       gtag('config', 'G-HS59YL4Y3D');
     </script>
 
-    <!-- Trustpilot widget script -->
-    <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+    <!-- TrustBox script -->
+    <script is:inline type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+    <!-- End TrustBox script -->
 
     <slot name="head" />
   </head>
@@ -105,16 +106,18 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
     <!-- ── TRUSTPILOT Floating Sticker ── -->
     <div id="tp-sticker">
       <div class="tp-sticker-label">Recenzii clienți</div>
+      <!-- TrustBox widget - Review Collector -->
       <div class="trustpilot-widget"
-           data-locale="en-US"
+           data-locale="ro-RO"
            data-template-id="56278e9abfbbba0bdcd568bc"
-           data-businessunit-id="6ad0a9bbc306c18a13301538"
+           data-businessunit-id="6ad21e64dea7b17b7f0585d7"
            data-style-height="52px"
            data-style-width="220px"
-           data-token="feb288da-c598-4f56-889c-4b401bfb23de">
+           data-token="5d8638c8-df43-434b-b812-50901f6b578f">
         <a href="https://www.trustpilot.com/review/beauty-healths.com"
            target="_blank" rel="noopener">Trustpilot</a>
       </div>
+      <!-- End TrustBox widget -->
     </div>
     <style is:global>
       #tp-sticker {
