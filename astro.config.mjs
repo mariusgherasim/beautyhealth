@@ -3,6 +3,6 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://beautyhealth.gherasimmarius.com',
+  site: 'https://beauty-healths.com',
   integrations: [sitemap()],
 });
