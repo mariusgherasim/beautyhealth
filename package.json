@@ -9,10 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "update-prices": "node scripts/update-prices.cjs",
-    "update-prices:cloud": "node scripts/update-prices.cjs --sources=infinitelove.ro,farmec.ro",
-    "update-prices:local": "node scripts/update-prices.cjs --sources=springfarma.com,minuneanaturii.ro"
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

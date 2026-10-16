@@ -5,3 +5,4 @@ update-report.json
 logs/
 .env
 "*.xml" 
+scripts/
