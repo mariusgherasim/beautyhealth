@@ -6,6 +6,7 @@ import Newsletter from '../components/Newsletter.astro';
 import CookieConsent from '../components/CookieConsent.astro';
 import BannerSlot from '../components/BannerSlot.astro';
 import ProductCard from '../components/ProductCard.astro';
+import HomeSearch from '../components/HomeSearch.astro';
 import { categories } from '../data/categories.js';
 import { produse, categoriiCuOferte, produseCategorie } from '../data/catalog.mjs';
 import { niceCount } from '../data/text.mjs';
@@ -44,7 +45,11 @@ const offerteAzi = discountProducts.slice(0, 24);
         <h1>Câte produse ai cumpărat fără să compari prețul?</h1>
         <p><strong>{niceCount(total).replace('peste ', 'Peste ')}</strong> de produse de frumusețe, îngrijire și sănătate, comparate zilnic. Găsește oferta bună, nu doar prima pe care o vezi.</p>
       </div>
+      <HomeSearch />
     </section>
+
+    <!-- Rezultatele cautarii din hero (completate de HomeSearch) -->
+    <section id="hs-results" hidden aria-live="polite"></section>
 
     <div class="wrap">
       <BannerSlot category="homepage" size="728x90" />

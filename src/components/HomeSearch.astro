@@ -1,0 +1,385 @@
+---
+// Cautarea din prima pagina (in hero), in tot catalogul.
+//
+// La click in casuta (cand e goala) apare fereastra de sugestii: 6 categorii si
+// 6 branduri aleatorii; hover/atingere -> 8 produse aleatorii.
+// La scriere fereastra se inchide si se cauta in indexul compact (/search-index.json),
+// descarcat o singura data, abia la primul caracter. Rezultatele apar grupate pe
+// categorii, in sectiunea #hs-results de sub hero.
+import '../styles/search-panel.css';
+---
+<div class="cs-wrap hs-wrap">
+  <div class="category-search hs-box">
+    <input
+      type="search"
+      class="search-input"
+      placeholder="Caută produs sau brand (ex: vitamina D, Vichy, șampon)..."
+      autocomplete="off"
+      enterkeyhint="search"
+      aria-haspopup="dialog"
+      aria-expanded="false"
+    />
+    <button type="button" class="search-icon" aria-label="Deschide sugestiile de căutare">🔍</button>
+    <p class="search-status"></p>
+  </div>
+
+  <div class="sp-panel" hidden role="dialog" aria-label="Sugestii de căutare">
+    <div class="sp-side">
+      <div class="sp-block">
+        <p class="sp-heading">Categorii populare</p>
+        <div class="sp-tipuri"></div>
+      </div>
+      <div class="sp-block">
+        <p class="sp-heading">Branduri populare</p>
+        <div class="sp-branduri"></div>
+      </div>
+    </div>
+    <div class="sp-main">
+      <div class="sp-main-head">
+        <p class="sp-heading sp-titlu">Produse populare</p>
+        <a class="sp-vezi" href="#">Vezi toate →</a>
+        <button type="button" class="sp-close" aria-label="Închide">✕</button>
+      </div>
+      <div class="sp-produse"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const norm = (s) =>
+    String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+
+  function escapeHtml(s) {
+    const div = document.createElement('div');
+    div.textContent = s == null ? '' : String(s);
+    return div.innerHTML;
+  }
+
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function renderMini(p) {
+    const disc = p.op && p.op > p.pr;
+    return `
+      <a class="sp-card" href="${escapeHtml(p.u)}" target="_blank" rel="noopener sponsored nofollow"
+         data-product-id="${escapeHtml(p.id)}" data-product-title="${escapeHtml(p.t)}" data-product-price="${p.pr}">
+        <span class="sp-img"><img src="${escapeHtml(p.img)}" alt="${escapeHtml(p.t)}" loading="lazy" width="140" height="140" /></span>
+        <span class="sp-name">${escapeHtml(p.t)}</span>
+        <span class="sp-price">${Number(p.pr).toFixed(2)} RON${disc ? ` <s>${Number(p.op).toFixed(2)}</s>` : ''}</span>
+      </a>`;
+  }
+
+  function renderCard(p) {
+    const disc = p.op && p.op > p.pr;
+    const img = p.img ? `<img src="${escapeHtml(p.img)}" alt="${escapeHtml(p.t)}" loading="lazy" width="220" height="220" />` : '';
+    return `
+      <a class="product-card" href="${escapeHtml(p.u)}" target="_blank" rel="noopener sponsored nofollow"
+         data-product-id="${escapeHtml(p.id)}" data-product-title="${escapeHtml(p.t)}" data-product-price="${p.pr}">
+        ${disc ? '<span class="badge">Ofertă</span>' : ''}
+        ${img}
+        <div class="card-body">
+          ${p.b ? `<span class="brand">${escapeHtml(p.b)}</span>` : ''}
+          <h3>${escapeHtml(p.t)}</h3>
+          <div class="price-row">
+            <span class="price">${Number(p.pr).toFixed(2)} RON</span>
+            ${disc ? `<span class="old-price">${Number(p.op).toFixed(2)} RON</span>` : ''}
+          </div>
+          <span class="cta">Vezi oferta →</span>
+        </div>
+      </a>`;
+  }
+
+  const wrap = document.querySelector('.hs-wrap');
+  if (wrap) {
+    const input = wrap.querySelector('.search-input');
+    const lupa = wrap.querySelector('.search-icon');
+    const status = wrap.querySelector('.search-status');
+    const panel = wrap.querySelector('.sp-panel');
+    const elTipuri = panel.querySelector('.sp-tipuri');
+    const elBranduri = panel.querySelector('.sp-branduri');
+    const elProduse = panel.querySelector('.sp-produse');
+    const elTitlu = panel.querySelector('.sp-titlu');
+    const elVezi = panel.querySelector('.sp-vezi');
+    const resultsEl = document.getElementById('hs-results');
+
+    // ── Fereastra de sugestii ──────────────────────────────────────────
+    let panelData = null, panelLoading = null, grupuri = {}, deschidere = false;
+
+    function loadPanel() {
+      if (panelData) return Promise.resolve(panelData);
+      if (!panelLoading) {
+        panelLoading = fetch('/search-panel/home.json')
+          .then((r) => r.json())
+          .then((d) => (panelData = d))
+          .catch(() => (panelData = { tipuri: [], branduri: [] }));
+      }
+      return panelLoading;
+    }
+
+    function arataProduse(key) {
+      const g = grupuri[key];
+      if (!g) return;
+      panel.querySelectorAll('.sp-item').forEach((el) => el.classList.toggle('active', el.dataset.key === key));
+      elTitlu.textContent = g.name;
+      elVezi.href = g.url;
+      elVezi.textContent = `Vezi toate ${g.count} →`;
+      elProduse.innerHTML = shuffle(g.p).slice(0, 8).map(renderMini).join('');
+    }
+
+    function construiestePanel() {
+      const cats = shuffle(panelData.tipuri).slice(0, 6);
+      const branduri = shuffle(panelData.branduri).slice(0, 6);
+      grupuri = {};
+      cats.forEach((g) => (grupuri['c:' + g.slug] = g));
+      branduri.forEach((g) => (grupuri['b:' + g.slug] = g));
+      elTipuri.innerHTML = cats
+        .map((g) => `<button type="button" class="sp-item sp-tip" data-key="c:${escapeHtml(g.slug)}">${escapeHtml(g.name)}</button>`)
+        .join('');
+      elBranduri.innerHTML = branduri
+        .map((g) => `<button type="button" class="sp-item sp-brand" data-key="b:${escapeHtml(g.slug)}" title="${escapeHtml(g.name)}">${
+          g.logo ? `<img src="${escapeHtml(g.logo)}" alt="${escapeHtml(g.name)}" loading="lazy" />` : `<span>${escapeHtml(g.name)}</span>`
+        }</button>`)
+        .join('');
+      elBranduri.closest('.sp-block').hidden = branduri.length === 0;
+      const primul = cats[0] ? 'c:' + cats[0].slug : branduri[0] ? 'b:' + branduri[0].slug : null;
+      if (primul) arataProduse(primul);
+    }
+
+    async function deschide() {
+      if (input.value.trim() !== '' || !panel.hidden || deschidere) return;
+      deschidere = true;
+      await loadPanel();
+      deschidere = false;
+      if (input.value.trim() !== '') return;
+      if (!panelData.tipuri.length && !panelData.branduri.length) return;
+      construiestePanel();
+      panel.hidden = false;
+      input.setAttribute('aria-expanded', 'true');
+      if (typeof gtag === 'function') gtag('event', 'bh_search_panel_open', { category: 'homepage' });
+    }
+
+    function inchide() {
+      if (panel.hidden) return;
+      panel.hidden = true;
+      input.setAttribute('aria-expanded', 'false');
+    }
+
+    input.addEventListener('focus', deschide);
+    input.addEventListener('click', deschide);
+    lupa.addEventListener('click', () => {
+      input.focus();
+      if (input.value.trim()) cauta(input.value, true);
+      else deschide();
+    });
+    panel.querySelector('.sp-close').addEventListener('click', inchide);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') inchide(); });
+    document.addEventListener('click', (e) => { if (!wrap.contains(e.target)) inchide(); });
+    panel.addEventListener('mousedown', (e) => { if (e.target.closest('button')) e.preventDefault(); });
+
+    const canHover = window.matchMedia('(hover: hover)').matches;
+    panel.addEventListener('mouseover', (e) => {
+      if (!canHover) return;
+      const it = e.target.closest('.sp-item');
+      if (it && !it.classList.contains('active')) arataProduse(it.dataset.key);
+    });
+    panel.addEventListener('click', (e) => {
+      const it = e.target.closest('.sp-item');
+      if (it) arataProduse(it.dataset.key);
+      const card = e.target.closest('.sp-card');
+      if (card && typeof gtag === 'function') {
+        gtag('event', 'bh_affiliate_click', {
+          product_id: card.dataset.productId || '',
+          product_title: card.dataset.productTitle || '',
+          product_price: card.dataset.productPrice || '',
+          source: 'search_panel_home',
+          page_location: window.location.href,
+        });
+      }
+    });
+
+    // ── Cautarea in tot catalogul ──────────────────────────────────────
+    let index = null, indexLoading = null;
+
+    function loadIndex() {
+      if (index) return Promise.resolve(index);
+      if (!indexLoading) {
+        status.textContent = 'Se încarcă produsele...';
+        indexLoading = fetch('/search-index.json')
+          .then((r) => r.json())
+          .then((d) => {
+            const lista = d.p.map((x, i) => ({
+              id: 'h' + i,
+              t: x[0],
+              b: x[1],
+              c: x[2],
+              pr: x[3],
+              op: x[4] || null,
+              img: x[6] ? d.ip[x[5]] + x[6] : '',
+              u: x[7] >= 0
+                ? `https://event.2performant.com/events/click?ad_type=product_store&unique=${x[8]}&aff_code=676a7e7d9&campaign_unique=${d.cu[x[7]]}`
+                : x[8],
+              n: ' ' + norm(x[0] + ' ' + x[1]) + ' ',
+              nb: norm(x[1]),
+              nt: norm(x[0]),
+            }));
+            index = { cats: d.c, lista };
+            status.textContent = '';
+            return index;
+          })
+          .catch(() => {
+            status.textContent = 'Căutarea nu a putut fi încărcată. Încearcă din nou.';
+            indexLoading = null;
+            return null;
+          });
+      }
+      return indexLoading;
+    }
+
+    let gaTimer;
+    async function cauta(query, imediat) {
+      const q = query.trim();
+      if (q.length < 2) {
+        resultsEl.hidden = true;
+        resultsEl.innerHTML = '';
+        status.textContent = q.length === 1 ? 'Scrie cel puțin 2 caractere.' : '';
+        return;
+      }
+      const idx = await loadIndex();
+      if (!idx || input.value.trim() !== q) return; // a schimbat textul intre timp
+
+      const nq = norm(q);
+      const cuvinte = nq.split(' ').filter(Boolean);
+      const gasite = [];
+      for (const p of idx.lista) {
+        if (!cuvinte.every((w) => p.n.includes(w))) continue;
+        let s = 0;
+        if (p.nt.includes(nq)) s += 3;
+        if (p.nb === nq || p.nb.startsWith(nq + ' ')) s += 2;
+        if (p.nt.startsWith(nq)) s += 1;
+        gasite.push([s, p]);
+      }
+      gasite.sort((a, b) => b[0] - a[0]);
+
+      // Grupare pe categorii: numarul include toate categoriile produsului;
+      // produsul se afiseaza o singura data, la prima lui categorie.
+      const grup = idx.cats.map(([slug, name]) => ({ slug, name, count: 0, afisate: [] }));
+      for (const [, p] of gasite) {
+        p.c.forEach((ci) => grup[ci] && grup[ci].count++);
+        const g = grup[p.c[0]];
+        if (g && g.afisate.length < 4) g.afisate.push(p);
+      }
+      const cuRezultate = grup.filter((g) => g.count > 0).sort((a, b) => b.count - a.count);
+
+      resultsEl.hidden = false;
+      if (!gasite.length) {
+        resultsEl.innerHTML = `<div class="hs-res"><p class="hs-sum">Niciun produs găsit pentru „${escapeHtml(q)}”. Încearcă alt termen sau verifică scrierea.</p></div>`;
+      } else {
+        const link = (g) => `/${g.slug}/?q=${encodeURIComponent(q)}`;
+        resultsEl.innerHTML = `
+          <div class="hs-res">
+            <p class="hs-sum"><strong>${gasite.length.toLocaleString('ro-RO')}</strong> produse găsite pentru „${escapeHtml(q)}”</p>
+            <div class="hs-chips">
+              ${cuRezultate.map((g) => `<a class="hs-chip" href="${link(g)}">${escapeHtml(g.name)} <span>${g.count}</span></a>`).join('')}
+            </div>
+            ${cuRezultate.slice(0, 6).filter((g) => g.afisate.length).map((g) => `
+              <div class="hs-group">
+                <div class="hs-group-head">
+                  <h2>${escapeHtml(g.name)} <span>(${g.count})</span></h2>
+                  <a href="${link(g)}">Vezi toate ${g.count} în ${escapeHtml(g.name)} →</a>
+                </div>
+                <div class="hs-grid">${g.afisate.map(renderCard).join('')}</div>
+              </div>`).join('')}
+          </div>`;
+      }
+      if (imediat) resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      clearTimeout(gaTimer);
+      gaTimer = setTimeout(() => {
+        if (typeof gtag === 'function') gtag('event', 'bh_search', { search_term: q, results: gasite.length, page: 'homepage' });
+      }, 1200);
+    }
+
+    let t;
+    input.addEventListener('input', () => {
+      const v = input.value;
+      clearTimeout(t);
+      if (v.trim() === '') {
+        cauta('');
+        deschide(); // a sters tot textul -> fereastra reapare
+        return;
+      }
+      inchide(); // primul caracter scris -> fereastra se inchide
+      loadIndex(); // incepe descarcarea imediat
+      t = setTimeout(() => cauta(v), 250);
+    });
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); clearTimeout(t); cauta(input.value, true); input.blur(); }
+    });
+
+    // GA4 pentru produsele din rezultate
+    resultsEl.addEventListener('click', (e) => {
+      const card = e.target.closest('.product-card');
+      if (card && typeof gtag === 'function') {
+        gtag('event', 'bh_affiliate_click', {
+          product_title: card.dataset.productTitle || '',
+          product_price: card.dataset.productPrice || '',
+          source: 'search_home',
+          page_location: window.location.href,
+        });
+      }
+    });
+  }
+</script>
+
+<style is:global>
+  .hs-wrap { max-width: 1100px; margin: 26px auto 0; text-align: left; }
+  .hs-box.category-search { max-width: 720px; margin: 0 auto; }
+  .hs-box input {
+    font-size: 1.05rem;
+    padding: 16px 52px 16px 20px;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  }
+  .hs-box input:focus { border-color: var(--gold, #c89b3c); }
+  .hs-box input::-webkit-search-cancel-button { cursor: pointer; }
+  .hs-box .search-icon { right: 16px; font-size: 1.2rem; }
+  .hs-box .search-status { color: #cfd6e6; text-align: center; }
+  .hs-wrap .sp-panel { top: 66px; left: 0; right: 0; width: auto; }
+
+  /* Rezultate sub hero */
+  #hs-results { background: #fff; border-bottom: 1px solid #ece7de; }
+  #hs-results[hidden] { display: none; }
+  .hs-res { max-width: 1200px; margin: 0 auto; padding: 26px 16px 30px; }
+  .hs-sum { margin: 0 0 12px; color: #444; font-size: 0.95rem; }
+  .hs-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+  .hs-chip {
+    padding: 6px 12px; border-radius: 20px; border: 1px solid #ddd; background: #fff;
+    font-size: 0.82rem; color: var(--navy, #0b1f4a); text-decoration: none;
+  }
+  .hs-chip span { color: #999; margin-left: 2px; }
+  .hs-chip:hover { border-color: var(--navy, #0b1f4a); }
+  .hs-group { margin-top: 18px; }
+  .hs-group-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+  .hs-group-head h2 { margin: 0; font-size: 1.15rem; color: var(--navy, #0b1f4a); }
+  .hs-group-head h2 span { color: #999; font-weight: 400; font-size: 0.95rem; }
+  .hs-group-head a { color: var(--gold, #c89b3c); font-weight: 700; font-size: 0.88rem; text-decoration: none; }
+  .hs-group-head a:hover { text-decoration: underline; }
+  .hs-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+
+  @media (max-width: 900px) {
+    .hs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 640px) {
+    .hs-wrap { margin-top: 18px; }
+    .hs-box input { font-size: 1rem; padding: 14px 46px 14px 16px; }
+    .hs-wrap .sp-panel { top: 58px; }
+    .hs-grid { gap: 10px; }
+  }
+</style>
