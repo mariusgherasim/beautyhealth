@@ -5,68 +5,56 @@ import Header from '../../../../components/Header.astro';
 import Footer from '../../../../components/Footer.astro';
 import Newsletter from '../../../../components/Newsletter.astro';
 import BannerSlot from '../../../../components/BannerSlot.astro';
-import { getCategoryBySlug } from '../../../../data/categories.js';
-import { subcategories, getSubcategoryBySlug } from '../../../../data/subcategories.js';
-import productsData from '../../../../data/products.json';
+import { categories, getCategoryBySlug } from '../../../../data/categories.js';
+import { produseTip, tipuriCategorie, cuNumar } from '../../../../data/catalog.mjs';
 
+// Pagini de TIP: /{categorie}/tip/{tip}/  (doar tipurile cu minim 5 produse)
 export function getStaticPaths({ paginate }) {
   const PAGE_SIZE = 24;
-  const paths = [];
-
-  for (const sub of subcategories.filter(s => s.type !== 'brand')) {
-    for (const catSlug of sub.categories) {
-      const keywords = sub.keywords;
-      const products = productsData.filter((p) => {
-        if (p.draft) return false;
-        if (!p.category.includes(catSlug)) return false;
-        const searchText = ((p.title || '') + ' ' + (p.subcategory_raw || '')).toLowerCase();
-        return keywords.some((kw) => searchText.includes(kw.toLowerCase()));
-      });
-
-      if (products.length === 0) continue;
-
-      const paginatedPaths = paginate(products, {
-        params: { category: catSlug, sub: sub.slug },
+  return categories.flatMap((cat) =>
+    tipuriCategorie(cat.slug).flatMap((t) =>
+      paginate(produseTip(cat.slug, t.slug), {
+        params: { category: cat.slug, tip: t.slug },
+        props: { tip: t },
         pageSize: PAGE_SIZE,
-      });
-      paths.push(...paginatedPaths);
-    }
-  }
-  return paths;
+      })
+    )
+  );
 }
 
-const { page } = Astro.props;
-const { category: categorySlug, sub: subSlug } = Astro.params;
-
+const { page, tip } = Astro.props;
+const { category: categorySlug } = Astro.params;
 const cat = getCategoryBySlug(categorySlug);
-const sub = getSubcategoryBySlug(subSlug);
+const siblings = tipuriCategorie(categorySlug);
 
-const canonicalBase = `https://beauty-healths.com/${categorySlug}/sub/${subSlug}/`;
-const canonical = page.currentPage === 1
-  ? canonicalBase
-  : `${canonicalBase}${page.currentPage}/`;
+const intro = tip.intro ||
+  cuNumar(`Câte oferte ai verificat ultima dată înainte să cumperi? Aici găsești {N} de produse din „${tip.name}” (${cat.name}), de la mai multe magazine online, ca să compari prețul înainte să comanzi.`, page.total);
+const metaDescription = `${tip.name} — ${page.total} produse din ${cat.name}, prețuri comparate de la mai multe magazine online.`;
+
+const canonicalBase = `https://beauty-healths.com/${categorySlug}/tip/${tip.slug}/`;
+const canonical = page.currentPage === 1 ? canonicalBase : `${canonicalBase}${page.currentPage}/`;
 
 const title = page.currentPage === 1
-  ? `${sub.name} — ${cat.name} | BeautyHealth`
-  : `${sub.name} — ${cat.name}, Pagina ${page.currentPage} | BeautyHealth`;
+  ? `${tip.name} — ${cat.name} | BeautyHealth`
+  : `${tip.name} — ${cat.name}, Pagina ${page.currentPage} | BeautyHealth`;
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "name": `${sub.name} — ${cat.name}`,
+  "name": `${tip.name} — ${cat.name}`,
   "url": canonical,
   "breadcrumb": {
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://beauty-healths.com/" },
       { "@type": "ListItem", "position": 2, "name": cat.name, "item": `https://beauty-healths.com/${categorySlug}/` },
-      { "@type": "ListItem", "position": 3, "name": sub.name, "item": canonicalBase }
+      { "@type": "ListItem", "position": 3, "name": tip.name, "item": canonicalBase }
     ]
   }
 };
 ---
 
-<Layout title={title} description={sub.metaDescription} canonical={canonical}>
+<Layout title={title} description={metaDescription} canonical={canonical}>
   <Fragment slot="head">
     {page.currentPage > 1 && (
       <link rel="prev" href={page.currentPage === 2 ? canonicalBase : `${canonicalBase}${page.currentPage - 1}/`} />
@@ -85,16 +73,22 @@ const jsonLd = {
       <span>/</span>
       <a href={`/${categorySlug}/`}>{cat.name}</a>
       <span>/</span>
-      <span>{sub.name}</span>
+      <span>{tip.name}</span>
     </nav>
 
     <BannerSlot category={categorySlug} size="728x90" />
 
-    <h1>{sub.name} <span class="cat-label">— {cat.name}</span></h1>
+    <h1>{tip.name} <span class="cat-label">— {cat.name}</span></h1>
 
     {page.currentPage === 1 && (
-      <p class="intro">{sub.intro}</p>
+      <p class="intro">{intro}</p>
     )}
+
+    <div class="sub-pills">
+      {siblings.map((t) => (
+        <a href={`/${categorySlug}/tip/${t.slug}/`} class={t.slug === tip.slug ? 'sub-pill active' : 'sub-pill'}>{t.name}</a>
+      ))}
+    </div>
 
     <p class="results-count">
       {page.total} produse — pagina {page.currentPage} din {page.lastPage}
@@ -127,6 +121,9 @@ const jsonLd = {
   h1 { color: var(--navy); margin-bottom: 8px; font-size: 1.8rem; }
   .cat-label { font-weight: 400; font-size: 1.1rem; color: #666; }
   .intro { max-width: 780px; color: #444; margin-bottom: 16px; }
+  .sub-pills { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 14px; }
+  .sub-pill { padding: 4px 11px; border-radius: 20px; background: #fff8ee; border: 1px solid #e8c97a; font-size: 0.78rem; text-decoration: none; color: #7a5c00; font-weight: 500; }
+  .sub-pill:hover, .sub-pill.active { background: var(--gold); color: #fff; border-color: var(--gold); }
   .results-count { color: #888; font-size: 0.85rem; margin-bottom: 16px; }
   .grid {
     display: grid;

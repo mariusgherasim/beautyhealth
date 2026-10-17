@@ -12,16 +12,22 @@
 // Optiuni:
 //   node sync-feeds-local.cjs --surse=notino,infinitelove
 //   node sync-feeds-local.cjs --surse=springfarma,farmec
-//   node sync-feeds-local.cjs --surse=boabe,endro
 //   node sync-feeds-local.cjs --dry-run   (afiseaza ce ar face, fara sa salveze)
 //
 // Feed-uri necesare (pune-le in acelasi folder cu scriptul):
-//   feed_notino.xml          → notino.ro
-//   feed_springfarma.xml     → springfarma.com
-//   feed_farmec.xml          → farmec.ro
-//   feed_infinitelove.xml    → infinitelove.ro
-//   feed_c143969aa.xml       → boabe.ro
-//   feed_9c297a4fb.xml       → endro.ro
+//   feed_235256a01.xml   → notino.ro
+//   feed_436edea46.xml   → springfarma.com
+//   feed_eb530f914.xml   → farmec.ro
+//   feed_9d5a36a0f.xml   → infinitelove.ro
+//   feed_fd8dad9ff.xml   → detoxmed.ro
+//   feed_5d8022816.xml   → longevity-boost.com
+//   feed_9c297a4fb.xml   → endro.ro
+//   feed_c143969aa.xml   → boabe.ro
+//   feed_5544111cd.xml   → PARFLAB.ro
+//   feed_585a1cd31.xml   → drmax.ro (catalog complet)
+//   feed_09eca89e8.xml   → drmax.ro (branduri exclusive)
+//   feed_dc6bbc64e.xml   → drmax.ro (private label)
+//   (cele 3 feed-uri Dr. Max se unesc automat; produsele duble apar o singura data)
 //
 // Output: src/data/products.json (actualizat direct)
 //         sync-report.json (raport detaliat)
@@ -47,26 +53,54 @@ const FEED_CONFIG = {
   "notino.ro": {
     files: ["feed_notino.xml", "feed_235256a01.xml", "feed_235256a01_1.xml"],
     type: "notino",
+    defaultCategory: "parfumuri",
   },
   "springfarma.com": {
     files: ["feed_springfarma.xml", "feed_436edea46.xml", "feed_436edea46_1.xml"],
     type: "springfarma",
+    defaultCategory: "vitamine-suplimente",
   },
   "farmec.ro": {
     files: ["feed_farmec.xml", "feed_eb530f914.xml", "feed_eb530f914_1.xml"],
     type: "farmec",
+    defaultCategory: "ingrijire-ten",
   },
   "infinitelove.ro": {
     files: ["feed_infinitelove.xml", "feed_9d5a36a0f.xml", "feed_9d5a36a0f_1.xml"],
     type: "infinitelove",
+    defaultCategory: "parfumuri",
   },
-  "boabe.ro": {
-    files: ["feed_boabe.xml", "feed_c143969aa.xml"],
-    type: "boabe",
+  "detoxmed.ro": {
+    files: ["feed_detoxmed.xml", "feed_fd8dad9ff.xml"],
+    type: "generic",
+    defaultCategory: "vitamine-suplimente",
+  },
+  "longevity-boost.com": {
+    files: ["feed_longevity-boost.xml", "feed_5d8022816.xml"],
+    type: "generic",
+    defaultCategory: "vitamine-suplimente",
   },
   "endro.ro": {
     files: ["feed_endro.xml", "feed_9c297a4fb.xml"],
-    type: "endro",
+    type: "generic",
+    defaultCategory: "ingrijire-ten",
+  },
+  "boabe.ro": {
+    files: ["feed_boabe.xml", "feed_c143969aa.xml"],
+    type: "generic",
+    defaultCategory: "vitamine-suplimente",
+  },
+  "PARFLAB.ro": {
+    files: ["feed_parflab.xml", "feed_5544111cd.xml"],
+    type: "generic",
+    defaultCategory: "parfumuri",
+  },
+  "drmax.ro": {
+    // mergeFiles: se citesc TOATE fisierele gasite si se unesc dupa product_id
+    files: ["feed_585a1cd31.xml", "feed_09eca89e8.xml", "feed_dc6bbc64e.xml"],
+    mergeFiles: true,
+    type: "drmax",
+    defaultCategory: "ingrijire-ten",
   },
 };
 
@@ -123,6 +157,10 @@ function parseXmlItems(content) {
   return items;
 }
 
+function findFeedFiles(config) {
+  return config.files.map((f) => path.join(__dirname, f)).filter((p) => fs.existsSync(p));
+}
+
 function findFeedFile(config) {
   for (const filename of config.files) {
     const p = path.join(__dirname, filename);
@@ -168,20 +206,66 @@ function getFarmecCategory(catRaw) {
   return "ingrijire-ten";
 }
 
-function getEndroCategory(catRaw) {
-  if (!catRaw) return "ingrijire-ten";
+function getGenericCategory(catRaw, defaultCategory) {
+  if (!catRaw) return defaultCategory;
   const c = catRaw.toLowerCase();
-  // Corp și păr
-  if (c.includes("șampoane") || c.includes("sampoane")) return "ingrijire-par";
-  if (c.includes("corp")) return "ingrijire-corp";
-  // Deodorante → ingrijire-corp (fara subcategorie separata)
-  if (c.includes("deodorant")) return "ingrijire-corp";
-  // Pastă de dinți → igiena-orala
-  if (c.includes("past") && c.includes("din")) return "igiena-orala";
-  if (c.includes("refill")) return "igiena-orala";
-  // Tot ce tine de fata + rutine → ingrijire-ten
-  if (c.includes("rutine") || c.includes("rutin")) return "ingrijire-ten";
-  if (c.includes("crem") || c.includes("ser") || c.includes("cur") || c.includes("noapte")) return "ingrijire-ten";
+  if (["parfum", "apa de"].some((k) => c.includes(k))) return "parfumuri";
+  if (["machiaj", "make", "fond de ten", "ruj", "mascara"].some((k) => c.includes(k))) return "machiaj";
+  if (["par", "păr", "sampon", "balsam"].some((k) => c.includes(k))) return "ingrijire-par";
+  if (["corp", "crema corp", "lotiune"].some((k) => c.includes(k))) return "ingrijire-corp";
+  if (["ten", "fata", "față", "serum", "toner"].some((k) => c.includes(k))) return "ingrijire-ten";
+  if (["supliment", "vitamine", "mineral", "capsule", "tablete"].some((k) => c.includes(k))) return "vitamine-suplimente";
+  if (["mama", "copil", "bebe"].some((k) => c.includes(k))) return "mama-si-copilul";
+  if (["oral", "dinti", "pasta"].some((k) => c.includes(k))) return "igiena-orala";
+  if (["barbat", "bărbat", "after shave"].some((k) => c.includes(k))) return "cosmetice-barbati";
+  return defaultCategory;
+}
+
+// ---- DR. MAX: categorie din <category> + <subcategory> ----
+// Potrivire fara diacritice, pe inceput de cuvant ('corp' prinde 'corporala').
+function normTxt(s) {
+  return " " + String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim() + " ";
+}
+function areKw(text, kws) {
+  return kws.some((k) => {
+    const whole = k.endsWith("=");
+    const kk = normTxt(whole ? k.slice(0, -1) : k).trim();
+    return whole ? text.includes(" " + kk + " ") : text.includes(" " + kk);
+  });
+}
+function getDrmaxCategory(cat, sub, title) {
+  const c = normTxt(cat);
+  // Produsele fara subcategorie (ex. "Marci exclusive") se incadreaza dupa titlu
+  const s = normTxt(sub && sub.trim() ? sub : title);
+  if (areKw(c, ["suplimente alimentare", "remedii naturiste"])) return "vitamine-suplimente";
+  if (areKw(c, ["mama si copilul"])) return "mama-si-copilul";
+  if (areKw(c, ["tehnico medicale"])) return "dispozitive-medicale";
+  if (areKw(c, ["dieta si nutritie"])) {
+    if (areKw(s, ["suplimente pentru sportivi", "aminoacizi", "creatina", "gainere", "batoane proteice", "antrenament", "carnitina", "arginina", "alimente sportivi", "proteine", "electroliti", "sport=",
+                  "imunitate", "anti inflamatie", "anti stres", "energie", "colagen", "fertilitate", "controlul greutatii", "pierdere in greutate", "longevitate", "pudre functionale"])) return "vitamine-suplimente";
+    return "wellness";
+  }
+  if (areKw(c, ["subiecte tabu"])) {
+    if (areKw(s, ["teste de sarcina"])) return "mama-si-copilul";
+    if (areKw(s, ["tampoane", "absorbante"])) return "ingrijire-corp";
+    if (areKw(s, ["incontinenta", "scutece adulti", "protectii pat"])) return "dispozitive-medicale";
+    if (areKw(s, ["hemoroizi", "herpes", "respiratie"])) return "vitamine-suplimente";
+    return "cuplu-intimitate";
+  }
+  // Frumusete si ingrijire -> dupa subcategorie (ordinea conteaza)
+  if (areKw(s, ["uleiuri esentiale", "aromaterapie", "aromoterapie", "roll on uleiuri"])) return "wellness";
+  if (areKw(s, ["apa de parfum", "apa de toaleta", "parfumuri", "odorizante", "lumanari", "parfumuri pentru textile"])) return "parfumuri";
+  if (areKw(s, ["pentru copii", "anti paduchi"])) return "mama-si-copilul";
+  if (areKw(s, ["aparat de ras femei"])) return "ingrijire-corp";
+  if (areKw(s, ["barbierit", "spuma de ras", "aparate de ras", "lame de ras", "aftershave", "barba", "pentru barbati", "pamatuf", "crema de ras", "gel de ras"])) return "cosmetice-barbati";
+  if (areKw(s, ["dinti", "dentar", "apa de gura", "igiena orala", "ata dentara", "dusuri bucale", "proteze"])) return "igiena-orala";
+  if (areKw(s, ["fond de ten", "ruj=", "unghi", "oja", "creion", "rimel", "fard", "gloss", "corector", "pudra de fata", "pensule", "bb cream", "cc cream", "tus=", "iluminator", "bronzer", "baza de machiaj",
+                "gene false", "sprancene", "bureti machiaj", "accesorii make up", "machiaj", "truse", "acetona", "pile=", "cuticule"])) return "machiaj";
+  if (areKw(s, ["par=", "parului", "sampon", "balsam hidratant pentru par", "balsam pentru par", "balsam de par", "balsam cu keratina", "balsam leave in", "masti pentru par", "masti de par", "scalp", "styling", "anticadere",
+                "antimatreata", "perie de par", "piepteni", "vopsea", "fixativ", "spuma de par", "gel de par", "uleiuri pentru par", "ulei de par", "pomada", "protectie termica", "bonete", "prosoape de par",
+                "spray si pudra pentru volum", "accesorii par"])) return "ingrijire-par";
+  if (areKw(s, ["corp", "dus=", "deodorant", "antiperspirant", "maini", "picioare", "pedichiura", "scrub", "spray de corp", "mist", "baie", "intim", "absorbant", "cupe menstruale", "chiloti menstruali",
+                "tampoane si", "anticelulit", "vergeturi", "celulita", "epila", "depila", "ceara de epilat", "benzi depilatoare", "tantari", "insecte", "masaj", "after sun", "dupa plaja", "autobronzant", "sapun solid"])) return "ingrijire-corp";
   return "ingrijire-ten";
 }
 
@@ -198,12 +282,12 @@ function updateProduct(p, item) {
   delete p.description;
 }
 
-function makeProduct(source, pid, item, category, existingSlugs) {
+function makeProduct(source, pid, item, category, existingSlugs, rawCategory) {
   const fp = parsePrice(extractField(item, "price")) || 0;
   const fo = parsePrice(extractField(item, "old_price"));
   const imgs = (extractField(item, "image_urls") || "").split(",");
   const title = extractField(item, "title") || "";
-  const prefix = source.replace(".ro", "").replace(".com", "");
+  const prefix = source.replace(".ro", "").replace(".com", "").toLowerCase();
 
   let base = slugify(title || `produs-${pid}`);
   let slug = base;
@@ -219,7 +303,7 @@ function makeProduct(source, pid, item, category, existingSlugs) {
     brand: extractField(item, "brand") || "",
     title,
     category: Array.isArray(category) ? category : [category],
-    subcategory_raw: extractField(item, "category"),
+    subcategory_raw: rawCategory !== undefined ? rawCategory : extractField(item, "category"),
     price: fp,
     old_price: fo && fo > fp ? fo : null,
     currency: "RON",
@@ -265,22 +349,31 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
     if (!surseFilter.some((f) => sourceName.includes(f) || source.includes(f))) continue;
   }
 
-  const feedPath = findFeedFile(config);
-  if (!feedPath) {
+  const feedPaths = config.mergeFiles ? findFeedFiles(config) : [findFeedFile(config)].filter(Boolean);
+  if (feedPaths.length === 0) {
     console.log(`⚠️  ${source}: niciun fisier feed gasit (cautat: ${config.files.join(", ")})`);
     continue;
   }
 
   console.log(`\n=== ${source.toUpperCase()} ===`);
-  console.log(`  Feed: ${path.basename(feedPath)}`);
+  console.log(`  Feed: ${feedPaths.map((f) => path.basename(f)).join(" + ")}`);
 
-  const content = fs.readFileSync(feedPath, "utf8");
-  const rawItems = parseXmlItems(content);
+  // Cand sunt mai multe fisiere, un produs (product_id) apare o singura data — primul fisier are prioritate
+  let rawItems = [];
+  const seenPids = new Set();
+  for (const fp of feedPaths) {
+    for (const it of parseXmlItems(fs.readFileSync(fp, "utf8"))) {
+      const pid = extractField(it, "product_id");
+      if (seenPids.has(pid)) continue;
+      seenPids.add(pid);
+      rawItems.push(it);
+    }
+  }
   const activeItems = rawItems.filter((i) => extractField(i, "product_active") === "true");
   console.log(`  Feed: ${rawItems.length} total, ${activeItems.length} active`);
 
+  const prefix = source.replace(".ro", "").replace(".com", "").toLowerCase();
   const jsonProducts = products.filter((p) => p.source_site === source);
-  const prefix = source.replace(".ro", "").replace(".com", "");
   const jsonPids = new Set(jsonProducts.map((p) => p.id.replace(`${prefix}-`, "")));
 
   let updated = 0, added = 0, deactivated = 0;
@@ -413,34 +506,30 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
       added++;
     }
   }
-  // ---- BOABE.RO (wellness / cafea specialitate) ----
-  else if (config.type === "boabe") {
+  // ---- DR. MAX (3 feed-uri unite) ----
+  else if (config.type === "drmax") {
     const feedActive = {};
-    const feedAllPids = new Set();
     for (const item of rawItems) {
-      const pid = extractField(item, "product_id");
-      feedAllPids.add(pid);
-      if (extractField(item, "product_active") === "true") feedActive[pid] = item;
+      if (extractField(item, "product_active") === "true") feedActive[extractField(item, "product_id")] = item;
     }
-
     for (const p of products) {
       if (p.source_site !== source) continue;
-      const pid = p.id.replace("boabe-", "");
+      const pid = p.id.replace(`${prefix}-`, "");
       if (feedActive[pid]) { updateProduct(p, feedActive[pid]); updated++; }
-      else if (!feedAllPids.has(pid)) { p.availability = false; p.draft = true; deactivated++; }
+      else if (!seenPids.has(pid)) { p.availability = false; p.draft = true; deactivated++; }
     }
-
     for (const [pid, item] of Object.entries(feedActive)) {
       if (jsonPids.has(pid)) continue;
-      // Toate produsele boabe.ro merg la wellness
-      const np = makeProduct(source, pid, item, "wellness", existingSlugs);
-      np.id = `boabe-${pid}`;
+      const cat = extractField(item, "category") || "";
+      const sub = extractField(item, "subcategory") || "";
+      const raw = sub ? `${cat} > ${sub}` : cat;
+      const np = makeProduct(source, pid, item, getDrmaxCategory(cat, sub, extractField(item, "title")), existingSlugs, raw);
       if (!isDryRun) products.push(np);
       added++;
     }
   }
-  // ---- ENDRO.RO (cosmetice naturale) ----
-  else if (config.type === "endro") {
+  // ---- GENERIC (detoxmed, longevity-boost, endro, boabe, PARFLAB si altele viitoare) ----
+  else if (config.type === "generic") {
     const feedActive = {};
     const feedAllPids = new Set();
     for (const item of rawItems) {
@@ -451,16 +540,15 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
 
     for (const p of products) {
       if (p.source_site !== source) continue;
-      const pid = p.id.replace("endro-", "");
+      const pid = p.id.replace(`${prefix}-`, "");
       if (feedActive[pid]) { updateProduct(p, feedActive[pid]); updated++; }
       else if (!feedAllPids.has(pid)) { p.availability = false; p.draft = true; deactivated++; }
     }
 
     for (const [pid, item] of Object.entries(feedActive)) {
       if (jsonPids.has(pid)) continue;
-      const cat = getEndroCategory(extractField(item, "category"));
+      const cat = getGenericCategory(extractField(item, "category"), config.defaultCategory);
       const np = makeProduct(source, pid, item, cat, existingSlugs);
-      np.id = `endro-${pid}`;
       if (!isDryRun) products.push(np);
       added++;
     }
@@ -495,7 +583,7 @@ if (!isDryRun) {
   fs.writeFileSync(REPORT_PATH, JSON.stringify(report, null, 2), "utf8");
   console.log(`✅ Salvat: ${PRODUCTS_PATH}`);
   console.log(`📋 Raport: ${REPORT_PATH}`);
-  console.log(`\n⏭️  Acum faci: git pull -X ours && git add src/data/products.json && git commit -m "chore: sync feeds local" && git push\n`);
+  console.log(`\n⏭️  Acum faci: git pull && git add src/data/products.json && git commit -m "chore: sync feeds local" && git push\n`);
 } else {
   console.log(`⚠️  DRY RUN — nimic nu a fost salvat.\n`);
 }

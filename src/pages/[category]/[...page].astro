@@ -6,29 +6,26 @@ import BannerSlot from '../../components/BannerSlot.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Newsletter from '../../components/Newsletter.astro';
-import productsData from '../../data/products.json';
 import { categories, getCategoryBySlug } from '../../data/categories.js';
-import { getBrandsForCategory } from '../../data/brands.js';
-import { getSubcategoriesForCategory } from '../../data/subcategories.js';
+import { produseCategorie, tipuriCategorie, brandsCategorie, cuNumar } from '../../data/catalog.mjs';
 
 export function getStaticPaths({ paginate }) {
   const PAGE_SIZE = 24;
-  return categories.flatMap((cat) => {
-    const products = productsData.filter(
-      (p) => !p.draft && p.category.includes(cat.slug)
-    );
-    return paginate(products, {
+  return categories.flatMap((cat) =>
+    paginate(produseCategorie(cat.slug), {
       params: { category: cat.slug },
       pageSize: PAGE_SIZE,
-    });
-  });
+    })
+  );
 }
 
 const { page } = Astro.props;
 const { category: categorySlug } = Astro.params;
 const cat = getCategoryBySlug(categorySlug);
-const catBrands = getBrandsForCategory(categorySlug);
-const catSubs = getSubcategoriesForCategory(categorySlug).filter(s => s.type === 'tip');
+const catBrands = brandsCategorie(categorySlug);
+const catTipuri = tipuriCategorie(categorySlug);
+const intro = cuNumar(cat.intro, page.total);
+const metaDescription = cuNumar(cat.metaDescription, page.total);
 
 const canonicalBase = `https://beauty-healths.com/${categorySlug}/`;
 const canonical = page.currentPage === 1 ? canonicalBase : `${canonicalBase}${page.currentPage}/`;
@@ -59,7 +56,7 @@ const jsonLd = {
   }
 };
 ---
-<Layout title={title} description={cat.metaDescription} canonical={canonical}>
+<Layout title={title} description={metaDescription} canonical={canonical}>
   <Fragment slot="head">
     {page.currentPage > 1 && <link rel="prev" href={page.currentPage === 2 ? canonicalBase : `${canonicalBase}${page.currentPage - 1}/`} />}
     {page.url.next && <link rel="next" href={`https://beauty-healths.com${page.url.next}`} />}
@@ -78,7 +75,7 @@ const jsonLd = {
     <h1>{cat.name}</h1>
 
     {page.currentPage === 1 && (
-      <p class="intro">{cat.intro}</p>
+      <p class="intro">{intro}</p>
     )}
 
     <!-- Linia 1: navigare categorii principale -->
@@ -91,14 +88,14 @@ const jsonLd = {
       </div>
     </div>
 
-    <!-- Linia 2: subcategorii de tip produs (dacă există) -->
-    {catSubs.length > 0 && (
+    <!-- Linia 2: tipuri de produs -->
+    {catTipuri.length > 0 && (
       <div class="nav-row">
         <span class="nav-label">Tipuri</span>
         <div class="sub-pills">
-          {catSubs.map((sub) => (
-            <a href={`/${categorySlug}/sub/${sub.slug}/`} class="sub-pill">
-              {sub.name}
+          {catTipuri.map((t) => (
+            <a href={`/${categorySlug}/tip/${t.slug}/`} class="sub-pill">
+              {t.name}
             </a>
           ))}
         </div>

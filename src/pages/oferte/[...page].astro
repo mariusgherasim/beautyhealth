@@ -5,15 +5,15 @@ import BannerSlot from '../../components/BannerSlot.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Newsletter from '../../components/Newsletter.astro';
-import productsData from '../../data/products.json';
+import { produse, categoriiCuOferte } from '../../data/catalog.mjs';
 import { categories } from '../../data/categories.js';
 
 export function getStaticPaths({ paginate }) {
   const PAGE_SIZE = 24;
 
   // Toate produsele active cu discount, sortate dupa % reducere descrescator
-  const products = productsData
-    .filter((p) => !p.draft && p.availability && p.old_price && p.old_price > p.price)
+  const products = produse
+    .filter((p) => p.availability && p.old_price && p.old_price > p.price)
     .map((p) => ({
       ...p,
       _pct: Math.round((1 - p.price / p.old_price) * 100),
@@ -72,7 +72,7 @@ const description = `${page.total} produse cu reducere, sortate după cel mai ma
       <span class="nav-label">Categorii</span>
       <div class="category-pills">
         <a href="/oferte/" class="cat-pill active">Toate</a>
-        {categories.map((c) => (
+        {categoriiCuOferte().map((c) => (
           <a href={`/oferte/${c.slug}/`} class="cat-pill">{c.name}</a>
         ))}
       </div>
