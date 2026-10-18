@@ -28,6 +28,8 @@
 //   feed_09eca89e8.xml   → drmax.ro (branduri exclusive)
 //   feed_dc6bbc64e.xml   → drmax.ro (private label)
 //   (cele 3 feed-uri Dr. Max se unesc automat; produsele duble apar o singura data)
+//   feed_f741a4c2e.xml   → picadili.ro (DOAR manichiura / unghii; restul feed-ului
+//                          merge pe styleaccessories.eu — acelasi fisier se pune in ambele foldere)
 //
 // Output: src/data/products.json (actualizat direct)
 //         sync-report.json (raport detaliat)
@@ -102,7 +104,22 @@ const FEED_CONFIG = {
     type: "drmax",
     defaultCategory: "ingrijire-ten",
   },
+  "picadili.ro": {
+    // Feed comun cu styleaccessories.eu: aici intra DOAR produsele de manichiura
+    files: ["feed_picadili.xml", "feed_f741a4c2e.xml"],
+    type: "picadili",
+    defaultCategory: "machiaj",
+  },
 };
+
+// Picadili: ce produse sunt de manichiura (categoria din feed sau titlul)
+const PICADILI_CATEGORII = ["accesorii unghii", "manichiura"];
+const PICADILI_TITLU = /unghii|manichiura|oja|rubber base|tipsuri|gel uv|geluri|pile unghii|buffer|cuticul|pigment|sclipici|strasuri|caviar|top coat|base coat/;
+function isPicadiliManichiura(item) {
+  const cat = normTxt(extractField(item, "category")).trim();
+  if (PICADILI_CATEGORII.some((c) => cat === c)) return true;
+  return PICADILI_TITLU.test(normTxt(extractField(item, "title")));
+}
 
 // ---- Argumente CLI ----
 const args = process.argv.slice(2);
@@ -524,6 +541,26 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
       const sub = extractField(item, "subcategory") || "";
       const raw = sub ? `${cat} > ${sub}` : cat;
       const np = makeProduct(source, pid, item, getDrmaxCategory(cat, sub, extractField(item, "title")), existingSlugs, raw);
+      if (!isDryRun) products.push(np);
+      added++;
+    }
+  }
+  // ---- PICADILI (doar manichiura → Machiaj, tipul „Ojă & Unghii") ----
+  else if (config.type === "picadili") {
+    const feedActive = {};
+    for (const item of rawItems) {
+      if (extractField(item, "product_active") === "true" && isPicadiliManichiura(item)) feedActive[extractField(item, "product_id")] = item;
+    }
+    console.log(`  Manichiura: ${Object.keys(feedActive).length} produse active (restul feed-ului e pentru styleaccessories.eu)`);
+    for (const p of products) {
+      if (p.source_site !== source) continue;
+      const pid = p.id.replace(`${prefix}-`, "");
+      if (feedActive[pid]) { updateProduct(p, feedActive[pid]); updated++; }
+      else if (!p.draft) { p.availability = false; p.draft = true; deactivated++; }
+    }
+    for (const [pid, item] of Object.entries(feedActive)) {
+      if (jsonPids.has(pid)) continue;
+      const np = makeProduct(source, pid, item, "machiaj", existingSlugs);
       if (!isDryRun) products.push(np);
       added++;
     }

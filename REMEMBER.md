@@ -1,36 +1,125 @@
 # BeautyHealth — REMEMBER.md
 
-Site afiliat de comparare prețuri pentru Frumusețe & Sănătate, la
-`beautyhealth.gherasimmarius.com`. Al treilea site din familia
-shop/carti/beautyhealth, aceeași arhitectură de bază (Astro static + GitHub
-Pages + Squarespace DNS + 2Performant).
+*Actualizat: 18 octombrie 2026 — versiune unică. `REMEMBER-updated.md` a fost unit aici și se șterge.*
 
-## Surse de produse (4 merchant-i 2Performant)
+Site afiliat de comparare prețuri pentru Frumusețe & Sănătate, la
+**https://beauty-healths.com** (mutat de pe `beautyhealth.gherasimmarius.com` în octombrie 2026).
+Face parte din familia de site-uri gherasimmarius: **styleaccessories.eu** (ceasuri, bijuterii,
+încălțăminte — fostele shop + style), **carti.gherasimmarius.com**, **beauty-healths.com**.
+Astro static + GitHub Pages + DNS Squarespace + 2Performant.
+
+---
+
+## 0. Stare curentă și rutina de lucru (citește întâi asta)
+
+| | |
+|---|---|
+| Domeniu | `beauty-healths.com` (`public/CNAME`) |
+| Repo | `mariusgherasim/beautyhealth` — branch `main` |
+| Folder local | `C:\FOLDER DE LUCRU\PAUL MELINTE\SITE BEAUTY_HEALTH\beautyhealth-site-git` |
+| Tehnologie | Astro 7, Node ≥ 22.12, `@astrojs/sitemap` |
+| Publicare | **doar manual**, `git push` de pe laptop. Singurul workflow e `.github/workflows/deploy.yml` (build + deploy la push). `update-prices.yml` a fost eliminat pe 16.10.2026. |
+| Prețuri | vin din feed-urile XML prin `sync-feeds-local.cjs` (`price_source: "feed"`). Scraping-ul automat de prețuri nu mai rulează. |
+| Produse | ~46.400 active (oct 2026) |
+
+### Categorii (12)
+Vitamine & Suplimente · Îngrijire ten · Îngrijire corp · Îngrijire păr · Machiaj · Igienă orală ·
+Parfumuri · Mama și copilul · Cosmetice bărbați · Wellness · **Cuplu & Intimitate** · **Dispozitive medicale**
+
+Fiecare categorie are **Tipuri** (`src/data/tipuri.js`, minimum 5 produse) și **Branduri**
+(`src/data/brands.js`, logo-uri în `public/logos/`, 122 logo-uri). Reîncadrarea produselor se face
+la build în `src/data/catalog.mjs` — `products.json` nu se modifică acolo.
+Adrese: `/{categorie}/`, `/{categorie}/tip/{tip}/`, `/{categorie}/brand/{brand}/`, `/oferte/`, `/oferte/{categorie}/`.
+
+### Surse (feed-uri 2Performant) — fișierele pe care le pui în folder
+
+| Magazin | Fișier feed | Ce intră pe site |
+|---|---|---|
+| drmax.ro | `feed_585a1cd31.xml` + `feed_09eca89e8.xml` + `feed_dc6bbc64e.xml` (se unesc automat) | tot catalogul, încadrat pe categorii |
+| springfarma.com | `feed_436edea46.xml` | farmacie, filtrat Beauty & Health |
+| notino.ro | `feed_235256a01.xml` | parfumuri (toate), machiaj top 5.000, ten/păr top 1.000 |
+| PARFLAB.ro | `feed_5544111cd.xml` | parfumuri (decant-uri) |
+| farmec.ro | `feed_eb530f914.xml` | ten, machiaj, corp, păr |
+| infinitelove.ro | `feed_9d5a36a0f.xml` | parfumuri |
+| endro.ro | `feed_9c297a4fb.xml` | cosmetice naturale |
+| boabe.ro | `feed_c143969aa.xml` | wellness (cafea) |
+| detoxmed.ro | `feed_fd8dad9ff.xml` | wellness (detox) |
+| longevity-boost.com | `feed_5d8022816.xml` | vitamine & suplimente |
+| **picadili.ro** | **`feed_f741a4c2e.xml`** | **DOAR manichiura** → Machiaj, tipul „Ojă & Unghii" (~380 produse) |
+
+Dacă lipsește un feed, scriptul sare peste magazinul acela și continuă.
+
+### Picadili — feed comun cu styleaccessories.eu (din 18.10.2026)
+- **Același fișier** `feed_f741a4c2e.xml` se pune în **ambele** foldere: `beautyhealth-site-git` și `shoes-site`.
+- Pe **beauty-healths.com** intră doar produsele de manichiură: categoriile din feed „Accesorii unghii" și „Manichiura", plus titlurile cu unghii / ojă / rubber base / tipsuri / geluri / pile / cuticule / pigmenți / sclipici / strasuri / top coat / base coat.
+- Pe **styleaccessories.eu** intră restul (bijuterii argint, genți, portofele, curele, ochelari, lenjerie), iar manichiura e exclusă automat — cele două site-uri nu se suprapun.
+- Regula e în `sync-feeds-local.cjs`: `PICADILI_CATEGORII`, `PICADILI_TITLU`, funcția `isPicadiliManichiura()`. Produsele Picadili care nu mai sunt de manichiură sau au dispărut din feed devin `draft: true`.
+- Id-uri: `picadili-{product_id}`, `source_site: "picadili.ro"`, `category: ["machiaj"]`, `subcategory_raw` = categoria din feed.
+
+### Rutina de actualizare produse
+```cmd
+cd "C:\FOLDER DE LUCRU\PAUL MELINTE\SITE BEAUTY_HEALTH\beautyhealth-site-git"
+git pull
+```
+1. Pui feed-urile noi în folder (tabelul de mai sus).
+2. Rulezi sincronizarea:
+```cmd
+node sync-feeds-local.cjs
+```
+   Doar unele surse: `node sync-feeds-local.cjs --surse=drmax,picadili` · test fără salvare: `--dry-run`
+3. Verifici local (opțional): `npm run dev` → http://localhost:4321
+4. Publici:
+```cmd
+git add src/data/products.json
+git commit -m "chore: sync feeds local"
+git push
+```
+Pe GitHub → **Actions** → bulina verde (~1–2 minute).
+
+**Pentru alte fișiere** (bannere, texte, scripturi): `git add` cu numele exact al fiecărui fișier, de ex.
+`git add src/data/banners.js sync-feeds-local.cjs`.
+
+> `.gitignore` conține acum corect `feed_*.xml` (înainte era scris `"*.xml"` cu ghilimele și **nu funcționa** — de aceea feed-urile ajunseseră în repo). Feed-urile vechi au fost scoase din repo cu `git rm --cached feed_*.xml`. Regula de prudență rămâne: preferă `git add <fișier>` în loc de `git add -A`.
+
+### Integrări (valori curente)
+| Serviciu | Valoare |
+|---|---|
+| GA4 | `G-HS59YL4Y3D` (flux gherasimmarius.com, cross-domain cu styleaccessories.eu și gherasimmarius.com) |
+| Trustpilot | profil `beauty-healths.com`, businessUnitId `6ad21e64dea7b17b7f0585d7`, token `5d8638c8-df43-434b-b812-50901f6b578f`, template Review Collector, locale `ro-RO` |
+| MailerLite | formularul „Nu rata ofertele" `193157177015273136` (embed `43814132`) |
+| Search Console | `beauty-healths.com`, sitemap `sitemap-index.xml` |
+
+### Stickere
+Stickerele promo (colț jos) și bara Trustpilot sunt în `src/layouts/Layout.astro`. Butonul ✕ ascunde doar pe pagina curentă; la pagina următoare reapar. Fiecare sticker se ascunde singur după data de final din scriptul lui. Pe mobil Trustpilot devine bară jos, iar stickerele urcă deasupra ei.
+
+---
+
+> **Notă:** secțiunile de mai jos sunt istoricul proiectului (deciziile și ghidurile acumulate de la lansare). Unde ceva s-a schimbat de atunci, informația curentă e cea din secțiunea 0 de mai sus.
+
+## Surse de produse (merchant-i 2Performant)
 
 | Merchant | Produse active | Categorie principală |
 |---|---|---|
-| minuneanaturii.ro | 576 | Vitamine & suplimente (ceaiuri ayurvedice) |
+| notino.ro | variabil (limitat — parfumuri toate, machiaj top 5k, ten/păr top 1k) | Parfumuri, Machiaj, Îngrijire ten, Îngrijire păr |
 | springfarma.com | ~12.500 (din ~14.150 in feed, dupa filtrare) | Farmacie completă — filtrat doar Beauty&Health |
 | infinitelove.ro | 348 (din 544, restul inactive la sursă) | Parfumuri |
 | farmec.ro | 114 (din 128 active în feed, restul excluse) | Ten, Machiaj, Corp, Păr (Gerovital) |
+| boabe.ro | variabil | Wellness (cafea de specialitate) |
+| endro.ro | variabil | Cosmetice naturale (ten, corp) |
+| longevity-boost.com | 0 active momentan (15 în feed, neactivate de merchant) | Vitamine & Suplimente (longevitate) |
+| detoxmed.ro | 15 | Wellness (sucuri detox, programe detox) |
+| PARFLAB.ro | 2.456 | Parfumuri (decant-uri / mostre) |
+| drmax.ro | ~28.600 | Catalog complet (3 feed-uri unite), din 17.10.2026 |
+| picadili.ro | ~380 | Doar manichiură → Machiaj (feed comun cu styleaccessories.eu), din 18.10.2026 |
 
-**Total produse active: 13.533** (fără pagină individuală de produs — vezi
-decizia de arhitectură de mai jos). Alte **1.867 produse excluse** în total
-(1.853 de la primele 3 surse + 14 de la farmec.ro) — vezi
-`produse-excluse-beautyhealth.xlsx` și `produse-excluse-farmec.xlsx` livrate
-separat, cu motiv per produs (dispozitive medicale, categorie "Cuplu și sex"
-— exclusă implicit ca sensibilă la brand, produse de curățenie casnică
-Nufăr/Triumf și insecticide Insect-Tox de la farmec.ro, produse inactive la
-sursă, necategorizate).
-
-**IMPORTANT: nu folosi niciodată feed-ul XML 2Performant ca sursă de preț** —
+*(Istoric — din 16.10.2026 prețul vine din feed, prin `sync-feeds-local.cjs`; scraping-ul automat a fost oprit.)* **IMPORTANT (regula inițială): nu folosi niciodată feed-ul XML 2Performant ca sursă de preț** —
 prețurile din feed întârzie față de site-ul oficial. Feed-ul e folosit doar
 pentru import inițial/bulk. Prețul zilnic vine din scraping direct pe
 `official_url`.
 
 ## Decizie de arhitectură: fără pagini individuale de produs
 
-Cu ~13.400 produse active, generarea unei pagini Astro per produs ar face
+Cu zeci de mii de produse active, generarea unei pagini Astro per produs ar face
 build-ul foarte lent și ar produce un sitemap uriaș cu SEO slab per produs
 individual. Am ales varianta paginilor de categorie:
 
@@ -46,22 +135,19 @@ individual. Am ales varianta paginilor de categorie:
 - Dacă vrei ulterior pagini individuale pentru un top de produse "vedetă"
   (ca `featured` la shop), se poate adăuga separat fără să afecteze restul.
 
-## Categorii (9)
+## Categorii (inițial 10 — acum 12, vezi secțiunea 0)
 
-Vitamine & Suplimente (5.543) · Îngrijire ten (2.614) · Îngrijire corp (1.479)
-· Mama și copilul (1.468) · Îngrijire păr (1.066) · Machiaj (423, categorie
-nouă propusă — nu exista în discuția inițială cu Marius, dar era un bucket
-prea mare ca să-l bagi la "Îngrijire ten") · Igienă orală (403) · Parfumuri
-(396) · Cosmetice bărbați (27).
+Vitamine & Suplimente · Îngrijire ten · Îngrijire corp · Mama și copilul
+· Îngrijire păr · Machiaj · Igienă orală · Parfumuri · Cosmetice bărbați
+· **Wellness** (cafea specialitate boabe.ro + sucuri detox detoxmed.ro)
 
-Mapările exacte custom_field1/custom_field2 → categorie sunt în
-`build_products.py` (scriptul folosit o singură dată la import inițial) —
-păstrează-l dacă vrei să re-imporți un feed nou cu aceeași logică.
+Mapările exacte sursă → categorie sunt în `sync-feeds-local.cjs`, funcțiile
+`get{Sursa}Category()`.
 
 ## Ce am construit (cod, gata de push pe GitHub)
 
-- Proiect Astro 4.x complet funcțional, build testat local (566 pagini, ~3s).
-- `src/data/products.json` — sursa unică de adevăr (13.419 produse active).
+- Proiect Astro 4.x complet funcțional, build testat local (566+ pagini, ~3s).
+- `src/data/products.json` — sursa unică de adevăr (45.734 produse, din care ~37.490 active).
 - `src/data/categories.js` — metadate SEO per categorie.
 - Pagini de categorie paginate cu SEO complet (`src/pages/[category]/[...page].astro`).
 - Homepage cu hero + grid de categorii + counts live.
@@ -147,7 +233,235 @@ funcțional local/pe GitHub, e suficient să înlocuiești doar
 `src/data/products.json` cu fișierul nou și să faci commit + push — nu ai
 nevoie să dezarhivezi toată arhiva mare peste proiectul existent.
 
+---
+
+## ★ Ghid: cum adaugi un brand nou cu pagina proprie pe site
+
+Aceasta este procedura completă pentru a adăuga un brand nou (ex. ENDRO,
+NIVEA, CERAVE etc.) astfel încât să apară corect în secțiunea **Branduri**
+de pe paginile de categorie și să aibă pagina lui proprie `/[cat]/brand/[slug]/`.
+
+### Fișierele implicate (în ordine)
+
+#### 1. `src/data/subcategories.js` — OBLIGATORIU dacă brandul apare deja în fișier ca `type: 'brand'`
+
+Verifică dacă brandul există deja cu `type: 'brand'` (unele branduri au
+fost adăugate inițial în subcategories ca tip greșit). Dacă există cu
+`type: 'tip'`, schimbă în `type: 'brand'`. Dacă nu există deloc, nu
+trebuie adăugat aici — brandul se gestionează exclusiv prin `brands.js`.
+
+Exemplu de intrare corectă în subcategories.js (pentru un brand existent acolo):
+```js
+{ name: 'ENDRO', slug: 'endro', type: 'brand', categories: ['ingrijire-ten','ingrijire-corp'], keywords: ['endro'] },
+```
+
+#### 2. `src/data/brands.js` — OBLIGATORIU
+
+Adaugă brandul în array-ul `brands`. Câmpurile obligatorii:
+- `name` — numele afișat pe site (majuscule, cu diacritice dacă e cazul)
+- `slug` — URL-ul brandului (litere mici, cratime în loc de spații/caractere speciale)
+- `categories` — lista de slug-uri de categorii unde apare brandul
+
+```js
+// Adaugă în secțiunea corespunzătoare (Cerute de Marius / Parfumuri / Machiaj etc.)
+{ name: 'ENDRO', slug: 'endro', categories: ['ingrijire-ten','ingrijire-corp'] },
+```
+
+**Atenție:** dacă nu adaugi brandul aici, el nu va apărea niciodată în
+secțiunea "Branduri" de pe paginile de categorie și nu va exista nicio
+pagină `/brand/[slug]/` generată.
+
+#### 3. `src/pages/[category]/brand/[brand]/[...page].astro` — OBLIGATORIU dacă brandul are un nume nestandard în câmpul `brand` din products.json
+
+Funcția `getStaticPaths` filtrează produsele per brand printr-un set de
+`if (brand.slug === '...')` cu logică personalizată. Dacă brandul tău are
+exact același nume în `products.json` ca `name` din `brands.js` (majuscule
+identice), atunci fallback-ul `pb.includes(brandNameVariants)` îl prinde
+automat și **nu trebuie să adaugi nimic**.
+
+Dacă brandul are variații de scriere în feed (ex. "LA ROCHE-POSAY" vs
+"LA ROCHE POSAY"), adaugă un case explicit:
+
+```js
+if (brand.slug === 'noul-brand') return pb.includes('VARIANTA DIN FEED');
+```
+
+Locul unde se adaugă — imediat înainte de linia `return pb.includes(brandNameVariants);`:
+```js
+if (brand.slug === 'guess') return pb.includes('GUESS');
+if (brand.slug === 'endro') return pb.includes('ENDRO');   // ← exemplu adăugat
+return pb.includes(brandNameVariants);  // fallback generic
+```
+
+#### 4. `src/pages/[category]/[...page].astro` — NU trebuie modificat
+
+Pagina de categorie afișează brandurile automat prin `getBrandsForCategory(categorySlug)`
+și filtrează subcategoriile cu `.filter(s => s.type === 'tip')` — deci
+brandurile din `brands.js` apar automat la "Branduri", fără nicio
+modificare manuală.
+
+#### 5. `src/pages/[category]/sub/[sub]/[...page].astro` — NU trebuie modificat
+
+Generarea rutelor `/sub/[slug]/` exclude automat orice subcategorie cu
+`type: 'brand'` prin `.filter(s => s.type !== 'brand')` — deci un brand
+nou nu va genera accidental o rută `/sub/[slug]/`.
+
+### Rezumat: ce modifici pentru un brand nou
+
+| Fișier | Modificare necesară | Obligatoriu? |
+|--------|---------------------|-------------|
+| `src/data/brands.js` | Adaugă obiect `{ name, slug, categories }` | ✅ DA |
+| `src/pages/[category]/brand/[brand]/[...page].astro` | Adaugă `if (brand.slug === '...')` doar dacă numele din feed diferă față de `name` din brands.js | Doar dacă e cazul |
+| `src/data/subcategories.js` | Verifică / corectează `type` dacă brandul există deja acolo | Doar dacă e cazul |
+| `src/pages/[category]/[...page].astro` | Nimic | ❌ NU |
+| `src/pages/[category]/sub/[sub]/[...page].astro` | Nimic | ❌ NU |
+
+### Exemplu complet — adăugare brand NIVEA
+
+**Pas 1 — `src/data/brands.js`:**
+```js
+{ name: 'NIVEA', slug: 'nivea', categories: ['ingrijire-corp','ingrijire-ten'] },
+```
+
+**Pas 2 — verifică în `products.json`** cum apare brandul în câmpul `brand`:
+```
+grep -i "nivea" src/data/products.json | grep '"brand"'
+```
+Dacă apare exact `"NIVEA"` → fallback-ul generic funcționează, nu mai
+modifici `brand/[brand]/[...page].astro`.
+Dacă apare `"Nivea GmbH"` sau altceva → adaugi case explicit în brand page.
+
+**Pas 3 — commit + push:**
+```powershell
+git pull
+git add src/data/brands.js
+git commit -m "feat: brand nou NIVEA pe ingrijire-corp si ingrijire-ten"
+git push
+```
+
+### Fix aplicat în sesiunea 12.10.2026 — ENDRO apărea la „Tipuri" în loc de „Branduri"
+
+**Cauza rădăcină:** ENDRO exista în `subcategories.js` cu `type: 'brand'`
+(corect), dar:
+1. Lipsea complet din `brands.js` → nu apărea la "Branduri"
+2. `getStaticPaths` din `sub/[sub]/[...page].astro` nu excludea brandurile
+   → genera ruta `/sub/endro/` (greșit)
+3. `getSubcategoriesForCategory()` în pagina de categorie returna ALL tipurile
+   fără filtrare → Endro apărea la "Tipuri" (greșit)
+4. Lipsea case-ul `endro` în filtrul din `brand/[brand]/[...page].astro`
+   → pagina de brand ar fi găsit 0 produse
+
+**Fix-urile aplicate (toate 4 fișiere):**
+
+`src/data/brands.js` — adăugat:
+```js
+{ name: 'ENDRO', slug: 'endro', categories: ['ingrijire-ten','ingrijire-corp'] },
+```
+
+`src/pages/[category]/[...page].astro` — linia 31:
+```js
+// Înainte:
+const catSubs = getSubcategoriesForCategory(categorySlug);
+// După:
+const catSubs = getSubcategoriesForCategory(categorySlug).filter(s => s.type === 'tip');
+```
+
+`src/pages/[category]/sub/[sub]/[...page].astro` — linia 16:
+```js
+// Înainte:
+for (const sub of subcategories) {
+// După:
+for (const sub of subcategories.filter(s => s.type !== 'brand')) {
+```
+
+`src/pages/[category]/brand/[brand]/[...page].astro` — adăugat înainte de fallback:
+```js
+if (brand.slug === 'endro') return pb.includes('ENDRO');
+```
+
+---
+
+## ★ Ghid: cum adaugi un magazine (merchant) nou în sync-feeds-local.cjs
+
+Procedura completă pentru a adăuga un merchant nou din 2Performant.
+
+### Pași
+
+**1. Identifici feed-ul** — descărcați de la 2Performant, are un ID în numele
+fișierului (ex. `feed_5d8022816.xml`).
+
+**2. Identifici tipul de produse** din primele câteva `<item>` (title,
+campaign_name, description) — astfel alegi categoria.
+
+**3. Adaugi în `FEED_CONFIG`:**
+```js
+"nou-merchant.ro": {
+  files: ["feed_nou-merchant.xml", "feed_IDXXXXXX.xml"],
+  type: "nou-merchant",
+},
+```
+
+**4. Adaugi funcția de mapare categorie** (după celelalte `get*Category`):
+```js
+function getNouMerchantCategory(catRaw) {
+  if (!catRaw) return "wellness"; // categoria default
+  const c = catRaw.toLowerCase();
+  if (c.includes("parfum")) return "parfumuri";
+  return "wellness";
+}
+```
+
+**5. Adaugi blocul `else if`** în secțiunea de procesare per sursă:
+```js
+else if (config.type === "nou-merchant") {
+  const feedActive = {}, feedAllPids = new Set();
+  for (const item of rawItems) {
+    const pid = extractField(item, "product_id");
+    feedAllPids.add(pid);
+    if (extractField(item, "product_active") === "true") feedActive[pid] = item;
+  }
+  for (const p of products) {
+    if (p.source_site !== source) continue;
+    const pid = p.id.replace("nou-merchant-", "");
+    if (feedActive[pid]) { updateProduct(p, feedActive[pid]); updated++; }
+    else if (!feedAllPids.has(pid)) { p.availability = false; p.draft = true; deactivated++; }
+  }
+  for (const [pid, item] of Object.entries(feedActive)) {
+    if (jsonPids.has(pid)) continue;
+    const cat = getNouMerchantCategory(extractField(item, "category"));
+    const np = makeProduct(source, pid, item, cat, existingSlugs);
+    np.id = `nou-merchant-${pid}`;
+    if (!isDryRun) products.push(np);
+    added++;
+  }
+}
+```
+
+**6. Rulezi:** `node sync-feeds-local.cjs --surse=nou-merchant`
+
+**7. Livrezi products.json actualizat** (vezi Situația 7 din ghidul Git).
+
+### Magazine adăugate și tipul lor de produse
+
+| Merchant | type în FEED_CONFIG | Fișiere feed acceptate | Categorie |
+|---|---|---|---|
+| notino.ro | notino | feed_notino.xml, feed_235256a01.xml | parfumuri, machiaj, ingrijire-ten, ingrijire-par |
+| springfarma.com | springfarma | feed_springfarma.xml, feed_436edea46.xml | vitamine-suplimente (și altele) |
+| farmec.ro | farmec | feed_farmec.xml, feed_eb530f914.xml | ingrijire-ten, corp, par, machiaj |
+| infinitelove.ro | infinitelove | feed_infinitelove.xml, feed_9d5a36a0f.xml | parfumuri |
+| boabe.ro | boabe | feed_boabe.xml, feed_c143969aa.xml | wellness |
+| endro.ro | endro | feed_endro.xml, feed_9c297a4fb.xml | ingrijire-ten, corp |
+| longevity-boost.com | longevity-boost | feed_longevity-boost.xml, feed_5d8022816.xml | vitamine-suplimente |
+| detoxmed.ro | detoxmed | feed_detoxmed.xml, feed_fd8dad9ff.xml | wellness |
+| PARFLAB.ro | parflab | feed_parflab.xml, feed_5544111cd.xml | parfumuri |
+| drmax.ro | drmax | feed_585a1cd31.xml + feed_09eca89e8.xml + feed_dc6bbc64e.xml (unite) | toate categoriile (getDrmaxCategory) |
+| picadili.ro | picadili | feed_picadili.xml, feed_f741a4c2e.xml | machiaj — doar manichiura (isPicadiliManichiura) |
+
+---
+
 ## Incident (16.07.2026): prima rulare reală de update-prices a eșuat masiv
+
+*(Istoric — `update-prices.yml` a fost eliminat pe 16.10.2026; prețurile vin acum din feed-uri.)*
 
 Prima rulare reală a `update-prices.yml` a dat **221 produse actualizate din
 13.533** (13.312 eșuate) — foarte probabil blocare anti-bot (Cloudflare/WAF)
@@ -194,7 +508,8 @@ actualizate cu succes nu s-au salvat.
 și cu header-ele de browser real, e un semn puternic că springfarma.com
 folosește o protecție mai serioasă (challenge JS, care cheerio/axios nu poate
 rezolva) — în cazul ăsta ar trebui reconsiderat Playwright DOAR pentru
-springfarma (nu pentru toate sursele), sau o frecvență mai rară de scraping
+springfarma (nu pentru toate sursele), sau o frecvență mai rară de scraping.
+
 **Actualizare diagnostic (18.07.2026, după a doua rulare — 548 ok / 83 failed / 12.902 skipped):**
 
 Am investigat direct (accesând paginile eu însumi, din alt mediu decât GitHub
@@ -342,7 +657,7 @@ puțin ca prim pas):**
    2000ms) — rata efectivă scade la ~20-30 request-uri/minut, sub majoritatea
    pragurilor tipice de rate-limit.
 2. **Cooldown-and-resume în loc de circuit breaker permanent** — când o
-   sursă acumulează 25 eșecuri consecutive, scriptul NU mai renunță definitiv:
+   sursă acumulează 25 de eșecuri consecutive, scriptul NU mai renunță definitiv:
    face o pauză de 5 minute, apoi reia încercările. Se repetă de maxim 3 ori
    (`maxCooldowns` în `SOURCE_CONFIG`) per sursă per rulare; după al 3-lea
    cooldown eșuat, abia atunci renunță definitiv pentru rularea curentă
@@ -435,99 +750,39 @@ nevoie de vreo intervenție.
 
 ## Ce rămâne de făcut manual (nu pot face eu asta)
 
-
 1. ~~**Selectoare CSS de preț**~~ — **REZOLVAT (16.07.2026)**. Marius a trimis
    HTML real pentru toate cele 4 surse (springfarma, minuneanaturii,
-   infinitelove, farmec). Selectoare actualizate și testate:
-   - **minuneanaturii.ro**: preț din atributul `content` al
-     `.product-price[itemprop="price"]`; preț vechi din `.regular-price`;
-     stoc verificat prin text `/in stoc/i` în `#product-availability`.
-   - **springfarma.com**: preț din atributul `data-price-amount` al
-     `[data-price-type="finalPrice"]`; preț vechi din
-     `[data-price-type="oldPrice"]`. Selectorul de "stoc epuizat" rămâne
-     **nesigur** — nu am avut un exemplu, e doar o presupunere
-     (`.stock.unavailable, .out-of-stock`).
-   - **infinitelove.ro**: confirmat că e randat server-side (nu are nevoie de
-     JS/Playwright) — am simplificat scraper-ul la cheerio/axios, ca la
-     celelalte. Preț din `ins .woocommerce-Price-amount` (sau
-     `.price > .woocommerce-Price-amount` dacă nu există reducere), preț
-     vechi din `del .woocommerce-Price-amount`.
-   - **farmec.ro** (merchant nou, adăugat ulterior): scraper nou creat,
-     preț din `.ProductPrice-PriceValue`, preț vechi din
-     `.ProductPrice-HighPrice`.
-   - Am eliminat complet dependința de **Playwright** din proiect (nu mai e
-     necesară pentru nicio sursă) — scraping-ul e mai rapid și workflow-ul
-     GitHub Actions nu mai instalează Chromium.
-   - Fișierele din `scripts/lib/` au fost redenumite din `.js` în `.cjs`
-     (proiectul Astro are `"type": "module"` în `package.json`, ceea ce
-     făcea ca `require()` din `update-prices.cjs` să nu găsească exporturile
-     corect — bug prins și reparat acum, înainte să apuce să rămână
-     nedescoperit până la prima rulare reală în GitHub Actions).
+   infinitelove, farmec). Selectoare actualizate și testate.
 2. **MailerLite** — creezi grup nou "BEAUTYHEALTH" + formular nou (double
    opt-in activ, sender `office@gherasimmarius.com`, ca la shop). Te ghidez
    pas cu pas când ești gata. Apoi înlocuim placeholder-ul din
    `src/components/Newsletter.astro` cu embed-ul JSONP real.
 3. ~~**Logo**~~ — **REZOLVAT (16.07.2026)**. Concept original, creat de Claude
-   după un research rapid al site-urilor sursă (springfarma - verde, minunea
-   naturii - verde/curcubeu naturist, farmec - brand tradițional, infinitelove
-   - parfumerie). Diferențiere deliberată: paletă navy + auriu (deja folosită
-   pe site), nu verde ca aproape toată concurența "de farmacie" — semnalează
-   "comparator curatoriu/premium", nu încă un site de farmacie. Fișiere:
+   după un research rapid al site-urilor sursă. Fișiere:
    - `public/logo-beautyhealth.svg` — varianta navy, pt fundaluri deschise
    - `public/logo-beautyhealth-white.svg` — varianta albă, folosită în
      header (fundal navy)
    - `public/favicon.svg` — doar iconița, pe fundal navy plin, rotunjit
-   Simbol: o formă abstractă de petală/frunză împletită cu o picătură,
-   sugerând dualitatea frumusețe+sănătate. Wordmark: "beauty" (navy/alb) +
-   "health" (auriu), font serif Georgia, subtitlu "FRUMUSETE SI SANATATE".
 4. **Google Analytics 4** — property-ul e comun (G-HS59YL4Y3D), tag-ul e deja
-   pus în cod. **Clarificare (16.07.2026):** streamul separat creat la shop
-   (measurement ID diferit, G-VQW0LXD8Y8) a fost necesar EXCLUSIV pentru
-   legarea contului Google Ads de conversia `affiliate_click` (Ads are nevoie
-   de un stream a cărui adresă să corespundă exact hostname-ului) — nu pentru
-   analiză în sine. La cărți nu s-a făcut acest pas (nu rulează Google Ads
-   acolo) și funcționează corect fără. **Decizie pentru beautyhealth:** cât
-   timp nu există o campanie Google Ads dedicată, se procedează ca la cărți —
-   FĂRĂ stream nou. Tag-ul comun raportează automat, diferențiat prin
-   hostname. Dacă apare vreodată un plan de Google Ads pentru beautyhealth,
-   abia atunci se creează un stream dedicat, cu același scop tehnic ca la shop.
-   Ce rămâne totuși de făcut, indiferent de stream (independent, la nivel de
-   proprietate GA4):
-   - **Codul e gata (16.07.2026)** — toate 3 evenimentele se declanșează
-     deja pe site, confirmate în build:
-     - `bh_affiliate_click` — delegare globală de click în `Layout.astro`,
-       pe orice `.product-card` (funcționează atât pe cardurile din
-       paginare, cât și pe cele injectate de căutare), cu parametri
-       `product_id`, `product_title`, `product_price`.
-     - `bh_category_page_view` — în `[category]/[...page].astro`, cu
-       parametri `category` și `page_number`.
-     - `bh_newsletter_signup` — în `Newsletter.astro`, pe submit-ul
-       formularului. **ATENȚIE:** când înlocuiești formularul placeholder
-       cu embed-ul real MailerLite, păstrează acest event listener (sau
-       unul echivalent legat de formularul real) — altfel semnalul se
-       pierde silențios.
-   - **Manual, în GA4 → Admin → Events:** creezi cele 3 evenimente
-     (`Create event` sau pur și simplu așteptând să apară automat din
-     trafic real, GA4 le detectează din `gtag('event', ...)`), apoi le
-     marchezi ca **Key Event** (toggle "Mark as key event").
-5. **Google Search Console** — trebuie verificat manual (proprietate nouă,
-   verificare prin DNS TXT record pe Squarespace sau prin fișier HTML în
-   `public/`). Trimite fișierul de verificare (dacă alegi metoda HTML) și-l
-   pun eu în `public/`.
-6. **GitHub** — repo nou, upload prin interfața web (ca de obicei) sau
-   `git push` dacă preferi. Nu uita `.github/` (ascuns, verifică să se
-   încarce și el).
+   pus în cod. Cât timp nu există o campanie Google Ads dedicată, se procedează
+   ca la cărți — FĂRĂ stream nou. **Manual, în GA4 → Admin → Events:** creezi
+   cele 3 evenimente (`bh_affiliate_click`, `bh_category_page_view`,
+   `bh_newsletter_signup`) și le marchezi ca **Key Event**.
+5. ~~**Google Search Console**~~ — **REZOLVAT (Oct 2026)**. Verificat și sitemap
+   submis. Vezi secțiunea dedicată mai jos.
+6. **GitHub** — repo nou, upload prin interfața web sau `git push`.
+   Nu uita `.github/` (ascuns, verifică să se încarce și el).
 7. **DNS Squarespace** — CNAME către GitHub Pages, la fel ca la celelalte
    3 site-uri.
-8. **Verificare mobil** — layout-ul e responsive (grid auto-fill, meniu
-   hamburger sub 720px), dar merită un test real pe telefon după deploy.
+8. **Verificare mobil** — layout-ul e responsive, merită un test real pe
+   telefon după deploy.
 
 ## Tools & tehnologii folosite aici
 
-- Astro 4.x, static output, `@astrojs/sitemap`
+- Astro 7 (inițial 4.x), static output, `@astrojs/sitemap`
 - Scraping: axios + cheerio (springfarma, minuneanaturii — site-uri statice),
-  Playwright (infinitelove — posibil necesar JS pentru variante de produs)
-- GitHub Actions pentru build/deploy + cron zilnic de prețuri
+  Playwright (farmec.ro — SPA care necesită JS)
+- GitHub Actions doar pentru build/deploy la push (cron-ul de prețuri a fost eliminat pe 16.10.2026)
 
 ---
 
@@ -726,7 +981,6 @@ versiunea ta cu prețurile corecte.
 
 ---
 
-
 ### Situația 7 — Înlocuire products.json și push (fluxul complet)
 
 **Când:** ori de câte ori primești un fișier `products-beautyhealth-updated.json`
@@ -746,7 +1000,7 @@ del products.json
 ren "products-beautyhealth-updated.json" "products.json"
 ```
 
-Verifici că a mers (ar trebui să apară ~49-51MB și data de azi):
+Verifici că a mers (ar trebui să apară ~35-40MB și data de azi):
 ```cmd
 dir products.json
 ```
@@ -761,24 +1015,14 @@ git commit -m "chore: actualizare toate sursele din feed"
 git push
 ```
 
-**Dacă vrei să incluzi și `banners.js` în același commit** (când ai adăugat
-bannere noi manual):
+**Dacă vrei să incluzi și `banners.js` sau `sync-feeds-local.cjs` în același commit:**
 ```cmd
-git add src/data/products.json src/data/banners.js
-git commit -m "chore: actualizare produse + bannere noi"
+git add src/data/products.json sync-feeds-local.cjs
+git commit -m "chore: actualizare produse + 3 magazine noi"
 git push
 ```
 
-**Dacă `del products.json` dă eroare** (fișierul e blocat de alt proces):
-- Închide File Explorer dacă e deschis în acel folder
-- Închide orice editor de text care ar putea avea fișierul deschis
-- Reîncearcă comanda
-
-**Dacă `ren` dă eroare "A duplicate file name exists"**: înseamnă că
-`products.json` nu a fost șters complet. Rulezi din nou `del products.json`
-și apoi `ren`.
-
-**Alternativă din PowerShell** (dacă preferi PowerShell în loc de cmd):
+**Alternativă din PowerShell:**
 ```powershell
 cd "C:\FOLDER DE LUCRU\PAUL MELINTE\SITE BEAUTY_HEALTH\beautyhealth-site-git"
 Copy-Item "$env:USERPROFILE\Downloads\products-beautyhealth-updated.json" "src\data\products.json" -Force
@@ -825,9 +1069,79 @@ warning: in the working copy of 'fisier.js', LF will be replaced by CRLF
 ```
 **Ignoră-le complet** — sunt inofensive. E o diferență de format de linie
 între Linux (LF, cum generează Claude și GitHub Actions) și Windows (CRLF).
-Git le convertește automat și corect, fișierele funcționează identic pe
+Git le convertează automat și corect, fișierele funcționează identic pe
 ambele sisteme.
 
+---
+
+### Situația 8 — vim se deschide la git pull sau git merge
+
+**Când apare:** `git pull` găsește modificări pe GitHub și deschide editorul vim
+pentru a confirma mesajul de merge. Arată un ecran negru cu text și `~` pe linii.
+
+**Rezolvare rapidă:**
+1. Apasă **Esc** (o dată)
+2. Apasă **Shift+Z** de două ori rapid (**ZZ** cu majuscule)
+3. Vim se închide și merge-ul continuă automat
+
+**Alternativă dacă ZZ nu merge:**
+```cmd
+REM Inchide fereastra cmd, deschide una noua, apoi:
+cd "C:\FOLDER DE LUCRU\PAUL MELINTE\SITE BEAUTY_HEALTH\beautyhealth-site-git"
+git commit --no-edit
+git push
+```
+
+**Prevenire pe viitor:**
+```cmd
+git config --global core.editor "notepad"
+```
+
+---
+
+### Situația 9 — git push respins din cauza unui fișier mare (>100MB)
+
+**Când apare:**
+```
+remote: error: File feed_235256a01.xml is 197.01 MB; this exceeds GitHub's file size limit of 100.00 MB
+remote: error: GH001: Large files detected.
+! [remote rejected] main -> main (pre-receive hook declined)
+```
+
+**Ce înseamnă:** un fișier XML (feed de la merchant) a intrat accidental într-un
+commit. GitHub refuză fișierele peste 100MB.
+
+**Soluție — scoate fișierul din ultimul commit și adaugă-l în .gitignore:**
+```powershell
+# 1. Scoate fișierul din ultimul commit (fără să-l ștergi de pe disk)
+git rm --cached feed_235256a01.xml
+
+# 2. Adaugă în .gitignore ca să nu mai intre niciodată
+echo "feed_*.xml" >> .gitignore
+git add .gitignore
+
+# 3. Amendează commitul (înlocuiește-l fără fișierul mare)
+git commit --amend --no-edit
+
+# 4. Push
+git push
+```
+
+**Prevenire:** feed-urile XML de la merchants sunt fișiere locale de lucru
+(folosite de `sync-feeds-local.cjs`), nu fac parte din codul site-ului.
+**NICIODATĂ nu face `git add -A` sau `git add .` în folderul beautyhealth** —
+folosește mereu `git add <fisier-specific>`, ca să nu incluzi accidental
+feed-urile XML.
+
+Asigură-te că `.gitignore` conține:
+```
+feed_*.xml
+```
+
+Verifici cu:
+```powershell
+type .gitignore
+```
 
 ---
 
@@ -888,11 +1202,6 @@ Parametrii:
 https://beautyhealth.gherasimmarius.com/?utm_source=facebook&utm_medium=social&utm_campaign=oferta-saptamana
 ```
 
-**Facebook Stories:**
-```
-https://beautyhealth.gherasimmarius.com/parfumuri/?utm_source=facebook&utm_medium=story&utm_campaign=parfumuri-vara
-```
-
 **Instagram bio (link fix, spre homepage):**
 ```
 https://beautyhealth.gherasimmarius.com/?utm_source=instagram&utm_medium=bio&utm_campaign=beautyhealth-homepage
@@ -903,19 +1212,9 @@ https://beautyhealth.gherasimmarius.com/?utm_source=instagram&utm_medium=bio&utm
 https://beautyhealth.gherasimmarius.com/?utm_source=tiktok&utm_medium=bio&utm_campaign=beautyhealth-homepage
 ```
 
-**WhatsApp Status (ofertă săptămânală):**
-```
-https://beautyhealth.gherasimmarius.com/ingrijire-ten/?utm_source=whatsapp&utm_medium=story&utm_campaign=oferta-saptamana
-```
-
 **WhatsApp mesaj direct (recomandare produs):**
 ```
 https://beautyhealth.gherasimmarius.com/vitamine-suplimente/?utm_source=whatsapp&utm_medium=message&utm_campaign=recomandare-produs
-```
-
-**LinkedIn:**
-```
-https://beautyhealth.gherasimmarius.com/vitamine-suplimente/?utm_source=linkedin&utm_medium=social&utm_campaign=sanatate-suplimente
 ```
 
 **Newsletter MailerLite:**
@@ -923,47 +1222,11 @@ https://beautyhealth.gherasimmarius.com/vitamine-suplimente/?utm_source=linkedin
 https://beautyhealth.gherasimmarius.com/machiaj/?utm_source=mailerlite&utm_medium=email&utm_campaign=newsletter-iulie-2026
 ```
 
----
-
-### Cum diferențiezi 2 linkuri din același canal — utm_content
-
-Dacă trimiți spre beautyhealth atât în feed cât și în Stories pe Instagram în
-aceeași zi, folosești `utm_content` ca să le diferențiezi în GA4:
-
-```
-# Link din feed
-https://beautyhealth.gherasimmarius.com/parfumuri/?utm_source=instagram&utm_medium=social&utm_campaign=parfumuri-vara&utm_content=feed
-
-# Link din Stories
-https://beautyhealth.gherasimmarius.com/parfumuri/?utm_source=instagram&utm_medium=story&utm_campaign=parfumuri-vara&utm_content=story
-```
-
----
-
-### Unde vezi rezultatele în GA4
-
-**GA4 → Reports → Acquisition → Traffic acquisition**
-
-Coloanele cheie:
-- **Session source / medium** — ex. `facebook / social`, `tiktok / bio`
-- **Sessions** — câte vizite a adus canalul respectiv
-- **Key events** — câte click-uri pe produse (`bh_affiliate_click`) sau
-  vizualizări de categorie (`bh_category_page_view`) au generat
-
-Poți filtra după `utm_campaign` dacă vrei să compari campanii specifice:
-**Explore → Free form** → dimensiune `Campaign` + metric `Key events`.
-
----
-
 ### Generator rapid de UTM — fără să scrii manual
 
-Dacă vrei să generezi linkuri mai rapid fără să le construiești manual,
-folosește **Google Campaign URL Builder**:
 ```
 https://ga-dev-tools.google.com/campaign-url-builder/
 ```
-Completezi URL-ul, sursa, mediul și campania, și generează linkul complet
-cu toți parametrii gata de copiat.
 
 ---
 
@@ -1005,7 +1268,7 @@ Se creează `beautyhealth-email-output.html`. Deschizi cu Notepad/VS Code și g�
 1. **Recipients**: selectezi lista BeautyHealth
 2. **Schedule**: **Send now** sau programezi la ora dorită
 
-### Lista de abonatți
+### Lista de abonați
 - Există deja o listă BeautyHealth în MailerLite
 - Formularul de abonare e embed în site (MailerLite form ID 193157177015273136)
 
@@ -1014,12 +1277,10 @@ Se creează `beautyhealth-email-output.html`. Deschizi cu Notepad/VS Code și g�
 - Rotație zilnică deterministică — în fiecare zi apar produse diferite
 - Alege automat un banner compatibil cu emailul din categoria parfumuri/homepage
 - Generează subiect și preheader cu cifrele reale din acea zi
-  (ex: „Reduceri până la 50% la parfumuri — Infinite Love, LabNatur și altele")
 
 ### Nu uita
 - Blocul **Countdown** se adaugă DEASUPRA blocului Custom HTML în MailerLite
 - Emailul conține link spre `/oferte/parfumuri/` — pagina de oferte parfumuri de pe site
-- Dacă nu există parfumuri cu reducere în acea zi, scriptul afișează mesaj și nu generează nimic
 
 ---
 
@@ -1029,17 +1290,11 @@ Se creează `beautyhealth-email-output.html`. Deschizi cu Notepad/VS Code și g�
 Generează un email cu **20 parfumuri aleatorii dintr-un brand ales aleator**
 la fiecare rulare. Brand diferit de fiecare dată — nu e deterministic pe zi.
 
-### Unde se află fișierul
-```
-beautyhealth-site-git\generate-beautyhealth-email-brand.cjs
-```
-
 ### Cum rulezi
 ```cmd
 cd "C:\FOLDER DE LUCRU\PAUL MELINTE\SITE BEAUTY_HEALTH\beautyhealth-site-git"
 node generate-beautyhealth-email-brand.cjs
 ```
-
 Output: **`beautyhealth-email-brand-output.html`** în același folder.
 
 ### Logica de selecție
@@ -1062,13 +1317,8 @@ Output: **`beautyhealth-email-brand-output.html`** în același folder.
 | Focus | Cel mai mare discount | Prezentare colecție brand |
 | CTA | `/oferte/parfumuri/` | `/parfumuri/brand/{slug}/` |
 
-### Subiect și preheader
-Se generează automat în funcție de brand și dacă are sau nu reduceri:
-- **Cu reduceri**: `{Brand} — 20 parfumuri, reduceri până la X% | BeautyHealth`
-- **Fără reduceri**: `Descoperă colecția {Brand} — 20 parfumuri selectate | BeautyHealth`
-
 ### Nu uita în MailerLite
-- Adaugă blocul **Countdown** DEASUPRA blocului Custom HTML
+- Adaugă blocul **Countdown** DEASUPRA blocului Custom HTML în MailerLite
 - CTA-ul duce pe pagina de brand: `beautyhealth.gherasimmarius.com/parfumuri/brand/{slug}/`
 
 ---
@@ -1105,6 +1355,8 @@ node sync-feeds-local.cjs
 REM Doar anumite surse
 node sync-feeds-local.cjs --surse=notino,infinitelove
 node sync-feeds-local.cjs --surse=springfarma,farmec
+node sync-feeds-local.cjs --surse=longevity-boost,detoxmed,parflab
+node sync-feeds-local.cjs --surse=drmax,picadili
 
 REM Dry run — afisaza ce ar face, fara sa salveze nimic
 node sync-feeds-local.cjs --dry-run
@@ -1118,6 +1370,13 @@ node sync-feeds-local.cjs --dry-run
 | springfarma.com | `feed_springfarma.xml`, `feed_436edea46.xml`, `feed_436edea46_1.xml` |
 | farmec.ro | `feed_farmec.xml`, `feed_eb530f914.xml`, `feed_eb530f914_1.xml` |
 | infinitelove.ro | `feed_infinitelove.xml`, `feed_9d5a36a0f.xml`, `feed_9d5a36a0f_1.xml` |
+| boabe.ro | `feed_boabe.xml`, `feed_c143969aa.xml` |
+| endro.ro | `feed_endro.xml`, `feed_9c297a4fb.xml` |
+| longevity-boost.com | `feed_longevity-boost.xml`, `feed_5d8022816.xml` |
+| detoxmed.ro | `feed_detoxmed.xml`, `feed_fd8dad9ff.xml` |
+| PARFLAB.ro | `feed_parflab.xml`, `feed_5544111cd.xml` |
+| drmax.ro | `feed_585a1cd31.xml` + `feed_09eca89e8.xml` + `feed_dc6bbc64e.xml` (toate trei, se unesc) |
+| picadili.ro | `feed_picadili.xml`, `feed_f741a4c2e.xml` (același fișier ca în shoes-site) |
 
 ### Output
 - `src/data/products.json` — actualizat direct
@@ -1148,35 +1407,18 @@ git push
 
 ---
 
-### Situația 8 — vim se deschide la git pull sau git merge
+### ⚠️ IMPORTANT: feed-urile XML NU se commit pe GitHub
 
-**Când apare:** `git pull` găsește modificări pe GitHub și deschide editorul vim
-pentru a confirma mesajul de merge. Arată un ecran negru cu text și `~` pe linii.
+Feed-urile XML de la merchants (ex. `feed_235256a01.xml`, `feed_436edea46.xml`,
+`feed_5544111cd.xml` etc.) sunt fișiere locale de lucru — pot depăși 100MB și
+GitHub le respinge. **NICIODATĂ nu face `git add -A` sau `git add .`** în
+folderul beautyhealth — folosește mereu `git add <fisier-specific>`.
 
-**Rezolvare rapidă:**
-1. Apasă **Esc** (o dată)
-2. Apasă **Shift+Z** de două ori rapid (**ZZ** cu majuscule)
-3. Vim se închide și merge-ul continuă automat
-
-**Alternativă dacă ZZ nu merge:**
-```cmd
-REM Inchide fereastra cmd, deschide una noua, apoi:
-cd "C:\FOLDER DE LUCRU\PAUL MELINTE\SITE BEAUTY_HEALTH\beautyhealth-site-git"
-git commit --no-edit
-git push
+Asigură-te că `.gitignore` conține:
 ```
-
-**Ce face ZZ:** salvează fișierul și închide vim (echivalent cu `:wq` + Enter).
-**Ce face --no-edit:** acceptă mesajul de merge implicit fără să deschidă editorul.
-
-**Prevenire pe viitor:** poți seta git să nu mai deschidă vim pentru merge-uri:
-```cmd
-git config --global core.editor "notepad"
+feed_*.xml
 ```
-Sau să accepte automat mesajul de merge fără editor:
-```cmd
-git config --global merge.log false
-```
+Dacă ai comis accidental un fișier XML mare, vezi **Situația 9** din ghidul Git.
 
 ---
 
@@ -1221,10 +1463,6 @@ node add-banners.cjs
 </a>
 ```
 
-### Validare automată
-Scriptul verifică sintaxa JS înainte să salveze — dacă ceva nu e corect,
-nu suprascrie fișierul și afișează eroarea.
-
 ### După rulare — push pe GitHub
 ```cmd
 git pull -X ours
@@ -1232,3 +1470,120 @@ git add src/data/banners.js
 git commit -m "feat: bannere noi"
 git push
 ```
+
+---
+
+## 15. Trustpilot — implementat 15 Oct 2026
+
+**Profil curent:** beauty-healths.com — Business Unit ID `6ad21e64dea7b17b7f0585d7`, token `5d8638c8-df43-434b-b812-50901f6b578f` (în `Layout.astro`).
+*(Istoric: profilul inițial beautyhealth.gherasimmarius.com avea Business Unit ID `6ad0a9bbc306c18a13301538`, token `feb288da-c598-4f56-889c-4b401bfb23de`.)*
+**Categorie Trustpilot:** Beauty & Well-being → Cosmetics & Makeup → Cosmetics Store
+
+### Fișier de verificare domeniu
+- **Cale în proiect:** `public/395d987b-1bf4-4d15-a52e-7e61fad49755.html`
+- **URL live:** `https://beautyhealth.gherasimmarius.com/395d987b-1bf4-4d15-a52e-7e61fad49755.html` ✅
+- **Conținut:** text simplu `395d987b-1bf4-4d15-a52e-7e61fad49755`
+- **Cum funcționează:** Trustpilot accesează URL-ul și verifică că fișierul există — domeniul e astfel confirmat ca al tău
+
+### Widget integrat în `src/layouts/Layout.astro`
+
+**Script bootstrap în `<head>`:**
+```html
+<script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+```
+
+**Sticker fix centrat vertical (stânga), înainte de `</body>`:**
+```html
+<!-- ── TRUSTPILOT Floating Sticker ── -->
+<div id="tp-sticker">
+  <div class="tp-sticker-label">Recenzii clienți</div>
+  <div class="trustpilot-widget"
+       data-locale="en-US"
+       data-template-id="56278e9abfbbba0bdcd568bc"
+       data-businessunit-id="6ad0a9bbc306c18a13301538"
+       data-style-height="52px"
+       data-style-width="220px"
+       data-token="feb288da-c598-4f56-889c-4b401bfb23de">
+    <a href="https://www.trustpilot.com/review/beautyhealth.gherasimmarius.com"
+       target="_blank" rel="noopener">Trustpilot</a>
+  </div>
+</div>
+```
+
+**CSS sticker:**
+- `position: fixed; left: 12px; top: 50%; transform: translateY(-50%); z-index: 9998`
+- Fundal alb, border-radius 10px, box-shadow
+- Pe mobil (< 640px) devine bară fixă jos (actualizat oct 2026), iar stickerele promo urcă deasupra ei
+- Nu interferează cu Farmec sticker (Farmec = bottom-right, Trustpilot = center-left)
+
+### ⚠️ ATENȚIE: CSS transform distruge widget-ul Trustpilot
+
+**Problema:** CSS `transform: rotate()` aplicat pe containerul widget-ului
+**blochează complet randarea iframe-ului Trustpilot** (browser security sandbox
++ compositing layer). Simptom: widget-ul dispare complet de pe pagini.
+
+**Regulă:** NICIODATĂ nu folosi `transform: rotate()` pe `#tp-sticker`
+sau pe orice element părinte al widget-ului Trustpilot.
+
+`transform: translateY(-50%)` pe `#tp-sticker` este **sigur** — translateY
+nu afectează iframe-urile la fel ca rotate. Testat și confirmat funcțional.
+
+### Extindere widget la alte site-uri din ecosistem
+
+Același `data-businessunit-id` și `data-token` funcționează pentru toate
+domeniile sub același cont Trustpilot. Fiecare domeniu nou necesită verificare
+separată:
+
+1. Trustpilot Business → Settings → Business Information → secțiunea „Domains" → Add domain
+2. Primești un fișier de verificare nou (UUID diferit față de cel de pe beautyhealth)
+3. Pui fișierul în `public/` al site-ului respectiv
+4. Deploy → Trustpilot Business → Verify
+
+Site-urile din ecosistem: **styleaccessories.eu** are deja profil propriu (Business Unit ID `6ad4bbc3dea7b17b7f05cfb1`, verificat prin DNS); `carti.gherasimmarius.com` încă nu are.
+
+---
+
+## 16. Google Search Console — Sitemap (implementat Oct 2026)
+
+### Sitemap generat automat prin Astro
+
+**Pachet folosit:** `@astrojs/sitemap`
+
+**Configurare în `astro.config.mjs`:**
+```js
+import sitemap from '@astrojs/sitemap';
+
+export default defineConfig({
+  site: 'https://beauty-healths.com',
+  integrations: [sitemap()],
+  // ... restul configurației
+});
+```
+
+**URL sitemap live:** `https://beauty-healths.com/sitemap-index.xml` ✅ *(inițial pe beautyhealth.gherasimmarius.com)*
+
+Sitemapul se regenerează automat la fiecare build (fiecare `git push` → deploy).
+Conține toate paginile generate de Astro (categorii, brand pages, sub-categorii,
+homepage, pagini statice).
+
+### Verificare proprietate în Google Search Console
+
+Proprietatea `beautyhealth.gherasimmarius.com` a fost verificată prin **fișier HTML**
+în `public/` — același mecanism ca verificarea domeniului pe Trustpilot (pui fișierul
+în `public/`, faci deploy, Google îl accesează și confirmă proprietatea).
+
+### Submitere sitemap
+
+1. Google Search Console → proprietatea `beautyhealth.gherasimmarius.com`
+2. Meniu stânga → **Sitemaps**
+3. Câmp „Add a new sitemap" → introduci: `sitemap-index.xml`
+4. Click **Submit**
+5. **Stare confirmată:** ✅ Submitted and indexed (Oct 2026)
+
+### De reținut
+
+- Sitemapul se actualizează automat la fiecare deploy — nu trebuie re-submis
+  când adaugi produse sau pagini noi
+- Google Search Console îl recitește periodic pe cont propriu după prima submisie
+- Dacă site-ul primește erori de crawl (404, redirect loops), apar în raportul
+  „Pages" din Search Console — verifică periodic
