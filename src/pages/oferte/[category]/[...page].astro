@@ -5,21 +5,14 @@ import BannerSlot from '../../../components/BannerSlot.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import Newsletter from '../../../components/Newsletter.astro';
-import { produseCategorie } from '../../../data/catalog.mjs';
+import { produseCategorie, oferte, categoriiCuOferte } from '../../../data/catalog.mjs';
 import { categories, getCategoryBySlug } from '../../../data/categories.js';
 
 export function getStaticPaths({ paginate }) {
   const PAGE_SIZE = 24;
 
   return categories.flatMap((cat) => {
-    const products = produseCategorie(cat.slug)
-      .filter((p) => p.availability && p.old_price && p.old_price > p.price)
-      .map((p) => ({
-        ...p,
-        _pct: Math.round((1 - p.price / p.old_price) * 100),
-        _sum: Math.round(p.old_price - p.price),
-      }))
-      .sort((a, b) => b._pct - a._pct);
+    const products = oferte(produseCategorie(cat.slug));
 
     if (products.length === 0) return [];
 
@@ -34,7 +27,7 @@ const { page } = Astro.props;
 const { category: categorySlug } = Astro.params;
 const cat = getCategoryBySlug(categorySlug);
 // doar categoriile care au oferte (altfel linkul ar duce la o pagina inexistenta)
-const catCuOferte = categories.filter((c) => produseCategorie(c.slug).some((p) => p.availability && p.old_price && p.old_price > p.price));
+const catCuOferte = categoriiCuOferte();
 
 const canonicalBase = `https://beauty-healths.com/oferte/${categorySlug}/`;
 const canonical = page.currentPage === 1

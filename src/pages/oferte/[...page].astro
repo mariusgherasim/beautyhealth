@@ -5,21 +5,14 @@ import BannerSlot from '../../components/BannerSlot.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Newsletter from '../../components/Newsletter.astro';
-import { produse, categoriiCuOferte } from '../../data/catalog.mjs';
+import { produse, categoriiCuOferte, oferte } from '../../data/catalog.mjs';
 import { categories } from '../../data/categories.js';
 
 export function getStaticPaths({ paginate }) {
   const PAGE_SIZE = 24;
 
-  // Toate produsele active cu discount, sortate dupa % reducere descrescator
-  const products = produse
-    .filter((p) => p.availability && p.old_price && p.old_price > p.price)
-    .map((p) => ({
-      ...p,
-      _pct: Math.round((1 - p.price / p.old_price) * 100),
-      _sum: Math.round(p.old_price - p.price),
-    }))
-    .sort((a, b) => b._pct - a._pct);
+  // Produsele reduse de minim 50 lei, sortate dupa % reducere descrescator
+  const products = oferte();
 
   return paginate(products, { pageSize: PAGE_SIZE });
 }

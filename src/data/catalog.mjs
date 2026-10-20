@@ -132,7 +132,26 @@ export function cuNumar(text, n) {
   });
 }
 
-// Categoriile care au cel putin un produs cu reducere (pentru linkurile /oferte/{categorie}/)
+// ── OFERTE (prima pagina + /oferte/) ────────────────────────────────────
+// Apar doar produsele reduse care costa, dupa reducere, cel putin PRET_MINIM_OFERTA lei.
+// Produsele mai ieftine raman pe site, in categoria lor, dar nu apar la oferte.
+export const PRET_MINIM_OFERTA = 50;
+export const esteOferta = (p) =>
+  p.availability && p.old_price && p.old_price > p.price && p.price >= PRET_MINIM_OFERTA;
+
+// Ofertele, cu % si suma economisita, sortate dupa cea mai mare reducere
+export function oferte(lista = produse) {
+  return lista
+    .filter(esteOferta)
+    .map((p) => ({
+      ...p,
+      _pct: Math.round((1 - p.price / p.old_price) * 100),
+      _sum: Math.round(p.old_price - p.price),
+    }))
+    .sort((a, b) => b._pct - a._pct);
+}
+
+// Categoriile care au cel putin o oferta (pentru linkurile /oferte/{categorie}/)
 export function categoriiCuOferte() {
-  return categories.filter((c) => produseCategorie(c.slug).some((p) => p.availability && p.old_price && p.old_price > p.price));
+  return categories.filter((c) => produseCategorie(c.slug).some(esteOferta));
 }

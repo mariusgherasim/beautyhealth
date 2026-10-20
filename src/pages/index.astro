@@ -8,7 +8,7 @@ import BannerSlot from '../components/BannerSlot.astro';
 import ProductCard from '../components/ProductCard.astro';
 import HomeSearch from '../components/HomeSearch.astro';
 import { categories } from '../data/categories.js';
-import { produse, categoriiCuOferte, produseCategorie } from '../data/catalog.mjs';
+import { produse, categoriiCuOferte, produseCategorie, oferte } from '../data/catalog.mjs';
 import { niceCount } from '../data/text.mjs';
 
 const activeProducts = produse;
@@ -19,15 +19,8 @@ const categoryStats = categories.map((c) => ({
   count: produseCategorie(c.slug).length,
 }));
 
-// Oferte zilei — toate produsele cu discount, sortate dupa % reducere desc
-const discountProducts = activeProducts
-  .filter((p) => p.old_price && p.old_price > p.price)
-  .map((p) => ({
-    ...p,
-    _pct: Math.round((1 - p.price / p.old_price) * 100),
-    _sum: Math.round(p.old_price - p.price),
-  }))
-  .sort((a, b) => b._pct - a._pct);
+// Oferte zilei — produsele reduse de minim 50 lei (regula in catalog.mjs), sortate dupa % reducere desc
+const discountProducts = oferte();
 
 const totalDiscount = discountProducts.length;
 // Prima pagina de oferte: primele 24
