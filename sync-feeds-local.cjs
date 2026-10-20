@@ -188,7 +188,12 @@ function findFeedFile(config) {
 
 function getNotioCategory(catString) {
   if (!catString) return null;
-  const first = catString.split(" - ")[0].trim();
+  // Feed-ul Notino are (din oct. 2026) două formate de categorie, iar fiecare produs apare
+  // de două ori: „Machiaj - Ten - Fond de ten" și „Cosmetice și accesorii, Machiaj, Fond de ten".
+  // Le recunoaștem pe amândouă (altfel aproape toate produsele ajung draft).
+  const parti = catString.split(/\s+-\s+|\s*,\s*/).map((s) => s.trim()).filter(Boolean);
+  if (parti[0] === "Cosmetice și accesorii") parti.shift();
+  const first = parti[0] || "";
   const map = {
     Parfumuri: "parfumuri",
     Machiaj: "machiaj",
