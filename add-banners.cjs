@@ -58,9 +58,13 @@ function parseHtmlBanners(html) {
 }
 
 function detectChannels(width, height) {
+  // Pe site apar doar formatele mici/medii; 300x600 e prea inalt, ramane pentru email
   if (width === 728 && height === 90) return ["site"];
+  if (width === 468 && height === 60) return ["site"];
   if (width === 300 && height === 250) return ["site", "email", "facebook", "instagram"];
-  if (width === 300 && height === 600) return ["site", "email"];
+  if (width === 300 && height === 300) return ["site", "facebook", "instagram"];
+  if ((width === 750 && height === 350) || (width === 600 && height === 250)) return ["site", "facebook", "instagram"];
+  if (width === 300 && height === 600) return ["email"];
   if (width === 160 && height === 600) return ["facebook"];
   if (width === height) return ["instagram", "facebook"]; // patrat
   if (height > width) return ["instagram", "facebook"]; // portret
@@ -68,12 +72,10 @@ function detectChannels(width, height) {
 }
 
 function detectNote(width, height) {
-  const standard = [
-    [728, 90], [300, 250], [300, 600], [160, 600]
-  ];
-  const isStandard = standard.some(([w, h]) => w === width && h === height);
-  if (!isStandard) return "social media — format non-standard IAB, nu se afiseaza pe site";
-  return null;
+  const peSite = [[728, 90], [468, 60], [300, 250], [300, 300], [750, 350], [600, 250]];
+  if (peSite.some(([w, h]) => w === width && h === height)) return null;
+  if (width === 300 && height === 600) return "prea inalt pentru site — folosit doar in email";
+  return "social media — nu se afiseaza pe site";
 }
 
 function readExistingBanners(content) {
@@ -102,6 +104,9 @@ function detectCategories(merchant) {
   if (m.includes("notino")) return ["parfumuri", "machiaj", "ingrijire-ten", "ingrijire-par", "homepage"];
   if (m.includes("infinite")) return ["parfumuri", "homepage"];
   if (m.includes("springfarma")) return ["vitamine-suplimente", "homepage"];
+  if (m.includes("detoxmed")) return ["wellness", "vitamine-suplimente", "homepage"];
+  if (m.includes("drmax")) return ["vitamine-suplimente", "ingrijire-ten", "ingrijire-corp", "mama-si-copilul", "igiena-orala", "dispozitive-medicale", "wellness", "homepage"];
+  if (m.includes("picadili")) return ["machiaj", "homepage"];
   return ["homepage"];
 }
 

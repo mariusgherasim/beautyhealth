@@ -1,10 +1,14 @@
 ---
 // Slot de banner afiliat. Folosire:
-//   <BannerSlot category="parfumuri" size="728x90" />
-//   <BannerSlot category="homepage" size="300x250" />
+//   <BannerSlot category="parfumuri" size="728x90" />   → banner orizontal (728x90 sau 468x60)
+//   <BannerSlot category="homepage" />                  → orice banner de site (orizontal, 300x250, 300x300, 750x350, 600x250)
 //
 // - category: slug-ul categoriei curente (sau "homepage")
-// - size (optional): "728x90" | "300x250" | "300x600" - daca lipseste, accepta orice dimensiune
+// - size (optional): "728x90" = slot orizontal; lipsa = orice dimensiune de site
+//
+// Pe site apar DOAR bannerele care au "site" in channels si au una dintre
+// dimensiunile de mai jos — formatele mari (300x600, 1080x1080, 750x350 etc.)
+// raman pentru email / social media si nu mai incarca pagina.
 //
 // Filtrarea dupa data (active_from / active_until) si alegerea aleatorie se
 // fac CLIENT-SIDE (in browser), nu la build - altfel un banner expirat ar
@@ -14,12 +18,17 @@ import { banners } from '../data/banners.js';
 
 const { category, size = null } = Astro.props;
 
+const ORIZONTALE = ['728x90', '468x60'];
+const PE_SITE = [...ORIZONTALE, '300x250', '300x300', '750x350', '600x250']; // cele late apar doar in slotul de jos
+const MAX_H = 250; // inaltimea maxima a unui banner pe site (px)
+
 const eligible = banners.filter((b) => {
+  const dim = `${b.width}x${b.height}`;
   if (!b.categories.includes(category)) return false;
-  if (size) {
-    const [w, h] = size.split('x').map(Number);
-    if (b.width !== w || b.height !== h) return false;
-  }
+  if (!(b.channels || []).includes('site')) return false;
+  if (!PE_SITE.includes(dim)) return false;
+  if (size === '728x90' && !ORIZONTALE.includes(dim)) return false;
+  if (size && size !== '728x90' && dim !== size) return false;
   return true;
 });
 ---
@@ -34,9 +43,11 @@ const eligible = banners.filter((b) => {
         data-banner-id={b.id}
         data-active-from={b.active_from || ''}
         data-active-until={b.active_until || ''}
+        style={`max-width:${b.width}px`}
         hidden
       >
-        <img src={b.image_url} alt={b.merchant} width={b.width} height={b.height} loading="lazy" />
+        <img src={b.image_url} alt={b.merchant} width={b.width} height={b.height} loading="lazy"
+             style={`width:min(100%, ${Math.min(b.width, Math.round(MAX_H * b.width / b.height))}px)`} />
       </a>
     ))}
   </div>
@@ -58,7 +69,12 @@ const eligible = banners.filter((b) => {
       slot.remove(); // niciun banner activ azi - slotul dispare complet
       return;
     }
-    const pick = candidates[Math.floor(Math.random() * candidates.length)];
+    // nu repetam acelasi banner in doua sloturi de pe aceeasi pagina (daca avem de unde alege)
+    const used = (window.__bhBannere ||= new Set());
+    const fresh = candidates.filter((el) => !used.has(el.dataset.bannerId));
+    const pool = fresh.length ? fresh : candidates;
+    const pick = pool[Math.floor(Math.random() * pool.length)];
+    used.add(pick.dataset.bannerId);
     pick.hidden = false;
   });
 </script>
@@ -69,9 +85,11 @@ const eligible = banners.filter((b) => {
     justify-content: center;
     margin: 20px 0;
   }
+  .banner-item { display: block; width: 100%; }
   .banner-item img {
-    max-width: 100%;
-    height: auto;
+    display: block;
+    height: auto;             /* latimea vine din atributul style: maxim 250px inaltime */
+    margin: 0 auto;
     border-radius: 6px;
   }
   .banner-item[hidden] {

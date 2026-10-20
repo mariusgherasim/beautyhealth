@@ -1,0 +1,245 @@
+---
+// Landing page DetoxMed — programe detox cu sucuri crude presate la rece (detoxmed.ro, campanie 2Performant 7875d2dab)
+// Testimonialele sunt cele furnizate de DetoxMed din recenziile clientilor; le prezentam ca experiente, nu ca promisiuni.
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { produse } from '../data/catalog.mjs';
+
+const LINK_DETOX = 'https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=7875d2dab&redirect_to=https%253A//detoxmed.ro/';
+
+const dm = produse.filter((p) => p.source_site === 'detoxmed.ro' && p.availability);
+const dupaTitlu = (re) => dm.filter((p) => re.test(p.title));
+const program = (nume) => dm.find((p) => new RegExp(`DetoxMED ${nume}`, 'i').test(p.title));
+
+const PROGRAME = [
+  { nume: 'Ușor', cheie: 'U.or', zi: '3 sucuri + 2 salate / zi', pentru: 'Primul tău detox. Cel mai blând început, cu 2 mese solide pe zi.', badge: 'Pentru început' },
+  { nume: 'Moderat', cheie: 'Moderat', zi: '4 sucuri + 1 salată / zi', pentru: 'Echilibrul dintre rezultat și confort, cu o salată cu superalimente.', badge: '' },
+  { nume: 'Intensiv', cheie: 'Intensiv', zi: '6 sucuri crude / zi', pentru: 'Pentru cine a mai ținut o cură (de ex. Ușor sau Moderat). Cel mai vândut: Intensiv 3 zile, apoi 5 zile.', badge: 'Cel mai vândut' },
+].map((x) => ({ ...x, produs: program(x.cheie) }));
+
+const GRUPE = [
+  { id: 'imunomed', titlu: 'Programe ImunoMED', desc: 'Programe cu sucuri crude pentru sezonul rece.', produse: dupaTitlu(/ImunoMED/i) },
+  { id: 'healthymed', titlu: 'Meniuri HealthyMED', desc: 'Meniuri pentru o persoană, pentru doi sau pentru colegii de birou.', produse: dupaTitlu(/HealthyMED/i) },
+  { id: 'pachete', titlu: 'Pachete promo de sucuri', desc: '12, 16 sau 20 de sticle, cu preț redus față de prețul întreg.', produse: dupaTitlu(/Pachet Promo/i) },
+].filter((g) => g.produse.length);
+
+const TESTIMONIALE = [
+  { tema: 'Kilograme în minus', text: 'Am ajuns la 64,9 kg de la 68,4 kg', ctx: 'după 7 zile', cine: 'Melania P.' },
+  { tema: 'Kilograme în minus', text: 'Am făcut o cură de 10 zile și am 7 kg în minus', ctx: '', cine: 'Dana C.' },
+  { tema: 'Fără senzație de foame', text: 'Nu am simțit pic de foame, încă din prima zi', ctx: '', cine: 'Melania P.' },
+  { tema: 'Ușor de ținut', text: 'Este prima dată când reușesc să țin o dietă fără să mă chinui', ctx: '', cine: 'Cristina T.' },
+  { tema: 'Energie, fără cafea', text: 'Mi-au oferit multă energie și o stare de bine, nefiind nevoie să consum cafea', ctx: '', cine: 'Adriana L.' },
+  { tema: 'Abdomen dezumflat', text: 'Am scăpat de balonare, oboseală și câțiva cm', ctx: '', cine: 'Andreea B.' },
+  { tema: 'Ten luminos', text: 'După prima zi, tenul radiază!', ctx: '', cine: 'Roxana B.' },
+  { tema: 'Fără poftă de dulce', text: 'Nu mi-a fost foame deloc și nu simt nevoia de dulce', ctx: '', cine: 'Laura G.' },
+  { tema: 'Revin să cumpere', text: 'Am cumpărat de la ei de 3 ori pachetul de 5 zile', ctx: '', cine: 'Cristina P.' },
+];
+
+const title = 'Program detox DetoxMed: sucuri crude presate la rece, livrate acasă | BeautyHealth';
+const description = 'Trei programe detox DetoxMed — Intensiv, Moderat și Ușor — cu sucuri crude, nepasteurizate, în sticlă, livrate proaspete în toată România. Peste 5.000 de clienți.';
+---
+<Layout title={title} description={description} canonical="https://beauty-healths.com/detox/" ogImage="/images/og-detox.jpg">
+  <Header />
+
+  <main class="dx">
+    <!-- HERO -->
+    <section class="dx-hero">
+      <div class="dx-wrap">
+        <p class="dx-eyebrow">DetoxMed · programe detox livrate acasă</p>
+        <h1>Sucuri crude, presate la rece, la ușa ta. <span>3 programe, de la 3 zile.</span></h1>
+        <p class="dx-lead">
+          Sucuri din fructe, legume și frunze, <strong>nepasteurizate</strong>, în <strong>sticlă</strong>, plus salate cu superalimente.
+          Totul vine gata de consumat, în cutie termoizolantă, în toată România.
+        </p>
+        <div class="dx-stats">
+          <div><b>5.000+</b><span>clienți</span></div>
+          <div><b>570+</b><span>localități livrate</span></div>
+          <div><b>3</b><span>programe</span></div>
+          <div><b>0%</b><span>dobândă, 4 rate TBI</span></div>
+        </div>
+        <div class="dx-ctas">
+          <a class="dx-btn" href="#programe">Alege programul</a>
+          <a class="dx-btn dx-btn--ghost" href={LINK_DETOX} target="_blank" rel="noopener sponsored" data-dx-cta="hero">Vezi detoxmed.ro →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOOK -->
+    <section class="dx-wrap dx-hook">
+      <h2>Câte diete ai început luni și ai abandonat miercuri?</h2>
+      <p>
+        De câte ori ai renunțat pentru că ți-a fost foame? Câte cafele bei ca să treci de ora 15?
+        Și cât timp îți ia, de fapt, să gătești sănătos în fiecare zi?
+      </p>
+      <p>
+        Pentru mulți, piedica nr. 1 e lipsa timpului. La DetoxMed nu gătești, nu cumperi ingrediente, nu storci nimic:
+        primești sucurile proaspete, numerotate pe ore, și le bei în ordine. Peste <strong>5.000 de clienți</strong> au făcut deja asta,
+        din București și Cluj până în Darabani, de unde au venit 34 de comenzi.
+      </p>
+    </section>
+
+    <!-- PROGRAME -->
+    <section class="dx-wrap" id="programe">
+      <h2 class="dx-h2">Cele 3 programe</h2>
+      <p class="dx-sub">Fiecare program se poate lua pe mai multe zile: 3, 5, 7 sau mai multe.</p>
+      <div class="dx-progs">
+        {PROGRAME.map((p) => (
+          <div class={`dx-prog${p.badge === 'Cel mai vândut' ? ' dx-prog--top' : ''}`}>
+            {p.badge && <span class="dx-badge">{p.badge}</span>}
+            <h3>{p.nume}</h3>
+            <p class="dx-zi">{p.zi}</p>
+            <p class="dx-pentru">{p.pentru}</p>
+            {p.produs && <p class="dx-pret">de la <b>{Math.round(p.produs.price)} lei</b></p>}
+            {p.produs && (
+              <a class="dx-btn dx-btn--full" href={p.produs.affiliate_url} target="_blank" rel="noopener sponsored nofollow" data-dx-cta={`program-${p.nume}`}>Vezi programul {p.nume} →</a>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- CE SPUN CLIENTELE -->
+    <section class="dx-wrap">
+      <h2 class="dx-h2">Ce spun clientele</h2>
+      <div class="dx-tests">
+        {TESTIMONIALE.map((t) => (
+          <figure class="dx-test">
+            <span class="dx-tema">{t.tema}</span>
+            <blockquote>„{t.text}”{t.ctx && <em> ({t.ctx})</em>}</blockquote>
+            <figcaption>— {t.cine}</figcaption>
+          </figure>
+        ))}
+      </div>
+      <p class="dx-disclaimer">
+        Experiențe individuale ale clienților, din recenziile publicate de DetoxMed. Rezultatele diferă de la o persoană la alta și nu sunt garantate.
+        Dacă ai o afecțiune, ești însărcinată, alăptezi sau urmezi un tratament, discută cu medicul înainte de o cură detox.
+      </p>
+    </section>
+
+    <!-- DE CE DETOXMED -->
+    <section class="dx-wrap">
+      <h2 class="dx-h2">De ce DetoxMed</h2>
+      <div class="dx-why">
+        <div><b>100% crude și nepasteurizate</b><span>Fără pasteurizare termică și fără HPP (presiune înaltă).</span></div>
+        <div><b>În sticlă, nu în plastic</b><span>Sucurile vin în sticle de 330 ml.</span></div>
+        <div><b>Cu vitamina C alcalină</b><span>Adăugată în sucuri.</span></div>
+        <div><b>Lanț frigorific complet</b><span>Livrare în cutii termoizolante, cu gheață, în toată țara.</span></div>
+        <div><b>Plătești cum vrei</b><span>Ramburs, card online sau 4 rate cu 0% dobândă prin TBI Bank.</span></div>
+        <div><b>Comanda e confirmată telefonic</b><span>Înainte de livrare, ca să știi exact ce și când primești.</span></div>
+      </div>
+    </section>
+
+    <!-- CUM FUNCTIONEAZA -->
+    <section class="dx-wrap dx-steps">
+      <h2 class="dx-h2">Cum funcționează</h2>
+      <ol>
+        <li><b>Alegi programul și numărul de zile</b> pe detoxmed.ro.</li>
+        <li><b>Primești un telefon</b> de confirmare a comenzii.</li>
+        <li><b>Curierul aduce sucurile proaspete</b>, în cutie termoizolantă. Livrările se fac de marți până vineri.</li>
+        <li><b>Le păstrezi la frigider (0–4°C)</b> și le bei în ordinea numerelor de pe sticle, la orele recomandate.</li>
+      </ol>
+    </section>
+
+    <!-- ALTE PROGRAME -->
+    {GRUPE.length > 0 && (
+      <section class="dx-wrap">
+        <h2 class="dx-h2">Mai multe de la DetoxMed</h2>
+        {GRUPE.map((g) => (
+          <div class="dx-group" id={g.id}>
+            <h3>{g.titlu}</h3>
+            <p>{g.desc}</p>
+            <div class="dx-grid">{g.produse.map((p) => <ProductCard product={p} />)}</div>
+          </div>
+        ))}
+        <p class="dx-note">Prețurile sunt cele din ultima actualizare a catalogului nostru. Prețul final îl vezi pe detoxmed.ro.</p>
+      </section>
+    )}
+
+    <!-- CTA FINAL -->
+    <section class="dx-final">
+      <div class="dx-wrap">
+        <h2>Începe cu 3 zile.</h2>
+        <p>Programul Intensiv de 3 zile e cel mai vândut. La prima cură, Ușor sau Moderat sunt alegerea mai blândă.</p>
+        <a class="dx-btn" href={LINK_DETOX} target="_blank" rel="noopener sponsored" data-dx-cta="final">Comandă pe detoxmed.ro →</a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('[data-dx-cta]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      if (typeof gtag === 'function') gtag('event', 'bh_campaign_click', { campaign: 'detoxmed', position: a.dataset.dxCta });
+    });
+  });
+</script>
+
+<style>
+  .dx { --dx-dark: #12341f; --dx-green: #2f8f4e; --dx-lime: #b9e07a; --dx-cream: #f6faf1; }
+  .dx-wrap { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+
+  .dx-hero { background: radial-gradient(circle at 80% 0%, #2a6b3f 0%, var(--dx-dark) 60%); color: #fff; padding: 56px 0 48px; text-align: center; }
+  .dx-eyebrow { display: inline-block; font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--dx-lime); border: 1px solid rgba(185,224,122,.5); border-radius: 999px; padding: 6px 14px; margin: 0 0 18px; }
+  .dx-hero h1 { font-size: clamp(1.7rem, 4.5vw, 2.7rem); line-height: 1.15; margin: 0 auto 14px; max-width: 860px; }
+  .dx-hero h1 span { display: block; color: var(--dx-lime); }
+  .dx-lead { font-size: 1.05rem; color: rgba(255,255,255,.85); max-width: 660px; margin: 0 auto 24px; line-height: 1.55; }
+  .dx-stats { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 0 auto 26px; }
+  .dx-stats div { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); border-radius: 10px; padding: 10px 16px; min-width: 110px; }
+  .dx-stats b { display: block; font-size: 1.5rem; color: #fff; }
+  .dx-stats span { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: rgba(255,255,255,.65); }
+  .dx-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .dx-btn { display: inline-block; background: var(--dx-green); color: #fff; font-weight: 700; text-decoration: none; padding: 14px 26px; border-radius: 8px; transition: transform .15s, background .15s; text-align: center; }
+  .dx-btn:hover { background: #267a41; transform: translateY(-2px); }
+  .dx-btn--ghost { background: transparent; border: 1px solid rgba(255,255,255,.45); }
+  .dx-btn--ghost:hover { background: rgba(255,255,255,.08); }
+  .dx-btn--full { display: block; margin-top: auto; }
+
+  .dx-hook { max-width: 780px; padding-top: 44px; text-align: center; }
+  .dx-hook h2 { color: var(--dx-dark); font-size: 1.6rem; margin: 0 0 12px; }
+  .dx-hook p { color: #444; line-height: 1.65; font-size: 1.02rem; }
+
+  .dx-h2 { color: var(--dx-dark); font-size: 1.5rem; margin: 44px 0 8px; }
+  .dx-sub { color: #666; margin: 0 0 18px; }
+  .dx-progs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .dx-prog { position: relative; display: flex; flex-direction: column; background: #fff; border: 1px solid #dbe8d2; border-radius: 14px; padding: 22px 20px 20px; }
+  .dx-prog--top { border: 2px solid var(--dx-green); box-shadow: 0 8px 28px rgba(47,143,78,.15); }
+  .dx-badge { position: absolute; top: -12px; left: 20px; background: var(--dx-green); color: #fff; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; padding: 4px 10px; border-radius: 999px; }
+  .dx-prog h3 { margin: 4px 0 4px; font-size: 1.4rem; color: var(--dx-dark); }
+  .dx-zi { font-weight: 700; color: var(--dx-green); margin: 0 0 10px; }
+  .dx-pentru { color: #555; font-size: .93rem; line-height: 1.5; margin: 0 0 14px; }
+  .dx-pret { color: #333; margin: 0 0 14px; }
+  .dx-pret b { font-size: 1.3rem; color: var(--dx-dark); }
+
+  .dx-tests { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-top: 14px; }
+  .dx-test { margin: 0; background: var(--dx-cream); border: 1px solid #e0ecd6; border-radius: 12px; padding: 16px 18px; }
+  .dx-tema { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--dx-green); }
+  .dx-test blockquote { margin: 8px 0; font-size: 1rem; line-height: 1.5; color: #222; }
+  .dx-test em { color: #777; font-style: normal; font-size: .9rem; }
+  .dx-test figcaption { font-size: .85rem; color: #666; }
+  .dx-disclaimer { font-size: .8rem; color: #888; line-height: 1.5; margin: 12px 0 0; max-width: 860px; }
+
+  .dx-why { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 14px; }
+  .dx-why div { background: #fff; border: 1px solid #e5ece0; border-radius: 12px; padding: 16px 18px; }
+  .dx-why b { display: block; color: var(--dx-dark); margin-bottom: 4px; }
+  .dx-why span { color: #555; font-size: .92rem; line-height: 1.5; }
+
+  .dx-steps ol { padding-left: 20px; line-height: 1.8; color: #333; max-width: 780px; }
+  .dx-group { padding-top: 22px; }
+  .dx-group h3 { color: var(--dx-dark); margin: 0 0 4px; font-size: 1.2rem; }
+  .dx-group > p { color: #666; margin: 0 0 14px; font-size: .92rem; }
+  .dx-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+  .dx-note { font-size: .8rem; color: #888; margin-top: 12px; }
+
+  .dx-final { background: var(--dx-dark); color: #fff; text-align: center; padding: 44px 0; margin-top: 48px; }
+  .dx-final h2 { margin: 0 0 8px; font-size: 1.7rem; }
+  .dx-final p { color: rgba(255,255,255,.8); margin: 0 auto 20px; max-width: 620px; }
+
+  @media (max-width: 520px) {
+    .dx-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .dx-stats div { min-width: 0; flex: 1 1 40%; }
+  }
+</style>
