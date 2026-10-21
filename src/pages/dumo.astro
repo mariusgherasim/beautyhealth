@@ -1,0 +1,223 @@
+---
+// Sales page DUMO Luxury Perfume (Infinite Love) — destinatie pentru reclame Facebook / Instagram / TikTok / WhatsApp.
+// Datele parfumurilor: descrierile primite de la Infinite Love + feedul 2Performant (pret, imagine, link afiliat).
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { produse } from '../data/catalog.mjs';
+
+// acelasi format ca linkurile quicklink Farmec: caracterele speciale dublu codate (: -> %253A), slash-urile raman
+const QL = (url) => `https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=3fd6221b1&redirect_to=${encodeURIComponent(url).replace(/%2F/g, '/').replace(/%/g, '%25')}`;
+const LINK_COLECTIE = QL('https://infinitelove.ro/eticheta/noutati/?filter_colectie=colectia-dumo');
+
+const PARFUMURI = [
+  { nume: 'REXOR', profil: 'Lemnos și ambrat', note: ['bergamotă', 'prună', 'piper', 'cedru'], pentru: 'Pentru cine vrea un parfum cu prezență puternică.', stil: 'puternic', url: 'https://infinitelove.ro/produs/rexor/' },
+  { nume: 'SPARTACUS', profil: 'Fructat și condimentat', note: ['măr', 'piersică', 'scorțișoară', 'vanilie'], pentru: 'Arome calde, potrivite pentru sezonul rece.', stil: 'cald', url: 'https://infinitelove.ro/produs/spartacus-the-scent-of-freedom/' },
+  { nume: 'MARCUS', profil: 'Citric, floral, ambrat', note: ['citrice', 'piersică', 'flori albe', 'ambră', 'mosc'], pentru: 'Elegant și versatil, de purtat oricând.', stil: 'elegant', url: 'https://infinitelove.ro/produs/marcus/' },
+  { nume: 'PRISCUS', profil: 'Fresh și verde', note: ['măr', 'eucalipt', 'galbanum', 'vetiver'], pentru: 'Pentru cine caută prospețime.', stil: 'fresh', url: 'https://infinitelove.ro/produs/priscus/' },
+  { nume: 'CRIXUS', profil: 'Energic și condimentat', note: ['ghimbir', 'portocală', 'eucalipt', 'bază ambrată, lemnoasă'], pentru: 'Energie și caracter, de dimineața până seara.', stil: 'energic', url: 'https://infinitelove.ro/produs/crixus-the-scent-of-braveheart/' },
+  { nume: 'COMMODUS', profil: 'Bogat și expresiv', note: ['citrice', 'heliotrop', 'cuișoare', 'santal'], pentru: 'Flacon cu finisaj auriu, pentru cine iubește să iasă în evidență.', stil: 'opulent', url: null },
+  { nume: 'VERUS', profil: 'Lemnos și afumat', note: ['eucalipt', 'cuișoare', 'tămâie', 'vetiver'], pentru: 'Pentru iubitorii aromelor misterioase.', stil: 'misterios', url: 'https://infinitelove.ro/produs/verus/' },
+].map((p) => {
+  const prod = produse.find((x) => x.source_site === 'infinitelove.ro' && x.title.trim().toUpperCase() === p.nume);
+  return {
+    ...p,
+    pret: prod ? Math.round(prod.price) : null,
+    img: prod?.image_url || null,
+    link: prod?.affiliate_url || (p.url ? QL(p.url) : LINK_COLECTIE),
+  };
+});
+const pretMin = Math.min(...PARFUMURI.filter((p) => p.pret).map((p) => p.pret));
+
+const STILURI = [
+  { id: 'fresh', txt: 'Fresh, curat' },
+  { id: 'cald', txt: 'Cald, dulce' },
+  { id: 'elegant', txt: 'Elegant, discret' },
+  { id: 'energic', txt: 'Energic, condimentat' },
+  { id: 'puternic', txt: 'Puternic, lemnos' },
+  { id: 'misterios', txt: 'Misterios, afumat' },
+  { id: 'opulent', txt: 'Bogat, de efect' },
+];
+
+const title = 'DUMO Luxury Perfume — 7 parfumuri de gladiator | Infinite Love';
+const description = `Noua colecție DUMO de la Infinite Love: 7 parfumuri originale în flacoane inspirate de armurile gladiatorilor. Rexor, Spartacus, Marcus, Priscus, Crixus, Commodus, Verus${pretMin < Infinity ? ` — de la ${pretMin} lei` : ''}.`;
+---
+<Layout title={title} description={description} canonical="https://beauty-healths.com/dumo/" ogImage="/images/og-dumo.jpg">
+  <Header />
+
+  <main class="du">
+    <!-- HERO -->
+    <section class="du-hero">
+      <div class="du-wrap">
+        <p class="du-eyebrow">Nou · Infinite Love · Colecția DUMO</p>
+        <h1>7 gladiatori.<br><span>Care dintre ei ești tu?</span></h1>
+        <p class="du-lead">
+          <strong>DUMO Luxury Perfume</strong>: 7 parfumuri originale, fiecare cu identitatea lui,
+          în flacoane spectaculoase inspirate de armurile gladiatorilor.{pretMin < Infinity && <> De la <strong>{pretMin} lei</strong>.</>}
+        </p>
+        <div class="du-ctas">
+          <a class="du-btn" href="#alege">Găsește-ți parfumul</a>
+          <a class="du-btn du-btn--ghost" href={LINK_COLECTIE} target="_blank" rel="noopener sponsored" data-du-cta="hero">Toată colecția →</a>
+        </div>
+        <div class="du-strip">
+          {PARFUMURI.filter((p) => p.img).slice(0, 6).map((p) => <img src={p.img} alt={`Parfum ${p.nume}`} loading="eager" width="120" height="120" />)}
+        </div>
+      </div>
+    </section>
+
+    <!-- HOOK -->
+    <section class="du-wrap du-hook">
+      <h2>Ce spune parfumul tău despre tine?</h2>
+      <p>
+        Ești genul care intră într-o cameră și se face remarcat? Sau preferi să lași o urmă discretă, pe care și-o amintesc toți?
+        Cauți prospețime dimineața, căldură seara, mister la miezul nopții?
+      </p>
+      <p>
+        Fiecare dintre cele <strong>7 parfumuri DUMO</strong> poartă numele unui gladiator și are un caracter clar:
+        de la <strong>Priscus</strong>, fresh și verde, la <strong>Verus</strong>, lemnos și afumat.
+        Alege-ți stilul mai jos și îți arătăm gladiatorul potrivit.
+      </p>
+    </section>
+
+    <!-- ALEGE STILUL -->
+    <section class="du-wrap" id="alege">
+      <h2 class="du-h2">Ce stil de parfum îți place?</h2>
+      <div class="du-chips" role="group" aria-label="Alege stilul">
+        {STILURI.map((s) => <button type="button" class="du-chip" data-stil={s.id}>{s.txt}</button>)}
+        <button type="button" class="du-chip du-chip--toate is-on" data-stil="">Toate cele 7</button>
+      </div>
+
+      <div class="du-grid">
+        {PARFUMURI.map((p, i) => (
+          <article class="du-card" data-stil={p.stil} id={p.nume.toLowerCase()}>
+            <div class="du-img">
+              {p.img ? <img src={p.img} alt={`Parfum DUMO ${p.nume}`} loading="lazy" width="400" height="400" /> : <span class="du-noimg">{p.nume}</span>}
+              <span class="du-nr">{String(i + 1).padStart(2, '0')}/07</span>
+            </div>
+            <div class="du-body">
+              <h3>{p.nume}</h3>
+              <p class="du-profil">{p.profil}</p>
+              <ul class="du-note">{p.note.map((n) => <li>{n}</li>)}</ul>
+              <p class="du-pentru">{p.pentru}</p>
+              <div class="du-buy">
+                {p.pret && <span class="du-pret">{p.pret} lei</span>}
+                <a class="du-btn du-btn--sm" href={p.link} target="_blank" rel="noopener sponsored nofollow" data-du-cta={`parfum-${p.nume}`}>Vezi {p.nume} →</a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+      <p class="du-note-mica">Prețurile sunt cele din ultima actualizare a catalogului nostru; prețul final îl vezi pe infinitelove.ro.</p>
+    </section>
+
+    <!-- IDEI -->
+    <section class="du-wrap">
+      <h2 class="du-h2">Pentru cine e potrivit</h2>
+      <div class="du-ideas">
+        <div><b>Pentru sezonul rece</b><span>Spartacus (măr, scorțișoară, vanilie) și Rexor (prună, piper, cedru) sunt aromele calde ale colecției.</span></div>
+        <div><b>Cadou pentru un pasionat</b><span>Flacoanele inspirate de armurile gladiatorilor fac din fiecare parfum un obiect de colecție. Commodus vine cu finisaj auriu.</span></div>
+        <div><b>De purtat zilnic</b><span>Marcus și Priscus sunt variantele versatile: citrice, flori albe, eucalipt și vetiver.</span></div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="du-final">
+      <div class="du-wrap">
+        <h2>Alege-ți gladiatorul.</h2>
+        <p>7 parfumuri DUMO, disponibile acum pe infinitelove.ro.</p>
+        <a class="du-btn" href={LINK_COLECTIE} target="_blank" rel="noopener sponsored" data-du-cta="final">Descoperă colecția DUMO →</a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script is:inline>
+  (function () {
+    var chips = document.querySelectorAll('.du-chip');
+    var cards = document.querySelectorAll('.du-card');
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () {
+        var s = c.dataset.stil;
+        chips.forEach(function (x) { x.classList.toggle('is-on', x === c); });
+        var prim = null;
+        cards.forEach(function (k) {
+          var ok = !s || k.dataset.stil === s;
+          k.classList.toggle('is-dim', !ok);
+          k.classList.toggle('is-pick', !!s && ok);
+          if (ok && !prim) prim = k;
+        });
+        if (s && prim) prim.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (typeof gtag === 'function') gtag('event', 'bh_dumo_stil', { stil: s || 'toate' });
+      });
+    });
+    document.querySelectorAll('[data-du-cta]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        if (typeof gtag === 'function') gtag('event', 'bh_campaign_click', { campaign: 'dumo', position: a.dataset.duCta });
+      });
+    });
+  })();
+</script>
+
+<style>
+  .du { --du-black: #0e0d0b; --du-gold: #c9a24a; --du-gold2: #e8cf8a; --du-cream: #f7f2e8; }
+  .du-wrap { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+
+  .du-hero { background: radial-gradient(circle at 50% -10%, #3a2d14 0%, var(--du-black) 60%); color: #fff; padding: 56px 0 40px; text-align: center; }
+  .du-eyebrow { display: inline-block; font-size: .75rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--du-gold2); border: 1px solid rgba(201,162,74,.55); border-radius: 999px; padding: 6px 14px; margin: 0 0 18px; }
+  .du-hero h1 { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.1; margin: 0 0 14px; letter-spacing: .01em; }
+  .du-hero h1 span { color: var(--du-gold); }
+  .du-lead { font-size: 1.05rem; color: rgba(255,255,255,.85); max-width: 640px; margin: 0 auto 24px; line-height: 1.55; }
+  .du-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px; }
+  .du-btn { display: inline-block; background: var(--du-gold); color: #1a1408; font-weight: 800; text-decoration: none; padding: 14px 26px; border-radius: 8px; transition: transform .15s, background .15s; text-align: center; }
+  .du-btn:hover { background: var(--du-gold2); transform: translateY(-2px); }
+  .du-btn--ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.45); }
+  .du-btn--ghost:hover { background: rgba(255,255,255,.08); }
+  .du-btn--sm { padding: 10px 14px; font-size: .9rem; }
+  .du-strip { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+  .du-strip img { width: 96px; height: 96px; object-fit: cover; border-radius: 10px; border: 1px solid rgba(201,162,74,.35); background: #222; }
+
+  .du-hook { max-width: 780px; padding-top: 44px; text-align: center; }
+  .du-hook h2 { font-family: Georgia, serif; color: var(--du-black); font-size: 1.7rem; margin: 0 0 12px; }
+  .du-hook p { color: #444; line-height: 1.65; font-size: 1.02rem; }
+
+  .du-h2 { font-family: Georgia, serif; color: var(--du-black); font-size: 1.6rem; margin: 44px 0 14px; }
+  .du-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+  .du-chip { background: #fff; border: 1px solid #d9cfba; border-radius: 999px; padding: 9px 16px; font-size: .92rem; cursor: pointer; color: #333; }
+  .du-chip:hover { border-color: var(--du-gold); }
+  .du-chip.is-on { background: var(--du-black); color: var(--du-gold2); border-color: var(--du-black); }
+
+  .du-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  .du-card { background: #fff; border: 1px solid #e6dcc6; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; transition: opacity .2s, transform .2s, box-shadow .2s; scroll-margin-top: 90px; }
+  .du-card.is-dim { opacity: .35; }
+  .du-card.is-pick { box-shadow: 0 0 0 2px var(--du-gold), 0 12px 30px rgba(0,0,0,.12); transform: translateY(-3px); }
+  .du-img { position: relative; aspect-ratio: 1; background: var(--du-black); display: flex; align-items: center; justify-content: center; }
+  .du-img img { width: 100%; height: 100%; object-fit: cover; }
+  .du-noimg { font-family: Georgia, serif; font-size: 2rem; letter-spacing: .12em; color: var(--du-gold); }
+  .du-nr { position: absolute; top: 10px; left: 10px; background: rgba(14,13,11,.75); color: var(--du-gold2); font-size: .72rem; font-weight: 700; letter-spacing: .1em; padding: 4px 8px; border-radius: 6px; }
+  .du-body { padding: 16px 18px 18px; display: flex; flex-direction: column; flex: 1; }
+  .du-body h3 { font-family: Georgia, serif; font-size: 1.4rem; letter-spacing: .08em; margin: 0 0 2px; color: var(--du-black); }
+  .du-profil { color: #a07a2c; font-weight: 700; margin: 0 0 10px; }
+  .du-note { list-style: none; padding: 0; margin: 0 0 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .du-note li { background: var(--du-cream); border-radius: 999px; padding: 3px 10px; font-size: .8rem; color: #5a4a2a; }
+  .du-pentru { color: #555; font-size: .92rem; line-height: 1.5; margin: 0 0 14px; }
+  .du-buy { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .du-pret { font-size: 1.25rem; font-weight: 800; color: var(--du-black); white-space: nowrap; }
+  .du-buy .du-btn { white-space: nowrap; }
+  .du-note-mica { font-size: .8rem; color: #888; margin-top: 12px; }
+
+  .du-ideas { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .du-ideas div { background: var(--du-cream); border: 1px solid #eadfca; border-radius: 12px; padding: 16px 18px; }
+  .du-ideas b { display: block; color: var(--du-black); margin-bottom: 4px; }
+  .du-ideas span { color: #555; font-size: .92rem; line-height: 1.5; }
+
+  .du-final { background: var(--du-black); color: #fff; text-align: center; padding: 44px 0; margin-top: 48px; }
+  .du-final h2 { font-family: Georgia, serif; margin: 0 0 8px; font-size: 1.9rem; color: var(--du-gold2); }
+  .du-final p { color: rgba(255,255,255,.8); margin: 0 auto 20px; }
+
+  @media (max-width: 520px) {
+    .du-strip img { width: 72px; height: 72px; }
+    .du-grid { grid-template-columns: 1fr; }
+  }
+</style>

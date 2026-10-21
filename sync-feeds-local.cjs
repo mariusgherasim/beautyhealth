@@ -4,7 +4,7 @@
 // Compara fiecare feed XML cu products.json si:
 //   - Actualizeaza preturile pentru produsele existente
 //   - Adauga produsele noi din feed care lipsesc din JSON
-//   - Dezactiveaza (draft: true) produsele din JSON absente din feed sau marcate inactive (product_active=false)
+//   - Dezactiveaza (draft: true) produsele din JSON absente din feed
 //
 // Rulare:
 //   node sync-feeds-local.cjs
@@ -196,13 +196,19 @@ function getSpringfarmaCategory(catRaw) {
   return "vitamine-suplimente";
 }
 
-function getFarmecCategory(catRaw) {
-  if (!catRaw) return "ingrijire-ten";
-  const c = catRaw.toLowerCase();
-  if (["machiaj", "make"].some((k) => c.includes(k))) return "machiaj";
-  if (["par", "păr"].some((k) => c.includes(k))) return "ingrijire-par";
-  if (c.includes("corp")) return "ingrijire-corp";
-  if (["barbat", "bărbat"].some((k) => c.includes(k))) return "cosmetice-barbati";
+// Farmec: categoria din feed e adesea numele gamei ("Game", "Gerovital Plant"), asa ca ne uitam
+// si la titlu. Returneaza null pentru produsele care nu tin de beauty (curatenie, insecticide).
+function getFarmecCategory(catRaw, title = "", brand = "") {
+  const t = normTxt(`${catRaw || ""} ${title || ""} ${brand || ""}`);
+  if (areKw(t, ["locuinta", "nufar", "insect tox", "insecticid", "desfundat", "detergent", "inalbitor", "odorizant", "curatare suprafete", "spray de curatat", "anticalcar"])) return null;
+  if (areKw(t, ["pasta de dinti", "periuta", "apa de gura", "dentar"])) return "igiena-orala";
+  if (areKw(t, ["kids", "copii", "bebe"])) return "mama-si-copilul";
+  if (areKw(t, ["deodorant", "antiperspirant"])) return "ingrijire-corp";
+  if (areKw(t, ["apa de parfum", "apa de toaleta", "eau de", "parfum pentru", "parfum de dama", "parfum barbatesc"])) return "parfumuri";
+  if (areKw(t, ["make up", "machiaj", "ruj", "fond de ten", "fondotinta", "pudra", "cipria", "mascara", "rimel", "creion", "lac de unghii", "oja", "top coat", "base coat", "anticearcan", "concealer", "fard", "gloss", "beauty="])) return "machiaj";
+  if (areKw(t, ["men=", "barbati", "spuma de ras", "gel de ras", "after shave", "aftershave", "barba"])) return "cosmetice-barbati";
+  if (areKw(t, ["par=", "sampon", "balsam de par", "masca de par", "vopsea", "tratament expert", "scalp", "anticadere"])) return "ingrijire-par";
+  if (areKw(t, ["corp", "dus=", "gel de dus", "depilat", "maini", "picioare", "sapun", "lapte de corp", "sun=", "protectie solara", "bronz"])) return "ingrijire-corp";
   return "ingrijire-ten";
 }
 
@@ -360,9 +366,14 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
 
   // Cand sunt mai multe fisiere, un produs (product_id) apare o singura data — primul fisier are prioritate
   let rawItems = [];
+  let strain = 0;
   const seenPids = new Set();
   for (const fp of feedPaths) {
     for (const it of parseXmlItems(fs.readFileSync(fp, "utf8"))) {
+      // Unele feed-uri 2Performant contin produse din mai multe magazine (ex. feedul Farmec are si
+      // produse Infinite Love). Pastram doar produsele magazinului curent, dupa campaign_name.
+      const camp = (extractField(it, "campaign_name") || "").toLowerCase().replace(/^https?:\/\//, "").replace(/^www\./, "").replace(/\/+$/, "");
+      if (camp && camp !== source.toLowerCase()) { strain++; continue; }
       const pid = extractField(it, "product_id");
       if (seenPids.has(pid)) continue;
       seenPids.add(pid);
@@ -370,7 +381,7 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
     }
   }
   const activeItems = rawItems.filter((i) => extractField(i, "product_active") === "true");
-  console.log(`  Feed: ${rawItems.length} total, ${activeItems.length} active`);
+  console.log(`  Feed: ${rawItems.length} total, ${activeItems.length} active${strain ? ` (ignorate ${strain} produse din alte magazine)` : ""}`);
 
   const prefix = source.replace(".ro", "").replace(".com", "").toLowerCase();
   const jsonProducts = products.filter((p) => p.source_site === source);
@@ -468,7 +479,7 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
       if (p.source_site !== source) continue;
       const pid = p.id.replace("springfarma-", "");
       if (feedActive[pid]) { updateProduct(p, feedActive[pid]); updated++; }
-      else { p.availability = false; p.draft = true; deactivated++; } // lipseste din feed SAU e inactiv (product_active=false)
+      else if (!feedAllPids.has(pid)) { p.availability = false; p.draft = true; deactivated++; } // doar daca lipseste complet din feed
     }
 
     for (const [pid, item] of Object.entries(feedActive)) {
@@ -482,24 +493,35 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
   }
   // ---- FARMEC ----
   else if (config.type === "farmec") {
+    // Curatenie: inregistrari vechi Infinite Love importate gresit ca Farmec (feedul Farmec contine si produse Infinite Love)
+    for (let k = products.length - 1; k >= 0; k--) {
+      const p = products[k];
+      if (p.source_site === source && /infinitelove\.ro/i.test(p.official_url || "")) { products.splice(k, 1); deactivated++; }
+    }
+    const jsonPidsF = new Set(products.filter((p) => p.source_site === source).map((p) => p.id.replace("farmec-", "")));
+
     const feedActive = {};
     const feedAllPids = new Set();
+    const exclude = new Set();
     for (const item of rawItems) {
       const pid = extractField(item, "product_id");
       feedAllPids.add(pid);
-      if (extractField(item, "product_active") === "true") feedActive[pid] = item;
+      // La Farmec campul product_active NU e de incredere: produse marcate "false" se pot cumpara
+      // pe farmec.ro (verificat 21.10.2026). Le luam pe toate, mai putin cele care nu tin de beauty.
+      if (getFarmecCategory(extractField(item, "category"), extractField(item, "title"), extractField(item, "brand"))) feedActive[pid] = item;
+      else exclude.add(pid);
     }
 
     for (const p of products) {
       if (p.source_site !== source) continue;
       const pid = p.id.replace("farmec-", "");
       if (feedActive[pid]) { updateProduct(p, feedActive[pid]); updated++; }
-      else { p.availability = false; p.draft = true; deactivated++; } // lipseste din feed SAU e inactiv (product_active=false)
+      else if (exclude.has(pid) || !feedAllPids.has(pid)) { p.availability = false; p.draft = true; deactivated++; } // non-beauty sau disparut din feed
     }
 
     for (const [pid, item] of Object.entries(feedActive)) {
-      if (jsonPids.has(pid)) continue;
-      const cat = getFarmecCategory(extractField(item, "category"));
+      if (jsonPidsF.has(pid)) continue;
+      const cat = getFarmecCategory(extractField(item, "category"), extractField(item, "title"), extractField(item, "brand"));
       const np = makeProduct(source, pid, item, cat, existingSlugs);
       np.id = `farmec-${pid}`;
       if (!isDryRun) products.push(np);
@@ -516,7 +538,7 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
       if (p.source_site !== source) continue;
       const pid = p.id.replace(`${prefix}-`, "");
       if (feedActive[pid]) { updateProduct(p, feedActive[pid]); updated++; }
-      else { p.availability = false; p.draft = true; deactivated++; } // lipseste din feed SAU e inactiv (product_active=false)
+      else if (!seenPids.has(pid)) { p.availability = false; p.draft = true; deactivated++; } // doar daca lipseste complet din feed
     }
     for (const [pid, item] of Object.entries(feedActive)) {
       if (jsonPids.has(pid)) continue;
@@ -542,7 +564,7 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
       if (p.source_site !== source) continue;
       const pid = p.id.replace(`${prefix}-`, "");
       if (feedActive[pid]) { updateProduct(p, feedActive[pid]); updated++; }
-      else { p.availability = false; p.draft = true; deactivated++; } // lipseste din feed SAU e inactiv (product_active=false)
+      else if (!feedAllPids.has(pid)) { p.availability = false; p.draft = true; deactivated++; } // doar daca lipseste complet din feed
     }
 
     for (const [pid, item] of Object.entries(feedActive)) {
