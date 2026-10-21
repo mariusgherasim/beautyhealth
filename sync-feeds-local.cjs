@@ -4,7 +4,9 @@
 // Compara fiecare feed XML cu products.json si:
 //   - Actualizeaza preturile pentru produsele existente
 //   - Adauga produsele noi din feed care lipsesc din JSON
-//   - Dezactiveaza (draft: true) produsele din JSON absente din feed
+//   - Dezactiveaza (draft: true) produsele din JSON absente din feed sau cu stoc epuizat (product_active=false)
+//     EXCEPTIE Farmec: acolo product_active nu e de incredere (produse "false" se pot cumpara) — se iau toate.
+//     Verificat 21.10.2026: SpringFarma, Parflab, Endro, Infinite Love, Boabe -> "false" = stoc epuizat.
 //
 // Rulare:
 //   node sync-feeds-local.cjs
@@ -479,7 +481,7 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
       if (p.source_site !== source) continue;
       const pid = p.id.replace("springfarma-", "");
       if (feedActive[pid]) { updateProduct(p, feedActive[pid]); updated++; }
-      else if (!feedAllPids.has(pid)) { p.availability = false; p.draft = true; deactivated++; } // doar daca lipseste complet din feed
+      else { p.availability = false; p.draft = true; deactivated++; } // lipseste din feed SAU stoc epuizat (product_active=false)
     }
 
     for (const [pid, item] of Object.entries(feedActive)) {
@@ -538,7 +540,7 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
       if (p.source_site !== source) continue;
       const pid = p.id.replace(`${prefix}-`, "");
       if (feedActive[pid]) { updateProduct(p, feedActive[pid]); updated++; }
-      else if (!seenPids.has(pid)) { p.availability = false; p.draft = true; deactivated++; } // doar daca lipseste complet din feed
+      else { p.availability = false; p.draft = true; deactivated++; } // lipseste din feed SAU stoc epuizat (product_active=false)
     }
     for (const [pid, item] of Object.entries(feedActive)) {
       if (jsonPids.has(pid)) continue;
@@ -564,7 +566,7 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
       if (p.source_site !== source) continue;
       const pid = p.id.replace(`${prefix}-`, "");
       if (feedActive[pid]) { updateProduct(p, feedActive[pid]); updated++; }
-      else if (!feedAllPids.has(pid)) { p.availability = false; p.draft = true; deactivated++; } // doar daca lipseste complet din feed
+      else { p.availability = false; p.draft = true; deactivated++; } // lipseste din feed SAU stoc epuizat (product_active=false)
     }
 
     for (const [pid, item] of Object.entries(feedActive)) {
