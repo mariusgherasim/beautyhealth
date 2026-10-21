@@ -101,14 +101,14 @@ const description = 'Anniversary Shopping Event pe farmec.ro: până la -40% la 
       <nav class="gv-tabs" aria-label="Game Gerovital">
         {grupe.map((g) => <a href={`#${g.id}`}>{g.titlu} <em>{g.produse.length}</em></a>)}
       </nav>
-      <p class="gv-note">Prețurile de pe card sunt cele din ultima actualizare a catalogului nostru. Prețul redus din campanie îl vezi pe farmec.ro.</p>
+      <p class="gv-note">Reducerea de până la 40% se aplică direct pe farmec.ro, în coș. Apasă pe produs ca să vezi prețul redus.</p>
 
       {grupe.map((g) => (
         <div class="gv-group" id={g.id}>
           <h3>{g.titlu}</h3>
           <p>{g.desc}</p>
           <div class="gv-grid">
-            {g.produse.map((p) => <ProductCard product={p} />)}
+            {g.produse.map((p) => <div class="gv-card"><span class="gv-off">până la -40%</span><ProductCard product={p} /></div>)}
           </div>
         </div>
       ))}
@@ -140,6 +140,10 @@ const description = 'Anniversary Shopping Event pe farmec.ro: până la -40% la 
 <script is:inline define:vars={{ START, END }}>
   (function () {
     var start = new Date(START), end = new Date(END);
+    // Feedul Farmec nu contine preturile campaniei: cat timp campania e activa, nu aratam pretul
+    // intreg din catalog pe carduri (ar contrazice titlul), ci eticheta "pana la -40%".
+    var acum = new Date();
+    if (acum >= start && acum <= end) document.documentElement.classList.add('gv-activ');
     function pad(n) { return String(n).padStart(2, '0'); }
     function tick() {
       var now = new Date();
@@ -149,6 +153,8 @@ const description = 'Anniversary Shopping Event pe farmec.ro: până la -40% la 
         document.getElementById('gv-count').style.display = 'none';
         document.getElementById('gv-final-title').textContent = 'Campania s-a încheiat';
         document.getElementById('gv-final-btn').textContent = 'Vezi ofertele actuale Farmec →';
+        document.documentElement.classList.remove('gv-activ');
+        var nota = document.querySelector('.gv-note'); if (nota) nota.textContent = 'Prețurile sunt cele din ultima actualizare a catalogului nostru.';
         return false;
       }
       var target = now < start ? start : end;
@@ -212,6 +218,10 @@ const description = 'Anniversary Shopping Event pe farmec.ro: până la -40% la 
   .gv-group { padding-top: 26px; scroll-margin-top: 80px; }
   .gv-group h3 { color: var(--gv-dark); font-size: 1.2rem; margin: 0 0 4px; }
   .gv-group > p { color: #666; font-size: .92rem; margin: 0 0 14px; }
+  .gv-card { position: relative; }
+  .gv-off { display: none; position: absolute; top: 10px; left: 10px; z-index: 2; background: #c8102e; color: #fff; font-size: .72rem; font-weight: 800; padding: 4px 8px; border-radius: 6px; letter-spacing: .02em; }
+  :global(html.gv-activ) .gv-off { display: block; }
+  :global(html.gv-activ) .gv-grid :global(.price-row) { display: none; }
   .gv-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
 
   .gv-tips ol { padding-left: 20px; line-height: 1.7; color: #333; max-width: 760px; }
