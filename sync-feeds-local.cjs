@@ -4,7 +4,7 @@
 // Compara fiecare feed XML cu products.json si:
 //   - Actualizeaza preturile pentru produsele existente
 //   - Adauga produsele noi din feed care lipsesc din JSON
-//   - Dezactiveaza (draft: true) produsele din JSON absente din feed
+//   - Dezactiveaza (draft: true) produsele din JSON absente din feed sau marcate inactive (product_active=false)
 //
 // Rulare:
 //   node sync-feeds-local.cjs
@@ -28,8 +28,6 @@
 //   feed_09eca89e8.xml   → drmax.ro (branduri exclusive)
 //   feed_dc6bbc64e.xml   → drmax.ro (private label)
 //   (cele 3 feed-uri Dr. Max se unesc automat; produsele duble apar o singura data)
-//   feed_f741a4c2e.xml   → picadili.ro (DOAR manichiura / unghii; restul feed-ului
-//                          merge pe styleaccessories.eu — acelasi fisier se pune in ambele foldere)
 //
 // Output: src/data/products.json (actualizat direct)
 //         sync-report.json (raport detaliat)
@@ -104,22 +102,7 @@ const FEED_CONFIG = {
     type: "drmax",
     defaultCategory: "ingrijire-ten",
   },
-  "picadili.ro": {
-    // Feed comun cu styleaccessories.eu: aici intra DOAR produsele de manichiura
-    files: ["feed_picadili.xml", "feed_f741a4c2e.xml"],
-    type: "picadili",
-    defaultCategory: "machiaj",
-  },
 };
-
-// Picadili: ce produse sunt de manichiura (categoria din feed sau titlul)
-const PICADILI_CATEGORII = ["accesorii unghii", "manichiura"];
-const PICADILI_TITLU = /unghii|manichiura|oja|rubber base|tipsuri|gel uv|geluri|pile unghii|buffer|cuticul|pigment|sclipici|strasuri|caviar|top coat|base coat/;
-function isPicadiliManichiura(item) {
-  const cat = normTxt(extractField(item, "category")).trim();
-  if (PICADILI_CATEGORII.some((c) => cat === c)) return true;
-  return PICADILI_TITLU.test(normTxt(extractField(item, "title")));
-}
 
 // ---- Argumente CLI ----
 const args = process.argv.slice(2);
@@ -188,12 +171,7 @@ function findFeedFile(config) {
 
 function getNotioCategory(catString) {
   if (!catString) return null;
-  // Feed-ul Notino are (din oct. 2026) două formate de categorie, iar fiecare produs apare
-  // de două ori: „Machiaj - Ten - Fond de ten" și „Cosmetice și accesorii, Machiaj, Fond de ten".
-  // Le recunoaștem pe amândouă (altfel aproape toate produsele ajung draft).
-  const parti = catString.split(/\s+-\s+|\s*,\s*/).map((s) => s.trim()).filter(Boolean);
-  if (parti[0] === "Cosmetice și accesorii") parti.shift();
-  const first = parti[0] || "";
+  const first = catString.split(" - ")[0].trim();
   const map = {
     Parfumuri: "parfumuri",
     Machiaj: "machiaj",
@@ -490,7 +468,7 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
       if (p.source_site !== source) continue;
       const pid = p.id.replace("springfarma-", "");
       if (feedActive[pid]) { updateProduct(p, feedActive[pid]); updated++; }
-      else if (!feedAllPids.has(pid)) { p.availability = false; p.draft = true; deactivated++; }
+      else { p.availability = false; p.draft = true; deactivated++; } // lipseste din feed SAU e inactiv (product_active=false)
     }
 
     for (const [pid, item] of Object.entries(feedActive)) {
@@ -516,7 +494,7 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
       if (p.source_site !== source) continue;
       const pid = p.id.replace("farmec-", "");
       if (feedActive[pid]) { updateProduct(p, feedActive[pid]); updated++; }
-      else if (!feedAllPids.has(pid)) { p.availability = false; p.draft = true; deactivated++; }
+      else { p.availability = false; p.draft = true; deactivated++; } // lipseste din feed SAU e inactiv (product_active=false)
     }
 
     for (const [pid, item] of Object.entries(feedActive)) {
@@ -538,7 +516,7 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
       if (p.source_site !== source) continue;
       const pid = p.id.replace(`${prefix}-`, "");
       if (feedActive[pid]) { updateProduct(p, feedActive[pid]); updated++; }
-      else if (!seenPids.has(pid)) { p.availability = false; p.draft = true; deactivated++; }
+      else { p.availability = false; p.draft = true; deactivated++; } // lipseste din feed SAU e inactiv (product_active=false)
     }
     for (const [pid, item] of Object.entries(feedActive)) {
       if (jsonPids.has(pid)) continue;
@@ -546,26 +524,6 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
       const sub = extractField(item, "subcategory") || "";
       const raw = sub ? `${cat} > ${sub}` : cat;
       const np = makeProduct(source, pid, item, getDrmaxCategory(cat, sub, extractField(item, "title")), existingSlugs, raw);
-      if (!isDryRun) products.push(np);
-      added++;
-    }
-  }
-  // ---- PICADILI (doar manichiura → Machiaj, tipul „Ojă & Unghii") ----
-  else if (config.type === "picadili") {
-    const feedActive = {};
-    for (const item of rawItems) {
-      if (extractField(item, "product_active") === "true" && isPicadiliManichiura(item)) feedActive[extractField(item, "product_id")] = item;
-    }
-    console.log(`  Manichiura: ${Object.keys(feedActive).length} produse active (restul feed-ului e pentru styleaccessories.eu)`);
-    for (const p of products) {
-      if (p.source_site !== source) continue;
-      const pid = p.id.replace(`${prefix}-`, "");
-      if (feedActive[pid]) { updateProduct(p, feedActive[pid]); updated++; }
-      else if (!p.draft) { p.availability = false; p.draft = true; deactivated++; }
-    }
-    for (const [pid, item] of Object.entries(feedActive)) {
-      if (jsonPids.has(pid)) continue;
-      const np = makeProduct(source, pid, item, "machiaj", existingSlugs);
       if (!isDryRun) products.push(np);
       added++;
     }
@@ -584,7 +542,7 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
       if (p.source_site !== source) continue;
       const pid = p.id.replace(`${prefix}-`, "");
       if (feedActive[pid]) { updateProduct(p, feedActive[pid]); updated++; }
-      else if (!feedAllPids.has(pid)) { p.availability = false; p.draft = true; deactivated++; }
+      else { p.availability = false; p.draft = true; deactivated++; } // lipseste din feed SAU e inactiv (product_active=false)
     }
 
     for (const [pid, item] of Object.entries(feedActive)) {
