@@ -15,6 +15,8 @@ const {
   ogImage = "/og-default.jpg",
 } = Astro.props;
 
+import { promotii } from "../data/promotii.js";
+const nrPromotii = promotii.filter((p) => !p.expira || p.expira >= new Date().toISOString().slice(0, 10)).length;
 const siteName = "BeautyHealth";
 const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
 ---
@@ -432,6 +434,43 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
       })();
     </script>
     <!-- ── END DUMO STICKER ── -->
+
+    <!-- ── TAB PROMOTII: pe marginea din dreapta, pe toate paginile (duce la /promotii/) ── -->
+    {nrPromotii > 0 && (
+      <a class="pr-tab" id="pr-tab" href="/promotii/" aria-label={`Promoții și coduri de reducere (${nrPromotii})`}>
+        <span class="pr-tab-pct">%</span>
+        <span class="pr-tab-txt">Promoții</span>
+        <span class="pr-tab-nr">{nrPromotii}</span>
+      </a>
+    )}
+    <style is:global>
+      .pr-tab {
+        position: fixed; right: 0; top: 42%; z-index: 9997;
+        display: flex; flex-direction: column; align-items: center; gap: 6px;
+        background: #c8102e; color: #fff; text-decoration: none;
+        padding: 12px 8px; border-radius: 10px 0 0 10px;
+        box-shadow: -3px 4px 16px rgba(0,0,0,.22);
+        font-family: 'Segoe UI', system-ui, sans-serif; transition: padding .2s, background .2s;
+      }
+      .pr-tab:hover { background: #a50d26; padding-right: 12px; }
+      .pr-tab-pct { font-size: 1.15rem; font-weight: 900; line-height: 1; }
+      .pr-tab-txt { writing-mode: vertical-rl; transform: rotate(180deg); font-size: .78rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+      .pr-tab-nr { background: #fff; color: #c8102e; font-size: .72rem; font-weight: 900; border-radius: 999px; min-width: 20px; height: 20px; line-height: 20px; text-align: center; }
+      @media (max-width: 640px) {
+        .pr-tab { top: 38%; padding: 9px 6px; gap: 4px; }
+        .pr-tab-txt { font-size: .66rem; }
+      }
+    </style>
+    <script is:inline>
+      (function () {
+        // Pe pagina de promotii: fara tab si fara stickere peste carduri
+        if (location.pathname.indexOf('/promotii/') !== 0) return;
+        ['pr-tab', 'promo-sticker', 'gv-sticker', 'dx-sticker', 'du-sticker', 'tombola-sticker'].forEach(function (id) {
+          var x = document.getElementById(id); if (x) x.style.setProperty('display', 'none', 'important');
+        });
+      })();
+    </script>
+    <!-- ── END TAB PROMOTII ── -->
 
     <!-- ── TRUSTPILOT Floating Sticker ── -->
     <div id="tp-sticker">
