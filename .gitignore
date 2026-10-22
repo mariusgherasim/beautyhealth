@@ -8,3 +8,4 @@ feed_*.xml
 scripts/
 
 sync-report.json
+feeds/_*.txt
