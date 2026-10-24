@@ -11,8 +11,10 @@
 //   descriere  1–2 fraze
 //   reducere   textul din eticheta mare (ex: "-50%", "-28 lei", "Ofertă") — sau null
 //   cod        codul de reducere, dacă există (ex: "DETOX10") — sau null pentru oferte fără cod.
-//              Când există cod: butonul „Afișează codul” copiază codul, deschide magazinul
-//              prin linkul de afiliat și arată codul într-o fereastră.
+//              Când există cod, cardul arată „••••10 Afișează codul”: la click apare fereastra
+//              cu codul și „Copiază codul”; după copiere revine la card, unde clientul apasă
+//              „Vezi oferta” și lipește codul în coș pe site-ul magazinului.
+//   cod_text   (opțional) textul de deasupra codului (ex: "Încă 10% reducere EXTRA cu codul")
 //   link       linkul de afiliat (quicklink 2Performant)
 //   expira     data de final "YYYY-MM-DD" (inclusiv) — sau null dacă nu știm.
 //              După această dată oferta dispare singură de pe site.
@@ -83,7 +85,8 @@ export const promotii = [
     titlu: "Programe detox DetoxMed cu 20% reducere",
     descriere: "Programele Intensiv, Moderat și Ușor, cu sucuri crude presate la rece livrate în toată țara, de la 496 lei.",
     reducere: "-20%",
-    cod: null,
+    cod: "DETOX10",
+    cod_text: "Încă 10% reducere EXTRA la toate produsele, cu codul",
     link: "https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=7875d2dab&redirect_to=https%253A//detoxmed.ro/product-category/programe-detoxmed/",
     expira: null,
     categorii: ["wellness"],
