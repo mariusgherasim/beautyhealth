@@ -1,0 +1,33 @@
+---
+// /ghiduri/ — lista tuturor ghidurilor (date: src/data/ghiduri.js)
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import GhiduriUtile from '../../components/GhiduriUtile.astro';
+import { ghiduri } from '../../data/ghiduri.js';
+const n = ghiduri.length;
+---
+<Layout title="Ghiduri de frumusețe și parfumuri | BeautyHealth" description={`${n} ghiduri practice despre parfumuri, îngrijire și sănătate: cum alegi, cum testezi, ce înseamnă etichetele. Cu surse verificate.`} canonical="https://beauty-healths.com/ghiduri/">
+  <Header />
+  <main class="ghl">
+    <section class="ghl-hero">
+      <p class="ghl-tag">Ghiduri educative</p>
+      <h1>Ghiduri: alege mai bine, plătește mai puțin</h1>
+      <p class="ghl-lead">Ce scrie, de fapt, pe eticheta unui parfum? De ce același parfum miroase altfel după 3 ore? Cum citești lista de ingrediente a unei creme? Răspunsuri scurte, cu surse verificate și produsele potrivite la final.</p>
+    </section>
+    <div class="ghl-wrap">
+      <GhiduriUtile toate titlu="Toate ghidurile" />
+      <Newsletter />
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .ghl-hero { background: linear-gradient(135deg, #0B1F4A, #14306e); color: #fff; padding: 44px 16px 36px; text-align: center; }
+  .ghl-tag { font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: #C89B3C; margin: 0 0 10px; font-weight: 700; }
+  .ghl-hero h1 { margin: 0 0 10px; font-size: clamp(1.7rem, 4vw, 2.4rem); }
+  .ghl-lead { color: rgba(255,255,255,.85); max-width: 700px; margin: 0 auto; line-height: 1.6; }
+  .ghl-wrap { max-width: 1200px; margin: 0 auto; padding: 0 16px 30px; }
+</style>

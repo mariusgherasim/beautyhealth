@@ -96,6 +96,12 @@ Stickerele promo (colț jos) și bara Trustpilot sunt în `src/layouts/Layout.as
 
 > **Notă:** secțiunile de mai jos sunt istoricul proiectului (deciziile și ghidurile acumulate de la lansare). Unde ceva s-a schimbat de atunci, informația curentă e cea din secțiunea 0 de mai sus.
 
+### Secțiunea Ghiduri (din 26.10.2026)
+- Pagina listă: `/ghiduri/` (`src/pages/ghiduri/index.astro`); link „📖 Ghiduri" în meniul de sus și coloana „Ghiduri" din footer.
+- Ghidurile: `/ghiduri/note-parfum-varf-inima-baza/` (lead magnet: fișă de testare printabilă + formular de abonare) și `/ghiduri/parfum-edp-edt/` (mutat din `public/ghid-parfum-edp-edt.html`, care acum doar redirecționează aici).
+- **Ghid nou** = pagină în `src/pages/ghiduri/{slug}.astro` + o intrare în `src/data/ghiduri.js` (titlu, descriere, minute, categorii). Apare singur pe `/ghiduri/` și în blocul „📖 Ghiduri utile" de pe paginile categoriilor (și tipurilor) din `categorii`.
+- Emailul ghidului de note: `ghid-note-parfum-email.html` (în rădăcina repo-ului, nu se publică pe site).
+
 ## Surse de produse (merchant-i 2Performant)
 
 | Merchant | Produse active | Categorie principală |

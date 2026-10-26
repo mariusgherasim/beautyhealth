@@ -6,6 +6,7 @@ import BannerSlot from '../../components/BannerSlot.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Newsletter from '../../components/Newsletter.astro';
+import GhiduriUtile from '../../components/GhiduriUtile.astro';
 import { categories, getCategoryBySlug } from '../../data/categories.js';
 import { produseCategorie, tipuriCategorie, brandsCategorie, cuNumar } from '../../data/catalog.mjs';
 
@@ -134,6 +135,7 @@ const jsonLd = {
     </nav>
 
     <BannerSlot category={categorySlug} />
+    <GhiduriUtile categorie={categorySlug} />
     <Newsletter />
   </main>
 

@@ -1,0 +1,290 @@
+---
+// Ghid educativ + lead magnet: „Ce înseamnă notele de vârf, inimă și bază la un parfum"
+// - fișa de buzunar (piramida + jurnalul de testare) se poate printa / salva ca PDF
+// - formularul de abonare MailerLite (grupul beauty) e la final, în #abonare
+// - parfumurile-exemplu se leagă la build de produsele din catalog (prețuri actuale)
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import { produse } from '../../data/catalog.mjs';
+
+const URL = 'https://beauty-healths.com/ghiduri/note-parfum-varf-inima-baza/';
+
+// Piramide simplificate, după descrierile oficiale ale caselor de parfum
+const EXEMPLE = [
+  { nume: 'Dior Sauvage', an: 2015, gen: 'bărbați', rx: /^DIOR Sauvage Eau de Toilette/i,
+    varf: 'bergamotă de Calabria, piper', inima: 'piper de Sichuan, lavandă, elemi', baza: 'ambroxan, cedru, labdanum',
+    pe: 'Primele minute sunt citrice și piperate; după o oră rămâne un lemnos-ambrat curat.' },
+  { nume: 'Lancôme La Vie est Belle', an: 2012, gen: 'femei', rx: /^Lancôme La vie est belle Eau de Parfum/i,
+    varf: 'coacăze negre, pară', inima: 'iris, iasomie, floare de portocal', baza: 'praline, vanilie, paciuli, boabe tonka',
+    pe: 'Începe fructat, trece prin flori pudrate și se așază dulce, gurmand, pe piele și haine.' },
+  { nume: 'Armani Acqua di Giò', an: 1996, gen: 'bărbați', rx: /^Armani Acqua di Giò Eau de Toilette/i,
+    varf: 'lămâie, bergamotă, note marine', inima: 'iasomie, rozmarin, piersică', baza: 'cedru, mosc alb, paciuli',
+    pe: 'Exemplul clasic de parfum „proaspăt": vârful acvatic domină, baza e discretă.' },
+  { nume: 'Yves Saint Laurent Libre', an: 2019, gen: 'femei', rx: /^Yves Saint Laurent Libre Eau de Parfum/i,
+    varf: 'lavandă, mandarină, coacăze negre', inima: 'lavandă, floare de portocal, iasomie', baza: 'vanilie de Madagascar, mosc, cedru, ambră',
+    pe: 'Aceeași notă (lavanda) apare și în vârf, și în inimă — un truc folosit des de parfumieri.' },
+  { nume: 'Rabanne 1 Million', an: 2008, gen: 'bărbați', rx: /^Rabanne 1 Million Eau de Toilette/i,
+    varf: 'grapefruit, mentă, mandarină roșie', inima: 'trandafir, scorțișoară, condimente', baza: 'piele, ambră, note lemnoase',
+    pe: 'Vârful rece și fresh contrastează cu o bază caldă, condimentată, care ține ore bune.' },
+  { nume: 'Carolina Herrera Good Girl', an: 2016, gen: 'femei', rx: /^Carolina Herrera Good Girl Eau de Parfum/i,
+    varf: 'migdale, cafea, bergamotă', inima: 'tuberoză, iasomie sambac', baza: 'boabe tonka, cacao, vanilie',
+    pe: 'Cafeaua și migdalele din vârf se simt imediat; seara rămân doar cacao și tonka.' },
+];
+// produsul cu cel mai mic preț din catalog pentru fiecare exemplu (cu poză)
+const exemple = EXEMPLE.map((e) => {
+  const m = produse.filter((p) => e.rx.test(p.title) && p.image_url && p.affiliate_url).sort((a, b) => a.price - b.price);
+  return { ...e, produs: m[0] || null, nr: m.length };
+});
+const lei = (n) => Number(n).toLocaleString('ro-RO', { minimumFractionDigits: 0, maximumFractionDigits: 2 }) + ' lei';
+const nrParfumuri = produse.filter((p) => (p.category || []).includes('parfumuri')).length;
+const L = (n) => n.toLocaleString('ro-RO');
+
+const title = 'Note de vârf, inimă și bază la parfum — ghid + fișă de testare | BeautyHealth';
+const description = 'Ce înseamnă, de fapt, piramida olfactivă: cât ține fiecare notă, de ce un parfum miroase altfel după 3 ore și cum testezi corect. Cu fișă de buzunar gratuită.';
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'Article', headline: 'Ce înseamnă, de fapt, notele de vârf, inimă și bază la un parfum',
+  description, inLanguage: 'ro-RO', datePublished: '2026-10-26', mainEntityOfPage: URL,
+  author: { '@type': 'Organization', name: 'BeautyHealth' }, publisher: { '@type': 'Organization', name: 'BeautyHealth' },
+};
+---
+<Layout title={title} description={description} canonical={URL}>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} slot="head" />
+  <Header />
+
+  <main class="gn">
+    <header class="gn-hero">
+      <div class="gn-wrap">
+        <p class="gn-tag">Ghid educativ · Parfumuri · ~8 minute</p>
+        <h1>Ce înseamnă, de fapt, „note de vârf, inimă și bază" la un parfum</h1>
+        <p class="gn-lead">
+          Piața de parfumuri din România a trecut de <strong>400 de milioane de euro</strong>, iar doar parfumurile de nișă au ajuns la <strong>40 de milioane de euro în 2025</strong>.
+          Câți dintre noi am cumpărat totuși un parfum după primele 30 de secunde din magazin? Câți am descoperit acasă, după două ore, că miroase cu totul altfel?
+          Și câți am dat vina pe „parfumul fals", când de fapt vedeam doar piramida olfactivă la lucru?
+        </p>
+        <a class="gn-btn" href="#fisa">Ia fișa de buzunar gratuită ↓</a>
+      </div>
+    </header>
+
+    <article class="gn-wrap gn-art">
+      <div class="gn-cifre">
+        <div><b>5 min – 2 h</b><span>cât țin notele de vârf</span></div>
+        <div><b>~3 h</b><span>cât ține inima parfumului</span></div>
+        <div><b>ore – zile</b><span>baza, pe piele și pe haine</span></div>
+        <div><b>1946</b><span>anul în care Jean Carles a deschis școala care a făcut metoda celebră</span></div>
+      </div>
+
+      <h2 id="ce-este">Piramida olfactivă, pe scurt</h2>
+      <p>
+        Un parfum nu e un singur miros, ci un amestec de zeci de ingrediente care se evaporă <strong>în ritmuri diferite</strong>.
+        Cele mai volatile pleacă primele, cele mai grele rămân ultimele. Parfumierii le grupează în trei „etaje" — vârf, inimă și bază —
+        iar desenul cu cele trei niveluri se numește <strong>piramida olfactivă</strong>.
+      </p>
+      <p>
+        Ideea de a construi parfumul pe niveluri de volatilitate e legată de numele lui <strong>Jean Carles</strong> (1892–1966), creatorul parfumurilor
+        Ma Griffe (1946) și Miss Dior (1947) și primul director al școlii de parfumerie Roure din Grasse, deschisă în 1946. Carles compunea „de jos în sus":
+        întâi baza, apoi inima, la final vârful. Metoda lui de a învăța materiile prime se folosește și azi în formarea parfumierilor.
+      </p>
+
+      <div class="gn-piramida" aria-label="Piramida olfactivă">
+        <div class="gn-niv gn-v"><b>VÂRF</b><span>primele minute · citrice, aromatice, fructe</span></div>
+        <div class="gn-niv gn-i"><b>INIMĂ</b><span>de la ~10 minute la câteva ore · flori, condimente</span></div>
+        <div class="gn-niv gn-b"><b>BAZĂ</b><span>după ~30 de minute, ore întregi · lemn, vanilie, ambră, mosc</span></div>
+      </div>
+
+      <h2 id="varf">1. Notele de vârf — prima impresie</h2>
+      <p>
+        Sunt ce simți imediat după pulverizare. Molecule mici, ușoare, care se evaporă repede: <strong>câteva minute până la maximum 2 ore</strong>.
+        Citricele (bergamota, lămâia, grapefruitul) sunt cele mai scurte — uneori dispar în câteva minute.
+      </p>
+      <p><strong>Ingrediente tipice:</strong> bergamotă, lămâie, mandarină, grapefruit, mentă, busuioc, rozmarin, lavandă, note marine.</p>
+      <p class="gn-nota">De aceea mostra de pe hârtie din magazin te poate păcăli: hârtia îți arată mai ales vârful, iar tu cumperi, de fapt, inima și baza.</p>
+
+      <h2 id="inima">2. Notele de inimă — caracterul parfumului</h2>
+      <p>
+        Apar pe măsură ce vârful se stinge, de regulă după aproximativ <strong>10 minute</strong>, și rămân în prim-plan <strong>în jur de 3 ore</strong>.
+        Ele dau „personalitatea": floral, condimentat, fructat, pudrat. Când cineva spune „parfumul tău miroase a trandafir", de obicei vorbește despre inimă.
+      </p>
+      <p><strong>Ingrediente tipice:</strong> trandafir, iasomie, iris, floare de portocal, tuberoză, ylang-ylang, scorțișoară, piper, cardamom, piersică.</p>
+
+      <h2 id="baza">3. Notele de bază — ce rămâne</h2>
+      <p>
+        Molecule grele, care se evaporă cel mai încet. Se simt clar <strong>după aproximativ 30 de minute</strong> și pot ține{" "}<strong>ore întregi pe piele și chiar zile pe haine</strong>. Tot ele „fixează" restul notelor și le țin mai mult pe piele.
+      </p>
+      <p><strong>Ingrediente tipice:</strong> vanilie, boabe tonka, ambră, mosc, santal, cedru, vetiver, paciuli, piele, cacao.</p>
+
+      <div class="gn-box">
+        <h3>De ce același parfum miroase altfel pe tine și pe prietena ta?</h3>
+        <p>Duratele de mai sus sunt orientative. Pielea fiecăruia (mai uscată sau mai grasă), temperatura corpului și chiar ce ai mâncat schimbă ritmul în care se evaporă notele.
+          Ingredientele naturale tind să se evapore mai repede, iar moleculele de sinteză adaugă stabilitate și persistență. Concluzia practică: <strong>un parfum se testează pe pielea ta, nu pe a altcuiva</strong>.</p>
+      </div>
+
+      <h2 id="exemple">Piramida pe 6 parfumuri pe care le știi</h2>
+      <p>Piramide simplificate, după descrierile oficiale ale caselor de parfum. Uită-te cum se schimbă „familia" de la vârf la bază.</p>
+      <div class="gn-ex">
+        {exemple.map((e) => (
+          <div class="gn-excard">
+            <div class="gn-exhead">
+              {e.produs && <img src={e.produs.image_url} alt={e.nume} loading="lazy" width="90" height="90" />}
+              <div><h3>{e.nume}</h3><span class="gn-exmeta">{e.an} · {e.gen}</span></div>
+            </div>
+            <ul class="gn-pyr">
+              <li><b>Vârf</b> {e.varf}</li>
+              <li><b>Inimă</b> {e.inima}</li>
+              <li><b>Bază</b> {e.baza}</li>
+            </ul>
+            <p class="gn-expe">{e.pe}</p>
+            {e.produs && (
+              <a class="gn-exbtn" href={e.produs.affiliate_url} target="_blank" rel="noopener sponsored nofollow">
+                Vezi oferta — de la {lei(e.produs.price)} →
+              </a>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <h2 id="testare">Cum testezi corect un parfum — 7 reguli</h2>
+      <ol class="gn-reg">
+        <li><strong>Pe piele, nu doar pe hârtie.</strong> Hârtia îți arată vârful; pielea îți arată parfumul întreg.</li>
+        <li><strong>Pulverizează pe încheietură sau în interiorul cotului</strong>, de la 10–15 cm, și <strong>nu freca</strong> — frecarea încălzește pielea și grăbește dispariția vârfului.</li>
+        <li><strong>Nu decide în primele 5 minute.</strong> Mirosi din nou la 30 de minute (inima) și la 2–3 ore (baza).</li>
+        <li><strong>Maximum 2–3 parfumuri pe sesiune</strong> — câte unul pe fiecare încheietură și unul în cot. Nasul obosește repede.</li>
+        <li><strong>Pe piele hidratată ține mai mult.</strong> O cremă fără parfum, pusă înainte, ajută notele să rămână.</li>
+        <li><strong>Cere o mostră sau cumpără o miniatură</strong> și poartă parfumul o zi întreagă înainte de un flacon mare.</li>
+        <li><strong>Citește piramida înainte să cumperi.</strong> Dacă îți plac bazele cu vanilie și tonka, caută-le în lista „note de bază" a parfumului.</li>
+      </ol>
+      <p>Te încurcă și etichetele „Eau de Parfum" și „Eau de Toilette"? Citește și <a href="/ghiduri/parfum-edp-edt/">ghidul despre concentrațiile de parfum</a> — de acolo vine, de fapt, cât ține un parfum în total.</p>
+
+      <section class="gn-fisa" id="fisa" aria-labelledby="fisa-t">
+        <div class="gn-fisa-head">
+          <p class="gn-tag">Gratuit · Printează sau salvează ca PDF</p>
+          <h2 id="fisa-t">Fișa de buzunar: piramida + jurnalul de testare</h2>
+        </div>
+        <div class="gn-fisa-body">
+          <table class="gn-tab">
+            <thead><tr><th>Nivel</th><th>Când îl simți</th><th>Cât ține</th><th>Ce conține de obicei</th></tr></thead>
+            <tbody>
+              <tr><td><b>Vârf</b></td><td>imediat</td><td>5 min – 2 h</td><td>citrice, mentă, lavandă, note marine</td></tr>
+              <tr><td><b>Inimă</b></td><td>după ~10 min</td><td>~3 h</td><td>trandafir, iasomie, iris, condimente</td></tr>
+              <tr><td><b>Bază</b></td><td>după ~30 min</td><td>ore, zile pe haine</td><td>vanilie, tonka, ambră, mosc, lemn</td></tr>
+            </tbody>
+          </table>
+          <h3>Jurnalul meu de testare</h3>
+          <table class="gn-tab gn-jurnal">
+            <thead><tr><th>Parfum</th><th>La 5 minute</th><th>La 30 de minute</th><th>La 3 ore</th><th>Îl cumpăr?</th></tr></thead>
+            <tbody>{[1, 2, 3, 4].map(() => <tr><td></td><td></td><td></td><td></td><td>☐ Da ☐ Nu</td></tr>)}</tbody>
+          </table>
+          <button type="button" class="gn-btn gn-print" id="gn-print">🖨️ Printează / salvează fișa ca PDF</button>
+        </div>
+      </section>
+
+      <section class="gn-lead-box" id="abonare">
+        <h2>Vrei și următoarele ghiduri?</h2>
+        <p>
+          Lunar trimitem un ghid scurt despre parfumuri și îngrijire — familiile olfactive, cum alegi un parfum-cadou, cum îl păstrezi ca să nu se strice —
+          plus ofertele reale ale săptămânii din cele {L(nrParfumuri)} de parfumuri de pe site. Fără spam, te dezabonezi cu un click.
+        </p>
+        <Newsletter />
+      </section>
+
+      <div class="gn-next">
+        <a href="/parfumuri/">Toate parfumurile →</a>
+        <a href="/oferte/parfumuri/">Parfumuri cu reducere →</a>
+        <a href="/promotii/">Promoții și coduri →</a>
+      </div>
+
+      <h2 id="surse">Surse</h2>
+      <ul class="gn-surse">
+        <li><a href="https://en.wikipedia.org/wiki/Jean_Carles" target="_blank" rel="noopener">Jean Carles — Wikipedia</a></li>
+        <li><a href="https://carrementbelle.com/blog/en/2020/10/28/top-middle-and-base-notes-olfactory-pyramid/" target="_blank" rel="noopener">Carrément Belle — The olfactory pyramid: top, middle, base notes</a></li>
+        <li><a href="https://blog.lebermuth.com/fragrance-101-understanding-the-fragrance-pyramid" target="_blank" rel="noopener">Lebermuth — Understanding the fragrance pyramid</a></li>
+        <li><a href="https://www.revistabiz.ro/piata-romaneasca-de-parfumuri-de-nisa-a-atins-40-de-milioane-de-euro-in-2025/" target="_blank" rel="noopener">Revista Biz — Piața românească de parfumuri de nișă a atins 40 de milioane de euro în 2025</a></li>
+        <li><a href="https://www.economica.net/piata-de-cosmetice-si-parfumuri-din-romania-se-apropie-de-12-miliarde-de-euro-ce-se-cumpara-si-cum-s-au-schimbat-obiceiurile_907933.html" target="_blank" rel="noopener">Economica.net — Piața de cosmetice și parfumuri din România</a></li>
+      </ul>
+      <p class="gn-nota">Linkurile către produse sunt de afiliere: putem primi un comision, fără cost în plus pentru tine. Prețurile pot varia — prețul final e cel de pe site-ul magazinului.</p>
+    </article>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script is:inline>
+  (function () {
+    var b = document.getElementById('gn-print');
+    if (b) b.addEventListener('click', function () {
+      document.documentElement.classList.add('gn-doar-fisa');
+      if (typeof gtag === 'function') gtag('event', 'bh_lead_magnet_print', { ghid: 'note-parfum' });
+      window.print();
+      setTimeout(function () { document.documentElement.classList.remove('gn-doar-fisa'); }, 500);
+    });
+  })();
+</script>
+
+<style is:global>
+  @media print {
+    html.gn-doar-fisa body * { visibility: hidden !important; }
+    html.gn-doar-fisa #fisa, html.gn-doar-fisa #fisa * { visibility: visible !important; }
+    html.gn-doar-fisa #fisa { position: absolute; left: 0; top: 0; width: 100%; border: 0 !important; box-shadow: none !important; }
+    html.gn-doar-fisa .gn-print { display: none !important; }
+  }
+</style>
+
+<style>
+  .gn { --navy: #0B1F4A; --gold: #C89B3C; --cream: #FAF8F4; --line: #E8E0D5; --mid: #6B5B4E; background: var(--cream); }
+  .gn-wrap { max-width: 820px; margin: 0 auto; padding: 0 18px; }
+  .gn-hero { background: linear-gradient(160deg, var(--navy), #1a3560); color: #fff; padding: 52px 0 44px; text-align: center; }
+  .gn-tag { font: 700 11px system-ui, sans-serif; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); margin: 0 0 12px; }
+  .gn-hero h1 { font-family: Georgia, serif; font-size: clamp(1.7rem, 4.2vw, 2.5rem); line-height: 1.2; margin: 0 0 16px; color: #fff; }
+  .gn-lead { font-size: 1.05rem; line-height: 1.65; color: rgba(255,255,255,.88); margin: 0 0 22px; }
+  .gn-btn { display: inline-block; background: var(--gold); color: #fff; font: 700 .95rem system-ui, sans-serif; padding: 12px 24px; border-radius: 6px; text-decoration: none; border: 0; cursor: pointer; }
+  .gn-btn:hover { background: #a9802e; }
+  .gn-art { padding-top: 28px; padding-bottom: 40px; font-family: Georgia, serif; color: #2a2a2a; }
+  .gn-art p, .gn-art li { font-size: 1.04rem; line-height: 1.75; }
+  .gn-art h2 { color: var(--navy); font-size: 1.45rem; margin: 2.2rem 0 .8rem; padding-left: 12px; border-left: 4px solid var(--gold); line-height: 1.3; }
+  .gn-art a { color: var(--navy); }
+  .gn-cifre { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; background: #fff; border: 1px solid var(--line); border-top: 3px solid var(--gold); border-radius: 8px; padding: 16px; text-align: center; }
+  .gn-cifre b { display: block; color: var(--navy); font-size: 1.35rem; }
+  .gn-cifre span { display: block; font: .8rem/1.35 system-ui, sans-serif; color: var(--mid); margin-top: 4px; }
+  .gn-piramida { display: flex; flex-direction: column; align-items: center; gap: 4px; margin: 22px 0; font-family: system-ui, sans-serif; }
+  .gn-niv { color: #fff; text-align: center; padding: 12px 14px; border-radius: 6px; }
+  .gn-niv b { display: block; letter-spacing: .12em; font-size: .95rem; }
+  .gn-niv span { font-size: .8rem; opacity: .9; }
+  .gn-v { width: 46%; background: #C89B3C; } .gn-i { width: 70%; background: #8a5a7c; } .gn-b { width: 94%; background: var(--navy); }
+  .gn-nota { font-size: .92rem !important; color: var(--mid); font-style: italic; }
+  .gn-box { background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--navy); border-radius: 6px; padding: 16px 18px; margin: 24px 0; }
+  .gn-box h3 { color: var(--navy); margin: 0 0 8px; font-size: 1.1rem; }
+  .gn-ex { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+  .gn-excard { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+  .gn-exhead { display: flex; gap: 10px; align-items: center; }
+  .gn-exhead img { width: 64px; height: 64px; object-fit: contain; flex: none; }
+  .gn-exhead h3 { font-size: 1rem; margin: 0; color: var(--navy); line-height: 1.25; }
+  .gn-exmeta { font: .75rem system-ui, sans-serif; color: var(--mid); }
+  .gn-pyr { list-style: none; padding: 0; margin: 0; font: .86rem/1.45 system-ui, sans-serif; }
+  .gn-pyr li { padding: 4px 0; border-bottom: 1px dashed var(--line); }
+  .gn-pyr b { display: inline-block; min-width: 46px; color: var(--gold); text-transform: uppercase; font-size: .72rem; letter-spacing: .06em; }
+  .gn-expe { font-size: .88rem !important; color: var(--mid); margin: 0; line-height: 1.5 !important; }
+  .gn-exbtn { margin-top: auto; display: block; text-align: center; background: var(--navy); color: #fff !important; text-decoration: none; font: 700 .82rem system-ui, sans-serif; padding: 10px; border-radius: 5px; }
+  .gn-reg li { margin-bottom: 8px; }
+  .gn-fisa { background: #fff; border: 2px dashed var(--gold); border-radius: 10px; margin: 34px 0; overflow: hidden; }
+  .gn-fisa-head { background: var(--navy); padding: 16px 18px; }
+  .gn-fisa-head h2 { color: #fff; border: 0; padding: 0; margin: 0; font-size: 1.3rem; }
+  .gn-fisa-body { padding: 16px 18px 20px; }
+  .gn-fisa-body h3 { color: var(--navy); margin: 18px 0 8px; }
+  .gn-tab { width: 100%; border-collapse: collapse; font: .86rem/1.4 system-ui, sans-serif; }
+  .gn-tab th { background: #f4efe6; color: var(--navy); text-align: left; padding: 8px; border: 1px solid var(--line); }
+  .gn-tab td { padding: 8px; border: 1px solid var(--line); vertical-align: top; }
+  .gn-jurnal td { height: 38px; }
+  .gn-print { margin-top: 16px; }
+  .gn-lead-box { background: linear-gradient(160deg, var(--navy), #1a3560); color: #fff; border-radius: 10px; padding: 24px 20px 10px; margin: 34px 0; text-align: center; }
+  .gn-lead-box h2 { color: #fff; border: 0; padding: 0; margin: 0 0 10px; }
+  .gn-lead-box p { color: rgba(255,255,255,.88); font-size: .98rem; }
+  .gn-next { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 10px 0 20px; font-family: system-ui, sans-serif; }
+  .gn-next a { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 9px 16px; text-decoration: none; font-weight: 700; font-size: .9rem; }
+  .gn-surse li { font-size: .88rem; }
+  @media (max-width: 640px) {
+    .gn-cifre { grid-template-columns: repeat(2, 1fr); }
+    .gn-v { width: 70%; } .gn-i { width: 85%; } .gn-b { width: 100%; }
+    .gn-tab { font-size: .76rem; } .gn-tab th, .gn-tab td { padding: 5px; }
+  }
+</style>
