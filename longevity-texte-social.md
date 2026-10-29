@@ -11,7 +11,14 @@ https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&
 **Reguli Longevity (obligatorii):**
 - NU scrie „-40%” pentru 1–5 noiembrie, pentru că reducerile se aplică una după alta.
 - Fără boli și fără afirmații de sănătate inventate. Fără „tratează”, „vindecă”, „previne”, „detox”, „100% natural”.
-- Dacă pui un beneficiu, copiază-l EXACT din descrierea produsului de pe longevity-boost.com. Exemplul din brief: „magneziul contribuie la reducerea oboselii și extenuării”.
+- Dacă pui un beneficiu, folosește DOAR una dintre mențiunile de mai jos, copiate exact de pe longevity-boost.com (29.10.2026):
+  - Antioxidants Boost: „Vitamina C și seleniul contribuie la protejarea celulelor împotriva stresului oxidativ.”
+  - Liposomal Vitamin C Boost: „Vitamina C contribuie la funcționarea normală a sistemului imunitar și la reducerea oboselii și extenuării.”
+  - Magnesium Bisglycinate Boost: „Magneziul contribuie la reducerea oboselii și extenuării.”
+  - Mind Forte: „Acidul pantotenic (vitamina B5) contribuie la performanța mentală normală.”
+  - Se-Inositol Boost: „Seleniul contribuie la menținerea sănătății părului și la menținerea sănătății unghiilor.”
+- Nu cita recenziile clienților de pe site: unele pomenesc afecțiuni.
+- Nu prelua insigna „100% NATURAL” de pe site.
 - Fără numele sau imaginea cofondatoarelor.
 - La final scrie #publicitate sau „link de afiliere”.
 
@@ -29,7 +36,9 @@ https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&
 > ✅ la comenzile de minimum 300 de lei se mai aplică automat încă 20%, după prima reducere
 > ✅ transport gratuit peste 190 de lei
 >
-> Cele 5 produse: Antioxidants Boost, Liposomal Vitamin C Boost, Magnesium Bisglycinate Boost, Mind Forte, Se-Inositol Boost. O cutie îți ajunge între 1 și 6 luni, în funcție de produs.
+> Cele 5 produse: Antioxidants Boost, Liposomal Vitamin C Boost, Magnesium Bisglycinate Boost, Mind Forte, Se-Inositol Boost. Curele recomandate pe site durează între 1 și 6 luni.
+>
+> 💡 Știai? Magneziul contribuie la reducerea oboselii și extenuării.
 >
 > ⏰ Până joi, 5 noiembrie, la 23:59. Linkul e în comentariu.
 > #publicitate #LongevityBOOST #suplimente
@@ -82,7 +91,7 @@ https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&
 > De vineri, 6 noiembrie, până vineri, 20 noiembrie, la 23:59:
 > 🔹 -35% direct în coș, fără cod
 > 🔹 2 produse full size cadou, la alegere, la comenzile de minimum 400 de lei
-> 🔹 5 produse în campanie, iar o cutie îți ajunge între 1 și 6 luni
+> 🔹 5 produse în campanie, iar curele recomandate pe site durează între 1 și 6 luni
 >
 > 👉 Linkul e în comentariu. #publicitate
 
