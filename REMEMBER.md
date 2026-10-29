@@ -96,6 +96,11 @@ Stickerele promo (colț jos) și bara Trustpilot sunt în `src/layouts/Layout.as
 
 > **Notă:** secțiunile de mai jos sunt istoricul proiectului (deciziile și ghidurile acumulate de la lansare). Unde ceva s-a schimbat de atunci, informația curentă e cea din secțiunea 0 de mai sus.
 
+### Taburile laterale „🏷️ Oferte" și „% Promoții" (din 29.10.2026)
+- Pe marginea din dreapta a tuturor paginilor, în `src/layouts/Layout.astro`: **Oferte** (navy, sus, cu numărul de produse reduse → `/oferte/`) și **Promoții** (roșu, dedesubt → `/promotii/`).
+- Pe mobil (≤640 px) stau în același loc și se schimbă între ele la 2 secunde, ca să nu se aglomereze cu stickerul Dumo.
+- Tabul Oferte nu apare pe paginile `/oferte/…`; tabul Promoții nu apare pe `/promotii/`. Numărul de pe tabul Oferte se actualizează singur la fiecare build.
+
 ### Secțiunea Ghiduri (din 26.10.2026)
 - Pagina listă: `/ghiduri/` (`src/pages/ghiduri/index.astro`); link „📖 Ghiduri" în meniul de sus și coloana „Ghiduri" din footer.
 - Ghidurile: `/ghiduri/note-parfum-varf-inima-baza/` (lead magnet: fișă de testare printabilă + formular de abonare) și `/ghiduri/parfum-edp-edt/` (mutat din `public/ghid-parfum-edp-edt.html`, care acum doar redirecționează aici).

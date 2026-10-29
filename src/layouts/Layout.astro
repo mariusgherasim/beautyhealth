@@ -17,6 +17,8 @@ const {
 
 import { promotii } from "../data/promotii.js";
 const nrPromotii = promotii.filter((p) => !p.expira || p.expira >= new Date().toISOString().slice(0, 10)).length;
+import { oferte } from "../data/catalog.mjs";
+const nrOferte = oferte().length;
 const siteName = "BeautyHealth";
 const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
 ---
@@ -459,6 +461,16 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
     </script>
     <!-- ── END DUMO STICKER ── -->
 
+    <!-- ── TAB OFERTE: pe marginea din dreapta, deasupra tabului Promoții (duce la /oferte/) ──
+         Pe mobil cele două taburi stau în același loc și se schimbă între ele la 2 secunde. -->
+    {nrOferte > 0 && (
+      <a class="of-tab" id="of-tab" href="/oferte/" aria-label={`Oferte și reduceri (${nrOferte} produse)`}>
+        <span class="of-tab-ic" aria-hidden="true">🏷️</span>
+        <span class="of-tab-txt">Oferte</span>
+        <span class="of-tab-nr">{nrOferte}</span>
+      </a>
+    )}
+
     <!-- ── TAB PROMOTII: pe marginea din dreapta, pe toate paginile (duce la /promotii/) ── -->
     {nrPromotii > 0 && (
       <a class="pr-tab" id="pr-tab" href="/promotii/" aria-label={`Promoții și coduri de reducere (${nrPromotii})`}>
@@ -484,7 +496,42 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
         .pr-tab { top: 38%; padding: 9px 6px; gap: 4px; }
         .pr-tab-txt { font-size: .66rem; }
       }
+
+      .of-tab {
+        position: fixed; right: 0; top: 20%; z-index: 9997;
+        display: flex; flex-direction: column; align-items: center; gap: 6px;
+        background: #0B1F4A; color: #fff; text-decoration: none;
+        padding: 12px 8px; border-radius: 10px 0 0 10px; border: 1px solid #C89B3C; border-right: 0;
+        box-shadow: -3px 4px 16px rgba(0,0,0,.22);
+        font-family: 'Segoe UI', system-ui, sans-serif; transition: padding .2s, background .2s, opacity .4s;
+      }
+      .of-tab:hover { background: #14306e; padding-right: 12px; }
+      .of-tab-ic { font-size: 1.05rem; line-height: 1; }
+      .of-tab-txt { writing-mode: vertical-rl; transform: rotate(180deg); font-size: .78rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #C89B3C; }
+      .of-tab-nr { background: #C89B3C; color: #0B1F4A; font-size: .68rem; font-weight: 900; border-radius: 999px; min-width: 20px; height: 20px; line-height: 20px; padding: 0 5px; text-align: center; }
+      @media (max-width: 640px) {
+        .of-tab { top: 38%; padding: 9px 6px; gap: 4px; }
+        .of-tab-txt { font-size: .66rem; }
+        /* cele două taburi se alternează în același loc */
+        html.tab-alt .of-tab, html.tab-alt .pr-tab { transition: opacity .45s; }
+        html.tab-alt.tab-pr .of-tab, html.tab-alt.tab-of .pr-tab { opacity: 0; pointer-events: none; }
+      }
     </style>
+    <script is:inline>
+      (function () {
+        var of = document.getElementById('of-tab'), pr = document.getElementById('pr-tab');
+        // pe paginile de oferte nu arătăm tabul de oferte
+        if (of && location.pathname.indexOf('/oferte/') === 0) { of.style.setProperty('display', 'none', 'important'); of = null; }
+        if (!of || !pr || location.pathname.indexOf('/promotii/') === 0) return;
+        var h = document.documentElement, mob = window.matchMedia('(max-width: 640px)');
+        h.classList.add('tab-alt', 'tab-of');
+        setInterval(function () {
+          if (!mob.matches) return;
+          var arataOf = h.classList.contains('tab-pr');
+          h.classList.toggle('tab-of', arataOf); h.classList.toggle('tab-pr', !arataOf);
+        }, 2000);
+      })();
+    </script>
     <script is:inline>
       (function () {
         // Pe pagina de promotii: fara tab si fara stickere peste carduri
