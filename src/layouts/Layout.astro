@@ -43,16 +43,40 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
     <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HS59YL4Y3D"></script>
+    <!-- gtag.js (197 KB) se încarcă după afișarea paginii sau la prima atingere/derulare.
+         Evenimentele de până atunci stau în dataLayer și se trimit, nu se pierd. -->
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
       gtag('js', new Date());
       gtag('config', 'G-HS59YL4Y3D');
+      (function () {
+        var done = false;
+        function loadGA() {
+          if (done) return; done = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-HS59YL4Y3D';
+          document.head.appendChild(s);
+        }
+        ['scroll', 'pointerdown', 'keydown', 'touchstart'].forEach(function (e) {
+          window.addEventListener(e, loadGA, { once: true, passive: true });
+        });
+        window.addEventListener('load', function () { setTimeout(loadGA, 1500); });
+      })();
     </script>
 
-    <!-- TrustBox script -->
-    <script is:inline type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+    <!-- TrustBox script — se încarcă după ce pagina e afișată, ca să nu încetinească site-ul pe mobil -->
+    <script is:inline>
+      window.addEventListener('load', function () {
+        setTimeout(function () {
+          var s = document.createElement('script');
+          s.src = 'https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js';
+          s.async = true;
+          document.head.appendChild(s);
+        }, 1200);
+      });
+    </script>
     <!-- End TrustBox script -->
 
     <slot name="head" />
