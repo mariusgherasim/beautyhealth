@@ -75,9 +75,9 @@ https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&
 >
 > De ce să aștepți încă 3 săptămâni? De ce să alegi un singur cadou, când poți alege două? Și de ce mostre, când pot fi cutii întregi?
 >
-> 🖤 Black Friday pe longevity-boost.com, 6–20 noiembrie
+> 🖤 Black Friday pe longevity-boost.com, 6–20 noiembrie: cea mai mare reducere a lunii
 > ✅ -35% automat în coș la Antioxidants Boost, Liposomal Vitamin C Boost, Magnesium Bisglycinate Boost, Mind Forte și Se-Inositol Boost
-> 🎁 la comenzile de minimum 400 de lei, 2 produse full size cadou, alese de tine
+> 🎁 la comenzile de minimum 400 de lei, 2 produse full size cadou, pe care le alegi tu dintre cele 6 produse din gamă
 > 🚚 transport gratuit peste 190 de lei
 >
 > 15 zile, apoi se termină. Linkul e în comentariu.
@@ -90,7 +90,8 @@ https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&
 >
 > De vineri, 6 noiembrie, până vineri, 20 noiembrie, la 23:59:
 > 🔹 -35% direct în coș, fără cod
-> 🔹 2 produse full size cadou, la alegere, la comenzile de minimum 400 de lei
+> 🔹 2 produse full size cadou, la alegere dintre cele 6 produse din gamă, la comenzile de minimum 400 de lei
+> 🔹 o comandă de 400 de lei acoperă o rutină de mai multe luni
 > 🔹 5 produse în campanie, iar curele recomandate pe site durează între 1 și 6 luni
 >
 > 👉 Linkul e în comentariu. #publicitate
@@ -102,12 +103,19 @@ https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&
 
 ### Story C2 (3 cadre)
 1. **„Black Friday pe 6 noiembrie?”** Pe imagine adaugă un sondaj: „Da, acum / Aștept 27”.
-2. **„-35% automat în coș + 2 cadouri FULL SIZE la min. 400 lei”**, cu cele 5 produse scrise mic dedesubt.
+2. **„-35% automat în coș + 2 cadouri FULL SIZE la min. 400 lei”**, cu textul mic dedesubt „le alegi tu dintre cele 6 produse din gamă”.
 3. **„Până pe 20 noiembrie, 23:59”**, cu sticker-ul Countdown, sticker-ul Link și textul „Transport gratuit peste 190 lei”.
 
 ---
 
+**Calendar recomandat de Longevity:**
+- 1–5 nov: postare pe 1 nov, reamintire pe 4 sau 5 nov.
+- Black Friday: lansare pe 6 nov, reamintire pe 12–13 nov, ultimul apel pe 19–20 nov (varianta 3).
+- În toate textele: „doar pe longevity-boost.com, în limita stocului disponibil”.
+- Pe site sunt publicate etichetele complete ale produselor; poți folosi asta ca argument.
+- În reclamele plătite respectă politicile Meta și Google pentru produse de sănătate.
+- Black Friday: Vitamin D3+K2 apare printre produsele incluse în textul pentru marketeri, dar nu și în cel pentru clienți. Nu spune nimic despre reducerea la D3+K2 până nu clarifici.
+
 **De verificat înainte de postare:**
 - Pragul de 400 de lei se calculează înainte sau după reducerea de 35%? Brieful nu spune.
-- Din ce produse se aleg cele 2 cadouri?
 - Până nu ai răspunsurile, nu da exemple de coș la C2.

@@ -1603,7 +1603,7 @@ Proprietatea `beautyhealth.gherasimmarius.com` a fost verificată prin **fișier
 
 **C1, ofertă de sezon (1–5 nov):** -20% automat + încă 20% automat la comenzi de min. 300 lei, fără cod.
 **C2, Black Friday (6–20 nov):** -35% automat + 2 produse full size cadou, la alegere, la min. 400 lei.
-Produse: Antioxidants Boost, Liposomal Vitamin C Boost, Magnesium Bisglycinate Boost, Mind Forte, Se-Inositol Boost. **Vitamin D3+K2 NU e inclus.** Transport gratuit peste 190 lei.
+Produse: Antioxidants Boost, Liposomal Vitamin C Boost, Magnesium Bisglycinate Boost, Mind Forte, Se-Inositol Boost. **Vitamin D3+K2 NU e inclus la C1.** La Black Friday, D3+K2 apare printre produsele incluse în textul 2Performant pentru marketeri, dar nu și în cel pentru clienți (neclar). Cadourile Black Friday: clientul alege 2 dintre cele 6 produse individuale din gamă. Transport gratuit peste 190 lei.
 Quicklink: `https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=28cd17dbc&redirect_to=https%253A//longevity-boost.com/collections/produse`
 
 ### Reguli obligatorii Longevity (pentru orice text)
@@ -1624,4 +1624,5 @@ Quicklink: `https://event.2performant.com/events/click?ad_type=quicklink&aff_cod
   - Test pentru o anumită zi: `/?lbtest=2026-11-10`.
 - **Emailuri:** `email-longevity-c1.html` se trimite pe 1 nov, `email-longevity-c2.html` pe 6 nov. Fiecare are 3 subiecte și 3 preheadere.
 - **Texte social:** `longevity-texte-social.md`, cu postări și Story-uri pentru ambele campanii.
-- **De aflat de la Longevity:** pragul de 400 lei e înainte sau după -35%? Din ce produse se aleg cadourile?
+- **De aflat de la Longevity:** pragul de 400 lei e înainte sau după -35%? D3+K2 are -35% de Black Friday?
+- **Reamintiri prin email** (fișierele nu sunt în repo): r1 pe 4 nov, r2 pe 12 nov, r3 pe 19 nov, după calendarul recomandat de Longevity.
