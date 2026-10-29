@@ -1619,7 +1619,7 @@ Quicklink: `https://event.2performant.com/events/click?ad_type=quicklink&aff_cod
   - Data se ia după ora României.
 - **Promoții:** 2 carduri în `src/data/promotii.js`. Câmp nou: **`incepe`**, data de la care apare oferta, astfel că o poți pune din timp.
   - `promotii.astro` și numărul de pe tabul „% Promoții” numără doar ofertele active azi (calculat în browser).
-- **Sticker `lb-sticker`** în `Layout.astro`, cu countdown până la 5 nov 23:59, apoi până la 20 nov 23:59, apoi dispare.
+- **Sticker `lb-sticker`** în `Layout.astro`: precampanie 29–31 oct („în curând”, countdown „Începe în” până la 1 nov), apoi countdown până la 5 nov 23:59 (pe 5 nov anunță „Mâine începe Black Friday”), apoi până la 20 nov 23:59, apoi dispare.
   - Apare pe prima pagină și la /vitamine-suplimente/, cu excepția tipului Slăbire & Detox. Acolo ia locul stickerului DUMO.
   - Test pentru o anumită zi: `/?lbtest=2026-11-10`.
 - **Emailuri:** `email-longevity-c1.html` se trimite pe 1 nov, `email-longevity-c2.html` pe 6 nov. Fiecare are 3 subiecte și 3 preheadere.

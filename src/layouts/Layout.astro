@@ -393,8 +393,8 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
     </script>
     <!-- ── END DETOX STICKER ── -->
 
-    <!-- ── LONGEVITY STICKER: 1–5 nov (-20% + încă 20%) și Black Friday 6–20 nov 2026 (-35% + 2 cadouri) ── -->
-    <!-- Apare singur la 1 nov 00:00 și dispare singur la 20 nov 23:59 (ora României). Pe prima pagină și la Vitamine & Suplimente
+    <!-- ── LONGEVITY STICKER: precampanie 29–31 oct, 1–5 nov (-20% + încă 20%) și Black Friday 6–20 nov 2026 (-35% + 2 cadouri) ── -->
+    <!-- Precampanie 29–31 oct („în curând”, countdown până la start). Apare singur la 1 nov 00:00 și dispare singur la 20 nov 23:59 (ora României). Pe prima pagină și la Vitamine & Suplimente
          (fără tipul Slăbire & Detox, unde rămâne DetoxMed). Acolo are prioritate față de DUMO.
          Reguli Longevity: NU „-40%" (reducerile se aplică succesiv), fără afirmații de sănătate, fără cofondatoare. -->
     <a class="lb-sticker" id="lb-sticker" href="https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=28cd17dbc&redirect_to=https%253A//longevity-boost.com/collections/produse" target="_blank" rel="sponsored noopener" style="display:none">
@@ -405,7 +405,7 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
       <div class="lbs-mid">
         <div class="lbs-plus" id="lbs-plus">+ încă 20% la comenzi de min. 300 lei</div>
         <div class="lbs-desc" id="lbs-desc">Reduceri aplicate succesiv, automat în coș, fără cod</div>
-        <div class="lbs-cd" aria-live="off"><span>Se termină în</span><b id="lbs-cd">--</b></div>
+        <div class="lbs-cd" aria-live="off"><span id="lbs-cdt">Se termină în</span><b id="lbs-cd">--</b></div>
       </div>
       <div class="lbs-cta">
         Vezi produsele
@@ -424,6 +424,7 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
       }
       .lb-sticker:hover { transform: translateY(-3px); }
       .lb-sticker.lb-bf { background: #0b0b0b; }
+      .lb-sticker.lb-pre .lbs-big::before { content: 'în curând'; display: block; font-size: .5rem; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 2px; }
       .lbs-top { background: linear-gradient(135deg, #e9d39a, #c9a24a); padding: 10px 32px 8px 14px; display: flex; align-items: center; justify-content: space-between; color: #10231c; }
       .lbs-big { font-size: 1.6rem; font-weight: 900; line-height: 1; }
       .lbs-label { font-size: .58rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; text-align: right; line-height: 1.35; }
@@ -452,12 +453,22 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
         var t = (location.search.match(/lbtest=([\d-]+)/) || [])[1];
         var offset = t ? new Date(t + 'T12:00:00+02:00') - new Date() : 0;
         var acum = function () { return new Date(Date.now() + offset); };
+        var PRE = new Date('2026-10-29T00:00:00+02:00'); // precampanie: anunțăm oferta, fără să o prezentăm ca activă
         var START = new Date('2026-11-01T00:00:00+02:00');
         var C1 = new Date('2026-11-05T23:59:59+02:00');
         var C2 = new Date('2026-11-20T23:59:59+02:00');
         var n = acum();
-        if (n < START || n > C2) return;
-        var bf = n > C1, end = bf ? C2 : C1;
+        if (n < PRE || n > C2) return;
+        var pre = n < START, bf = n > C1, end = pre ? START : (bf ? C2 : C1);
+        if (pre) {
+          el.classList.add('lb-pre');
+          document.getElementById('lbs-label').innerHTML = 'Din 1<br>noiembrie';
+          document.getElementById('lbs-desc').textContent = 'Longevity BOOST · reduceri aplicate succesiv, automat în coș, doar 1–5 noiembrie';
+          document.getElementById('lbs-cdt').textContent = 'Începe în';
+        } else if (end - n < 864e5 && !bf) {
+          // ultima zi a ofertei de sezon: anunțăm ce urmează
+          document.getElementById('lbs-desc').textContent = 'Mâine începe Black Friday: -35% + 2 cadouri';
+        }
         if (bf) {
           el.classList.add('lb-bf');
           document.getElementById('lbs-big').textContent = '-35%';
@@ -471,7 +482,7 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
         var d2 = function (x) { return (x < 10 ? '0' : '') + x; };
         var tick = function () {
           var r = Math.max(0, Math.floor((end - acum()) / 1000));
-          if (!r) { el.style.display = 'none'; return; }
+          if (!r) { if (pre) { location.reload(); return; } el.style.display = 'none'; return; }
           var z = Math.floor(r / 86400), h = Math.floor(r % 86400 / 3600), m = Math.floor(r % 3600 / 60), s = r % 60;
           cd.textContent = (z ? z + (z === 1 ? ' zi ' : ' zile ') : '') + d2(h) + ':' + d2(m) + ':' + d2(s);
         };
