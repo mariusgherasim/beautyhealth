@@ -23,7 +23,7 @@
   top: 8px;
   left: 8px;
   background: var(--gold, #c89b3c);
-  color: #fff;
+  color: var(--navy, #0b1f4a);
   font-size: 0.7rem;
   font-weight: 600;
   padding: 3px 8px;
@@ -48,7 +48,7 @@
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: #888;
+  color: #6b6b6b;
 }
 .product-card h3 {
   font-size: 0.92rem;
@@ -73,14 +73,14 @@
 }
 .product-card .old-price {
   font-size: 0.8rem;
-  color: #aaa;
+  color: #767676;
   text-decoration: line-through;
 }
 .product-card .cta {
   margin-top: 8px;
   font-size: 0.82rem;
   font-weight: 600;
-  color: var(--gold, #c89b3c);
+  color: var(--gold-text, #8a6a1f);
 }
 
 .grid {
@@ -123,14 +123,14 @@
 }
 .category-search .search-status {
   font-size: 0.8rem;
-  color: #888;
+  color: #6b6b6b;
   margin-top: 6px;
   min-height: 1.2em;
 }
 .search-empty {
   padding: 30px 10px;
   text-align: center;
-  color: #888;
+  color: #6b6b6b;
 }
 
 /* Banner clonat intre rezultatele cautarii - ocupa un rand intreg din grila */

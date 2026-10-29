@@ -82,6 +82,8 @@ const title = page.currentPage === 1
       {page.total} produse cu reducere — pagina {page.currentPage} din {page.lastPage}
     </p>
 
+    <h2 class="sr-only">Produse</h2>
+
     <div class="grid">
       {page.data.map((product) => (
         <div class="card-wrap">
@@ -106,22 +108,22 @@ const title = page.currentPage === 1
 
 <style>
   .wrap { max-width: 1200px; margin: 0 auto; padding: 20px 16px 60px; }
-  .breadcrumbs { font-size: 0.85rem; color: #888; margin-bottom: 12px; }
-  .breadcrumbs a { color: #888; text-decoration: none; }
+  .breadcrumbs { font-size: 0.85rem; color: #6b6b6b; margin-bottom: 12px; }
+  .breadcrumbs a { color: #6b6b6b; text-decoration: none; }
   h1 { color: var(--navy); margin-bottom: 8px; font-size: 1.8rem; }
   .intro { max-width: 780px; color: #444; margin-bottom: 16px; }
   .nav-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
-  .nav-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: #aaa; font-weight: 700; padding-top: 7px; white-space: nowrap; min-width: 52px; }
+  .nav-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: #6b6b6b; font-weight: 700; padding-top: 7px; white-space: nowrap; min-width: 52px; }
   .category-pills { display: flex; flex-wrap: wrap; gap: 6px; }
   .cat-pill { padding: 6px 13px; border-radius: 20px; background: #fff; border: 1px solid #ddd; font-size: 0.85rem; text-decoration: none; color: var(--navy); transition: background 0.15s; }
   .cat-pill:hover { border-color: var(--navy); }
   .cat-pill.active { background: var(--navy); color: #fff; border-color: var(--navy); }
-  .results-count { color: #888; font-size: 0.85rem; margin-bottom: 16px; }
+  .results-count { color: #6b6b6b; font-size: 0.85rem; margin-bottom: 16px; }
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
   .card-wrap { position: relative; }
   .discount-badge { position: absolute; top: 8px; left: 8px; z-index: 2; background: #b94040; color: white; font-size: 0.78rem; font-weight: 800; padding: 4px 10px; border-radius: 20px; pointer-events: none; }
   .pagination { display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 36px; font-size: 0.9rem; }
-  .pagination a { color: var(--gold); font-weight: 600; text-decoration: none; }
+  .pagination a { color: var(--gold-text, #8a6a1f); font-weight: 600; text-decoration: none; }
   @media (max-width: 600px) {
     .grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
     .pagination { flex-direction: column; gap: 10px; }
