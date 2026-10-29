@@ -1598,3 +1598,30 @@ Proprietatea `beautyhealth.gherasimmarius.com` a fost verificată prin **fișier
 - Google Search Console îl recitește periodic pe cont propriu după prima submisie
 - Dacă site-ul primește erori de crawl (404, redirect loops), apar în raportul
   „Pages" din Search Console — verifică periodic
+
+## 17. Longevity BOOST — campaniile din noiembrie 2026 (implementat 29 Oct 2026)
+
+**C1, ofertă de sezon (1–5 nov):** -20% automat + încă 20% automat la comenzi de min. 300 lei, fără cod.
+**C2, Black Friday (6–20 nov):** -35% automat + 2 produse full size cadou, la alegere, la min. 400 lei.
+Produse: Antioxidants Boost, Liposomal Vitamin C Boost, Magnesium Bisglycinate Boost, Mind Forte, Se-Inositol Boost. **Vitamin D3+K2 NU e inclus.** Transport gratuit peste 190 lei.
+Quicklink: `https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=28cd17dbc&redirect_to=https%253A//longevity-boost.com/collections/produse`
+
+### Reguli obligatorii Longevity (pentru orice text)
+- Folosește doar mențiunile din descrierile de pe site, în forma exactă (ex. „magneziul contribuie la reducerea oboselii și extenuării”).
+- Fără boli sau afecțiuni. Fără „tratează”, „vindecă”, „previne”, „detox”, „100% natural”.
+- NU prezenta 1–5 nov drept „-40%”, pentru că reducerile se aplică succesiv.
+- Fără numele sau imaginea cofondatoarelor.
+
+### Ce s-a pus pe site (totul pornește și se oprește singur după dată, fără push)
+- **Bannere:** în `public/banners/longevity/` (c1-*, c2-*), cu 12 intrări în `src/data/banners.js`, marcate `prioritar: true`.
+  - `BannerSlot.astro` arată întâi bannerele prioritare din perioada lor.
+  - Formatul 970x250 e acceptat acum în slotul de jos.
+  - Data se ia după ora României.
+- **Promoții:** 2 carduri în `src/data/promotii.js`. Câmp nou: **`incepe`**, data de la care apare oferta, astfel că o poți pune din timp.
+  - `promotii.astro` și numărul de pe tabul „% Promoții” numără doar ofertele active azi (calculat în browser).
+- **Sticker `lb-sticker`** în `Layout.astro`, cu countdown până la 5 nov 23:59, apoi până la 20 nov 23:59, apoi dispare.
+  - Apare pe prima pagină și la /vitamine-suplimente/, cu excepția tipului Slăbire & Detox. Acolo ia locul stickerului DUMO.
+  - Test pentru o anumită zi: `/?lbtest=2026-11-10`.
+- **Emailuri:** `email-longevity-c1.html` se trimite pe 1 nov, `email-longevity-c2.html` pe 6 nov. Fiecare are 3 subiecte și 3 preheadere.
+- **Texte social:** `longevity-texte-social.md`, cu postări și Story-uri pentru ambele campanii.
+- **De aflat de la Longevity:** pragul de 400 lei e înainte sau după -35%? Din ce produse se aleg cadourile?

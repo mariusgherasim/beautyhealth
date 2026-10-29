@@ -8,14 +8,18 @@ import { promotii } from '../data/promotii.js';
 import { categories } from '../data/categories.js';
 
 const azi = new Date().toISOString().slice(0, 10);
+// toate cele neexpirate ajung în pagină (și cele programate, ascunse până în ziua lor);
+// textele și numerele se calculează doar pe cele vizibile azi, iar browserul le actualizează
 const active = promotii.filter((p) => !p.expira || p.expira >= azi);
+const vizibile = active.filter((p) => !p.incepe || p.incepe <= azi);
 const magazine = [...new Set(active.map((p) => p.magazin))];
+const magVizibile = [...new Set(vizibile.map((p) => p.magazin))];
 const numeCat = Object.fromEntries(categories.map((c) => [c.slug, c.name]));
 const fmtData = (d) => new Date(d + 'T12:00:00').toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' });
 const ascunde = (cod) => cod.length <= 3 ? '•••' : '•'.repeat(Math.max(2, cod.length - 2)) + cod.slice(-2);
 
-const title = 'Promoții și coduri de reducere — Dr. Max, Farmec, DetoxMed | BeautyHealth';
-const description = `${active.length} promoții active la magazinele de frumusețe și sănătate: Dr. Max, Farmec, DetoxMed. Verificate și actualizate, cu data de expirare.`;
+const title = 'Promoții și coduri de reducere — Dr. Max, Farmec, DetoxMed, Longevity BOOST | BeautyHealth';
+const description = `${vizibile.length} promoții active la magazinele de frumusețe și sănătate: ${magVizibile.join(', ')}. Verificate și actualizate, cu data de expirare.`;
 ---
 <Layout title={title} description={description} canonical="https://beauty-healths.com/promotii/">
   <Header />
@@ -26,7 +30,7 @@ const description = `${active.length} promoții active la magazinele de frumuse�
         <p class="pr-eyebrow">Actualizat {fmtData(azi)}</p>
         <h1>Promoții și coduri de reducere</h1>
         <p class="pr-lead">
-          <strong>{active.length} oferte active</strong> de la {magazine.length} magazine: {magazine.join(', ')}.
+          <strong><span id="pr-nr">{vizibile.length}</span> oferte active</strong> de la <span id="pr-nrmag">{magVizibile.length}</span> magazine: <span id="pr-mags">{magVizibile.join(', ')}</span>.
           Le verificăm pe site-ul magazinului și le scoatem singure când expiră.
         </p>
       </div>
@@ -40,7 +44,7 @@ const description = `${active.length} promoții active la magazinele de frumuse�
 
       <div class="pr-grid">
         {active.map((p) => (
-          <article class="pr-card" data-mag={p.magazin} data-expira={p.expira || ''} id={p.id}>
+          <article class="pr-card" data-mag={p.magazin} data-expira={p.expira || ''} data-incepe={p.incepe || ''} id={p.id} hidden={p.incepe && p.incepe > azi ? true : undefined}>
             <div class="pr-top">
               <div>
                 <span class="pr-mag">{p.magazin}</span>
@@ -95,8 +99,22 @@ const description = `${active.length} promoții active la magazinele de frumuse�
 <script is:inline>
   (function () {
     // ascunde ofertele expirate de la ultimul build incoace
-    var azi = new Date().toISOString().slice(0, 10);
-    document.querySelectorAll('.pr-card').forEach(function (c) { if (c.dataset.expira && c.dataset.expira < azi) c.remove(); });
+    var azi = new Date(Date.now() + 2 * 3600e3).toISOString().slice(0, 10); // ora României
+    // și pe cele care încă n-au început (câmpul incepe) — apar singure în ziua lor
+    document.querySelectorAll('.pr-card').forEach(function (c) {
+      if ((c.dataset.expira && c.dataset.expira < azi) || (c.dataset.incepe && c.dataset.incepe > azi)) c.remove();
+      else c.hidden = false;
+    });
+    // numerele de pe butoanele de filtrare, după ce am scos ofertele care nu se văd azi
+    document.querySelectorAll('.pr-chip').forEach(function (ch) {
+      var n = document.querySelectorAll(ch.dataset.mag ? '.pr-card[data-mag="' + ch.dataset.mag + '"]' : '.pr-card').length;
+      if (!n && ch.dataset.mag) { ch.remove(); return; }
+      ch.textContent = ch.textContent.replace(/\(\d+\)/, '(' + n + ')');
+    });
+    var mags = [];
+    document.querySelectorAll('.pr-card').forEach(function (c) { if (mags.indexOf(c.dataset.mag) < 0) mags.push(c.dataset.mag); });
+    var setT = function (id, v) { var x = document.getElementById(id); if (x) x.textContent = v; };
+    setT('pr-nr', document.querySelectorAll('.pr-card').length); setT('pr-nrmag', mags.length); setT('pr-mags', mags.join(', '));
 
     // filtre pe magazin
     var chips = document.querySelectorAll('.pr-chip');

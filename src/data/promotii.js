@@ -16,6 +16,8 @@
 //              „Vezi oferta” și lipește codul în coș pe site-ul magazinului.
 //   cod_text   (opțional) textul de deasupra codului (ex: "Încă 10% reducere EXTRA cu codul")
 //   link       linkul de afiliat (quicklink 2Performant)
+//   incepe     (opțional) data de început "YYYY-MM-DD" — până atunci oferta nu se vede
+//              (o poți pune din timp, apare singură în ziua respectivă, fără push nou)
 //   expira     data de final "YYYY-MM-DD" (inclusiv) — sau null dacă nu știm.
 //              După această dată oferta dispare singură de pe site.
 //   categorii  categoriile site-ului unde e relevantă (pentru filtre)
@@ -26,6 +28,36 @@
 // ============================================================
 
 export const promotii = [
+  // ── Longevity BOOST — noiembrie 2026. Reguli: doar mențiunile de pe site, fără „tratează/previne/detox/100% natural",
+  //    NU „-40%" pentru 1–5 nov (reducerile se aplică succesiv), fără numele/imaginea cofondatoarelor.
+  {
+    id: "longevity-oferta-sezon",
+    magazin: "Longevity BOOST",
+    domeniu: "longevity-boost.com",
+    titlu: "Ofertă de sezon: -20% direct în coș + încă 20% la comenzile de minimum 300 lei",
+    descriere: "Reducerea de 20% se aplică automat la Antioxidants Boost, Liposomal Vitamin C Boost, Magnesium Bisglycinate Boost, Mind Forte și Se-Inositol Boost. La comenzile de minimum 300 lei se adaugă automat încă 20%, fără cod. Transport gratuit peste 190 lei. Vitamin D3+K2 nu este inclus.",
+    reducere: "-20%",
+    cod: null,
+    link: "https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=28cd17dbc&redirect_to=https%253A//longevity-boost.com/collections/produse",
+    incepe: "2026-11-01",
+    expira: "2026-11-05",
+    categorii: ["vitamine-suplimente"],
+    verificat: "2026-10-29",
+  },
+  {
+    id: "longevity-black-friday",
+    magazin: "Longevity BOOST",
+    domeniu: "longevity-boost.com",
+    titlu: "Black Friday: -35% direct în coș + 2 produse full size cadou la comenzile de minimum 400 lei",
+    descriere: "Reducerea de 35% se aplică automat la Antioxidants Boost, Liposomal Vitamin C Boost, Magnesium Bisglycinate Boost, Mind Forte și Se-Inositol Boost. La comenzile de minimum 400 lei alegi două produse full size cadou din gama inclusă. Transport gratuit peste 190 lei. Vitamin D3+K2 nu este inclus.",
+    reducere: "-35%",
+    cod: null,
+    link: "https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=28cd17dbc&redirect_to=https%253A//longevity-boost.com/collections/produse",
+    incepe: "2026-11-06",
+    expira: "2026-11-20",
+    categorii: ["vitamine-suplimente"],
+    verificat: "2026-10-29",
+  },
   {
     id: "drmax-promo-50",
     magazin: "Dr. Max",

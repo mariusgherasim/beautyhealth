@@ -16,7 +16,11 @@ const {
 } = Astro.props;
 
 import { promotii } from "../data/promotii.js";
-const nrPromotii = promotii.filter((p) => !p.expira || p.expira >= new Date().toISOString().slice(0, 10)).length;
+const aziBuild = new Date().toISOString().slice(0, 10);
+// promoțiile care nu au expirat (inclusiv cele programate, cu „incepe" în viitor) — browserul le numără pe cele de azi
+const promoNeexpirate = promotii.filter((p) => !p.expira || p.expira >= aziBuild);
+const nrPromotii = promoNeexpirate.filter((p) => !p.incepe || p.incepe <= aziBuild).length;
+const datePromo = JSON.stringify(promoNeexpirate.map((p) => [p.incepe || '', p.expira || '']));
 import { oferte } from "../data/catalog.mjs";
 const nrOferte = oferte().length;
 const siteName = "BeautyHealth";
@@ -389,6 +393,101 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
     </script>
     <!-- ── END DETOX STICKER ── -->
 
+    <!-- ── LONGEVITY STICKER: 1–5 nov (-20% + încă 20%) și Black Friday 6–20 nov 2026 (-35% + 2 cadouri) ── -->
+    <!-- Apare singur la 1 nov 00:00 și dispare singur la 20 nov 23:59 (ora României). Pe prima pagină și la Vitamine & Suplimente
+         (fără tipul Slăbire & Detox, unde rămâne DetoxMed). Acolo are prioritate față de DUMO.
+         Reguli Longevity: NU „-40%" (reducerile se aplică succesiv), fără afirmații de sănătate, fără cofondatoare. -->
+    <a class="lb-sticker" id="lb-sticker" href="https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=28cd17dbc&redirect_to=https%253A//longevity-boost.com/collections/produse" target="_blank" rel="sponsored noopener" style="display:none">
+      <div class="lbs-top">
+        <span class="lbs-big" id="lbs-big">-20%</span>
+        <span class="lbs-label" id="lbs-label">Longevity<br>BOOST</span>
+      </div>
+      <div class="lbs-mid">
+        <div class="lbs-plus" id="lbs-plus">+ încă 20% la comenzi de min. 300 lei</div>
+        <div class="lbs-desc" id="lbs-desc">Reduceri aplicate succesiv, automat în coș, fără cod</div>
+        <div class="lbs-cd" aria-live="off"><span>Se termină în</span><b id="lbs-cd">--</b></div>
+      </div>
+      <div class="lbs-cta">
+        Vezi produsele
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+      <button class="lbs-close" id="lbs-close" title="Închide" aria-label="Închide">✕</button>
+    </a>
+    <style is:global>
+      .lb-sticker {
+        position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+        width: 184px; background: #10231c; color: #fff;
+        border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,.32), 0 2px 8px rgba(214,178,94,.3);
+        overflow: hidden; text-decoration: none; border: 1px solid rgba(214,178,94,.5);
+        transition: transform .2s, box-shadow .2s;
+        font-family: 'Segoe UI', system-ui, sans-serif;
+      }
+      .lb-sticker:hover { transform: translateY(-3px); }
+      .lb-sticker.lb-bf { background: #0b0b0b; }
+      .lbs-top { background: linear-gradient(135deg, #e9d39a, #c9a24a); padding: 10px 32px 8px 14px; display: flex; align-items: center; justify-content: space-between; color: #10231c; }
+      .lbs-big { font-size: 1.6rem; font-weight: 900; line-height: 1; }
+      .lbs-label { font-size: .58rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; text-align: right; line-height: 1.35; }
+      .lbs-mid { padding: 9px 14px 8px; }
+      .lbs-plus { font-size: .78rem; font-weight: 800; color: #e9d39a; line-height: 1.3; margin-bottom: 4px; }
+      .lbs-desc { font-size: .7rem; color: rgba(255,255,255,.72); line-height: 1.4; margin-bottom: 6px; }
+      .lbs-cd { display: flex; flex-direction: column; gap: 1px; font-size: .6rem; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.6); }
+      .lbs-cd b { font-size: .95rem; letter-spacing: .02em; color: #fff; font-variant-numeric: tabular-nums; text-transform: none; }
+      .lbs-cta { background: #c9a24a; text-align: center; padding: 9px 14px; font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; display: flex; align-items: center; justify-content: center; gap: 5px; color: #10231c; }
+      .lbs-close { position: absolute; top: 4px; right: 4px; width: 26px; height: 26px; background: rgba(0,0,0,.15); border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #10231c; font-size: 12px; line-height: 1; padding: 0; }
+      @media (max-width: 480px) {
+        .lb-sticker { right: 10px; width: 152px; }
+        .lbs-desc { display: none; }
+        .lbs-big { font-size: 1.3rem; }
+        .lbs-label { display: none; }
+      }
+    </style>
+    <script is:inline>
+      (function () {
+        var el = document.getElementById('lb-sticker');
+        if (!el) return;
+        var p = location.pathname;
+        var pagina = p === '/' || (p.indexOf('/vitamine-suplimente/') === 0 && p.indexOf('/vitamine-suplimente/tip/slabire-detox/') !== 0);
+        if (!pagina) return;
+        // ?lbtest=2026-11-10 — previzualizare pentru o anumită zi (doar pentru verificare)
+        var t = (location.search.match(/lbtest=([\d-]+)/) || [])[1];
+        var offset = t ? new Date(t + 'T12:00:00+02:00') - new Date() : 0;
+        var acum = function () { return new Date(Date.now() + offset); };
+        var START = new Date('2026-11-01T00:00:00+02:00');
+        var C1 = new Date('2026-11-05T23:59:59+02:00');
+        var C2 = new Date('2026-11-20T23:59:59+02:00');
+        var n = acum();
+        if (n < START || n > C2) return;
+        var bf = n > C1, end = bf ? C2 : C1;
+        if (bf) {
+          el.classList.add('lb-bf');
+          document.getElementById('lbs-big').textContent = '-35%';
+          document.getElementById('lbs-label').innerHTML = 'Black<br>Friday';
+          document.getElementById('lbs-plus').textContent = '+ 2 cadouri full size la min. 400 lei';
+          document.getElementById('lbs-desc').textContent = 'Longevity BOOST · reducere automată în coș, fără cod';
+        }
+        ['promo-sticker', 'gv-sticker', 'du-sticker'].forEach(function (id) { var x = document.getElementById(id); if (x) x.style.setProperty('display', 'none', 'important'); });
+        el.style.display = 'block';
+        var cd = document.getElementById('lbs-cd');
+        var d2 = function (x) { return (x < 10 ? '0' : '') + x; };
+        var tick = function () {
+          var r = Math.max(0, Math.floor((end - acum()) / 1000));
+          if (!r) { el.style.display = 'none'; return; }
+          var z = Math.floor(r / 86400), h = Math.floor(r % 86400 / 3600), m = Math.floor(r % 3600 / 60), s = r % 60;
+          cd.textContent = (z ? z + (z === 1 ? ' zi ' : ' zile ') : '') + d2(h) + ':' + d2(m) + ':' + d2(s);
+        };
+        tick(); setInterval(tick, 1000);
+        var btn = document.getElementById('lbs-close');
+        if (btn) {
+          btn.addEventListener('click', function (e) {
+            e.preventDefault(); e.stopPropagation();
+            el.style.transition = 'opacity .3s, transform .3s'; el.style.opacity = '0'; el.style.transform = 'translateY(20px)';
+            setTimeout(function(){ el.style.display = 'none'; }, 320);
+          });
+        }
+      })();
+    </script>
+    <!-- ── END LONGEVITY STICKER ── -->
+
     <!-- ── DUMO STICKER: Infinite Love — colectia DUMO (din 21.10.2026, fara termen) ── -->
     <!-- In dreapta jos pe toate paginile. Cedeaza locul doar stickerelor de campanie mai specifice:
          Detox (pe Wellness), Gerovital (pana la 21.10, 23:59) si Farmec 30% (doar pe Ingrijire Ten). -->
@@ -445,7 +544,7 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
         // Pe pagina DUMO: fara stickere peste butoane
         if (p.indexOf('/dumo/') === 0) { ['promo-sticker', 'gv-sticker', 'dx-sticker', 'tombola-sticker'].forEach(ascunde); return; }
         // Stickere de campanie mai specifice au prioritate in dreapta
-        if (vizibil('dx-sticker') || vizibil('gv-sticker')) return;
+        if (vizibil('dx-sticker') || vizibil('gv-sticker') || vizibil('lb-sticker')) return;
         if (p.indexOf('/ingrijire-ten/') === 0 && vizibil('promo-sticker')) return; // Farmec 30% Complete Care ramane la Ingrijire Ten
         ascunde('promo-sticker');
         el.style.display = 'block';
@@ -472,8 +571,8 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
     )}
 
     <!-- ── TAB PROMOTII: pe marginea din dreapta, pe toate paginile (duce la /promotii/) ── -->
-    {nrPromotii > 0 && (
-      <a class="pr-tab" id="pr-tab" href="/promotii/" aria-label={`Promoții și coduri de reducere (${nrPromotii})`}>
+    {promoNeexpirate.length > 0 && (
+      <a class="pr-tab" id="pr-tab" href="/promotii/" data-promo={datePromo} aria-label={`Promoții și coduri de reducere (${nrPromotii})`}>
         <span class="pr-tab-pct">%</span>
         <span class="pr-tab-txt">Promoții</span>
         <span class="pr-tab-nr">{nrPromotii}</span>
@@ -520,6 +619,13 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
     <script is:inline>
       (function () {
         var of = document.getElementById('of-tab'), pr = document.getElementById('pr-tab');
+        // numărul de pe tabul Promoții: doar ofertele active azi (unele sunt programate cu „incepe")
+        if (pr && pr.dataset.promo) {
+          var azi = new Date(Date.now() + 2 * 3600e3).toISOString().slice(0, 10);
+          var nr = JSON.parse(pr.dataset.promo).filter(function (d) { return (!d[0] || d[0] <= azi) && (!d[1] || d[1] >= azi); }).length;
+          if (!nr) { pr.style.setProperty('display', 'none', 'important'); pr = null; }
+          else { var sp = pr.querySelector('.pr-tab-nr'); if (sp) sp.textContent = nr; }
+        }
         // pe paginile de oferte nu arătăm tabul de oferte
         if (of && location.pathname.indexOf('/oferte/') === 0) { of.style.setProperty('display', 'none', 'important'); of = null; }
         if (!of || !pr || location.pathname.indexOf('/promotii/') === 0) return;
@@ -536,7 +642,7 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
       (function () {
         // Pe pagina de promotii: fara tab si fara stickere peste carduri
         if (location.pathname.indexOf('/promotii/') !== 0) return;
-        ['pr-tab', 'promo-sticker', 'gv-sticker', 'dx-sticker', 'du-sticker', 'tombola-sticker'].forEach(function (id) {
+        ['pr-tab', 'promo-sticker', 'gv-sticker', 'dx-sticker', 'du-sticker', 'lb-sticker', 'tombola-sticker'].forEach(function (id) {
           var x = document.getElementById(id); if (x) x.style.setProperty('display', 'none', 'important');
         });
       })();
@@ -605,10 +711,10 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
         .tp-sticker-label { margin: 0; flex: 0 0 auto; max-width: 70px; line-height: 1.3; }
         #tp-sticker .trustpilot-widget { flex: 1; min-width: 0; margin-right: 18px; }
         .tp-close { top: 50%; right: 8px; transform: translateY(-50%); }
-        #promo-sticker, #tombola-sticker, #gv-sticker, #dx-sticker, #du-sticker { bottom: 74px; }
+        #promo-sticker, #tombola-sticker, #gv-sticker, #dx-sticker, #du-sticker, #lb-sticker { bottom: 74px; }
         body { padding-bottom: 68px; }
         /* dupa inchiderea barei Trustpilot, stickerele coboara si dispare spatiul de jos */
-        html.tp-inchis #promo-sticker, html.tp-inchis #tombola-sticker, html.tp-inchis #gv-sticker, html.tp-inchis #dx-sticker, html.tp-inchis #du-sticker { bottom: 16px; }
+        html.tp-inchis #promo-sticker, html.tp-inchis #tombola-sticker, html.tp-inchis #gv-sticker, html.tp-inchis #dx-sticker, html.tp-inchis #du-sticker, html.tp-inchis #lb-sticker { bottom: 16px; }
         html.tp-inchis body { padding-bottom: 0; }
       }
     </style>

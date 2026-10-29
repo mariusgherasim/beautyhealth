@@ -36,6 +36,154 @@
 
 export const banners = [
 
+  // ── longevity-boost.com — campaniile din noiembrie 2026 (imaginile în public/banners/longevity/) ──
+  // C1 1–5 nov: -20% în coș + încă 20% la min. 300 lei · C2 6–20 nov: Black Friday -35% + 2 cadouri la min. 400 lei
+  // NU scrie „-40%" pentru C1 (reducerile se aplică succesiv). Fără mențiuni de sănătate în afara celor de pe site.
+  {
+    id: "longevity-c1-970x250",
+    merchant: "longevity-boost.com",
+    campanie: "Ofertă de sezon -20%",
+    categories: ["vitamine-suplimente","wellness","homepage"],
+    image_url: "https://beauty-healths.com/banners/longevity/c1-970x250.webp",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=28cd17dbc&redirect_to=https%253A//longevity-boost.com/collections/produse",
+    width: 970, height: 250,
+    active_from: "2026-11-01", active_until: "2026-11-05",
+    channels: ["site"],
+    prioritar: true, // în perioada campaniei are prioritate față de celelalte bannere din aceleași categorii
+  },
+  {
+    id: "longevity-c1-728x90",
+    merchant: "longevity-boost.com",
+    campanie: "Ofertă de sezon -20%",
+    categories: ["vitamine-suplimente","wellness","homepage"],
+    image_url: "https://beauty-healths.com/banners/longevity/c1-728x90.webp",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=28cd17dbc&redirect_to=https%253A//longevity-boost.com/collections/produse",
+    width: 728, height: 90,
+    active_from: "2026-11-01", active_until: "2026-11-05",
+    channels: ["site"],
+    prioritar: true, // în perioada campaniei are prioritate față de celelalte bannere din aceleași categorii
+  },
+  {
+    id: "longevity-c1-300x250",
+    merchant: "longevity-boost.com",
+    campanie: "Ofertă de sezon -20%",
+    categories: ["vitamine-suplimente","wellness","homepage"],
+    image_url: "https://beauty-healths.com/banners/longevity/c1-300x250.webp",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=28cd17dbc&redirect_to=https%253A//longevity-boost.com/collections/produse",
+    width: 300, height: 250,
+    active_from: "2026-11-01", active_until: "2026-11-05",
+    channels: ["site"],
+    prioritar: true, // în perioada campaniei are prioritate față de celelalte bannere din aceleași categorii
+  },
+  {
+    id: "longevity-c1-300x250-email",
+    merchant: "longevity-boost.com",
+    campanie: "Ofertă de sezon -20%",
+    categories: ["vitamine-suplimente","wellness","homepage"],
+    image_url: "https://beauty-healths.com/banners/longevity/c1-300x250.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=28cd17dbc&redirect_to=https%253A//longevity-boost.com/collections/produse",
+    width: 300, height: 250,
+    active_from: "2026-11-01", active_until: "2026-11-05",
+    channels: ["email","facebook","instagram"],
+    prioritar: true, // în perioada campaniei are prioritate față de celelalte bannere din aceleași categorii
+  },
+  {
+    id: "longevity-c1-300x600",
+    merchant: "longevity-boost.com",
+    campanie: "Ofertă de sezon -20%",
+    categories: ["vitamine-suplimente","wellness","homepage"],
+    image_url: "https://beauty-healths.com/banners/longevity/c1-300x600.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=28cd17dbc&redirect_to=https%253A//longevity-boost.com/collections/produse",
+    width: 300, height: 600,
+    active_from: "2026-11-01", active_until: "2026-11-05",
+    channels: ["email"],
+    prioritar: true, // în perioada campaniei are prioritate față de celelalte bannere din aceleași categorii
+  },
+  {
+    id: "longevity-c1-1200x600",
+    merchant: "longevity-boost.com",
+    campanie: "Ofertă de sezon -20%",
+    categories: ["vitamine-suplimente","wellness","homepage"],
+    image_url: "https://beauty-healths.com/banners/longevity/c1-newsletter-1200x600.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=28cd17dbc&redirect_to=https%253A//longevity-boost.com/collections/produse",
+    width: 1200, height: 600,
+    active_from: "2026-11-01", active_until: "2026-11-05",
+    channels: ["email"],
+    prioritar: true, // în perioada campaniei are prioritate față de celelalte bannere din aceleași categorii
+  },
+  {
+    id: "longevity-c2-970x250",
+    merchant: "longevity-boost.com",
+    campanie: "Black Friday -35%",
+    categories: ["vitamine-suplimente","wellness","homepage"],
+    image_url: "https://beauty-healths.com/banners/longevity/c2-970x250.webp",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=28cd17dbc&redirect_to=https%253A//longevity-boost.com/collections/produse",
+    width: 970, height: 250,
+    active_from: "2026-11-06", active_until: "2026-11-20",
+    channels: ["site"],
+    prioritar: true, // în perioada campaniei are prioritate față de celelalte bannere din aceleași categorii
+  },
+  {
+    id: "longevity-c2-728x90",
+    merchant: "longevity-boost.com",
+    campanie: "Black Friday -35%",
+    categories: ["vitamine-suplimente","wellness","homepage"],
+    image_url: "https://beauty-healths.com/banners/longevity/c2-728x90.webp",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=28cd17dbc&redirect_to=https%253A//longevity-boost.com/collections/produse",
+    width: 728, height: 90,
+    active_from: "2026-11-06", active_until: "2026-11-20",
+    channels: ["site"],
+    prioritar: true, // în perioada campaniei are prioritate față de celelalte bannere din aceleași categorii
+  },
+  {
+    id: "longevity-c2-300x250",
+    merchant: "longevity-boost.com",
+    campanie: "Black Friday -35%",
+    categories: ["vitamine-suplimente","wellness","homepage"],
+    image_url: "https://beauty-healths.com/banners/longevity/c2-300x250.webp",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=28cd17dbc&redirect_to=https%253A//longevity-boost.com/collections/produse",
+    width: 300, height: 250,
+    active_from: "2026-11-06", active_until: "2026-11-20",
+    channels: ["site"],
+    prioritar: true, // în perioada campaniei are prioritate față de celelalte bannere din aceleași categorii
+  },
+  {
+    id: "longevity-c2-300x250-email",
+    merchant: "longevity-boost.com",
+    campanie: "Black Friday -35%",
+    categories: ["vitamine-suplimente","wellness","homepage"],
+    image_url: "https://beauty-healths.com/banners/longevity/c2-300x250.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=28cd17dbc&redirect_to=https%253A//longevity-boost.com/collections/produse",
+    width: 300, height: 250,
+    active_from: "2026-11-06", active_until: "2026-11-20",
+    channels: ["email","facebook","instagram"],
+    prioritar: true, // în perioada campaniei are prioritate față de celelalte bannere din aceleași categorii
+  },
+  {
+    id: "longevity-c2-300x600",
+    merchant: "longevity-boost.com",
+    campanie: "Black Friday -35%",
+    categories: ["vitamine-suplimente","wellness","homepage"],
+    image_url: "https://beauty-healths.com/banners/longevity/c2-300x600.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=28cd17dbc&redirect_to=https%253A//longevity-boost.com/collections/produse",
+    width: 300, height: 600,
+    active_from: "2026-11-06", active_until: "2026-11-20",
+    channels: ["email"],
+    prioritar: true, // în perioada campaniei are prioritate față de celelalte bannere din aceleași categorii
+  },
+  {
+    id: "longevity-c2-1200x600",
+    merchant: "longevity-boost.com",
+    campanie: "Black Friday -35%",
+    categories: ["vitamine-suplimente","wellness","homepage"],
+    image_url: "https://beauty-healths.com/banners/longevity/c2-newsletter-1200x600.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=28cd17dbc&redirect_to=https%253A//longevity-boost.com/collections/produse",
+    width: 1200, height: 600,
+    active_from: "2026-11-06", active_until: "2026-11-20",
+    channels: ["email"],
+    prioritar: true, // în perioada campaniei are prioritate față de celelalte bannere din aceleași categorii
+  },
+
   // ── farmec.ro ─────────────────────────────────────────
   {
     id: "farmec-300x250-a",

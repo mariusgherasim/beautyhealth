@@ -19,7 +19,7 @@ import { banners } from '../data/banners.js';
 const { category, size = null } = Astro.props;
 
 const ORIZONTALE = ['728x90', '468x60'];
-const PE_SITE = [...ORIZONTALE, '300x250', '300x300', '750x350', '600x250']; // cele late apar doar in slotul de jos
+const PE_SITE = [...ORIZONTALE, '300x250', '300x300', '750x350', '600x250', '970x250']; // cele late apar doar in slotul de jos
 const MAX_H = 250; // inaltimea maxima a unui banner pe site (px)
 
 const eligible = banners.filter((b) => {
@@ -43,6 +43,7 @@ const eligible = banners.filter((b) => {
         data-banner-id={b.id}
         data-active-from={b.active_from || ''}
         data-active-until={b.active_until || ''}
+        data-prioritar={b.prioritar ? '1' : ''}
         style={`max-width:${b.width}px`}
         hidden
       >
@@ -57,7 +58,7 @@ const eligible = banners.filter((b) => {
   // Ruleaza pentru toate sloturile de pe pagina: filtreaza dupa data curenta,
   // alege un banner aleatoriu dintre cele active si il face vizibil.
   document.querySelectorAll('[data-banner-slot]').forEach((slot) => {
-    const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+    const today = new Date(Date.now() + 2 * 3600e3).toISOString().slice(0, 10); // YYYY-MM-DD, ora României
     const candidates = Array.from(slot.querySelectorAll('.banner-item')).filter((el) => {
       const from = el.dataset.activeFrom;
       const until = el.dataset.activeUntil;
@@ -71,6 +72,9 @@ const eligible = banners.filter((b) => {
     }
     // nu repetam acelasi banner in doua sloturi de pe aceeasi pagina (daca avem de unde alege)
     const used = (window.__bhBannere ||= new Set());
+    // bannerele de campanie marcate „prioritar" (în perioada lor) au întâietate
+    const prio = candidates.filter((el) => el.dataset.prioritar);
+    if (prio.length) candidates.splice(0, candidates.length, ...prio);
     const fresh = candidates.filter((el) => !used.has(el.dataset.bannerId));
     const pool = fresh.length ? fresh : candidates;
     const pick = pool[Math.floor(Math.random() * pool.length)];
