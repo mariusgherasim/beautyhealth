@@ -221,6 +221,113 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
     </script>
     <!-- ── END TOMBOLA STICKER ── -->
 
+    <!-- ── FARMEC BLACK FRIDAY STICKER: teasing 30 oct, early access 5 nov, până pe 23 nov 2026 ── -->
+    <!-- În stânga jos, doar pe paginile cu produse Farmec (Ten, Corp, Păr, Machiaj și paginile brandurilor Farmec/Gerovital/Aslavital).
+         Acolo alternează cu stickerul „Farmec 15 ani” (tombola, până pe 18 nov). Duce la /farmec-black-friday/.
+         ⚠️ Data de final 23 nov e presupusă (perioada comisionului de 10%) — corecteaz-o aici și în promotii.js dacă Farmec anunță alta. -->
+    <a class="fb-sticker" id="fb-sticker" href="/farmec-black-friday/" style="display:none">
+      <div class="fbs-top">
+        <span class="fbs-big" id="fbs-big">5.11</span>
+        <span class="fbs-label" id="fbs-label">Early access<br>BeautyCLUB</span>
+      </div>
+      <div class="fbs-mid">
+        <div class="fbs-brand">Farmec · Black Friday</div>
+        <div class="fbs-desc" id="fbs-desc">Membrii BeautyCLUB intră cu o zi înaintea tuturor</div>
+        <div class="fbs-cd"><span id="fbs-cdt">Începe în</span><b id="fbs-cd">--</b></div>
+      </div>
+      <div class="fbs-cta" id="fbs-cta">Cum intri primul →</div>
+      <button class="fbs-close" id="fbs-close" title="Închide" aria-label="Închide">✕</button>
+    </a>
+    <style is:global>
+      .fb-sticker {
+        position: fixed; bottom: 24px; left: 24px; z-index: 9999;
+        width: 178px; background: #111; color: #fff;
+        border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,.3), 0 2px 8px rgba(200,16,46,.3);
+        overflow: hidden; text-decoration: none; border: 1px solid rgba(214,168,74,.5);
+        transition: transform .2s, opacity .45s;
+        font-family: 'Segoe UI', system-ui, sans-serif;
+      }
+      .fb-sticker:hover { transform: translateY(-3px); }
+      .fbs-top { background: linear-gradient(135deg, #e9cf86, #c89b3c); padding: 10px 32px 8px 14px; display: flex; align-items: center; justify-content: space-between; color: #111; }
+      .fbs-big { font-size: 1.55rem; font-weight: 900; line-height: 1; font-family: Georgia, serif; }
+      .fbs-label { font-size: .56rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; text-align: right; line-height: 1.35; }
+      .fbs-mid { padding: 9px 14px 8px; }
+      .fbs-brand { font-size: .66rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #e9cf86; margin-bottom: 3px; }
+      .fbs-desc { font-size: .74rem; color: rgba(255,255,255,.8); line-height: 1.4; margin-bottom: 6px; }
+      .fbs-cd { display: flex; flex-direction: column; gap: 1px; font-size: .58rem; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.6); }
+      .fbs-cd b { font-size: .95rem; color: #fff; font-variant-numeric: tabular-nums; text-transform: none; letter-spacing: .02em; }
+      .fbs-cta { background: #c8102e; text-align: center; padding: 9px 12px; font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: #fff; }
+      .fbs-close { position: absolute; top: 4px; right: 4px; width: 26px; height: 26px; background: rgba(0,0,0,.15); border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #111; font-size: 12px; line-height: 1; padding: 0; }
+      @media (max-width: 480px) {
+        .fb-sticker { left: 10px; width: 150px; }
+        .fbs-desc, .fbs-label { display: none; }
+        .fbs-big { font-size: 1.3rem; }
+      }
+    </style>
+    <script is:inline>
+      (function () {
+        var el = document.getElementById('fb-sticker');
+        if (!el) return;
+        var p = location.pathname;
+        var pagina = /^\/(ingrijire-ten|ingrijire-corp|ingrijire-par|machiaj)\//.test(p) || /\/brand\/(farmec|gerovital|aslavital)/.test(p);
+        if (!pagina || p.indexOf('/farmec-black-friday/') === 0) return;
+        // ?fbtest=2026-11-10 — previzualizare pentru o anumită zi (doar pentru verificare)
+        var t = (location.search.match(/fbtest=([\d-]+)/) || [])[1];
+        var offset = t ? new Date(t + 'T12:00:00+02:00') - new Date() : 0;
+        var acum = function () { return new Date(Date.now() + offset); };
+        var DE_LA = new Date('2026-10-30T00:00:00+02:00'), START = new Date('2026-11-05T00:00:00+02:00'), FINAL = new Date('2026-11-23T23:59:59+02:00');
+        var n = acum();
+        if (n < DE_LA || n > FINAL) return;
+        var pre = n < START, end = pre ? START : FINAL;
+        if (!pre) {
+          document.getElementById('fbs-big').textContent = 'BF';
+          document.getElementById('fbs-label').innerHTML = 'Black Friday<br>Beauty Kingdom';
+          document.getElementById('fbs-desc').textContent = 'Gerovital și seturi cadou, pe farmec.ro';
+          document.getElementById('fbs-cdt').textContent = 'Se termină în';
+          document.getElementById('fbs-cta').textContent = 'Vezi ofertele →';
+        }
+        var cd = document.getElementById('fbs-cd');
+        var d2 = function (x) { return (x < 10 ? '0' : '') + x; };
+        var tick = function () {
+          var r = Math.max(0, Math.floor((end - acum()) / 1000));
+          if (!r) { location.reload(); return; }
+          var z = Math.floor(r / 86400);
+          cd.textContent = (z ? z + (z === 1 ? ' zi ' : ' zile ') : '') + d2(Math.floor(r % 86400 / 3600)) + ':' + d2(Math.floor(r % 3600 / 60)) + ':' + d2(r % 60);
+        };
+        tick(); setInterval(tick, 1000);
+
+        // alternare cu stickerul „Farmec 15 ani” (același loc, stânga jos)
+        var tb = document.getElementById('tombola-sticker');
+        var tbVizibil = tb && getComputedStyle(tb).display !== 'none';
+        var inchis = { fb: false, tb: false };
+        el.style.display = 'block';
+        var timer = null;
+        if (tbVizibil) {
+          var arata = function (care) {
+            var a = care === 'fb' ? el : tb, b = care === 'fb' ? tb : el;
+            b.style.opacity = '0'; b.style.pointerEvents = 'none';
+            setTimeout(function () { b.style.display = 'none'; a.style.display = 'block'; a.style.opacity = '0'; a.style.pointerEvents = '';
+              requestAnimationFrame(function () { a.style.opacity = '1'; }); }, 450);
+          };
+          tb.style.transition = 'opacity .45s, transform .2s';
+          tb.style.display = 'none';
+          var curent = 'fb';
+          timer = setInterval(function () {
+            if (inchis.fb || inchis.tb) return;
+            curent = curent === 'fb' ? 'tb' : 'fb'; arata(curent);
+          }, 6000);
+          var tbx = document.getElementById('ts-close');
+          if (tbx) tbx.addEventListener('click', function () { inchis.tb = true; clearInterval(timer); if (!inchis.fb) setTimeout(function () { el.style.display = 'block'; el.style.opacity = '1'; el.style.pointerEvents = ''; }, 340); });
+        }
+        document.getElementById('fbs-close').addEventListener('click', function (e) {
+          e.preventDefault(); e.stopPropagation(); inchis.fb = true; if (timer) clearInterval(timer);
+          el.style.opacity = '0'; setTimeout(function () { el.style.display = 'none';
+            if (tbVizibil && !inchis.tb) { tb.style.display = 'block'; tb.style.opacity = '1'; tb.style.pointerEvents = ''; } }, 320);
+        });
+      })();
+    </script>
+    <!-- ── END FARMEC BLACK FRIDAY STICKER ── -->
+
     <!-- ── GEROVITAL STICKER: Anniversary Shopping Event — 20 oct 12:00 – 21 oct 23:59, 2026 ── -->
     <!-- Cat timp e activ, inlocuieste sticker-ul Farmec 30% din dreapta; dupa final dispare singur si revine cel Farmec. -->
     <a class="gv-sticker" id="gv-sticker" href="/gerovital-aniversar/" style="display:none">
@@ -653,7 +760,7 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
       (function () {
         // Pe pagina de promotii: fara tab si fara stickere peste carduri
         if (location.pathname.indexOf('/promotii/') !== 0) return;
-        ['pr-tab', 'promo-sticker', 'gv-sticker', 'dx-sticker', 'du-sticker', 'lb-sticker', 'tombola-sticker'].forEach(function (id) {
+        ['pr-tab', 'promo-sticker', 'gv-sticker', 'dx-sticker', 'du-sticker', 'lb-sticker', 'tombola-sticker', 'fb-sticker'].forEach(function (id) {
           var x = document.getElementById(id); if (x) x.style.setProperty('display', 'none', 'important');
         });
       })();
@@ -722,10 +829,10 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
         .tp-sticker-label { margin: 0; flex: 0 0 auto; max-width: 70px; line-height: 1.3; }
         #tp-sticker .trustpilot-widget { flex: 1; min-width: 0; margin-right: 18px; }
         .tp-close { top: 50%; right: 8px; transform: translateY(-50%); }
-        #promo-sticker, #tombola-sticker, #gv-sticker, #dx-sticker, #du-sticker, #lb-sticker { bottom: 74px; }
+        #promo-sticker, #tombola-sticker, #gv-sticker, #dx-sticker, #du-sticker, #lb-sticker, #fb-sticker { bottom: 74px; }
         body { padding-bottom: 68px; }
         /* dupa inchiderea barei Trustpilot, stickerele coboara si dispare spatiul de jos */
-        html.tp-inchis #promo-sticker, html.tp-inchis #tombola-sticker, html.tp-inchis #gv-sticker, html.tp-inchis #dx-sticker, html.tp-inchis #du-sticker, html.tp-inchis #lb-sticker { bottom: 16px; }
+        html.tp-inchis #promo-sticker, html.tp-inchis #tombola-sticker, html.tp-inchis #gv-sticker, html.tp-inchis #dx-sticker, html.tp-inchis #du-sticker, html.tp-inchis #lb-sticker, html.tp-inchis #fb-sticker { bottom: 16px; }
         html.tp-inchis body { padding-bottom: 0; }
       }
     </style>

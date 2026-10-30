@@ -185,6 +185,29 @@ export const banners = [
   },
 
   // ── farmec.ro ─────────────────────────────────────────
+  // Black Friday în Beauty Kingdom (teasing din 30 oct, early access 5 nov, până pe 23 nov) — 300x600 doar pentru email
+  {
+    id: "farmec-bf-300x600-a",
+    merchant: "farmec.ro",
+    campanie: "Black Friday în Beauty Kingdom",
+    categories: ["ingrijire-ten","ingrijire-corp","ingrijire-par","machiaj","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/273898/original/273898.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=969229b4c&aff_code=676a7e7d9&campaign_unique=1dfbc028f",
+    width: 300, height: 600,
+    active_from: "2026-10-30", active_until: "2026-11-23",
+    channels: ["email"],
+  },
+  {
+    id: "farmec-bf-300x600-b",
+    merchant: "farmec.ro",
+    campanie: "Black Friday în Beauty Kingdom",
+    categories: ["ingrijire-ten","ingrijire-corp","ingrijire-par","machiaj","homepage"],
+    image_url: "https://img.2performant.com/system/paperclip/banner_pictures/pics/273897/original/273897.jpg",
+    affiliate_url: "https://event.2performant.com/events/click?ad_type=banner&unique=8fbbb0528&aff_code=676a7e7d9&campaign_unique=1dfbc028f",
+    width: 300, height: 600,
+    active_from: "2026-10-30", active_until: "2026-11-23",
+    channels: ["email"],
+  },
   {
     id: "farmec-300x250-a",
     merchant: "farmec.ro",

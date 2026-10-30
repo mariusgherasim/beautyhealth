@@ -28,6 +28,36 @@
 // ============================================================
 
 export const promotii = [
+  // ── Farmec: Black Friday în Beauty Kingdom — early access 5 nov (BeautyCLUB + newsletter), apoi până pe 23 nov
+  //    ⚠️ Data de final pentru clienți nu era în mesajul Farmec: 23 nov e presupusă (= perioada comisionului de 10%).
+  {
+    id: "farmec-black-friday-teasing",
+    magazin: "Farmec",
+    domeniu: "farmec.ro",
+    titlu: "Black Friday Farmec: early access pe 5 noiembrie pentru membrii BeautyCLUB",
+    descriere: "Membrii BeautyCLUB Gerovital abonați la newsletter intră la ofertele de Black Friday pe 5 noiembrie, cu o zi înaintea tuturor. Fă-ți acum cont BeautyCLUB pe farmec.ro, bifează abonarea la newsletter și pune-ți favoritele în Wishlist: stocurile la produsele vedetă sunt limitate.",
+    reducere: "BF",
+    cod: null,
+    link: "https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=1dfbc028f&redirect_to=https%253A//www.farmec.ro/teasing-black-friday",
+    incepe: "2026-10-30",
+    expira: "2026-11-04",
+    categorii: ["ingrijire-ten", "ingrijire-corp", "ingrijire-par", "machiaj"],
+    verificat: "2026-10-30",
+  },
+  {
+    id: "farmec-black-friday",
+    magazin: "Farmec",
+    domeniu: "farmec.ro",
+    titlu: "Black Friday în Beauty Kingdom la Farmec: Gerovital și seturi cadou",
+    descriere: "Black Friday pe farmec.ro: oferte la gamele Gerovital (Equilibrium, Luxury, Derma+, Plant, Beauty, Evolution, Perfect Look, parfumuri) și la seturile, casetele și borsetele cadou. Pe 5 noiembrie, acces prioritar pentru membrii BeautyCLUB abonați la newsletter. În limita stocului.",
+    reducere: "BF",
+    cod: null,
+    link: "https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=1dfbc028f&redirect_to=https%253A//www.farmec.ro/teasing-black-friday",
+    incepe: "2026-11-05",
+    expira: "2026-11-23",
+    categorii: ["ingrijire-ten", "ingrijire-corp", "ingrijire-par", "machiaj"],
+    verificat: "2026-10-30",
+  },
   // ── Longevity BOOST — noiembrie 2026. Reguli: doar mențiunile de pe site, fără „tratează/previne/detox/100% natural",
   //    NU „-40%" pentru 1–5 nov (reducerile se aplică succesiv), fără numele/imaginea cofondatoarelor.
   {

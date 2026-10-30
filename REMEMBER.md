@@ -1626,3 +1626,42 @@ Quicklink: `https://event.2performant.com/events/click?ad_type=quicklink&aff_cod
 - **Texte social:** `longevity-texte-social.md`, cu postări și Story-uri pentru ambele campanii.
 - **De aflat de la Longevity:** pragul de 400 lei e înainte sau după -35%? D3+K2 are -35% de Black Friday?
 - **Reamintiri prin email** (fișierele nu sunt în repo): r1 pe 4 nov, r2 pe 12 nov, r3 pe 19 nov, după calendarul recomandat de Longevity.
+
+## 18. Farmec — Black Friday în Beauty Kingdom (implementat 30 Oct 2026)
+
+**Campania:**
+- teasing de acum;
+- **early access pe 5 nov** pentru membrii BeautyCLUB Gerovital abonați la newsletter;
+- apoi deschisă tuturor până pe **23 nov**. ⚠️ Data de final e presupusă: e perioada comisionului de 10%, iar Farmec nu a anunțat-o pentru clienți. Dacă află altă dată, o corectezi în `promotii.js`, în `Layout.astro` (FINAL) și în `farmec-black-friday.astro` (END).
+
+**Comisionul de 10% (5–23 nov)**, în loc de 7%, se aplică la:
+- gamele Gerovital Equilibrium, Luxury, Derma+, Plant, Beauty, Parfumuri, Evolution, Perfect Look;
+- toate seturile, casetele și borsetele cadou.
+
+Tombola afiliaților: minimum 5 comenzi valide în noiembrie → vouchere de 500/350/250 lei. E pentru noi, nu se publică.
+
+**Link:** quicklink spre `farmec.ro/teasing-black-friday`. Dacă Farmec dă alt link după 5 nov, îl schimbi în:
+- `promotii.js`;
+- `farmec-black-friday.astro` (LINK_FARMEC);
+- emailul de Black Friday.
+
+### Ce s-a pus pe site (totul pornește și se oprește singur după dată)
+
+**Pagina `/farmec-black-friday/`:**
+- numărătoare inversă până la early access, apoi până la final;
+- 4 pași: cont BeautyCLUB, newsletter, Wishlist, 5 nov;
+- **seturile cadou** și gamele cu 10% comision, luate automat din feed, cu prețurile actuale din catalog;
+- după 23 nov arată că oferta s-a încheiat;
+- test pentru o anumită zi: `?fbtest=2026-11-10`.
+
+**Stickerul `fb-sticker`:**
+- stă în stânga jos, pe Îngrijire Ten, Corp, Păr, Machiaj și pe paginile brandurilor Farmec/Gerovital/Aslavital;
+- **alternează la 6 secunde** cu stickerul „Farmec 15 ani” (tombola, până pe 18 nov);
+- până pe 5 nov arată „5.11 · Early access · Începe în”, apoi „BF · Se termină în”;
+- duce la `/farmec-black-friday/`.
+
+**Pagina `/promotii/`:** cardurile `farmec-black-friday-teasing` (30 oct – 4 nov) și `farmec-black-friday` (5–23 nov).
+
+**`banners.js`:** două bannere de 300x600 de la 2Performant, doar pentru email (30 oct – 23 nov).
+
+**Emailul** (nu e în repo): `email-farmec-black-friday.html`, pe 5 nov la 08:30. În aceeași zi, la 17:00, pleacă și emailul combinat.

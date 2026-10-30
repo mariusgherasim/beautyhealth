@@ -1,0 +1,241 @@
+---
+// Landing page: Black Friday în Beauty Kingdom (farmec.ro) — teasing din 30 oct, early access 5 nov pentru
+// membrii BeautyCLUB Gerovital abonați la newsletter, apoi pentru toți, până pe 23 nov 2026.
+// ⚠️ Data de final pentru clienți nu era în mesajul Farmec: 23 nov e presupusă (perioada comisionului de 10%).
+// Comision majorat 10% (5–23 nov): gamele Gerovital Equilibrium, Luxury, Derma+, Plant, Beauty, Parfumuri,
+// Evolution, Perfect Look + toate seturile, casetele și borsetele cadou → pe ele le punem în față.
+// (Parfumurile Gerovital nu sunt în feedul Farmec de acum, deci nu au secțiune.)
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { produse } from '../data/catalog.mjs';
+
+const START = '2026-11-05T00:00:00+02:00';
+const END = '2026-11-23T23:59:59+02:00';
+// pagina de teasing Farmec (după 5 nov, Farmec o transformă în pagina de Black Friday; dacă primești alt link, schimbă-l aici)
+const LINK_FARMEC = 'https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=1dfbc028f&redirect_to=https%253A//www.farmec.ro/teasing-black-friday';
+
+const farmec = produse.filter((p) => p.source_site === 'farmec.ro' && p.availability);
+const SET = /\b(set|seturi|caset[aă]|borset[aă])\b/i;
+const seturi = farmec.filter((p) => SET.test(p.title)).sort((a, b) => b.price - a.price);
+const restul = farmec.filter((p) => !SET.test(p.title));
+const GRUPE = [
+  { id: 'equilibrium', titlu: 'Gerovital H3 Equilibrium', desc: 'Creme, seruri și demachiante din gama Equilibrium.', game: ['Gerovital H3 Equilibrium'] },
+  { id: 'evolution', titlu: 'Gerovital H3 Evolution și Perfect Look', desc: 'Gama Evolution, plus fondurile de ten și corectoarele Perfect Look.', game: ['Gerovital H3 Evolution', 'Gerovital H3 Evolution Perfect Look'] },
+  { id: 'derma', titlu: 'Gerovital H3 Derma+', desc: 'Dermatocosmetice Derma+, Derma+ Premium Care și Derma+ Sun.', game: ['Gerovital H3 Derma+', 'Gerovital H3 Derma+ Premium Care', 'Gerovital H3 Derma+ Sun'] },
+  { id: 'luxury', titlu: 'Gerovital Luxury', desc: 'Gama premium Gerovital Luxury.', game: ['Gerovital Luxury'] },
+  { id: 'plant', titlu: 'Gerovital Plant', desc: 'Îngrijire cu ingrediente vegetale, gama Plant.', game: ['Gerovital Plant'] },
+  { id: 'beauty', titlu: 'Gerovital Beauty — machiaj', desc: 'Mascara, rujuri, fonduri de ten și lacuri de unghii.', game: ['Gerovital Beauty'] },
+];
+const grupe = [
+  { id: 'seturi', titlu: 'Seturi și casete cadou', desc: 'Seturi gata făcute, pentru tine sau pentru cadourile de sărbători.', produse: seturi },
+  ...GRUPE.map((g) => ({ ...g, produse: restul.filter((p) => g.game.includes((p.brand || '').trim())).sort((a, b) => b.price - a.price) })),
+].filter((g) => g.produse.length);
+const nrProduse = grupe.reduce((s, g) => s + g.produse.length, 0);
+
+const title = 'Black Friday Farmec 2026: early access pe 5 noiembrie pentru BeautyCLUB | BeautyHealth';
+const description = `Black Friday în Beauty Kingdom pe farmec.ro: membrii BeautyCLUB Gerovital abonați la newsletter intră pe 5 noiembrie, cu o zi înaintea tuturor. ${nrProduse} de produse Gerovital și ${seturi.length} de seturi cadou, adunate pe game.`;
+---
+<Layout title={title} description={description} canonical="https://beauty-healths.com/farmec-black-friday/">
+  <Header />
+
+  <main class="gv fbf">
+    <section class="gv-hero">
+      <div class="gv-wrap">
+        <p class="gv-eyebrow" id="gv-eyebrow">Black Friday în Beauty Kingdom · farmec.ro</p>
+        <h1 id="fbf-h1"><span class="gv-pct">5.11</span> Early access la Black Friday Farmec pentru membrii BeautyCLUB</h1>
+        <p class="gv-lead" id="fbf-lead">
+          Pe <strong>5 noiembrie</strong>, membrii BeautyCLUB Gerovital abonați la newsletter intră la ofertele de Black Friday <strong>cu o zi înaintea tuturor</strong>. Stocurile la produsele vedetă sunt limitate.
+        </p>
+        <div class="gv-count" id="gv-count" aria-live="polite">
+          <span class="gv-count-lbl" id="gv-count-lbl">Early access începe în</span>
+          <div class="gv-count-row">
+            <div><b id="gv-d">--</b><small>zile</small></div><i>:</i>
+            <div><b id="gv-h">--</b><small>ore</small></div><i>:</i>
+            <div><b id="gv-m">--</b><small>min</small></div><i>:</i>
+            <div><b id="gv-s">--</b><small>sec</small></div>
+          </div>
+        </div>
+        <div class="gv-ctas">
+          <a class="gv-btn" href={LINK_FARMEC} target="_blank" rel="noopener sponsored" data-gv-cta="hero" id="fbf-hero-btn">Pregătește-te pe farmec.ro →</a>
+          <a class="gv-btn gv-btn--ghost" href="#game">Vezi gamele</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="gv-wrap gv-hook">
+      <h2>Ai prins vreodată un produs vedetă înainte să se termine stocul?</h2>
+      <p>
+        Câte creme Gerovital ai pus anul acesta în coș și le-ai scos la final? Câte seturi cadou îți trebuie până la Crăciun?
+        Și dacă ai putea intra la reduceri cu o zi înaintea tuturor?
+      </p>
+      <p>
+        Am adunat mai jos <strong>{nrProduse} de produse</strong>: <strong>{seturi.length} de seturi și casete cadou</strong> și gamele Gerovital Equilibrium, Evolution, Derma+, Luxury, Plant și Beauty. Alege-le de acum și pune-le în Wishlist pe farmec.ro.
+      </p>
+    </section>
+
+    <section class="gv-wrap">
+      <h2 class="gv-h2">Cum intri primul, pe 5 noiembrie</h2>
+      <div class="gv-facts fbf-steps">
+        <div><span>Pasul 1</span><b>Fă-ți cont BeautyCLUB Gerovital pe farmec.ro (sau intră în contul tău)</b></div>
+        <div><span>Pasul 2</span><b>Bifează abonarea la newsletterul Farmec</b></div>
+        <div><span>Pasul 3</span><b>Adaugă din timp produsele favorite în Wishlist</b></div>
+        <div><span>Pasul 4</span><b>Pe 5 noiembrie intri la oferte, cu o zi înaintea tuturor</b></div>
+      </div>
+      <div class="gv-facts">
+        <div><span>Ce?</span><b>Black Friday în Beauty Kingdom</b></div>
+        <div><span>Când?</span><b>Early access pe 5 noiembrie, apoi pentru toți, până pe 23 noiembrie</b></div>
+        <div><span>Unde?</span><b>Online, pe farmec.ro</b></div>
+        <div><span>Cine?</span><b>Gerovital și Farmec, Cluj-Napoca</b></div>
+      </div>
+    </section>
+
+    <section class="gv-wrap" id="game">
+      <h2 class="gv-h2">Seturi cadou și gamele Gerovital</h2>
+      <nav class="gv-tabs" aria-label="Game Gerovital">
+        {grupe.map((g) => <a href={`#${g.id}`}>{g.titlu} <em>{g.produse.length}</em></a>)}
+      </nav>
+      <p class="gv-note" id="fbf-note">Prețurile de mai jos sunt cele din catalogul nostru, de azi. Prețurile de Black Friday apar pe farmec.ro din 5 noiembrie.</p>
+      {grupe.map((g) => (
+        <div class="gv-group" id={g.id}>
+          <h3>{g.titlu}</h3>
+          <p>{g.desc}</p>
+          <div class="gv-grid">
+            {g.produse.map((p) => <div class="gv-card"><ProductCard product={p} /></div>)}
+          </div>
+        </div>
+      ))}
+    </section>
+
+    <section class="gv-wrap gv-tips">
+      <h2 class="gv-h2">3 sfaturi pentru Black Friday la Farmec</h2>
+      <ol>
+        <li><b>Contul și newsletterul, de azi.</b> Fără ele nu intri la early access pe 5 noiembrie.</li>
+        <li><b>Wishlistul face diferența.</b> Pe 5 noiembrie mergi direct la coș, fără să mai cauți produsele.</li>
+        <li><b>Gândește-te la cadouri.</b> Seturile și casetele Gerovital sunt gata ambalate pentru sărbători.</li>
+      </ol>
+    </section>
+
+    <section class="gv-final">
+      <div class="gv-wrap">
+        <h2 id="gv-final-title">Fă-ți contul BeautyCLUB înainte de 5 noiembrie</h2>
+        <p id="fbf-final-p">Acces la ofertele de Black Friday cu o zi înaintea tuturor, pe farmec.ro.</p>
+        <a class="gv-btn" href={LINK_FARMEC} target="_blank" rel="noopener sponsored" data-gv-cta="final" id="gv-final-btn">Mergi pe farmec.ro →</a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script is:inline define:vars={{ START, END }}>
+  (function () {
+    var start = new Date(START), end = new Date(END);
+    var t = (location.search.match(/fbtest=([\d-]+)/) || [])[1];
+    var offset = t ? new Date(t + 'T12:00:00+02:00') - new Date() : 0;
+    var acum = function () { return new Date(Date.now() + offset); };
+    function pad(n) { return String(n).padStart(2, '0'); }
+    var $ = function (id) { return document.getElementById(id); };
+    var faza = null;
+    function seteaza(n) {
+      var f = n > end ? 'gata' : n >= start ? 'activ' : 'pre';
+      if (f === faza) return f; faza = f;
+      if (f === 'activ') {
+        $('fbf-h1').innerHTML = '<span class="gv-pct">BF</span> Black Friday în Beauty Kingdom, pe farmec.ro';
+        $('fbf-lead').innerHTML = 'Ofertele de Black Friday sunt deschise: gamele Gerovital și seturile cadou, <strong>până pe 23 noiembrie</strong>, în limita stocului.';
+        $('gv-count-lbl').textContent = 'Black Friday se termină în';
+        $('fbf-hero-btn').textContent = 'Vezi ofertele pe farmec.ro →';
+        $('gv-final-title').textContent = 'Black Friday Farmec e acum';
+        $('fbf-final-p').textContent = 'Gamele Gerovital și seturile cadou, până pe 23 noiembrie, în limita stocului.';
+        $('fbf-note').textContent = 'Prețurile de mai jos sunt cele din catalogul nostru. Prețul de Black Friday îl vezi pe farmec.ro.';
+      }
+      if (f === 'gata') {
+        $('gv-eyebrow').textContent = 'Black Friday Farmec s-a încheiat pe 23 noiembrie';
+        $('fbf-h1').innerHTML = 'Black Friday în Beauty Kingdom s-a încheiat';
+        $('fbf-lead').textContent = 'Produsele Gerovital de mai jos rămân disponibile pe farmec.ro, la prețurile actuale.';
+        $('gv-count').style.display = 'none';
+        $('gv-final-title').textContent = 'Campania s-a încheiat';
+        $('fbf-final-p').textContent = 'Vezi ofertele actuale pe farmec.ro.';
+        $('gv-final-btn').textContent = 'Mergi pe farmec.ro →';
+        $('fbf-hero-btn').textContent = 'Mergi pe farmec.ro →';
+      }
+      return f;
+    }
+    function tick() {
+      var n = acum();
+      if (seteaza(n) === 'gata') return false;
+      var diff = Math.max(0, (n < start ? start : end) - n);
+      $('gv-d').textContent = pad(Math.floor(diff / 86400000)); diff %= 86400000;
+      $('gv-h').textContent = pad(Math.floor(diff / 3600000)); diff %= 3600000;
+      $('gv-m').textContent = pad(Math.floor(diff / 60000)); diff %= 60000;
+      $('gv-s').textContent = pad(Math.floor(diff / 1000));
+      return true;
+    }
+    if (tick()) { var iv = setInterval(function () { if (!tick()) clearInterval(iv); }, 1000); }
+    document.querySelectorAll('[data-gv-cta]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        if (typeof gtag === 'function') gtag('event', 'bh_campaign_click', { campaign: 'farmec-black-friday', position: a.dataset.gvCta });
+      });
+    });
+  })();
+</script>
+
+<style>
+  .gv { --gv-dark: #111111; --gv-gold: #d6a84a; --gv-red: #c8102e; }
+  .gv-wrap { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+
+  .gv-hero { background: radial-gradient(circle at 20% 0%, #3a2a10 0%, var(--gv-dark) 60%); color: #fff; padding: 56px 0 48px; text-align: center; }
+  .gv-eyebrow { display: inline-block; font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gv-gold); border: 1px solid rgba(214,168,74,.5); border-radius: 999px; padding: 6px 14px; margin: 0 0 18px; }
+  .gv-hero h1 { font-size: clamp(1.7rem, 4.5vw, 2.8rem); line-height: 1.15; margin: 0 auto 14px; max-width: 820px; }
+  .gv-pct { display: block; font-family: Georgia, serif; font-size: clamp(3.2rem, 11vw, 5.5rem); color: var(--gv-gold); line-height: 1; margin-bottom: 6px; }
+  .gv-lead { font-size: 1.05rem; color: rgba(255,255,255,.85); max-width: 640px; margin: 0 auto 26px; line-height: 1.55; }
+  .gv-count { margin: 0 auto 26px; }
+  .gv-count-lbl { display: block; font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.6); margin-bottom: 8px; }
+  .gv-count-row { display: inline-flex; gap: 8px; align-items: center; }
+  .gv-count-row div { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); border-radius: 10px; padding: 10px 14px; min-width: 70px; }
+  .gv-count-row b { display: block; font-size: 2rem; font-variant-numeric: tabular-nums; line-height: 1; }
+  .gv-count-row small { font-size: .65rem; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.55); }
+  .gv-count-row i { font-style: normal; color: rgba(255,255,255,.35); font-size: 1.4rem; }
+  .gv-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .gv-btn { display: inline-block; background: var(--gv-red); color: #fff; font-weight: 700; text-decoration: none; padding: 14px 26px; border-radius: 8px; transition: transform .15s, background .15s; }
+  .gv-btn:hover { background: #a50d26; transform: translateY(-2px); }
+  .gv-btn--ghost { background: transparent; border: 1px solid rgba(255,255,255,.4); }
+  .gv-btn--ghost:hover { background: rgba(255,255,255,.08); }
+
+  .gv-hook { max-width: 760px; padding-top: 44px; padding-bottom: 8px; text-align: center; }
+  .gv-hook h2 { color: var(--gv-dark); font-size: 1.6rem; margin: 0 0 12px; }
+  .gv-hook p { color: #444; line-height: 1.65; font-size: 1.02rem; }
+
+  .gv-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin: 28px 0 8px; }
+  .gv-facts div { background: #faf6ef; border: 1px solid #eadfca; border-radius: 10px; padding: 14px 16px; }
+  .gv-facts span { display: block; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #a07a2c; margin-bottom: 4px; }
+  .gv-facts b { color: #222; font-size: .95rem; line-height: 1.4; }
+
+  .gv-h2 { color: var(--gv-dark); font-size: 1.5rem; margin: 40px 0 14px; }
+  .gv-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+  .gv-tabs a { background: #fff; border: 1px solid #ddd; border-radius: 999px; padding: 7px 14px; font-size: .85rem; color: #333; text-decoration: none; }
+  .gv-tabs a:hover { border-color: var(--gv-gold); color: var(--gv-dark); }
+  .gv-tabs em { font-style: normal; color: #999; margin-left: 4px; }
+  .gv-note { font-size: .8rem; color: #6b6b6b; margin: 0 0 8px; }
+  .gv-group { padding-top: 26px; scroll-margin-top: 80px; }
+  .gv-group h3 { color: var(--gv-dark); font-size: 1.2rem; margin: 0 0 4px; }
+  .gv-group > p { color: #666; font-size: .92rem; margin: 0 0 14px; }
+  .gv-card { position: relative; }
+  .gv-off { display: none; position: absolute; top: 10px; left: 10px; z-index: 2; background: #c8102e; color: #fff; font-size: .72rem; font-weight: 800; padding: 4px 8px; border-radius: 6px; letter-spacing: .02em; }
+  :global(html.gv-activ) .gv-off { display: block; }
+  :global(html.gv-activ) .gv-grid :global(.price-row) { display: none; }
+  .gv-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+
+  .gv-tips ol { padding-left: 20px; line-height: 1.7; color: #333; max-width: 760px; }
+  .gv-final { background: var(--gv-dark); color: #fff; text-align: center; padding: 44px 0; margin-top: 48px; }
+  .gv-final h2 { margin: 0 0 8px; font-size: 1.6rem; }
+  .gv-final p { color: rgba(255,255,255,.8); margin: 0 0 20px; }
+
+  @media (max-width: 520px) {
+    .gv-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .gv-count-row div { min-width: 58px; padding: 8px 10px; }
+    .gv-count-row b { font-size: 1.6rem; }
+  }
+  .fbf-steps div { background: #fff7f0; border-color: #f1d5c4; }
+</style>
