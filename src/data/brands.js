@@ -111,7 +111,7 @@ export const brands = [
   { name: 'NATURALIS', slug: 'naturalis', categories: ['vitamine-suplimente'] },
   { name: 'FARES', slug: 'fares', categories: ['vitamine-suplimente', 'wellness'] },
   { name: 'SOLGAR', slug: 'solgar', categories: ['vitamine-suplimente'] },
-  { name: 'ARONIA CHARLOTTENBURG', slug: 'aronia-charlottenburg', categories: ['vitamine-suplimente'] },
+  { name: 'ARONIA CHARLOTTENBURG', slug: 'aronia-charlottenburg', categories: ['vitamine-suplimente','wellness'] },
   { name: 'FAUNUS PLANT', slug: 'faunus-plant', categories: ['vitamine-suplimente', 'wellness'] },
   { name: 'NOW FOODS', slug: 'now-foods', categories: ['vitamine-suplimente'] },
   { name: 'HOFIGAL', slug: 'hofigal', categories: ['vitamine-suplimente'] },

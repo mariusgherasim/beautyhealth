@@ -1679,3 +1679,14 @@ Tombola afiliaților: minimum 5 comenzi valide în noiembrie → vouchere de 500
 - Nu asociem produsele cu boli sau afecțiuni. Nu scriem „tratează”, „vindecă”, „previne”, „pentru diabetici”, „scade colesterolul” (Regulamentul CE 1924/2006).
 - Nu preluăm afirmațiile din mesajele de marketing ale magazinelor (ex. Aronia: „beneficii dovedite pentru diabet, boli cardiovasculare”, „atestate prin studii medicale”, „100% naturale”).
 - Ce putem spune despre Aronia: certificat bio, produs în România, brand din 2015, prezent în 300 de magazine partenere (DM, BioCorner, Enigma, Miracolul Plantelor), transport gratuit peste 200 lei prin Sameday. Mențiunile de sănătate se iau doar exact cum apar pe site-ul producătorului și doar dacă sunt autorizate („vitamina C contribuie la...”).
+
+## 20. Pagina de brand /aronia/ (06.11.2026)
+
+- Adresa: **https://beauty-healths.com/aronia/** — pagina de distribuit pe WhatsApp, Facebook, Instagram (fișier `src/pages/aronia.astro`).
+- Se generează singură din produsele Aronia din catalog (`source_site: aronia-charlottenburg.ro`), în 4 grupe: Sucuri și gel de aloe vera · Gemuri, miere cremă, pudră și fructe · Pachete promo · Suplimente alimentare. Ordonate după preț, cu căutare.
+- Cifrele de pe pagină (328 produse, 74 ECO, „de la 9 lei”) se calculează la fiecare build. **Excepție: imaginea de share `public/images/og-aronia.jpg` are cifrele scrise în ea** (328 / 74). Dacă se schimbă mult numărul de produse, refă imaginea.
+- Butonul „Intră pe aronia-charlottenburg.ro” = quicklink cu `unique=9abbbd0e9` (campaign_unique din feed).
+- Butoanele de share pun UTM: `utm_source=whatsapp|facebook|instagram|share`, `utm_medium=social`, `utm_campaign=aronia`.
+- Pe pagină NU se folosesc descrierile din feed (conțin afirmații despre boli). Textele noastre nu conțin afirmații de sănătate.
+- Stickerele altor campanii (Farmec, DUMO etc.) sunt ascunse pe această pagină.
+- Brandul are și paginile clasice: `/vitamine-suplimente/brand/aronia-charlottenburg/` și `/wellness/brand/aronia-charlottenburg/` (în `brands.js` brandul are acum ambele categorii).

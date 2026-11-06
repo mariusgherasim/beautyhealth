@@ -1,0 +1,254 @@
+---
+// Pagina brandului Aronia Charlottenburg (aronia-charlottenburg.ro) — destinatie pentru postari WhatsApp / Facebook / Instagram.
+// Produsele vin din feedul 2Performant (feed_091d53e22.xml), sincronizat cu sync-feeds-local.cjs (vezi REMEMBER §19-20).
+// Texte: fara afirmatii de sanatate si fara boli (Reg. UE 1924/2006). Descrierile din feed NU se preiau pe pagina.
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { produse } from '../data/catalog.mjs';
+
+const URL_PAGINA = 'https://beauty-healths.com/aronia/';
+// quicklink spre magazin (campaign_unique din feed: 9abbbd0e9); ":" dublu codat, ca la celelalte quicklinkuri
+const LINK_MAGAZIN = 'https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=9abbbd0e9&redirect_to=https%253A//aronia-charlottenburg.ro/';
+
+const toate = produse.filter((p) => p.source_site === 'aronia-charlottenburg.ro' && p.availability);
+const ePachet = (p) => /^pachet promo/i.test(p.title);
+const eSuc = (p) => /^(suc|aloe vera gel|pachet cu 3 sucuri)/i.test(p.title);
+const eAliment = (p) => p.category.includes('wellness');
+
+const GRUPE = [
+  { id: 'sucuri', titlu: 'Sucuri și gel de aloe vera', desc: 'Aronia, afin siberian, cătină, rodie, sfeclă roșie și combinații, de la 300 ml până la 3 litri.',
+    produse: toate.filter((p) => !ePachet(p) && eAliment(p) && eSuc(p)) },
+  { id: 'gemuri', titlu: 'Gemuri, miere cremă, pudră și fructe', desc: 'Gemuri de 200 g, miere cremă de 220 g, pudră și fructe uscate de aronia, seturi cadou.',
+    produse: toate.filter((p) => !ePachet(p) && eAliment(p) && !eSuc(p)) },
+  { id: 'pachete', titlu: 'Pachete promo', desc: 'Câte 3 sau 5 bucăți din același produs, la preț de pachet.',
+    produse: toate.filter(ePachet) },
+  { id: 'suplimente', titlu: 'Suplimente alimentare', desc: 'Capsule, tablete și flacoane din gama magazinului. Caută după ingredient în căsuța de mai sus.',
+    produse: toate.filter((p) => !ePachet(p) && !eAliment(p)) },
+].map((g) => ({ ...g, produse: g.produse.sort((a, b) => a.price - b.price) })).filter((g) => g.produse.length);
+
+const nr = toate.length;
+const nrEco = toate.filter((p) => /\bECO\b/.test(p.title)).length;
+const pretMin = toate.length ? Math.floor(Math.min(...toate.map((p) => p.price))) : 0;
+const nrGr = Object.fromEntries(GRUPE.map((g) => [g.id, g.produse.length]));
+// primele produse din feed = produsele principale ale magazinului (suc, fructe, gem, pudra, capsule)
+const recomandate = toate.slice(0, 8);
+const azi = new Date(Date.now() + 2 * 3600e3);
+const LUNI = ['ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie', 'iulie', 'august', 'septembrie', 'octombrie', 'noiembrie', 'decembrie'];
+const dataActualizare = `${azi.getUTCDate()} ${LUNI[azi.getUTCMonth()]} ${azi.getUTCFullYear()}`;
+
+const title = `Aronia Charlottenburg: ${nr} de produse, ${nrEco} cu certificare ECO | BeautyHealth`;
+const description = `Sucuri, gemuri, miere cremă, pudră, pachete promo și suplimente Aronia Charlottenburg, pe o singură pagină. ${nr} de produse, de la ${pretMin} lei.`;
+---
+<Layout title={title} description={description} canonical={URL_PAGINA} ogImage="/images/og-aronia.jpg">
+  <Header />
+
+  <main class="ar">
+    <!-- HERO -->
+    <section class="ar-hero">
+      <div class="ar-wrap">
+        <p class="ar-eyebrow">Brand · aronia-charlottenburg.ro</p>
+        <h1>{nr} de produse Aronia Charlottenburg.<br><span>O singură pagină.</span></h1>
+        <p class="ar-lead"><strong>{nrGr.sucuri || 0} de sucuri</strong>, <strong>{nrGr.gemuri || 0} gemuri, mieri și fructe</strong>, <strong>{nrGr.pachete || 0} pachete promo</strong> și <strong>{nrGr.suplimente || 0} de suplimente</strong>. {nrEco} au certificare ECO. Prețuri de la <strong>{pretMin} lei</strong>.
+        </p>
+        <div class="ar-ctas">
+          <a class="ar-btn" href="#produse">Vezi produsele</a>
+          <a class="ar-btn ar-btn--ghost" href={LINK_MAGAZIN} target="_blank" rel="noopener sponsored" data-ar-cta="hero">Intră pe aronia-charlottenburg.ro →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOOK -->
+    <section class="ar-wrap ar-hook">
+      <h2>Câte site-uri ai deschis ultima oară ca să găsești un suc de aronia ECO?</h2>
+      <p>
+        Cât costă 3 litri? Dar un pachet de 3 × 3 litri? Există și gem, miere cremă sau fructe uscate de aronia?
+        Și de ce să le cauți pe rând, când le poți vedea pe toate dintr-o privire?
+      </p>
+      <p>
+        Am adunat aici toate cele <strong>{nr} de produse</strong> din magazinul Aronia Charlottenburg, pe grupe și ordonate de la cel mai mic preț.
+        Apeși pe produs și comanzi direct pe aronia-charlottenburg.ro.
+      </p>
+    </section>
+
+    <!-- CINE / CE / UNDE -->
+    <section class="ar-wrap">
+      <div class="ar-facts">
+        <div><span>Cine?</span><b>Aronia Charlottenburg Romania</b></div>
+        <div><span>Ce?</span><b>{nr} de produse: sucuri, gemuri, miere cremă, pudră, fructe, suplimente</b></div>
+        <div><span>Cât?</span><b>De la {pretMin} lei · {nrGr.pachete || 0} pachete promo de 3 sau 5 bucăți</b></div>
+        <div><span>Unde?</span><b>Comanzi online, pe aronia-charlottenburg.ro</b></div>
+      </div>
+    </section>
+
+    <!-- RECOMANDATE -->
+    {recomandate.length > 0 && (
+      <section class="ar-wrap">
+        <h2 class="ar-h2">Produsele de bază ale magazinului</h2>
+        <div class="ar-grid">{recomandate.map((p) => <ProductCard product={p} />)}</div>
+      </section>
+    )}
+
+    <!-- TOATE PRODUSELE -->
+    <section class="ar-wrap" id="produse">
+      <h2 class="ar-h2">Toate produsele</h2>
+      <nav class="ar-tabs" aria-label="Grupe de produse">
+        {GRUPE.map((g) => <a href={`#${g.id}`}>{g.titlu} <em>{g.produse.length}</em></a>)}
+      </nav>
+      <label class="ar-search">
+        <span>Caută un produs</span>
+        <input type="search" id="ar-q" placeholder="ex.: aronia 3L, cătină, gem, capsule" autocomplete="off" />
+      </label>
+      <p class="ar-note" id="ar-res" aria-live="polite">Prețuri din catalogul nostru, actualizat pe {dataActualizare}. Prețul final îl vezi pe aronia-charlottenburg.ro.</p>
+
+      {GRUPE.map((g) => (
+        <div class="ar-group" id={g.id}>
+          <h3>{g.titlu} <em>{g.produse.length}</em></h3>
+          <p>{g.desc}</p>
+          <div class="ar-grid">
+            {g.produse.map((p) => <div class="ar-card" data-t={p.title.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')}><ProductCard product={p} /></div>)}
+          </div>
+        </div>
+      ))}
+      <p class="ar-gol" id="ar-gol" hidden>Niciun produs nu se potrivește căutării. Încearcă alt cuvânt.</p>
+    </section>
+
+    <!-- DISTRIBUIE -->
+    <section class="ar-wrap ar-share" id="distribuie">
+      <h2 class="ar-h2">Trimite pagina cuiva</h2>
+      <p>Cunoști pe cineva care caută sucuri sau gemuri de aronia? Trimite-i pagina în 2 secunde.</p>
+      <div class="ar-share-row">
+        <a class="ar-sh ar-sh--wa" href={`https://wa.me/?text=${encodeURIComponent(`${nr} de produse Aronia Charlottenburg pe o singură pagină: sucuri, gemuri, pachete promo. ${URL_PAGINA}?utm_source=whatsapp&utm_medium=social&utm_campaign=aronia`)}`} target="_blank" rel="noopener" data-ar-share="whatsapp">WhatsApp</a>
+        <a class="ar-sh ar-sh--fb" href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`${URL_PAGINA}?utm_source=facebook&utm_medium=social&utm_campaign=aronia`)}`} target="_blank" rel="noopener" data-ar-share="facebook">Facebook</a>
+        <button type="button" class="ar-sh" id="ar-copy" data-ar-share="copy">Copiază linkul</button>
+        <button type="button" class="ar-sh" id="ar-native" data-ar-share="native" hidden>Mai multe…</button>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="ar-final">
+      <div class="ar-wrap">
+        <h2>Toată gama, direct de la sursă</h2>
+        <p>{nr} de produse Aronia Charlottenburg, de la {pretMin} lei, pe aronia-charlottenburg.ro.</p>
+        <a class="ar-btn" href={LINK_MAGAZIN} target="_blank" rel="noopener sponsored" data-ar-cta="final">Mergi în magazin →</a>
+        <p class="ar-mic">Suplimentele alimentare nu înlocuiesc o dietă variată și echilibrată și un stil de viață sănătos. Linkurile de pe această pagină sunt linkuri de afiliere.</p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script is:inline define:vars={{ URL_PAGINA }}>
+  (function () {
+    // Cautare in carduri (fara diacritice)
+    var q = document.getElementById('ar-q');
+    var gol = document.getElementById('ar-gol');
+    var cards = document.querySelectorAll('.ar-card');
+    var grupe = document.querySelectorAll('.ar-group');
+    function norm(s) { return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
+    var tmr;
+    q.addEventListener('input', function () {
+      clearTimeout(tmr);
+      tmr = setTimeout(function () {
+        var cuv = norm(q.value.trim()).split(/\s+/).filter(Boolean);
+        var total = 0;
+        cards.forEach(function (c) {
+          var ok = cuv.every(function (w) { return c.dataset.t.indexOf(w) !== -1; });
+          c.hidden = !ok; if (ok) total++;
+        });
+        grupe.forEach(function (g) { g.hidden = !g.querySelector('.ar-card:not([hidden])'); });
+        gol.hidden = total > 0;
+        if (cuv.length && typeof gtag === 'function') gtag('event', 'search', { search_term: q.value.trim(), page: 'aronia' });
+      }, 200);
+    });
+
+    // Distribuire
+    var copy = document.getElementById('ar-copy');
+    copy.addEventListener('click', function () {
+      var link = URL_PAGINA + '?utm_source=instagram&utm_medium=social&utm_campaign=aronia';
+      var gata = function () { copy.textContent = 'Link copiat ✓'; setTimeout(function () { copy.textContent = 'Copiază linkul'; }, 2500); };
+      if (navigator.clipboard) navigator.clipboard.writeText(link).then(gata, function () { prompt('Copiază linkul:', link); });
+      else prompt('Copiază linkul:', link);
+    });
+    var nat = document.getElementById('ar-native');
+    if (navigator.share) {
+      nat.hidden = false;
+      nat.addEventListener('click', function () {
+        navigator.share({ title: document.title, url: URL_PAGINA + '?utm_source=share&utm_medium=social&utm_campaign=aronia' }).catch(function () {});
+      });
+    }
+    document.querySelectorAll('[data-ar-share]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        if (typeof gtag === 'function') gtag('event', 'share', { method: a.dataset.arShare, content_type: 'page', item_id: 'aronia' });
+      });
+    });
+    document.querySelectorAll('[data-ar-cta]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        if (typeof gtag === 'function') gtag('event', 'bh_campaign_click', { campaign: 'aronia', position: a.dataset.arCta });
+      });
+    });
+  })();
+</script>
+
+<style>
+  .ar { --ar-dark: #2b1030; --ar-berry: #5b1f5e; --ar-green: #3f7d3a; --ar-cream: #f8f3f8; }
+  .ar-wrap { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+
+  .ar-hero { background: radial-gradient(circle at 15% 0%, #6d2a70 0%, var(--ar-dark) 65%); color: #fff; padding: 56px 0 48px; text-align: center; }
+  .ar-eyebrow { display: inline-block; font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #b9e0a5; border: 1px solid rgba(185,224,165,.5); border-radius: 999px; padding: 6px 14px; margin: 0 0 18px; }
+  .ar-hero h1 { font-size: clamp(1.7rem, 4.5vw, 2.8rem); line-height: 1.15; margin: 0 auto 14px; max-width: 860px; }
+  .ar-hero h1 span { color: #d8b4dc; }
+  .ar-lead { font-size: 1.05rem; color: rgba(255,255,255,.86); max-width: 680px; margin: 0 auto 26px; line-height: 1.6; }
+  .ar-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .ar-btn { display: inline-block; background: var(--ar-green); color: #fff; font-weight: 700; text-decoration: none; padding: 14px 26px; border-radius: 8px; transition: transform .15s, background .15s; }
+  .ar-btn:hover { background: #336a2f; transform: translateY(-2px); }
+  .ar-btn--ghost { background: transparent; border: 1px solid rgba(255,255,255,.45); }
+  .ar-btn--ghost:hover { background: rgba(255,255,255,.08); }
+
+  .ar-hook { max-width: 760px; padding-top: 44px; padding-bottom: 8px; text-align: center; }
+  .ar-hook h2 { color: var(--ar-dark); font-size: 1.55rem; margin: 0 0 12px; }
+  .ar-hook p { color: #444; line-height: 1.65; font-size: 1.02rem; }
+
+  .ar-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; margin: 28px 0 8px; }
+  .ar-facts div { background: var(--ar-cream); border: 1px solid #e6d6e7; border-radius: 10px; padding: 14px 16px; }
+  .ar-facts span { display: block; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--ar-berry); margin-bottom: 4px; }
+  .ar-facts b { color: #222; font-size: .95rem; line-height: 1.4; }
+
+  .ar-h2 { color: var(--ar-dark); font-size: 1.5rem; margin: 40px 0 14px; }
+  .ar-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+  .ar-tabs a { background: #fff; border: 1px solid #ddd; border-radius: 999px; padding: 7px 14px; font-size: .85rem; color: #333; text-decoration: none; }
+  .ar-tabs a:hover { border-color: var(--ar-berry); color: var(--ar-dark); }
+  .ar-tabs em, .ar-group h3 em { font-style: normal; color: #999; margin-left: 4px; font-weight: 400; }
+  .ar-search { display: block; max-width: 460px; margin: 0 0 8px; }
+  .ar-search span { display: block; font-size: .8rem; font-weight: 600; color: #555; margin-bottom: 4px; }
+  .ar-search input { width: 100%; box-sizing: border-box; padding: 11px 14px; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; }
+  .ar-search input:focus { outline: 2px solid var(--ar-berry); border-color: transparent; }
+  .ar-note { font-size: .8rem; color: #6b6b6b; margin: 0 0 8px; }
+  .ar-group { padding-top: 26px; scroll-margin-top: 80px; }
+  .ar-group h3 { color: var(--ar-dark); font-size: 1.2rem; margin: 0 0 4px; }
+  .ar-group > p { color: #666; font-size: .92rem; margin: 0 0 14px; }
+  .ar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+  .ar-card[hidden], .ar-group[hidden] { display: none; }
+  .ar-gol { padding: 24px 0; color: #666; }
+
+  .ar-share { text-align: center; }
+  .ar-share p { color: #555; }
+  .ar-share-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
+  .ar-sh { display: inline-block; font: inherit; font-weight: 700; font-size: .95rem; padding: 12px 22px; border-radius: 8px; border: 1px solid #ccc; background: #fff; color: #222; text-decoration: none; cursor: pointer; }
+  .ar-sh--wa { background: #1f8f4e; border-color: #1f8f4e; color: #fff; }
+  .ar-sh--fb { background: #1765cc; border-color: #1765cc; color: #fff; }
+
+  .ar-final { background: var(--ar-dark); color: #fff; text-align: center; padding: 44px 0; margin-top: 48px; }
+  .ar-final h2 { margin: 0 0 8px; font-size: 1.6rem; }
+  .ar-final p { color: rgba(255,255,255,.82); margin: 0 0 20px; }
+  .ar-final .ar-mic { font-size: .78rem; color: rgba(255,255,255,.6); margin: 22px auto 0; max-width: 640px; }
+
+  /* pe pagina de brand nu punem stickerele altor campanii peste produse */
+  :global(#tombola-sticker), :global(#du-sticker), :global(#gv-sticker), :global(#dx-sticker), :global(#promo-sticker), :global(#lb-sticker), :global(#fb-sticker) { display: none !important; }
+
+  @media (max-width: 520px) {
+    .ar-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  }
+</style>
