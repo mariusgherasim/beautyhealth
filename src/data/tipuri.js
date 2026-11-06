@@ -146,6 +146,8 @@ export const tipuri = {
   ],
 
   wellness: [
+    // „sucuri gemuri si superfructe” = categoria pusă de sync pentru Aronia Charlottenburg (după titlu)
+    { slug: 'sucuri-gemuri-superfructe', name: 'Sucuri, Gemuri & Superfructe', kw: ['sucuri gemuri si superfructe', 'gem=', 'gemuri', 'suc de aronia', 'suc aronia', 'suc de catina', 'suc catina', 'pudra de aronia', 'pudra aronia'] },
     { slug: 'detox', name: 'Detox', kw: ['detoxmed', 'program detox', 'healthymed', 'imunomed', 'cold press', 'suc presat', 'suc natural', 'sucuri naturale', 'ceai detoxifiant', 'detoxifiere', 'nutritie detox'] },
     { slug: 'cafea', name: 'Cafea', kw: ['cafea boabe', 'cafea macinata', 'cafea solubila', 'cafea verde', 'single origin', 'de specialitate', 'espresso', 'decaf', 'nutritie cafea', 'inlocuitori cafea'] },
     { slug: 'ceaiuri', name: 'Ceaiuri', kw: ['ceai', 'tea=', 'matcha', 'infuzie'] },

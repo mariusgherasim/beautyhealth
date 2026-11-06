@@ -1665,3 +1665,17 @@ Tombola afiliaților: minimum 5 comenzi valide în noiembrie → vouchere de 500
 **`banners.js`:** două bannere de 300x600 de la 2Performant, doar pentru email (30 oct – 23 nov).
 
 **Emailul** (nu e în repo): `email-farmec-black-friday.html`, pe 5 nov la 08:30. În aceeași zi, la 17:00, pleacă și emailul combinat.
+
+## 19. Aronia Charlottenburg (adăugat 06.11.2026)
+
+- Feed: `feed_091d53e22.xml` (aronia-charlottenburg.ro, 329 de produse, toate active, fără `old_price`). E trecut în `sync-feeds-local.cjs` și în `sites.json` (folderul DESCARCARE AUTOMATA FEEDURI). Brandul există deja în `brands.js`.
+- **Categoriile din feed NU se folosesc.** Sunt liste lungi de afecțiuni („Suplimente diabet, colesterol, tensiune...”). Categoria și tipul se stabilesc doar după titlu (`aroniaCategory`):
+  - sucuri, gemuri, pudre, fructe, miere → **Wellness → Sucuri, Gemuri & Superfructe** (tip nou în `tipuri.js`);
+  - capsule, tablete, vitamine → **Vitamine & Suplimente**, cu tipul luat din nume (Vitamina D, Omega 3, Magneziu...).
+- **Titluri scurte:** se păstrează doar numele produsului, fără descrierea de după „—”, „–”, „:” sau „|” (`aroniaTitle`). Multe titluri conțin promisiuni de sănătate („pentru diabetici”, „protejează inima”). „PROMO: ...” devine „Pachet promo: ...”.
+- **Produse excluse** (`ARONIA_EXCLUDE`, aproximativ 42): cele al căror nume rămâne legat de o afecțiune (diabet, colesterol, cardio, varice, alergii, paraziți, candida, tiroidă, prostată, tuse, „Protocol ...”, Amygdalin/B17). Intră pe site aproximativ 287 de produse.
+
+### ⚠️ Regula pentru texte (site, emailuri, social), valabilă la TOATE suplimentele și alimentele
+- Nu asociem produsele cu boli sau afecțiuni. Nu scriem „tratează”, „vindecă”, „previne”, „pentru diabetici”, „scade colesterolul” (Regulamentul CE 1924/2006).
+- Nu preluăm afirmațiile din mesajele de marketing ale magazinelor (ex. Aronia: „beneficii dovedite pentru diabet, boli cardiovasculare”, „atestate prin studii medicale”, „100% naturale”).
+- Ce putem spune despre Aronia: certificat bio, produs în România, brand din 2015, prezent în 300 de magazine partenere (DM, BioCorner, Enigma, Miracolul Plantelor), transport gratuit peste 200 lei prin Sameday. Mențiunile de sănătate se iau doar exact cum apar pe site-ul producătorului și doar dacă sunt autorizate („vitamina C contribuie la...”).

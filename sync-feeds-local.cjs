@@ -26,6 +26,7 @@
 //   feed_9c297a4fb.xml   → endro.ro
 //   feed_c143969aa.xml   → boabe.ro
 //   feed_5544111cd.xml   → PARFLAB.ro
+//   feed_091d53e22.xml   → aronia-charlottenburg.ro
 //   feed_585a1cd31.xml   → drmax.ro (catalog complet)
 //   feed_09eca89e8.xml   → drmax.ro (branduri exclusive)
 //   feed_dc6bbc64e.xml   → drmax.ro (private label)
@@ -96,6 +97,17 @@ const FEED_CONFIG = {
     files: ["feed_parflab.xml", "feed_5544111cd.xml"],
     type: "generic",
     defaultCategory: "parfumuri",
+  },
+  // Aronia Charlottenburg: categoriile din feed sunt liste lungi de afecțiuni („Suplimente diabet, ... colesterol”).
+  // NU le folosim: categoria și tipul se stabilesc DOAR după titlu (vezi aroniaCategory), ca să nu legăm
+  // sucurile/gemurile de boli pe site (Reg. CE 1924/2006 interzice asocierea alimentelor cu afecțiuni).
+  "aronia-charlottenburg.ro": {
+    files: ["feed_aronia.xml", "feed_091d53e22.xml"],
+    type: "generic",
+    defaultCategory: "vitamine-suplimente",
+    categorize: aroniaCategory,
+    cleanTitle: aroniaTitle,
+    exclude: aroniaExclus,
   },
   "drmax.ro": {
     // mergeFiles: se citesc TOATE fisierele gasite si se unesc dupa product_id
@@ -227,6 +239,36 @@ function getGenericCategory(catRaw, defaultCategory) {
   if (["oral", "dinti", "pasta"].some((k) => c.includes(k))) return "igiena-orala";
   if (["barbat", "bărbat", "after shave"].some((k) => c.includes(k))) return "cosmetice-barbati";
   return defaultCategory;
+}
+
+// ---- ARONIA CHARLOTTENBURG: titlu scurt + excluderi + categorie doar după titlu ----
+// Multe titluri din feed conțin afirmații despre boli („Pentru Diabetici”, „protejează inima”,
+// „împotriva varicelor”). Pe site NU le publicăm (Reg. CE 1924/2006):
+//   1. păstrăm doar numele produsului, partea dinainte de „—”, „–”, „ - ”, „:” sau „|”;
+//   2. produsele al căror nume rămâne legat de o afecțiune (ex: „Gluco-Diabet Formula”,
+//      „Protocol Diabetul Sub Control”) nu intră deloc pe site.
+const ARONIA_EXCLUDE = /\b(diabet|gluco|glicem|colesterol|cardio|inim|varic|venos|vascular|hemoroiz|alergi|allergy|tensiun|slab|slim|detox|cancer|tumor|boal|afectiun|vindec|trat|previn|parazit|parasit|candida|gastroacid|reflux|tiroid|thyroid|prostat|colon cleanse|tuse|amygdalin|b17)|^ ?protocol\b/;
+function aroniaTitle(title) {
+  let t = String(title || "").replace(/&amp;/g, "&").replace(/\s+/g, " ").trim();
+  const promo = /^promo:\s*/i.test(t);
+  t = t.replace(/^promo:\s*/i, "");
+  // tăiem la prima liniuță / două puncte / bară care introduce descrierea („— 60 capsule pentru...”)
+  t = t.split(/\s[—–]\s|—|–|\s-\s(?=[\da-zăâîșț])|-\s(?=\d)|:\s|\s\|\s/)[0].trim();
+  if (t.length < 4) t = String(title || "").trim();
+  return promo ? `Pachet promo: ${t}` : t;
+}
+function aroniaExclus(title) {
+  return ARONIA_EXCLUDE.test(normTxt(aroniaTitle(title)));
+}
+// Sucuri, gemuri, pudre, fructe uscate, miere → Wellness („Sucuri, Gemuri & Superfructe”);
+// capsule, tablete, vitamine → Vitamine & Suplimente (tipul se ia din titlu: Vitamina D, Omega 3, Magneziu...).
+function aroniaCategory(title) {
+  const t = normTxt(title);
+  const forma = /\b(capsul|tablet|softgel|flacoane)/.test(t);
+  if (!forma && /\b(suc|sucuri|gem|gemuri|pudra|fructe|miere|sirop|nectar|gel)\b/.test(t)) {
+    return { category: "wellness", raw: "sucuri gemuri si superfructe" };
+  }
+  return { category: "vitamine-suplimente", raw: "suplimente alimentare" };
 }
 
 // ---- DR. MAX: categorie din <category> + <subcategory> ----
@@ -554,6 +596,7 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
   }
   // ---- GENERIC (detoxmed, longevity-boost, endro, boabe, PARFLAB si altele viitoare) ----
   else if (config.type === "generic") {
+    let excluded = 0;
     const feedActive = {};
     const feedAllPids = new Set();
     for (const item of rawItems) {
@@ -565,17 +608,27 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
     for (const p of products) {
       if (p.source_site !== source) continue;
       const pid = p.id.replace(`${prefix}-`, "");
-      if (feedActive[pid]) { updateProduct(p, feedActive[pid]); updated++; }
-      else { p.availability = false; p.draft = true; deactivated++; } // lipseste din feed SAU stoc epuizat (product_active=false)
+      if (feedActive[pid] && !(config.exclude && config.exclude(extractField(feedActive[pid], "title") || ""))) { updateProduct(p, feedActive[pid]); updated++; }
+      else { p.availability = false; p.draft = true; deactivated++; } // lipseste din feed SAU stoc epuizat (product_active=false) SAU exclus
     }
 
     for (const [pid, item] of Object.entries(feedActive)) {
       if (jsonPids.has(pid)) continue;
+      if (config.categorize) { // categorie stabilită de o funcție dedicată (ex: Aronia, doar după titlu)
+        const t0 = extractField(item, "title") || "";
+        if (config.exclude && config.exclude(t0)) { excluded = (excluded || 0) + 1; continue; }
+        const c = config.categorize(config.cleanTitle ? config.cleanTitle(t0) : t0);
+        const np = makeProduct(source, pid, item, c.category, existingSlugs, c.raw);
+        if (config.cleanTitle) np.title = config.cleanTitle(t0);
+        if (!isDryRun) products.push(np);
+        added++;
+        continue;
+      }
       const cat = getGenericCategory(extractField(item, "category"), config.defaultCategory);
       const np = makeProduct(source, pid, item, cat, existingSlugs);
       if (!isDryRun) products.push(np);
       added++;
-    }
+    }    if (excluded) console.log(`  ⛔ excluse (nume legat de afecțiuni): ${excluded}`);
   }
 
   console.log(`  ✅ actualizate: ${updated} | ➕ adaugate: ${added} | 🗑️  dezactivate: ${deactivated}`);
