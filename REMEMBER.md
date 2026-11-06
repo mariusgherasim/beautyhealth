@@ -1673,7 +1673,7 @@ Tombola afiliaților: minimum 5 comenzi valide în noiembrie → vouchere de 500
   - sucuri, gemuri, pudre, fructe, miere → **Wellness → Sucuri, Gemuri & Superfructe** (tip nou în `tipuri.js`);
   - capsule, tablete, vitamine → **Vitamine & Suplimente**, cu tipul luat din nume (Vitamina D, Omega 3, Magneziu...).
 - **Titluri scurte:** se păstrează doar numele produsului, fără descrierea de după „—”, „–”, „:” sau „|” (`aroniaTitle`). Multe titluri conțin promisiuni de sănătate („pentru diabetici”, „protejează inima”). „PROMO: ...” devine „Pachet promo: ...”.
-- **Produse excluse** (`ARONIA_EXCLUDE`, aproximativ 42): cele al căror nume rămâne legat de o afecțiune (diabet, colesterol, cardio, varice, alergii, paraziți, candida, tiroidă, prostată, tuse, „Protocol ...”, Amygdalin/B17). Intră pe site aproximativ 287 de produse.
+- **Intră 328 din 329 de produse** (decizie 06.11.2026). Singurul exclus e **Amygdalin (B17)**, din motive de siguranță: EFSA avertizează asupra riscului de intoxicație cu cianură. Filtrul `aroniaExclus` / `ARONIA_EXCLUDE` (produse cu nume legat de afecțiuni, aproximativ 42) există în cod, dar e dezactivat. Se reactivează înlocuind rândul `exclude:` din configul Aronia cu `exclude: aroniaExclus,`.
 
 ### ⚠️ Regula pentru texte (site, emailuri, social), valabilă la TOATE suplimentele și alimentele
 - Nu asociem produsele cu boli sau afecțiuni. Nu scriem „tratează”, „vindecă”, „previne”, „pentru diabetici”, „scade colesterolul” (Regulamentul CE 1924/2006).

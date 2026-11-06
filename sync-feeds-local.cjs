@@ -107,7 +107,9 @@ const FEED_CONFIG = {
     defaultCategory: "vitamine-suplimente",
     categorize: aroniaCategory,
     cleanTitle: aroniaTitle,
-    exclude: aroniaExclus,
+    // Exclus doar Amygdalin (B17) — EFSA: risc de intoxicație cu cianură (decizie 06.11.2026).
+    // Pentru a exclude și produsele cu nume legat de afecțiuni (lista ARONIA_EXCLUDE), înlocuiește cu: exclude: aroniaExclus,
+    exclude: (t) => /amygdalin|\bb17\b/i.test(t),
   },
   "drmax.ro": {
     // mergeFiles: se citesc TOATE fisierele gasite si se unesc dupa product_id
