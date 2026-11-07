@@ -111,6 +111,13 @@ const FEED_CONFIG = {
     // Pentru a exclude și produsele cu nume legat de afecțiuni (lista ARONIA_EXCLUDE), înlocuiește cu: exclude: aroniaExclus,
     exclude: (t) => /amygdalin|\bb17\b/i.test(t),
   },
+  "6biologico.ro": {
+    // Cosmetice naturale italiene (adăugat 07.11.2026). Produsele pentru animale NU intră pe Beauty (merg pe Casa Atelier).
+    files: ["feed_6biologico.xml", "feed_20e3de1a9.xml"],
+    type: "generic",
+    defaultCategory: "ingrijire-ten",
+    categorize: bioCategory,
+  },
   "drmax.ro": {
     // mergeFiles: se citesc TOATE fisierele gasite si se unesc dupa product_id
     files: ["feed_585a1cd31.xml", "feed_09eca89e8.xml", "feed_dc6bbc64e.xml"],
@@ -271,6 +278,24 @@ function aroniaCategory(title) {
     return { category: "wellness", raw: "sucuri gemuri si superfructe" };
   }
   return { category: "vitamine-suplimente", raw: "suplimente alimentare" };
+}
+
+// ---- 6BIOLOGICO: categorie din <category> (căi multiple, ex. "Față > Ser | Vegan") + titlu ----
+// null = produsul nu intră pe Beauty (animale).
+function bioCategory(title, feedCat) {
+  const c = normTxt(feedCat), t = normTxt(title);
+  const raw = String(feedCat || "").replace(/\s*\|\s*/g, ", ");
+  if (c.includes(" animale ")) return null;
+  if (c.includes(" bebe ") || /\b(copii|bebelus)/.test(t)) return { category: "mama-si-copilul", raw };
+  if (/\b(barbati)\b/.test(c)) return { category: "cosmetice-barbati", raw };
+  if (c.includes(" rutine ")) {
+    if (/\b(par|sampon)\b/.test(t)) return { category: "ingrijire-par", raw: raw + ", par" };
+    if (/\bintim/.test(t)) return { category: "ingrijire-corp", raw: raw + ", igiena intima" };
+    return { category: "ingrijire-ten", raw: raw + ", ten" };
+  }
+  if (c.includes(" fata ")) return { category: "ingrijire-ten", raw };
+  if (/\b(par|sampon)\b/.test(c)) return { category: "ingrijire-par", raw };
+  return { category: "ingrijire-corp", raw };
 }
 
 // ---- DR. MAX: categorie din <category> + <subcategory> ----
@@ -619,7 +644,8 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
       if (config.categorize) { // categorie stabilită de o funcție dedicată (ex: Aronia, doar după titlu)
         const t0 = extractField(item, "title") || "";
         if (config.exclude && config.exclude(t0)) { excluded = (excluded || 0) + 1; continue; }
-        const c = config.categorize(config.cleanTitle ? config.cleanTitle(t0) : t0);
+        const c = config.categorize(config.cleanTitle ? config.cleanTitle(t0) : t0, extractField(item, "category") || "");
+        if (!c) { excluded = (excluded || 0) + 1; continue; } // categorize -> null: nu intră pe site
         const np = makeProduct(source, pid, item, c.category, existingSlugs, c.raw);
         if (config.cleanTitle) np.title = config.cleanTitle(t0);
         if (!isDryRun) products.push(np);
@@ -630,7 +656,7 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
       const np = makeProduct(source, pid, item, cat, existingSlugs);
       if (!isDryRun) products.push(np);
       added++;
-    }    if (excluded) console.log(`  ⛔ excluse (nume legat de afecțiuni): ${excluded}`);
+    }    if (excluded) console.log(`  ⛔ excluse: ${excluded}`);
   }
 
   console.log(`  ✅ actualizate: ${updated} | ➕ adaugate: ${added} | 🗑️  dezactivate: ${deactivated}`);

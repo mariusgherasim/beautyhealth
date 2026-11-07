@@ -98,6 +98,7 @@ export const brands = [
   { name: 'URIAGE', slug: 'uriage', categories: ['ingrijire-ten','ingrijire-corp'] },
   { name: 'AVÈNE', slug: 'avene', aliases: ['AVENE'], categories: ['ingrijire-ten','ingrijire-corp'] },
   { name: 'ZIAJA', slug: 'ziaja', categories: ['ingrijire-ten','ingrijire-corp','ingrijire-par'] },
+  { name: '6BIOLOGICO', slug: '6biologico', categories: ['ingrijire-ten','ingrijire-corp','ingrijire-par','cosmetice-barbati','mama-si-copilul'] },
 
   // --- Vitamine & Suplimente ---
   { name: 'HERBAGETICA', slug: 'herbagetica', categories: ['vitamine-suplimente'] },

@@ -1690,3 +1690,18 @@ Tombola afiliaților: minimum 5 comenzi valide în noiembrie → vouchere de 500
 - Pe pagină NU se folosesc descrierile din feed (conțin afirmații despre boli). Textele noastre nu conțin afirmații de sănătate.
 - Stickerele altor campanii (Farmec, DUMO etc.) sunt ascunse pe această pagină.
 - Brandul are și paginile clasice: `/vitamine-suplimente/brand/aronia-charlottenburg/` și `/wellness/brand/aronia-charlottenburg/` (în `brands.js` brandul are acum ambele categorii).
+
+## 21. 6biologico.ro (07.11.2026)
+
+- Cosmetice naturale italiene, comision 15%, campania 2Performant `bd4c71169`. Feed `feed_20e3de1a9.xml` (~200 produse, ~114 active), descărcat de `download_feeds.py` o singură dată și copiat și în folderul Casa Atelier.
+- În `sync-feeds-local.cjs`: tip `generic`, categorie din funcția `bioCategory(title, feedCat)` (după `<category>` din feed + titlu):
+  - Animale → **nu intră pe Beauty** (merg pe Casa Atelier, categoria Animale de companie);
+  - Bebe și Copii / „copii”, „bebeluș” în titlu → mama-si-copilul;
+  - Bărbați → cosmetice-barbati;
+  - Rutine (seturi) → păr / corp (igienă intimă) / ten, după titlu;
+  - Față → ingrijire-ten; Păr, Șampon → ingrijire-par; restul (Corp, Remedii, uleiuri) → ingrijire-corp.
+- Prima rulare: 84 de produse adăugate, 30 de produse pentru animale excluse.
+- `categorize` poate returna acum `null` (produsul nu intră pe site); primește și categoria din feed ca al doilea argument.
+- Brand nou în `brands.js`: 6BIOLOGICO.
+- Quicklink magazin: `https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=bd4c71169&redirect_to=https%253A//6biologico.ro`
+- Decizie: fără sticker, email sau Google Ads deocamdată (EPC mic); evaluare pe 2.12.2026.
