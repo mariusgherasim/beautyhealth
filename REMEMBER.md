@@ -1705,3 +1705,11 @@ Tombola afiliaților: minimum 5 comenzi valide în noiembrie → vouchere de 500
 - Brand nou în `brands.js`: 6BIOLOGICO.
 - Quicklink magazin: `https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=bd4c71169&redirect_to=https%253A//6biologico.ro`
 - Decizie: fără sticker, email sau Google Ads deocamdată (EPC mic); evaluare pe 2.12.2026.
+
+## 22. Rutine & Seturi + cardul 6biologico (09.11.2026)
+
+- Tip nou **„Rutine & Seturi”** (`rutine-seturi`) la Îngrijire ten și Îngrijire păr, în `tipuri.js`. Cuvinte cheie: rutina, rutine, set, seturi, set cadou, kit, trusa, cutie cadou. Prinde rutinele 6biologico și seturile cadou Farmec/Gerovital, Notino, Dr. Max (~400 la ten, ~200 la păr). Câteva potriviri false (ex. „Absolute Set” în numele unui fixativ) — acceptate.
+- Pagini: `/ingrijire-ten/tip/rutine-seturi/` și `/ingrijire-par/tip/rutine-seturi/`.
+- Card nou pe /promotii/: `6biologico-rutine` (din 09.11.2026, fără dată de final), link spre `6biologico.ro/product-category/rutine/`.
+- „5–10% mai ieftin decât separat” e afirmația magazinului, neverificată — pe card apare cu „spune magazinul”.
+- 6biologico: comisionul crește de la 15% la 20% după 5 vânzări confirmate. Evaluare pe 2.12.2026; dacă vin vânzări, se poate face o pagină dedicată de rutine.

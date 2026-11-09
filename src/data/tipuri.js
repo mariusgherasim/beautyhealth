@@ -56,6 +56,8 @@ export const tipuri = {
     { slug: 'contur-ochi', name: 'Contur Ochi', kw: ['contur ochi', 'conturul ochilor', 'zona ochilor', 'eye cream', 'eye contour', 'ser ochi', 'crema de ochi', 'pentru ochi', 'anticearcan', 'cearcan'] },
     { slug: 'acnee-imperfectiuni', name: 'Acnee & Imperfecțiuni', kw: ['acnee', 'acneic', 'acne', 'imperfectiun', 'sebo', 'pori=', 'cosuri', 'spot patch', 'blemish', 'comedoane', 'matifiant'] },
     { slug: 'crema-de-zi', name: 'Cremă de Zi', kw: ['crema de zi', 'creme de zi', 'day cream', 'creme pentru ten', 'crema de fata', 'crema fata', 'creme faciale'] },
+    { slug: 'rutine-seturi', name: 'Rutine & Seturi', kw: ['rutina', 'rutine', 'set=', 'seturi', 'set cadou', 'kit=', 'trusa', 'cutie cadou'],
+      intro: 'De ce să cauți produsele pe rând, când există rutine complete și seturi gata făcute? Ser și cremă, demachiant și tonic, de dimineață sau de seară: le găsești aici, comparate.' },
     { slug: 'dispozitive-faciale', name: 'Dispozitive Faciale', kw: ['foreo', 'electro=', 'terapie prin lumina', 'galvanic', 'perie faciala', 'aparat', 'dispozitiv', 'led='] },
   ],
 
@@ -84,6 +86,8 @@ export const tipuri = {
     { slug: 'styling', name: 'Styling', kw: ['fixativ', 'spuma de par', 'gel de par', 'ceara', 'wax=', 'styling', 'spray de par', 'hairspray', 'pasta de par', 'pomada', 'protectie termica', 'texturizant'] },
     { slug: 'tratament-anticadere', name: 'Tratament Anticădere', kw: ['cadere', 'anticadere', 'hair loss', 'caderea parului', 'activatori de crestere', 'cresterea parului'] },
     { slug: 'aparate-de-coafat', name: 'Aparate de Coafat', kw: ['uscator', 'uscatoare', 'placa', 'placi', 'ondulator', 'perie cu aer', 'perii cu aer', 'multistyler', 'hair dryer', 'straightener', 'produse electronice', 'perie ionica', 'bigudiuri'] },
+    { slug: 'rutine-seturi', name: 'Rutine & Seturi', kw: ['rutina', 'rutine', 'set=', 'seturi', 'set cadou', 'kit=', 'trusa', 'cutie cadou'],
+      intro: 'Șampon, balsam, mască sau ser: de ce să le iei pe rând, când le poți găsi în același set? Iată rutinele și seturile pentru păr, comparate.' },
     { slug: 'perii-accesorii', name: 'Perii & Accesorii', kw: ['perie', 'perii', 'pieptene', 'pieptan', 'piepteni', 'agrafe', 'elastic', 'accesorii pentru par', 'accesorii par', 'clama', 'cordelut', 'bonete', 'prosoape de par'] },
   ],
 

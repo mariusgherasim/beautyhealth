@@ -28,6 +28,22 @@
 // ============================================================
 
 export const promotii = [
+  // ── 6biologico — rutine complete (seturi de 2–5 produse), anunțate de magazin pe 09.11.2026. Fără dată de final.
+  //    „5–10% mai ieftin decât separat" e afirmația magazinului (neverificată) — de aceea apare cu „spune magazinul".
+  {
+    id: "6biologico-rutine",
+    magazin: "6biologico",
+    domeniu: "6biologico.ro",
+    titlu: "Rutine complete de îngrijire 6biologico: seturi de 2–5 produse, între 101 și 449 lei",
+    descriere: "Seturi de produse care se folosesc împreună, pe nevoi: ten acneic, ten matur, ten sensibil, pete pigmentare, păr fragil sau cu tendință de cădere, igienă intimă. Cosmetice vegane italiene. Luate în rutină, produsele costă cu 5–10% mai puțin decât separat, spune magazinul.",
+    reducere: "Rutine",
+    cod: null,
+    link: "https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=bd4c71169&redirect_to=https%253A//6biologico.ro/product-category/rutine/",
+    incepe: "2026-11-09",
+    expira: null,
+    categorii: ["ingrijire-ten", "ingrijire-par", "ingrijire-corp"],
+    verificat: "2026-11-09",
+  },
   // ── Farmec: Black Friday în Beauty Kingdom — early access 5 nov (BeautyCLUB + newsletter), apoi până pe 23 nov
   //    ⚠️ Data de final pentru clienți nu era în mesajul Farmec: 23 nov e presupusă (= perioada comisionului de 10%).
   {
