@@ -163,8 +163,7 @@ export const promotii = [
     titlu: "Programe detox DetoxMed cu 20% reducere",
     descriere: "Programele Intensiv, Moderat și Ușor, cu sucuri crude presate la rece livrate în toată țara, de la 496 lei.",
     reducere: "-20%",
-    cod: "DETOX10",
-    cod_text: "Încă 10% reducere EXTRA la toate produsele, cu codul",
+    cod: null, // codul DETOX10 (încă 10%) scos pe 09.11.2026
     link: "https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=7875d2dab&redirect_to=https%253A//detoxmed.ro/product-category/programe-detoxmed/",
     expira: null,
     categorii: ["wellness"],

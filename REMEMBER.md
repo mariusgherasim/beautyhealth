@@ -1721,3 +1721,15 @@ Tombola afiliaților: minimum 5 comenzi valide în noiembrie → vouchere de 500
 - Imaginea `public/images/og-dumo.jpg` a fost ștearsă.
 - Fără DUMO, în dreapta jos apar din nou stickerele obișnuite (Promoții / Farmec, după pagină și dată).
 - Mențiunile „DUMO” mai vechi din acest fișier (§ taburi, § Longevity, § Aronia) sunt istorice.
+
+## 24. DetoxMed fără cod (09.11.2026)
+
+- Pe cardul „Programe detox DetoxMed cu 20% reducere” (`detoxmed-programe-20`) am scos codul **DETOX10** (încă 10%). Cardul rămâne, fără cod.
+
+## 25. Footer: BusinessLeague + SAL ANPC (09.11.2026)
+
+- În `src/components/Footer.astro`, deasupra rândului ©, un rând de insigne centrat (pe mobil la fel, se rup singure pe rânduri):
+  - **BusinessLeague · Affiliate Marketing Partner** → https://businessleague.com/ (logo oficial primit de la ei, transformat din SVG de 3 MB în `public/images/businessleague-logo.png`, 22 KB).
+  - **SAL ANPC** → https://reclamatiisal.anpc.ro/ — pictograma oficială (https://www.anpc.ro/download/sal/SAL-PICTOGRAMA.png, primită ca .tif 680 x 169), salvată ca `public/images/anpc-sal.png` (500 x 124, afișată la 250 px lățime; colțurile albe din afara chenarului făcute transparente). Apare doar dacă fișierul există.
+- SOL (soluționarea online a litigiilor) NU se mai pune: platforma europeană a fost desființată (Ordinul ANPC 270/2026 modifică Ordinul 449/2022).
+- Aceeași insignă urmează și pe styleaccessories.eu, Casa Atelier și ÎncăUnCapitol.
