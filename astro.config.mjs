@@ -43,7 +43,7 @@ export default defineConfig({
   integrations: [
     // în sitemap intră doar paginile principale (categorii, branduri, tipuri, ghiduri, promoții);
     // paginile 2, 3, … rămân accesibile și Google le găsește din linkurile de paginare
-    sitemap({ filter: (page) => !/\/\d+\/$/.test(page) }),
+    sitemap({ filter: (page) => !/\/\d+\/$/.test(page) && !page.endsWith('/dumo/') }), // /dumo/ = doar redirecționare (scoasă 09.11.2026)
     trailingSlashLinks(),
   ],
 });

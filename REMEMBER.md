@@ -1713,3 +1713,11 @@ Tombola afiliaților: minimum 5 comenzi valide în noiembrie → vouchere de 500
 - Card nou pe /promotii/: `6biologico-rutine` (din 09.11.2026, fără dată de final), link spre `6biologico.ro/product-category/rutine/`.
 - „5–10% mai ieftin decât separat” e afirmația magazinului, neverificată — pe card apare cu „spune magazinul”.
 - 6biologico: comisionul crește de la 15% la 20% după 5 vânzări confirmate. Evaluare pe 2.12.2026; dacă vin vânzări, se poate face o pagină dedicată de rutine.
+
+## 23. DUMO scos (09.11.2026)
+
+- Colecția DUMO (Infinite Love) nu mai are preț pe infinitelove.ro, așa că am scos **stickerul DUMO** (dreapta jos, pe toate paginile) și **pagina de vânzare /dumo/**.
+- `src/pages/dumo.astro` e acum doar o **redirecționare** spre `/parfumuri/brand/infinite-love/` (noindex, scoasă din sitemap în `astro.config.mjs`), ca linkurile vechi din reclame și mesaje să nu dea 404.
+- Imaginea `public/images/og-dumo.jpg` a fost ștearsă.
+- Fără DUMO, în dreapta jos apar din nou stickerele obișnuite (Promoții / Farmec, după pagină și dată).
+- Mențiunile „DUMO” mai vechi din acest fișier (§ taburi, § Longevity, § Aronia) sunt istorice.
