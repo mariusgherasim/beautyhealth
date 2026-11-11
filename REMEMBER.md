@@ -1733,3 +1733,8 @@ Tombola afiliaților: minimum 5 comenzi valide în noiembrie → vouchere de 500
   - **SAL ANPC** → https://reclamatiisal.anpc.ro/ — pictograma oficială (https://www.anpc.ro/download/sal/SAL-PICTOGRAMA.png, primită ca .tif 680 x 169), salvată ca `public/images/anpc-sal.png` (500 x 124, afișată la 250 px lățime; colțurile albe din afara chenarului făcute transparente). Apare doar dacă fișierul există.
 - SOL (soluționarea online a litigiilor) NU se mai pune: platforma europeană a fost desființată (Ordinul ANPC 270/2026 modifică Ordinul 449/2022).
 - Aceeași insignă urmează și pe styleaccessories.eu, Casa Atelier și ÎncăUnCapitol.
+
+## Boabe scos (11.11.2026)
+
+- boabe.ro e scos de pe site: în `sync-feeds-local.cjs` nu mai are configurație, iar lista `SURSE_SCOASE` pune `draft: true` pe toate produsele lui la fiecare rulare (42 de produse active ascunse). Feedul `c143969aa` e scos și din `sites.json` (descărcare).
+- Ca să revină: îl scoți din `SURSE_SCOASE`, îi pui la loc configurația în `FEED_CONFIG` și feedul în `sites.json`.

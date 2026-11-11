@@ -24,7 +24,6 @@
 //   feed_fd8dad9ff.xml   → detoxmed.ro
 //   feed_5d8022816.xml   → longevity-boost.com
 //   feed_9c297a4fb.xml   → endro.ro
-//   feed_c143969aa.xml   → boabe.ro
 //   feed_5544111cd.xml   → PARFLAB.ro
 //   feed_091d53e22.xml   → aronia-charlottenburg.ro
 //   feed_585a1cd31.xml   → drmax.ro (catalog complet)
@@ -88,11 +87,6 @@ const FEED_CONFIG = {
     type: "generic",
     defaultCategory: "ingrijire-ten",
   },
-  "boabe.ro": {
-    files: ["feed_boabe.xml", "feed_c143969aa.xml"],
-    type: "generic",
-    defaultCategory: "vitamine-suplimente",
-  },
   "PARFLAB.ro": {
     files: ["feed_parflab.xml", "feed_5544111cd.xml"],
     type: "generic",
@@ -126,6 +120,13 @@ const FEED_CONFIG = {
     defaultCategory: "ingrijire-ten",
   },
 };
+
+// Magazine scoase de pe site: la fiecare rulare, toate produsele lor primesc draft: true
+// (nu se mai afișează și nu se mai actualizează). Ca să revină un magazin: îl scoți din listă
+// și îi pui la loc configurația în FEED_CONFIG.
+const SURSE_SCOASE = [
+  "boabe.ro", // scos 11.11.2026, la cererea lui Marius (feed c143969aa scos și din descărcare)
+];
 
 // ---- Argumente CLI ----
 const args = process.argv.slice(2);
@@ -410,6 +411,15 @@ for (const p of products) {
 }
 if (descRemoved > 0) console.log(`  🗑️  Sters description din ${descRemoved} produse existente`);
 
+// Magazine scoase de pe site (SURSE_SCOASE)
+for (const sursa of SURSE_SCOASE) {
+  let n = 0;
+  for (const p of products) {
+    if (p.source_site === sursa && !p.draft) { p.availability = false; p.draft = true; n++; }
+  }
+  if (n) console.log(`  ⛔ ${sursa}: ${n} produse scoase de pe site (SURSE_SCOASE)`);
+}
+
 console.log(`  Total produse: ${products.length}\n`);
 
 const report = {
@@ -621,7 +631,7 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
       added++;
     }
   }
-  // ---- GENERIC (detoxmed, longevity-boost, endro, boabe, PARFLAB si altele viitoare) ----
+  // ---- GENERIC (detoxmed, longevity-boost, endro, PARFLAB, aronia, 6biologico si altele viitoare) ----
   else if (config.type === "generic") {
     let excluded = 0;
     const feedActive = {};
