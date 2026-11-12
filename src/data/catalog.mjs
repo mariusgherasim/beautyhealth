@@ -72,9 +72,14 @@ for (const p of productsData) {
   const text = norm((p.title || '') + ' ' + (p.subcategory_raw || ''));
   const category = reclasifica(p, text, raw);
   const tip = [];
-  for (const c of category) {
-    for (const t of tipuri[c] || []) {
-      if (any(text, t.kw)) tip.push(`${c}/${t.slug}`);
+  if (Array.isArray(p.tip_fix)) {
+    // Tip fix, pus de sync (ex. BabyNeeds, după subcategoria din feed): nu mai căutăm cuvinte cheie
+    for (const k of p.tip_fix) if (category.includes(k.split('/')[0])) tip.push(k);
+  } else {
+    for (const c of category) {
+      for (const t of tipuri[c] || []) {
+        if (any(text, t.kw)) tip.push(`${c}/${t.slug}`);
+      }
     }
   }
   produse.push({ ...p, category, tipuri: tip, branduri: brandsOf(p) });

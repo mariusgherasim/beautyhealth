@@ -20,6 +20,16 @@ export const brands = [
   { name: 'LA ROCHE POSAY', slug: 'la-roche-posay', aliases: ['LA ROCHE'], categories: ['ingrijire-ten','ingrijire-corp'] },
   { name: 'INFINITE LOVE', slug: 'infinite-love', aliases: ['INFINITE'], categories: ['parfumuri'] },
   { name: 'PHILIPS AVENT', slug: 'philips-avent', aliases: ['PHILIPS'], categories: ['mama-si-copilul'] },
+  { name: 'LIONELO', slug: 'lionelo', categories: ['mama-si-copilul'] },
+  { name: 'MIMINU', slug: 'miminu', categories: ['mama-si-copilul'] },
+  { name: 'QMINI', slug: 'qmini', categories: ['mama-si-copilul'] },
+  { name: 'PETITE&MARS', slug: 'petite-mars', categories: ['mama-si-copilul'] },
+  { name: 'JANE', slug: 'jane', categories: ['mama-si-copilul'] },
+  { name: 'FREEON', slug: 'freeon', categories: ['mama-si-copilul'] },
+  { name: 'CHICCO', slug: 'chicco', categories: ['mama-si-copilul'] },
+  { name: 'BABY MIX', slug: 'baby-mix', categories: ['mama-si-copilul'] },
+  { name: 'NEW BABY', slug: 'new-baby', categories: ['mama-si-copilul'] },
+  { name: 'BABYONO', slug: 'babyono', categories: ['mama-si-copilul'] },
   { name: 'ENDRO', slug: 'endro', categories: ['ingrijire-ten','ingrijire-corp'] },
 
   // --- Parfumuri clasice (deja existente) ---

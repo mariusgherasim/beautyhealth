@@ -138,6 +138,11 @@ export const tipuri = {
     { slug: 'hranire-copii', name: 'Hrănire Copii', kw: ['cana=', 'cani=', 'pahar', 'caserol', 'farfuri', 'bol=', 'lingurit', 'tacamuri', 'snack', 'vesela', 'sticla', 'sticle', 'recipiente', 'bavet'] },
     { slug: 'siguranta-camera-copilului', name: 'Siguranță & Camera Copilului', kw: ['siguranta', 'camera copilului', 'tarc', 'termometr', 'aspirator nazal', 'aspiratoare nazale', 'monitor', 'umidificator', 'paturic', 'casti antifonice'] },
     { slug: 'jucarii', name: 'Jucării', kw: ['jucari', 'centru de activitati', 'inel gingival', 'inele gingivale'] },
+    // Din 12.11.2026 (BabyNeeds). La BabyNeeds tipul e fix, din subcategoria feedului (tip_fix); cuvintele cheie sunt pentru celelalte magazine.
+    { slug: 'carucioare-plimbare', name: 'Cărucioare & Plimbare', kw: ['carucior', 'carucioare', 'landou', 'marsupi', 'port bebe', 'geanta plimbare', 'genti plimbare'] },
+    { slug: 'scaune-auto', name: 'Scaune Auto', kw: ['scaun auto', 'scaune auto', 'scoica auto', 'inaltator auto', 'inaltatoare auto'] },
+    { slug: 'camera-bebelusului', name: 'Pătuțuri & Camera Bebelușului', kw: ['patut', 'patuturi', 'saltea patut', 'lenjerie patut', 'sac de dormit', 'saci de dormit', 'baldachin', 'leagan', 'balansoar', 'co sleeper', 'cosulet bebe'] },
+    { slug: 'biciclete-trotinete', name: 'Biciclete, Triciclete & Trotinete', kw: ['bicicleta', 'biciclete', 'tricicleta', 'triciclete', 'trotineta', 'trotinete', 'masinuta electrica'] },
   ],
 
   'cosmetice-barbati': [

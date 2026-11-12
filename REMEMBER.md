@@ -1738,3 +1738,12 @@ Tombola afiliaților: minimum 5 comenzi valide în noiembrie → vouchere de 500
 
 - boabe.ro e scos de pe site: în `sync-feeds-local.cjs` nu mai are configurație, iar lista `SURSE_SCOASE` pune `draft: true` pe toate produsele lui la fiecare rulare (42 de produse active ascunse). Feedul `c143969aa` e scos și din `sites.json` (descărcare).
 - Ca să revină: îl scoți din `SURSE_SCOASE`, îi pui la loc configurația în `FEED_CONFIG` și feedul în `sites.json`.
+
+## 26. BabyNeeds (12.11.2026)
+
+- babyneeds.ro, feed `feed_138bfda16.xml` (~3.900 produse, ~3.800 active), descărcat de `download_feeds.py` (în `sites.json` la beautyhealth). **Toate** produsele intră la **Mama și copilul** (decizie 12.11.2026), inclusiv cărucioare, scaune auto, pătuțuri, biciclete.
+- Tipuri noi la Mama și copilul (`tipuri.js`): **Cărucioare & Plimbare**, **Scaune Auto**, **Pătuțuri & Camera Bebelușului**, **Biciclete, Triciclete & Trotinete**.
+- La BabyNeeds tipul NU se calculează din cuvinte cheie (altfel „copii”/„bebe” din titlu ar pune o bicicletă la Îngrijire Bebeluși): `babyTip()` din `sync-feeds-local.cjs` îl alege după `<subcategory>` din feed și îl salvează pe produs ca `tip_fix`. `catalog.mjs` folosește `tip_fix` când există. La fiecare sync tipul se recalculează (`refreshCategory: true`).
+- Fără tip (doar în categorie): Grădiniță și școală, Hăinuțe, Produse resigilate (~74).
+- Branduri noi în `brands.js` (Mama și copilul): Lionelo, MimiNu, Qmini, Petite&Mars, Jane, FreeON, Chicco, Baby Mix, New Baby, BabyOno.
+- Prima rulare: 3.817 adăugate. Distribuție: Pătuțuri & Camera 1.262 · Jucării 483 · Cărucioare & Plimbare 437 · Biciclete & Trotinete 316 · Hrănire 306 · Îngrijire bebeluși 255 · Biberoane & Suzete 175 · Scaune auto 135 · Alăptare 122 · Siguranță 86 · Sarcină 83 · Scutece 65 · Îngrijire mamă 18.

@@ -26,6 +26,8 @@
 //   feed_9c297a4fb.xml   → endro.ro
 //   feed_5544111cd.xml   → PARFLAB.ro
 //   feed_091d53e22.xml   → aronia-charlottenburg.ro
+//   feed_20e3de1a9.xml   → 6biologico.ro
+//   feed_138bfda16.xml   → babyneeds.ro
 //   feed_585a1cd31.xml   → drmax.ro (catalog complet)
 //   feed_09eca89e8.xml   → drmax.ro (branduri exclusive)
 //   feed_dc6bbc64e.xml   → drmax.ro (private label)
@@ -111,6 +113,15 @@ const FEED_CONFIG = {
     type: "generic",
     defaultCategory: "ingrijire-ten",
     categorize: bioCategory,
+  },
+  "babyneeds.ro": {
+    // Articole pentru bebeluși și copii (adăugat 12.11.2026): TOATE produsele, la Mama și copilul.
+    // Tipul (Cărucioare, Scaune auto, Pătuțuri, Jucării...) se ia din <subcategory> → babyTip(), fix pe produs (tip_fix).
+    files: ["feed_babyneeds.xml", "feed_138bfda16.xml"],
+    type: "generic",
+    defaultCategory: "mama-si-copilul",
+    categorize: babyCategory,
+    refreshCategory: true, // și la produsele existente se recalculează tipul (dacă BabyNeeds mută produsul în altă subcategorie)
   },
   "drmax.ro": {
     // mergeFiles: se citesc TOATE fisierele gasite si se unesc dupa product_id
@@ -297,6 +308,37 @@ function bioCategory(title, feedCat) {
   if (c.includes(" fata ")) return { category: "ingrijire-ten", raw };
   if (/\b(par|sampon)\b/.test(c)) return { category: "ingrijire-par", raw };
   return { category: "ingrijire-corp", raw };
+}
+
+// ---- BABYNEEDS: totul la Mama și copilul; tipul după <subcategory> („Articole Transport >> Carucioare copii >> ...”) ----
+// Tipul e FIX (tip_fix), nu după cuvinte cheie: altfel „copii” / „bebe” din titlu ar pune o bicicletă la „Îngrijire Bebeluși”.
+function babyTip(sub, cat) {
+  const parts = String(sub || "").split(">>").map((x) => normTxt(x));
+  const top = parts[0] || "", rest = normTxt(parts.slice(1).join(" ") + " " + (cat || ""));
+  const T = (slug) => [`mama-si-copilul/${slug}`];
+  if (areKw(top, ["articole transport"])) return areKw(rest, ["scaune auto", "scoici auto", "inaltatoare auto"]) ? T("scaune-auto") : T("carucioare-plimbare");
+  if (areKw(top, ["camera bebelusului"])) return T("camera-bebelusului");
+  if (areKw(top, ["plimbare relaxare"])) {
+    if (areKw(rest, ["balansoare", "leagane", "sezlonguri", "premergatoare", "caluti"])) return T("camera-bebelusului");
+    return T("biciclete-trotinete"); // biciclete, triciclete, trotinete, vehicule, role, karturi, căști
+  }
+  if (areKw(top, ["jucarii cadouri", "jucarii de exterior"])) return T("jucarii");
+  if (areKw(top, ["bebe la masa"])) return areKw(rest, ["suzete", "biberoane", "incalzitoare biberoane", "sterilizatoare"]) ? T("biberoane-suzete") : T("hranire-copii");
+  if (areKw(top, ["curat si sanatos"])) {
+    if (areKw(rest, ["scutece", "servetele"])) return T("scutece-servetele");
+    if (areKw(rest, ["termometre", "aspiratoare nazale", "aerosoli", "umidificatoare", "cantare"])) return T("siguranta-camera-copilului");
+    return T("ingrijire-bebelusi");
+  }
+  if (areKw(top, ["articole parinti", "pompe electrice san"])) {
+    if (areKw(rest, ["alaptat", "pompe de san", "pompa"]) || areKw(top, ["pompe electrice san"])) return T("alaptare");
+    if (areKw(rest, ["burtiere postnatale", "ingrijire personala"])) return T("ingrijire-mama");
+    return T("sarcina");
+  }
+  if (areKw(top, ["siguranta bebelusului"])) return T("siguranta-camera-copilului");
+  return []; // Grădiniță și școală, Hăinuțe, Resigilate: doar în categorie, fără tip
+}
+function babyCategory(title, feedCat, sub) {
+  return { category: "mama-si-copilul", raw: String(sub || feedCat || "").replace(/\s*>>\s*/g, " > "), tipuri: babyTip(sub, feedCat) };
 }
 
 // ---- DR. MAX: categorie din <category> + <subcategory> ----
@@ -645,7 +687,14 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
     for (const p of products) {
       if (p.source_site !== source) continue;
       const pid = p.id.replace(`${prefix}-`, "");
-      if (feedActive[pid] && !(config.exclude && config.exclude(extractField(feedActive[pid], "title") || ""))) { updateProduct(p, feedActive[pid]); updated++; }
+      if (feedActive[pid] && !(config.exclude && config.exclude(extractField(feedActive[pid], "title") || ""))) {
+        updateProduct(p, feedActive[pid]); updated++;
+        if (config.refreshCategory && config.categorize) {
+          const it = feedActive[pid];
+          const c = config.categorize(p.title, extractField(it, "category") || "", extractField(it, "subcategory") || "");
+          if (c) { p.category = [c.category]; p.subcategory_raw = c.raw; if (c.tipuri) p.tip_fix = c.tipuri; }
+        }
+      }
       else { p.availability = false; p.draft = true; deactivated++; } // lipseste din feed SAU stoc epuizat (product_active=false) SAU exclus
     }
 
@@ -654,10 +703,11 @@ for (const [source, config] of Object.entries(FEED_CONFIG)) {
       if (config.categorize) { // categorie stabilită de o funcție dedicată (ex: Aronia, doar după titlu)
         const t0 = extractField(item, "title") || "";
         if (config.exclude && config.exclude(t0)) { excluded = (excluded || 0) + 1; continue; }
-        const c = config.categorize(config.cleanTitle ? config.cleanTitle(t0) : t0, extractField(item, "category") || "");
+        const c = config.categorize(config.cleanTitle ? config.cleanTitle(t0) : t0, extractField(item, "category") || "", extractField(item, "subcategory") || "");
         if (!c) { excluded = (excluded || 0) + 1; continue; } // categorize -> null: nu intră pe site
         const np = makeProduct(source, pid, item, c.category, existingSlugs, c.raw);
         if (config.cleanTitle) np.title = config.cleanTitle(t0);
+        if (c.tipuri) np.tip_fix = c.tipuri; // tip fix, ales de sync (ex. BabyNeeds) — catalog.mjs nu mai caută cuvinte cheie
         if (!isDryRun) products.push(np);
         added++;
         continue;
