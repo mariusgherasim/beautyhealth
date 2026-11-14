@@ -28,6 +28,22 @@
 // ============================================================
 
 export const promotii = [
+  // ── Dr. Max — colecția de Crăciun, 16.11–31.12.2026 (anunț 2Performant din 14.11.2026). Prețurile sunt cele anunțate de Dr. Max.
+  //    Are și pagină proprie, /cadouri-craciun-dr-max/, și sticker pe toate paginile (Layout.astro, #dm-sticker).
+  {
+    id: "drmax-cadouri-craciun",
+    magazin: "Dr. Max",
+    domeniu: "drmax.ro",
+    titlu: "Cadouri de Crăciun la Dr. Max: parfumuri până la −74%",
+    descriere: "Davidoff Champion Man EDT 90 ml la 99,99 lei (−74%), Joop! Homme Wild EDT 125 ml la 119,99 lei (−67%), IDC Institute Candy Set la 19,99 lei (−60%). Plus seturi Korres, Magic Studio și Biovène, pentru ea, pentru el, copii și bunici. În limita stocului.",
+    reducere: "-74%",
+    cod: null,
+    link: "https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=6390e3cfb&redirect_to=https%253A//www.drmax.ro/cadouri",
+    incepe: "2026-11-16",
+    expira: "2026-12-31",
+    categorii: ["parfumuri", "machiaj", "ingrijire-ten", "ingrijire-corp", "cosmetice-barbati", "mama-si-copilul"],
+    verificat: "2026-11-14",
+  },
   // ── 6biologico — rutine complete (seturi de 2–5 produse), anunțate de magazin pe 09.11.2026. Fără dată de final.
   //    „5–10% mai ieftin decât separat" e afirmația magazinului (neverificată) — de aceea apare cu „spune magazinul".
   {
@@ -115,7 +131,7 @@ export const promotii = [
     link: "https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=6390e3cfb&redirect_to=https%253A//www.drmax.ro/promo-dr-max",
     expira: null,
     categorii: ["vitamine-suplimente", "ingrijire-ten", "ingrijire-corp"],
-    verificat: "2026-10-22",
+    verificat: "2026-11-14",
   },
   {
     id: "drmax-pachete-de-grija",
@@ -141,7 +157,7 @@ export const promotii = [
     link: "https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=6390e3cfb&redirect_to=https%253A//www.drmax.ro/ofertele-lunii",
     expira: null,
     categorii: ["vitamine-suplimente", "ingrijire-ten", "mama-si-copilul"],
-    verificat: "2026-10-22",
+    verificat: "2026-11-14",
   },
   {
     id: "farmec-complete-care-30",
@@ -167,6 +183,6 @@ export const promotii = [
     link: "https://event.2performant.com/events/click?ad_type=quicklink&aff_code=676a7e7d9&unique=7875d2dab&redirect_to=https%253A//detoxmed.ro/product-category/programe-detoxmed/",
     expira: null,
     categorii: ["wellness"],
-    verificat: "2026-10-22",
+    verificat: "2026-11-14",
   },
 ];

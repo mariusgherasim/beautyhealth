@@ -1747,3 +1747,20 @@ Tombola afiliaților: minimum 5 comenzi valide în noiembrie → vouchere de 500
 - Fără tip (doar în categorie): Grădiniță și școală, Hăinuțe, Produse resigilate (~74).
 - Branduri noi în `brands.js` (Mama și copilul): Lionelo, MimiNu, Qmini, Petite&Mars, Jane, FreeON, Chicco, Baby Mix, New Baby, BabyOno.
 - Prima rulare: 3.817 adăugate. Distribuție: Pătuțuri & Camera 1.262 · Jucării 483 · Cărucioare & Plimbare 437 · Biciclete & Trotinete 316 · Hrănire 306 · Îngrijire bebeluși 255 · Biberoane & Suzete 175 · Scaune auto 135 · Alăptare 122 · Siguranță 86 · Sarcină 83 · Scutece 65 · Îngrijire mamă 18.
+
+## 27. Dr. Max — Cadouri de Crăciun (14.11.2026, campania 16.11–31.12.2026)
+
+- **Pagină nouă** `/cadouri-craciun-dr-max/` (`src/pages/cadouri-craciun-dr-max.astro`), date în `src/data/drmax-craciun.mjs`:
+  - „Ofertele campaniei”: cele 6 oferte anunțate de Dr. Max (Davidoff Champion 99,99 lei −74%, Joop! Homme Wild 119,99 −67%, CK Eternity Air Woman 149,99 −66%, Escada Celebrate N.O.W. 149,99 −66%, CK Obsession Men 99,99 −64%, IDC Candy Set 19,99 −60%). Prețurile sunt ale lui Dr. Max, nu calculate de noi. Dacă produsul e în feed, cardul duce la produs; altfel la drmax.ro/cadouri.
+  - Grupe pe destinatari, din feedul Dr. Max (max. 24 produse pe grupă, se actualizează la fiecare build): Parfumuri pentru ea · Seturi pentru ea (Korres, Magic Studio, Advent, „set cadou”) · Pentru el · Unisex (parfumuri unisex, IDC Institute, Biovène) · Copii (jucării, dermatocosmetice copii) · Bunici (tensiometre, aparate de masaj).
+  - Countdown până la 16.11, apoi până la 31.12; după 31.12 textul spune că s-a încheiat. Previzualizare: `?dmtest=2026-11-20`.
+  - Quicklink campanie: `unique=6390e3cfb`, spre `https://www.drmax.ro/cadouri`.
+- **Sticker** `#dm-sticker` în `Layout.astro`, dreapta jos, pe toate paginile, 16.11–31.12 (ascuns pe /promotii/, /cadouri-craciun-dr-max/, /detox/, /aronia/, /farmec-black-friday/, /gerovital-aniversar/). Textul se schimbă după pagină:
+  - Parfumuri → „−74%”, CK Obsession 99,99 lei → `#oferte`
+  - Cosmetice bărbați → „−67%”, Joop! Homme Wild → `#el`
+  - Machiaj, Ten, Corp, Păr → „19,99 lei · cadouri de la”, Korres / Magic Studio / IDC → `#ea-seturi`
+  - Mama și copilul → „Cadouri pentru copii” → `#copii`
+  - restul → „−74% Cadouri de Crăciun”, Calvin Klein / Davidoff / Joop!
+- **Alternare:** unde în dreapta jos e deja un sticker (Longevity pe prima pagină și Vitamine până pe 20.11; DetoxMed pe Wellness și Slăbire & Detox, permanent), cele două se schimbă la **3 secunde**. Alternarea stă pe loc cât timp mouse-ul e pe sticker și 8 secunde după o atingere pe telefon. Dacă unul e închis cu ✕, rămâne celălalt, fără alternare. Pe stânga jos (Farmec Black Friday / Tombola) nu se schimbă nimic.
+- **Card nou pe /promotii/:** `drmax-cadouri-craciun` (incepe 2026-11-16, expira 2026-12-31).
+- Cardurile `drmax-promo-50`, `drmax-ofertele-lunii` și `detoxmed-programe-20` (fără dată de final) au fost verificate de Marius pe 14.11.2026: sunt active (`verificat: "2026-11-14"`).

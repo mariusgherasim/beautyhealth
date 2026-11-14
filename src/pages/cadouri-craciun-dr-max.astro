@@ -1,0 +1,227 @@
+---
+// Landing page: Cadouri de Crăciun la Dr. Max — 16 noiembrie – 31 decembrie 2026.
+// Date și produse: src/data/drmax-craciun.mjs. Sticker: Layout.astro (#dm-sticker).
+// Prețurile/reducerile din „Ofertele campaniei” sunt cele anunțate de Dr. Max (14.11.2026).
+// Previzualizare pentru o anumită zi: ?dmtest=2026-11-20
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { GRUPE, OFERTE, NR_PRODUSE, LINK_DRMAX, START, END } from '../data/drmax-craciun.mjs';
+
+const nrRo = (n) => n.toLocaleString('ro-RO');
+const title = 'Cadouri de Crăciun la Dr. Max: parfumuri până la −74%, seturi de la 19,99 lei | BeautyHealth';
+const description = `Cadouri de Crăciun de la Dr. Max, 16 noiembrie – 31 decembrie 2026: parfumuri Calvin Klein, Davidoff, Escada și Joop! cu până la 74% reducere, seturi Korres, Magic Studio și IDC Institute de la 19,99 lei. ${nrRo(NR_PRODUSE)} de idei de cadouri, pentru ea, pentru el, copii și bunici.`;
+const destinatari = [...new Map(GRUPE.map((g) => [g.pentru, g])).values()];
+---
+<Layout title={title} description={description} canonical="https://beauty-healths.com/cadouri-craciun-dr-max/">
+  <Header />
+
+  <main class="dm">
+    <section class="dm-hero">
+      <div class="dm-wrap">
+        <p class="dm-eyebrow" id="dm-eyebrow">Dr. Max · Colecția de Crăciun · 16 noiembrie – 31 decembrie</p>
+        <h1><span class="dm-pct">−74%</span> Cadouri de Crăciun pentru toată familia, la Dr. Max</h1>
+        <p class="dm-lead" id="dm-lead">
+          Parfumuri <strong>Calvin Klein, Davidoff, Escada și Joop!</strong> cu reduceri de până la 74%, seturi Korres și Magic Studio, plus cadouri de răsfăț <strong>de la 19,99 lei</strong>.
+        </p>
+        <div class="dm-count" id="dm-count" aria-live="off">
+          <span class="dm-count-lbl" id="dm-count-lbl">Campania începe în</span>
+          <div class="dm-count-row">
+            <div><b id="dm-d">--</b><small>zile</small></div><i>:</i>
+            <div><b id="dm-h">--</b><small>ore</small></div><i>:</i>
+            <div><b id="dm-m">--</b><small>min</small></div><i>:</i>
+            <div><b id="dm-s">--</b><small>sec</small></div>
+          </div>
+        </div>
+        <div class="dm-ctas">
+          <a class="dm-btn" href={LINK_DRMAX} target="_blank" rel="noopener sponsored" data-dm-cta="hero">Vezi colecția pe drmax.ro →</a>
+          <a class="dm-btn dm-btn--ghost" href="#oferte">Ofertele campaniei</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="dm-wrap dm-hook">
+      <h2>Câte cadouri ai de făcut anul acesta?</h2>
+      <p>
+        Pentru mama, pentru soț, pentru copii, pentru bunici? Câte ore ai pierdut anul trecut prin magazine, în decembrie?
+        Și câți bani ai dat pe un parfum pe care îl găseai, cu câteva săptămâni mai devreme, la jumătate de preț?
+      </p>
+      <p>
+        Dr. Max, lanțul de farmacii cu magazin online pe drmax.ro, are <strong>între 16 noiembrie și 31 decembrie</strong> o colecție de Crăciun cu parfumuri de brand reduse cu <strong>până la 74%</strong> și seturi cadou <strong>de la 19,99 lei</strong>.
+        Mai jos am adunat <strong>{nrRo(NR_PRODUSE)} de idei de cadouri</strong> de la Dr. Max, pe destinatari.
+      </p>
+      <nav class="dm-dest" aria-label="Cadouri pe destinatari">
+        {destinatari.map((g) => <a href={`#${g.id}`}>{g.pentru}</a>)}
+      </nav>
+    </section>
+
+    <section class="dm-wrap" id="oferte">
+      <h2 class="dm-h2">Ofertele campaniei</h2>
+      <p class="dm-note">Prețuri și reduceri anunțate de Dr. Max pentru campania de Crăciun, valabile în limita stocului. Verifică prețul final pe drmax.ro.</p>
+      <div class="dm-oferte">
+        {OFERTE.map((o) => (
+          <a class="dm-oferta" href={o.link} target="_blank" rel="noopener sponsored" data-dm-cta="oferta">
+            {o.imagine ? <img src={o.imagine} alt="" loading="lazy" referrerpolicy="no-referrer" /> : <span class="dm-oferta-ic" aria-hidden="true">🎁</span>}
+            <span class="dm-oferta-red">{o.reducere}</span>
+            <span class="dm-oferta-nume">{o.nume}</span>
+            <span class="dm-oferta-pret">{o.pret} lei</span>
+          </a>
+        ))}
+      </div>
+      <div class="dm-facts">
+        <div><span>Ce?</span><b>Colecția de Crăciun Dr. Max: parfumuri, seturi cadou, machiaj și produse de răsfăț</b></div>
+        <div><span>Când?</span><b>16 noiembrie – 31 decembrie 2026</b></div>
+        <div><span>Unde?</span><b>Online, pe drmax.ro</b></div>
+        <div><span>Pentru cine?</span><b>Ea, el, copii, bunici, plus cadouri unisex</b></div>
+      </div>
+    </section>
+
+    <section class="dm-wrap" id="cadouri">
+      <h2 class="dm-h2">Idei de cadouri, pe destinatari</h2>
+      <nav class="dm-tabs" aria-label="Grupe de cadouri">
+        {GRUPE.map((g) => <a href={`#${g.id}`}>{g.titlu} <em>{g.total}</em></a>)}
+      </nav>
+      <p class="dm-note">Prețurile de mai jos sunt cele din catalogul nostru, actualizate zilnic din feedul Dr. Max. Prețul final îl vezi pe drmax.ro.</p>
+      {GRUPE.map((g) => (
+        <div class="dm-group" id={g.id}>
+          <h3>{g.titlu}</h3>
+          <p>{g.desc}{g.total > g.produse.length && ` Îți arătăm ${g.produse.length} din ${g.total}.`}</p>
+          <div class="dm-grid">
+            {g.produse.map((p) => <div class="dm-card"><ProductCard product={p} /></div>)}
+          </div>
+        </div>
+      ))}
+    </section>
+
+    <section class="dm-wrap dm-tips">
+      <h2 class="dm-h2">3 sfaturi pentru cadourile de Crăciun</h2>
+      <ol>
+        <li><b>Comandă până la jumătatea lui decembrie.</b> În ultima săptămână dinainte de Crăciun, livrările durează mai mult.</li>
+        <li><b>La parfumuri, verifică EDP sau EDT.</b> Apa de parfum (EDP) ține mai mult decât apa de toaletă (EDT), la aceeași aromă.</li>
+        <li><b>Seturile sunt deja gata de cadou.</b> Nu mai cauți ambalaj, iar de multe ori costă mai puțin decât produsele luate separat.</li>
+      </ol>
+    </section>
+
+    <section class="dm-final">
+      <div class="dm-wrap">
+        <h2 id="dm-final-title">Toată colecția de Crăciun, pe drmax.ro</h2>
+        <p id="dm-final-p">Cadouri pentru ea, pentru el, pentru copii, unisex și pentru bunici, până pe 31 decembrie.</p>
+        <a class="dm-btn" href={LINK_DRMAX} target="_blank" rel="noopener sponsored" data-dm-cta="final" id="dm-final-btn">Vezi cadourile pe drmax.ro →</a>
+        <p class="dm-disc">Linkurile spre drmax.ro sunt de afiliere: putem primi un comision, fără cost în plus pentru tine.</p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script is:inline define:vars={{ START, END }}>
+  (function () {
+    var start = new Date(START), end = new Date(END);
+    var t = (location.search.match(/dmtest=([\d-]+)/) || [])[1];
+    var offset = t ? new Date(t + 'T12:00:00+02:00') - new Date() : 0;
+    var acum = function () { return new Date(Date.now() + offset); };
+    function pad(n) { return String(n).padStart(2, '0'); }
+    var $ = function (id) { return document.getElementById(id); };
+    var faza = null;
+    function seteaza(n) {
+      var f = n > end ? 'gata' : n >= start ? 'activ' : 'pre';
+      if (f === faza) return f; faza = f;
+      if (f === 'activ') $('dm-count-lbl').textContent = 'Campania se termină în';
+      if (f === 'gata') {
+        $('dm-eyebrow').textContent = 'Campania de Crăciun Dr. Max s-a încheiat pe 31 decembrie';
+        $('dm-lead').textContent = 'Produsele de mai jos rămân pe drmax.ro, la prețurile actuale.';
+        $('dm-count').style.display = 'none';
+        $('dm-final-title').textContent = 'Campania s-a încheiat';
+        $('dm-final-p').textContent = 'Vezi ofertele actuale pe drmax.ro.';
+      }
+      return f;
+    }
+    function tick() {
+      var n = acum();
+      if (seteaza(n) === 'gata') return false;
+      var diff = Math.max(0, (n < start ? start : end) - n);
+      $('dm-d').textContent = pad(Math.floor(diff / 86400000)); diff %= 86400000;
+      $('dm-h').textContent = pad(Math.floor(diff / 3600000)); diff %= 3600000;
+      $('dm-m').textContent = pad(Math.floor(diff / 60000)); diff %= 60000;
+      $('dm-s').textContent = pad(Math.floor(diff / 1000));
+      return true;
+    }
+    if (tick()) { var iv = setInterval(function () { if (!tick()) clearInterval(iv); }, 1000); }
+    document.querySelectorAll('[data-dm-cta]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        if (typeof gtag === 'function') gtag('event', 'bh_campaign_click', { campaign: 'drmax-craciun', position: a.dataset.dmCta });
+      });
+    });
+  })();
+</script>
+
+<style>
+  .dm { --dm-green: #0b5d3b; --dm-dark: #0d2b1e; --dm-red: #c8102e; --dm-gold: #e3c27a; }
+  .dm-wrap { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+
+  .dm-hero { background: radial-gradient(circle at 15% 0%, #1d6b45 0%, var(--dm-dark) 62%); color: #fff; padding: 56px 0 48px; text-align: center; }
+  .dm-eyebrow { display: inline-block; font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--dm-gold); border: 1px solid rgba(227,194,122,.5); border-radius: 999px; padding: 6px 14px; margin: 0 0 18px; }
+  .dm-hero h1 { font-size: clamp(1.7rem, 4.5vw, 2.8rem); line-height: 1.15; margin: 0 auto 14px; max-width: 820px; }
+  .dm-pct { display: block; font-family: Georgia, serif; font-size: clamp(3.2rem, 11vw, 5.5rem); color: var(--dm-gold); line-height: 1; margin-bottom: 6px; }
+  .dm-lead { font-size: 1.05rem; color: rgba(255,255,255,.88); max-width: 660px; margin: 0 auto 26px; line-height: 1.55; }
+  .dm-count { margin: 0 auto 26px; }
+  .dm-count-lbl { display: block; font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.6); margin-bottom: 8px; }
+  .dm-count-row { display: inline-flex; gap: 8px; align-items: center; }
+  .dm-count-row div { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); border-radius: 10px; padding: 10px 14px; min-width: 70px; }
+  .dm-count-row b { display: block; font-size: 2rem; font-variant-numeric: tabular-nums; line-height: 1; }
+  .dm-count-row small { font-size: .65rem; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.55); }
+  .dm-count-row i { font-style: normal; color: rgba(255,255,255,.35); font-size: 1.4rem; }
+  .dm-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .dm-btn { display: inline-block; background: var(--dm-red); color: #fff; font-weight: 700; text-decoration: none; padding: 14px 26px; border-radius: 8px; transition: transform .15s, background .15s; }
+  .dm-btn:hover { background: #a50d26; transform: translateY(-2px); }
+  .dm-btn--ghost { background: transparent; border: 1px solid rgba(255,255,255,.4); }
+  .dm-btn--ghost:hover { background: rgba(255,255,255,.08); }
+
+  .dm-hook { max-width: 780px; padding-top: 44px; text-align: center; }
+  .dm-hook h2 { color: var(--dm-dark); font-size: 1.6rem; margin: 0 0 12px; }
+  .dm-hook p { color: #444; line-height: 1.65; font-size: 1.02rem; }
+  .dm-dest { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 18px; }
+  .dm-dest a { background: var(--dm-green); color: #fff; border-radius: 999px; padding: 8px 16px; font-size: .9rem; font-weight: 600; text-decoration: none; }
+  .dm-dest a:hover { background: var(--dm-dark); }
+
+  .dm-h2 { color: var(--dm-dark); font-size: 1.5rem; margin: 40px 0 10px; scroll-margin-top: 80px; }
+  #oferte, #cadouri { scroll-margin-top: 80px; }
+  .dm-note { font-size: .8rem; color: #6b6b6b; margin: 0 0 12px; }
+  .dm-oferte { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; }
+  .dm-oferta { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; background: #fff; border: 1px solid #e3e3e3; border-radius: 12px; padding: 14px 12px; text-decoration: none; color: #222; transition: transform .15s, border-color .15s; }
+  .dm-oferta:hover { transform: translateY(-3px); border-color: var(--dm-gold); }
+  .dm-oferta img { width: 110px; height: 110px; object-fit: contain; }
+  .dm-oferta-ic { width: 110px; height: 110px; display: flex; align-items: center; justify-content: center; font-size: 3rem; background: #f4f7f5; border-radius: 10px; }
+  .dm-oferta-red { position: absolute; top: 10px; left: 10px; background: var(--dm-red); color: #fff; font-size: .78rem; font-weight: 800; padding: 3px 8px; border-radius: 6px; }
+  .dm-oferta-nume { font-size: .86rem; line-height: 1.35; font-weight: 600; }
+  .dm-oferta-pret { font-size: 1.1rem; font-weight: 800; color: var(--dm-red); }
+
+  .dm-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin: 22px 0 8px; }
+  .dm-facts div { background: #f2f7f4; border: 1px solid #d3e5da; border-radius: 10px; padding: 14px 16px; }
+  .dm-facts span { display: block; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--dm-green); margin-bottom: 4px; }
+  .dm-facts b { color: #222; font-size: .95rem; line-height: 1.4; }
+
+  .dm-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+  .dm-tabs a { background: #fff; border: 1px solid #ddd; border-radius: 999px; padding: 7px 14px; font-size: .85rem; color: #333; text-decoration: none; }
+  .dm-tabs a:hover { border-color: var(--dm-green); color: var(--dm-dark); }
+  .dm-tabs em { font-style: normal; color: #999; margin-left: 4px; }
+  .dm-group { padding-top: 26px; scroll-margin-top: 80px; }
+  .dm-group h3 { color: var(--dm-dark); font-size: 1.2rem; margin: 0 0 4px; }
+  .dm-group > p { color: #666; font-size: .92rem; margin: 0 0 14px; }
+  .dm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+
+  .dm-tips ol { padding-left: 20px; line-height: 1.7; color: #333; max-width: 780px; }
+  .dm-final { background: var(--dm-dark); color: #fff; text-align: center; padding: 44px 0; margin-top: 48px; }
+  .dm-final h2 { margin: 0 0 8px; font-size: 1.6rem; }
+  .dm-final p { color: rgba(255,255,255,.82); margin: 0 0 20px; }
+  .dm-final .dm-disc { font-size: .78rem; color: rgba(255,255,255,.6); margin: 18px 0 0; }
+
+  @media (max-width: 520px) {
+    .dm-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .dm-oferte { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .dm-count-row div { min-width: 58px; padding: 8px 10px; }
+    .dm-count-row b { font-size: 1.6rem; }
+  }
+</style>

@@ -606,6 +606,131 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
     </script>
     <!-- ── END LONGEVITY STICKER ── -->
 
+    <!-- ── DR. MAX CRĂCIUN STICKER: 16 nov – 31 dec 2026 ── -->
+    <!-- Dreapta jos, pe toate paginile. Textul se schimbă după pagină (parfumuri / îngrijire și machiaj / copii / bărbați / restul).
+         Unde există deja un sticker în dreapta (Longevity, DetoxMed), cele două alternează la 3 secunde;
+         alternarea se oprește cât timp mouse-ul e pe sticker (sau 8 secunde după atingere pe telefon).
+         Duce la pagina /cadouri-craciun-dr-max/. Previzualizare: ?dmtest=2026-11-20 -->
+    <a class="dm-sticker" id="dm-sticker" href="/cadouri-craciun-dr-max/" style="display:none">
+      <div class="dms-top">
+        <span class="dms-big" id="dms-big">−74%</span>
+        <span class="dms-label" id="dms-label">Cadouri de<br>Crăciun</span>
+      </div>
+      <div class="dms-mid">
+        <div class="dms-brand">Dr. Max · Crăciun</div>
+        <div class="dms-desc" id="dms-desc">Parfumuri Calvin Klein, Davidoff, Joop!</div>
+        <div class="dms-end">Până pe 31 decembrie</div>
+      </div>
+      <div class="dms-cta">
+        Vezi cadourile
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+      <button class="dms-close" id="dms-close" title="Închide" aria-label="Închide">✕</button>
+    </a>
+    <style is:global>
+      .dm-sticker {
+        position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+        width: 180px; background: #0d2b1e; color: #fff;
+        border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,.3), 0 2px 8px rgba(200,16,46,.3);
+        overflow: hidden; text-decoration: none; border: 1px solid rgba(227,194,122,.55);
+        transition: transform .2s, opacity .45s;
+        font-family: 'Segoe UI', system-ui, sans-serif;
+      }
+      .dm-sticker:hover { transform: translateY(-3px); }
+      .dms-top { background: #c8102e; padding: 10px 32px 8px 14px; display: flex; align-items: center; justify-content: space-between; color: #fff; }
+      .dms-big { font-size: 1.6rem; font-weight: 900; line-height: 1; font-family: Georgia, serif; }
+      .dms-label { font-size: .58rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; text-align: right; line-height: 1.35; }
+      .dms-mid { padding: 9px 14px 8px; }
+      .dms-brand { font-size: .66rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #e3c27a; margin-bottom: 3px; }
+      .dms-desc { font-size: .76rem; color: rgba(255,255,255,.85); line-height: 1.4; margin-bottom: 5px; }
+      .dms-end { font-size: .6rem; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.6); }
+      .dms-cta { background: #0b5d3b; text-align: center; padding: 9px 12px; font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: #fff; display: flex; align-items: center; justify-content: center; gap: 5px; }
+      .dms-close { position: absolute; top: 4px; right: 4px; width: 26px; height: 26px; background: rgba(0,0,0,.18); border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; line-height: 1; padding: 0; }
+      @media (max-width: 480px) {
+        .dm-sticker { right: 10px; width: 152px; }
+        .dms-label, .dms-end { display: none; }
+        .dms-big { font-size: 1.3rem; }
+        .dms-desc { font-size: .7rem; margin-bottom: 0; }
+      }
+    </style>
+    <script is:inline>
+      (function () {
+        var el = document.getElementById('dm-sticker');
+        if (!el) return;
+        var p = location.pathname;
+        // fără sticker pe paginile de campanie (are butoane jos) și pe /promotii/ (are card)
+        if (/^\/(cadouri-craciun-dr-max|promotii|detox|aronia|farmec-black-friday|gerovital-aniversar)\//.test(p)) return;
+        var t = (location.search.match(/dmtest=([\d-]+)/) || [])[1];
+        var offset = t ? new Date(t + 'T12:00:00+02:00') - new Date() : 0;
+        var n = new Date(Date.now() + offset);
+        if (n < new Date('2026-11-16T00:00:00+02:00') || n > new Date('2026-12-31T23:59:59+02:00')) return;
+
+        // textul după pagină
+        var $ = function (id) { return document.getElementById(id); };
+        var url = '/cadouri-craciun-dr-max/';
+        var v = null;
+        if (p.indexOf('/parfumuri/') === 0) v = ['−74%', 'Parfumuri<br>de Crăciun', 'Calvin Klein Obsession 75 ml: 99,99 lei', '#oferte'];
+        else if (p.indexOf('/cosmetice-barbati/') === 0) v = ['−67%', 'Cadouri<br>pentru el', 'Joop! Homme Wild 125 ml: 119,99 lei', '#el'];
+        else if (/^\/(machiaj|ingrijire-ten|ingrijire-corp|ingrijire-par)\//.test(p)) v = ['19,99', 'lei · cadouri<br>de la', 'Seturi Korres, Magic Studio, IDC Institute', '#ea-seturi'];
+        else if (p.indexOf('/mama-si-copilul/') === 0) v = ['🎁', 'Cadouri<br>pentru copii', 'Idei de cadouri Dr. Max pentru cei mici', '#copii'];
+        if (v) { $('dms-big').textContent = v[0]; $('dms-label').innerHTML = v[1]; $('dms-desc').textContent = v[2]; url += v[3]; }
+        el.href = url;
+        el.addEventListener('click', function () {
+          if (typeof gtag === 'function') gtag('event', 'bh_campaign_click', { campaign: 'drmax-craciun', position: 'sticker' });
+        });
+
+        el.style.display = 'block';
+        // stickerul din dreapta care e afișat pe pagină (dacă există) → alternare la 3 secunde.
+        // Se caută după ce s-a încărcat toată pagina, ca celelalte stickere să fi decis deja dacă apar.
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', porneste); else porneste();
+        function porneste() {
+        var partener = null;
+        ['lb-sticker', 'dx-sticker', 'gv-sticker', 'promo-sticker'].forEach(function (id) {
+          var x = document.getElementById(id);
+          if (!partener && x && getComputedStyle(x).display !== 'none') partener = x;
+        });
+        var inchis = false, timer = null, pauzaPana = 0, hover = false;
+        function opreste() { if (timer) { clearInterval(timer); timer = null; } }
+        $('dms-close').addEventListener('click', function (e) {
+          e.preventDefault(); e.stopPropagation(); inchis = true; opreste();
+          el.style.opacity = '0';
+          setTimeout(function () {
+            el.style.display = 'none';
+            if (partener && partener.dataset.inchis !== '1') { partener.style.display = 'block'; partener.style.opacity = '1'; partener.style.pointerEvents = ''; }
+          }, 320);
+        });
+        if (!partener) return;
+
+        var arata = function (a, b) {
+          b.style.opacity = '0'; b.style.pointerEvents = 'none';
+          setTimeout(function () {
+            b.style.display = 'none'; a.style.display = 'block'; a.style.opacity = '0'; a.style.pointerEvents = '';
+            requestAnimationFrame(function () { a.style.opacity = '1'; });
+          }, 450);
+        };
+        partener.style.transition = 'opacity .45s, transform .2s';
+        partener.style.display = 'none';
+        var curent = el;
+        timer = setInterval(function () {
+          if (hover || Date.now() < pauzaPana) return;
+          if (curent === el) { arata(partener, el); curent = partener; } else { arata(el, partener); curent = el; }
+        }, 3000);
+        [el, partener].forEach(function (x) {
+          x.addEventListener('mouseenter', function () { hover = true; });
+          x.addEventListener('mouseleave', function () { hover = false; });
+          x.addEventListener('touchstart', function () { pauzaPana = Date.now() + 8000; }, { passive: true });
+        });
+        // dacă stickerul partener e închis cu ✕, rămâne doar Dr. Max (fără alternare)
+        var xp = partener.querySelector('button[class$="-close"]');
+        if (xp) xp.addEventListener('click', function () {
+          partener.dataset.inchis = '1'; opreste();
+          if (!inchis) setTimeout(function () { el.style.display = 'block'; el.style.opacity = '1'; el.style.pointerEvents = ''; }, 340);
+        });
+        }
+      })();
+    </script>
+    <!-- ── END DR. MAX CRĂCIUN STICKER ── -->
+
     <!-- ── TAB OFERTE: pe marginea din dreapta, deasupra tabului Promoții (duce la /oferte/) ──
          Pe mobil cele două taburi stau în același loc și se schimbă între ele la 2 secunde. -->
     {nrOferte > 0 && (
@@ -688,7 +813,7 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
       (function () {
         // Pe pagina de promotii: fara tab si fara stickere peste carduri
         if (location.pathname.indexOf('/promotii/') !== 0) return;
-        ['pr-tab', 'promo-sticker', 'gv-sticker', 'dx-sticker', 'lb-sticker', 'tombola-sticker', 'fb-sticker'].forEach(function (id) {
+        ['pr-tab', 'promo-sticker', 'gv-sticker', 'dx-sticker', 'lb-sticker', 'tombola-sticker', 'fb-sticker', 'dm-sticker'].forEach(function (id) {
           var x = document.getElementById(id); if (x) x.style.setProperty('display', 'none', 'important');
         });
       })();
@@ -757,10 +882,10 @@ const absoluteOgImage = new URL(ogImage, "https://beauty-healths.com").href;
         .tp-sticker-label { margin: 0; flex: 0 0 auto; max-width: 70px; line-height: 1.3; }
         #tp-sticker .trustpilot-widget { flex: 1; min-width: 0; margin-right: 18px; }
         .tp-close { top: 50%; right: 8px; transform: translateY(-50%); }
-        #promo-sticker, #tombola-sticker, #gv-sticker, #dx-sticker, #lb-sticker, #fb-sticker { bottom: 74px; }
+        #promo-sticker, #tombola-sticker, #gv-sticker, #dx-sticker, #lb-sticker, #fb-sticker, #dm-sticker { bottom: 74px; }
         body { padding-bottom: 68px; }
         /* dupa inchiderea barei Trustpilot, stickerele coboara si dispare spatiul de jos */
-        html.tp-inchis #promo-sticker, html.tp-inchis #tombola-sticker, html.tp-inchis #gv-sticker, html.tp-inchis #dx-sticker, html.tp-inchis #lb-sticker, html.tp-inchis #fb-sticker { bottom: 16px; }
+        html.tp-inchis #promo-sticker, html.tp-inchis #tombola-sticker, html.tp-inchis #gv-sticker, html.tp-inchis #dx-sticker, html.tp-inchis #lb-sticker, html.tp-inchis #fb-sticker, html.tp-inchis #dm-sticker { bottom: 16px; }
         html.tp-inchis body { padding-bottom: 0; }
       }
     </style>
