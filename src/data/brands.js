@@ -112,6 +112,12 @@ export const brands = [
 
   // --- Vitamine & Suplimente ---
   { name: 'HERBAGETICA', slug: 'herbagetica', categories: ['vitamine-suplimente'] },
+  // Hyllan Pharma (hyllanpharma.ro, din 25.11.2026)
+  { name: 'REFFLOR', slug: 'refflor', categories: ['vitamine-suplimente', 'mama-si-copilul'] },
+  { name: 'NORMENS', slug: 'normens', categories: ['vitamine-suplimente'] },
+  { name: 'PROFECUND', slug: 'profecund', categories: ['vitamine-suplimente', 'mama-si-copilul'] },
+  { name: 'NATALVIT', slug: 'natalvit', categories: ['mama-si-copilul'] },
+  { name: 'RHEUMA', slug: 'rheuma', categories: ['vitamine-suplimente', 'dispozitive-medicale'] },
   { name: 'ZDROVIT', slug: 'zdrovit', categories: ['vitamine-suplimente', 'igiena-orala'] },
   { name: 'DACIA PLANT', slug: 'dacia-plant', categories: ['vitamine-suplimente'] },
   { name: 'ALEVIA', slug: 'alevia', categories: ['vitamine-suplimente', 'wellness'] },

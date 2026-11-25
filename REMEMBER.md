@@ -1764,3 +1764,14 @@ Tombola afiliaților: minimum 5 comenzi valide în noiembrie → vouchere de 500
 - **Alternare:** unde în dreapta jos e deja un sticker (Longevity pe prima pagină și Vitamine până pe 20.11; DetoxMed pe Wellness și Slăbire & Detox, permanent), cele două se schimbă la **3 secunde**. Alternarea stă pe loc cât timp mouse-ul e pe sticker și 8 secunde după o atingere pe telefon. Dacă unul e închis cu ✕, rămâne celălalt, fără alternare. Pe stânga jos (Farmec Black Friday / Tombola) nu se schimbă nimic.
 - **Card nou pe /promotii/:** `drmax-cadouri-craciun` (incepe 2026-11-16, expira 2026-12-31).
 - Cardurile `drmax-promo-50`, `drmax-ofertele-lunii` și `detoxmed-programe-20` (fără dată de final) au fost verificate de Marius pe 14.11.2026: sunt active (`verificat: "2026-11-14"`).
+
+## 28. Hyllan Pharma (25.11.2026)
+
+- Feed `feed_364cb452d.xml` (hyllanpharma.ro, campaign_unique `f06f31c09`), adăugat în `sites.json` la beautyhealth. 25.11: 85 produse, 83 active, 24 cu reducere, 3,35–1.012 lei.
+- Suplimente și dispozitive medicale: Refflor, NorMens, ProFecund, Rheuma (RheumaGel, Rheumastop, RheumastoPlast), NatalVit, EstroPlus, Phoscollagen Osteo, extracte din plante.
+- `sync-feeds-local.cjs`: tip `generic` cu `categorize: hyllanCategory` și `refreshCategory: true`.
+  - **Categoriile din feed NU se publică**: au nume de afecțiuni („Anemie”, „Acnee”, „Imunitate și prevenție în răceală și gripă”, „Circulație venoasă”, „Antidiareice”, „Candidoze…”) — Reg. CE 1924/2006. `subcategory_raw` păstrează doar segmentele neutre, redenumite (`HYLLAN_SEGMENTE`): Vitamine și minerale, Imunitate, Probiotice și digestie, Digestie, Articulații, Menopauză, Ciclu menstrual, Fertilitate, Sarcină, Extracte din plante, Sănătate intimă. Restul segmentelor cad.
+  - Categoria: teste de sarcină/ovulație (inclusiv 2Pi), produsele pentru copii (Refflor Bebe, Forte copii, MultiKids, Vitamina C copii, supozitoare copii) și cele de sarcină → Mama și copilul; geluri, plasturi, ser fiziologic, supozitoare → Dispozitive medicale; restul → Vitamine & Suplimente.
+  - 25.11: 56 Vitamine & Suplimente, 18 Mama și copilul, 9 Dispozitive medicale.
+- Numele produselor rămân cum sunt în feed (ex. „NorMens Acne”, „Nevralgistop”) — e numele comercial al produsului, ca la Aronia.
+- `brands.js`: REFFLOR, NORMENS, PROFECUND, NATALVIT, RHEUMA (pagini de brand).

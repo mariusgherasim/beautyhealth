@@ -28,6 +28,7 @@
 //   feed_091d53e22.xml   → aronia-charlottenburg.ro
 //   feed_20e3de1a9.xml   → 6biologico.ro
 //   feed_138bfda16.xml   → babyneeds.ro
+//   feed_364cb452d.xml   → hyllanpharma.ro
 //   feed_585a1cd31.xml   → drmax.ro (catalog complet)
 //   feed_09eca89e8.xml   → drmax.ro (branduri exclusive)
 //   feed_dc6bbc64e.xml   → drmax.ro (private label)
@@ -122,6 +123,16 @@ const FEED_CONFIG = {
     defaultCategory: "mama-si-copilul",
     categorize: babyCategory,
     refreshCategory: true, // și la produsele existente se recalculează tipul (dacă BabyNeeds mută produsul în altă subcategorie)
+  },
+  "hyllanpharma.ro": {
+    // Suplimente și dispozitive medicale Hyllan Pharma (adăugat 25.11.2026): Refflor, NorMens, ProFecund, Rheuma, NatalVit...
+    // Categoriile din feed au nume de afecțiuni („Anemie”, „Acnee”, „Răceală și gripă”, „Circulație venoasă”) → NU le publicăm
+    // (Reg. CE 1924/2006). Categoria și subcategory_raw se stabilesc în hyllanCategory, doar cu termeni neutri.
+    files: ["feed_hyllanpharma.xml", "feed_364cb452d.xml"],
+    type: "generic",
+    defaultCategory: "vitamine-suplimente",
+    categorize: hyllanCategory,
+    refreshCategory: true,
   },
   "drmax.ro": {
     // mergeFiles: se citesc TOATE fisierele gasite si se unesc dupa product_id
@@ -339,6 +350,36 @@ function babyTip(sub, cat) {
 }
 function babyCategory(title, feedCat, sub) {
   return { category: "mama-si-copilul", raw: String(sub || feedCat || "").replace(/\s*>>\s*/g, " > "), tipuri: babyTip(sub, feedCat) };
+}
+
+// ---- HYLLAN PHARMA: categorie după <category> + titlu; subcategory_raw doar cu termeni neutri ----
+// În feed: „Suplimente Alimentare > Anemie > Imunitate și prevenție în răceală și gripă > Vitamine și minerale”.
+// Păstrăm doar segmentele neutre (redenumite), restul (afecțiuni, „Promotii”, „Kituri”) cad.
+const HYLLAN_SEGMENTE = [
+  [/^vitamine si minerale/, "Vitamine și minerale"],
+  [/^imunitate/, "Imunitate"],
+  [/^probiotice/, "Probiotice și digestie"],
+  [/^sanatatea ficatului/, "Digestie"],
+  [/^mobilitate articulara/, "Articulații"],
+  [/^menopauza/, "Menopauză"],
+  [/^reglarea ciclului menstrual/, "Ciclu menstrual"],
+  [/^conceptie si fertilitate/, "Fertilitate"],
+  [/^sarcina/, "Sarcină"],
+  [/^monoextracte/, "Extracte din plante"],
+  [/^candidoze/, "Sănătate intimă"],
+];
+function hyllanCategory(title, feedCat) {
+  const t = normTxt(title);
+  const segs = String(feedCat || "").split(">").map((s) => normTxt(s).trim());
+  const raw = [...new Set(segs.map((s) => (HYLLAN_SEGMENTE.find(([rx]) => rx.test(s)) || [])[1]).filter(Boolean))];
+  const out = (category, extra) => ({ category, raw: [...raw, ...(extra || [])].join(", ") || (category === "dispozitive-medicale" ? "Dispozitive medicale" : "Suplimente alimentare") });
+  // teste de sarcină / ovulație, produse pentru sarcină și pentru copii → Mama și copilul
+  if (/\b(test|teste)\b/.test(t) || /\b2pi\b/.test(t)) return out("mama-si-copilul", ["Teste de sarcină și ovulație"]);
+  if (/\b(copii|bebe|kids|multikids)\b/.test(t)) return out("mama-si-copilul", ["Pentru copii"]);
+  if (segs.some((s) => /^sarcina/.test(s)) && !/\b(barbat|tatic)/.test(t)) return out("mama-si-copilul");
+  // geluri, plasturi, ser fiziologic, supozitoare → Dispozitive medicale
+  if (/\b(gel|rheumagel|plastur|plasturi|ser fiziologic|supozitoare)\b|rheumastoplast/.test(t)) return out("dispozitive-medicale", /plast/.test(t) ? ["Plasturi"] : []);
+  return out("vitamine-suplimente");
 }
 
 // ---- DR. MAX: categorie din <category> + <subcategory> ----
